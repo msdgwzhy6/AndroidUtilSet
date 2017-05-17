@@ -1,0 +1,14 @@
+package com.smart.androidutils.viewholder;
+
+
+import android.widget.Button;
+
+import com.smart.holder_library.CommonAdapter;
+
+/**
+ * Created by smart on 2017/5/17.
+ */
+
+public class MainGridViewHolder implements CommonAdapter.IBaseViewHolder {
+    Button mNameText;
+}
