@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initData();
+        setTitle("操作面板");
         mGridView.setAdapter(new CommonAdapter(this,mItemBeanList,R.layout.main_grid_view_item,new MainGridViewHolderHelper()));
     }
 
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         items = new String[]{
                 getResources().getString(R.string.act_sp),
-                getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_spider),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
