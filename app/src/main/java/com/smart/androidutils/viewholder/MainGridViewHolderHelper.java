@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.SPActivity;
+import com.smart.androidutils.activity.SpiderActivity;
 import com.smart.androidutils.bean.ItemBean;
 import com.smart.holder_library.CommonAdapter;
 
@@ -34,6 +35,10 @@ public class MainGridViewHolderHelper implements CommonAdapter.IListHolderHelper
                 if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_sp))) {
                         context.startActivity(new Intent(context, SPActivity.class));
                 }
+                if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_spider))) {
+                        context.startActivity(new Intent(context, SpiderActivity.class));
+                }
+
             }
         });
     }
