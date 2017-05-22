@@ -19,9 +19,9 @@
     <Button
         android:id="@+id/id_btn_instance"
         style="@style/common_style"
-        android:text="instance"/>
+        android:text="实例化"/>
     <Button
         android:id="@+id/id_btn_method"
         style="@style/common_style"
-        android:text="instance"/>
+        android:text="函数"/>
 </LinearLayout>
