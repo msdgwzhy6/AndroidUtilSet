@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getString(R.string.act_sp),
                 getResources().getString(R.string.act_spider),
                 getResources().getString(R.string.act_class),
-                getResources().getString(R.string.act_sp1),
+                getResources().getString(R.string.act_reflect),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
