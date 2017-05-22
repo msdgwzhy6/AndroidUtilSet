@@ -10,5 +10,5 @@ import com.smart.holder_library.CommonAdapter;
  */
 
 public class MainGridViewHolder implements CommonAdapter.IBaseViewHolder {
-    Button mNameText;
+    Button mNameText;//控制面板上的itemview
 }

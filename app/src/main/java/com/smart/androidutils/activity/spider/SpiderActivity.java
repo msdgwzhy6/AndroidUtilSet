@@ -1,4 +1,4 @@
-package com.smart.androidutils.activity;
+package com.smart.androidutils.activity.spider;
 
 import android.os.Bundle;
 import android.os.Handler;

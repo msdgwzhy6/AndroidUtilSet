@@ -25,4 +25,5 @@ dependencies {
     compile 'com.smart.holder_library:holder_library:1.1.0'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile project(':xanderutil')
 }

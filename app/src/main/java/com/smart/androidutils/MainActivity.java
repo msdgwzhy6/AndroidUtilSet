@@ -11,7 +11,7 @@ import com.smart.holder_library.CommonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.UtilWidget.getView;
+import static com.xanderutillibrary.dao.util.UtilWidget.getView;
 
 public class MainActivity extends AppCompatActivity {
 

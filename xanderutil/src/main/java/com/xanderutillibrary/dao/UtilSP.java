@@ -2,9 +2,8 @@ package com.xanderutillibrary.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
 import android.util.Log;
-
-import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,10 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.util.Base64.URL_SAFE;
 
 /***************************************************************************
  * 创建者: 龙之游 技术部 @ xbb 596928539@qq.com on 2016/12/20.
@@ -145,7 +146,7 @@ public final class UtilSP {
    }
 
 
-   public <T> UtilSP putObj(String objKeyName, T object) {
+   public <T extends Serializable> UtilSP putBean(String objKeyName, T object) {
       // 创建字节输出流
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       ObjectOutputStream oos = null;
@@ -155,11 +156,12 @@ public final class UtilSP {
          // 将对象写入字节流
          oos.writeObject(object);
          // 将字节流编码成base64的字符窜
-         String obj_Base64 = new String(Base64.encodeBase64(baos.toByteArray()));
+         String obj_Base64 = new String(Base64.encode(baos.toByteArray(),URL_SAFE));
+         Log.i("xxx", "putBean" +obj_Base64);
          putString(objKeyName, obj_Base64);
-
+         Log.i("xxx", "putBean" +"ok 存储成功");
       } catch (IOException e) {
-         // TODO Auto-generated
+         e.printStackTrace();
       } finally {
          try {
             if (baos != null) {
@@ -172,24 +174,22 @@ public final class UtilSP {
             e.printStackTrace();
          }
       }
-      Log.i("xxx", "putObj" +"ok 存储成功");
+
       return instance;
    }
 
    /**
     * @param objKey
     *        存储该对象的键
-    * @param value
-    *        要获取的对象的值
     * @param <T>
     * @return
     */
-   public <T> T getObj(String objKey, T value) {
-
+   public <T> T getBean(String objKey) {
+      T value;
       String objectBase64 = getString(objKey);
-      Log.i("xxx", "getObj: " + objectBase64);
+      Log.i("xxx", "getBean: " + objectBase64);
       //读取字节
-      byte[] base64 = Base64.decodeBase64(objectBase64.getBytes());
+      byte[] base64 = Base64.decode(objectBase64.getBytes(),URL_SAFE);
 
       //封装到字节流
       ByteArrayInputStream bais = new ByteArrayInputStream(base64);
@@ -220,6 +220,7 @@ public final class UtilSP {
             }
          } catch (IOException e) {
             e.printStackTrace();
+            Log.i("xxx", "getBean" );
          }
       }
       return null;

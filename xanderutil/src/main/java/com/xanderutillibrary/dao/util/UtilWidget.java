@@ -1,4 +1,4 @@
-package com.smart.androidutils;
+package com.xanderutillibrary.dao.util;
 
 import android.app.Activity;
 import android.view.View;

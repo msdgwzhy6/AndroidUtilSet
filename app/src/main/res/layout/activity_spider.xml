@@ -5,7 +5,7 @@
     android:id="@+id/activity_spider"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smart.androidutils.activity.SpiderActivity">
+    tools:context="com.smart.androidutils.activity.spider.SpiderActivity">
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
