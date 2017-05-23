@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.DownloadListener;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -13,12 +15,18 @@ import android.webkit.WebView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.util.file.UtilFile.readSourceFromUrl;
+import static com.util.file.UtilFile.writeStr2Log;
 
 /****************************************************************************
  * Created by xu on 2017/1/6.
@@ -158,4 +166,50 @@ public class UtilWebViewNoAd {
             }
         });
     }
+    public static String readSourceFromUrl(String urlParam,String encoding){
+        InputStreamReader isr = null;
+        StringBuilder html = new StringBuilder();
+        InputStream is = null;
+        String charset ="utf-8";
+        if (!TextUtils.isEmpty(encoding)) {
+            charset = encoding;
+        }
+        try{
+            URL url = new URL(urlParam); //根据Strng表现形式创建URL对象
+
+            URLConnection urlConnection = url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
+
+            Log.i("xxx", "readSourceFromUrl: "+urlConnection.getContentEncoding());
+            //urlConnection.setConnectTimeout(4000); //设置链接超时
+
+            is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
+
+            isr = new InputStreamReader(is, charset);
+
+            BufferedReader br = new BufferedReader(isr);
+            String line = "";
+            while((line = br.readLine()) != null)
+            {
+                html.append(line).append("\r\n");
+            }
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+                if (isr != null) {
+                    isr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        writeStr2Log(html.toString());
+        return html.toString();
+    }
+
 }
