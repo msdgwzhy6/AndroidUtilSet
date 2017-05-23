@@ -23,17 +23,216 @@ import java.net.URL;
 
 import static com.util.UtilEncript.getMD5;
 
-
-/****************************************************************************
- * Created by xu on 2017/5/23.
- * Function: 对数据进行文件操作的工具类
+/***************************************************************************
+ * @author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
+ * Function:  A class of tools for file manipulation of data
  ***************************************************************************/
 
 public final class  UtilFile {
 
+    /**
+     * Get files based on file paths
+     * @param filePath file path
+     * @return File
+     */
+    public static File getFileByPath(String filePath) {
+        return TextUtils.isEmpty(filePath) ? null : new File(filePath);
+    }
+    /**
+     *judge if the file exists by filePath
+     * @param filePath file path
+     * @return {@code true}: existence <br>{@code false}: inexistence
+     */
+    public static boolean isFileExists(String filePath) {
+        return isFileExists(getFileByPath(filePath));
+    }
 
     /**
-     * 仅仅是从网络获取一张图片
+     *judge if the file exists by file
+     * @param file file
+     * @return {@code true}: existence<br>{@code false}: inexistence
+     */
+    public static boolean isFileExists(File file) {
+        return file != null && file.exists();
+    }
+
+    /**
+     * deleteFile
+     * Deletes a file by specifying the path
+     * @param srcFilePath
+     * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
+     */
+    public static boolean deleteFile(String srcFilePath) {
+        return deleteFile(getFileByPath(srcFilePath));
+    }
+    /**
+     * deleteFile
+     * Deletes a file by specifying the filename
+     * @param file
+     * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
+     */
+    public static boolean deleteFile(File file) {
+        return file != null && (!file.exists() || file.isFile() && file.delete());
+    }
+
+    /**
+     * Writes an input stream to a file
+     * @param filePath
+     * @param is
+     * @param append   Append at end of file
+     * @return {@code true}: success<br>{@code false}: failure
+     */
+    public static boolean writeFileFromIS(String filePath, InputStream is, boolean append) {
+        return writeFileFromIS(getFileByPath(filePath), is, append);
+    }
+
+    /**
+     * Writes an input stream to a file
+     * @param file
+     * @param is
+     * @param append Append at end of file
+     * @return {@code true}: success<br>{@code false}: failure
+     */
+    public static boolean writeFileFromIS(File file, InputStream is, boolean append) {
+        if (file == null || is == null) return false;
+        if (!createOrExistsFile(file)) return false;
+        OutputStream os = null;
+        try {
+            os = new BufferedOutputStream(new FileOutputStream(file, append));
+            byte data[] = new byte[1024];
+            int len;
+            while ((len = is.read(data, 0, 1024)) != -1) {
+                os.write(data, 0, len);
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            UtilsCloseIO.closeIO(is, os);
+        }
+    }
+
+    /**
+     * Writes String to File
+     * @param filePath file path
+     * @param content  file content
+     * @param append  Append at end of file
+     * @return {@code true}: success<br>{@code false}: faiure
+     */
+    public static boolean writeFileFromString(String filePath, String content, boolean append) {
+        return writeFileFromString(getFileByPath(filePath), content, append);
+    }
+
+    /**
+     * Writes String to File
+     * @param file file name
+     * @param content  file content
+     * @param append  Append at end of file
+     * @return {@code true}: success<br>{@code false}: failure
+     */
+    public static boolean writeFileFromString(File file, String content, boolean append) {
+        if (file == null || content == null) return false;
+        if (!createOrExistsFile(file)) return false;
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(file, append));
+            bw.write(content);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            UtilsCloseIO.closeIO(bw);
+        }
+    }
+
+    /**
+     * Judge if the directory exists and
+     * if not exist then to determine whether the creation succeeded
+     * @param dirPath
+     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     */
+    public static boolean createOrExistsDir(String dirPath) {
+        return createOrExistsDir(getFileByPath(dirPath));
+    }
+
+    /**
+     * Judge if the directory exists and
+     * if not exist then to determine whether the creation succeeded
+     * @param file
+     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     */
+    public static boolean createOrExistsDir(File file) {
+        // If it exists and it is a directory, returns true; it is not , returns false; if it does not exist, returns the success of creation
+        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
+    }
+
+    /**
+     * Judge if the file exists and
+     * if not exist then to determine whether the creation succeeded
+     * @param filePath  file path
+     *  @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     */
+    public static boolean createOrExistsFile(String filePath) {
+        return createOrExistsFile(getFileByPath(filePath));
+    }
+
+    /**
+     * Judge if the file exists;
+     * if not exist then to create ,and judge whether the creation succeeded
+     * @param file  file
+     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     */
+    public static boolean createOrExistsFile(File file) {
+        if (file == null) return false;
+        // if exist ,this is ,it is file,return true;else
+        if (file.exists()) return file.isFile();
+        //
+        if (!createOrExistsDir(file.getParentFile())) return false;
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Judge if the file exists;
+     * if it dose,delete it ;
+     * then create file ;
+     * @param filePath  file path
+     * @return {@code true}: create success<br>{@code false}: create failure
+     */
+    public static boolean createFileByDeleteOldFile(String filePath) {
+        return createFileByDeleteOldFile(getFileByPath(filePath));
+    }
+
+    /**
+     * Judge if the file exists;
+     * if it dose,delete it ;
+     * then create file ;
+     * @param file  file
+     * @return {@code true}: create success<br>{@code false}: create failure
+     */
+    public static boolean createFileByDeleteOldFile(File file) {
+        if (file == null) return false;
+        // File exists and deletion failed. Return false
+        if (file.exists() && file.isFile() && !file.delete()) return false;
+        // Failed to create directory back false
+        if (!createOrExistsDir(file.getParentFile())) return false;
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    /**
+     * Just get a picture from the Internet
      * @param imgUrl
      * @return
      */
@@ -53,14 +252,14 @@ public final class  UtilFile {
         return bitmap;
     }
     /**
-     * @说明： 保存图片到本地
+     * @说明： Save picture to local
      */
     public static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
     /**
-     * 从网络得到一张图片并保存到SD卡
-     * @param imgUrl 图片的url
-     * @param fileName 文件名
-     * @return 图片的文件形式
+     * Get a picture from the network and save it to the SD card
+     * @param imgUrl URL of the picture
+     * @param fileName File name stored
+     * @return Picture file form
      */
     public static String getNetBitmap2Save(String imgUrl,  String fileName){
         Bitmap bitmap =  getNetBitmap(imgUrl);
@@ -70,7 +269,7 @@ public final class  UtilFile {
         String pathName = rootDir  + fileName + File.separator;
 
         /*
-        * 创建目录
+        * create directory
         * */
         File imgDir = new File(pathName);
         if (!imgDir.exists()) {
@@ -78,7 +277,7 @@ public final class  UtilFile {
         }
 
         /*
-        * 创建文件
+        * create a file
         * */
         String imgName = getMD5(imgUrl)+".png";
         File imageFile = new File(imgDir,imgName);//文件
@@ -109,8 +308,8 @@ public final class  UtilFile {
     }
 
     /**
-     * 通过制定图片的本地路径得到一张bitmap
-     * @param bitmapPath  本地文件的绝对路径
+     * Get a bitmap by specifying the local path of the image
+     * @param bitmapPath  Absolute path of local file
      * @return
      */
     public static Bitmap getLocalBitmap(String bitmapPath){
@@ -127,9 +326,9 @@ public final class  UtilFile {
 
 
     /**
-     * 建立HTTP请求，并获取Bitmap对象。
-     * @param urlString  图片的URL地址
-     * @return 解析后的Bitmap对象
+     * Establish the HTTP request and get the bitmap object
+     * @param urlString  URL of the picture
+     * @return  Parsed bitmap object
      */
     public static boolean downloadUrlToStream(String urlString, OutputStream outputStream) {
         HttpURLConnection urlConnection = null;
@@ -138,8 +337,7 @@ public final class  UtilFile {
         try {
             final URL url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
-            in = new BufferedInputStream(urlConnection.getInputStream(),
-                    8 * 1024);
+            in = new BufferedInputStream(urlConnection.getInputStream(), 8 * 1024);
             out = new BufferedOutputStream(outputStream, 8 * 1024);
             int b;
             while ((b = in.read()) != -1) {

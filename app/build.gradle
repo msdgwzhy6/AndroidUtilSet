@@ -5,11 +5,14 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.smart.androidutils"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        abortOnError false
     }
     buildTypes {
         release {
@@ -25,5 +28,8 @@ dependencies {
     compile 'com.smart.holder_library:holder_library:1.1.0'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'com.smart.dialog_library:dialog_lib:1.1.7'
+
     compile project(':xanderutil')
+//    compile 'com.github.Xander1024:AndroidUtilSet:1.0.0'
 }

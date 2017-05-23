@@ -22,9 +22,9 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.util.Base64.URL_SAFE;
 
 /***************************************************************************
- * 创建者: 龙之游 技术部 @ xbb 596928539@qq.com on 2016/12/20.
- * 注释: 保存基本数据类型和对象，图片等,
- * 任何一个非基本类型 都要去实现Serializable接口 包括内部类
+ * @author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
+ * Note: save the basic data types and objects, pictures, etc;
+ * And any non basic types to implement the serializable interface including internal class
  ***************************************************************************/
 
 public final class UtilSP {
@@ -33,10 +33,14 @@ public final class UtilSP {
 
    private SharedPreferences.Editor editor;
    private SharedPreferences sharedPreferences;
-   /************************************************************
-    * 注释: 定义一个静态私有变量(不初始化，不使用final关键字，
-    * 使用volatile保证了多线程访问时instance变量的可见性，避免了instance初始化时其他变量属性还没赋值完时，被另外线程调用)
-    ************************************************************/
+
+   /*
+   * The definition of a private variable (not static initialization, do not use the final keyword,
+   * using volatile ensures that the multi thread access instance variable visibility, to avoid
+   * the instance initialization when the other variables did not end when the attribute assignment,
+   * by another thread calls)
+   */
+
    private static volatile UtilSP instance;
 
 
@@ -45,11 +49,13 @@ public final class UtilSP {
    }
 
    public static UtilSP getInstance(Context context) {
-      // 对象实例化时与否判断（不使用同步代码块，instance不等于null时，直接返回对象，提高运行效率）
+      // When an object is instantiated, or not, it is judged (without using synchronous blocks of code, when the instance is not equal to null),
+      // the object is returned directly and the operation efficiency is improve
       if (instance == null) {
-         //同步代码块（对象未初始化时，使用同步代码块，保证多线程访问时对象在第一次创建后，不再重复被创建）
+         //Synchronous block of code (when the object is uninitialized, using synchronous blocks of code to ensure that
+         // the object is not duplicated when it is first created) is accessed by multithreaded access
          synchronized (UtilSP.class) {
-            //未初始化，则初始instance变量
+            //Uninitialized, the initial instance variable
             if (instance == null) {
                instance = new UtilSP(context);
             }
@@ -70,9 +76,8 @@ public final class UtilSP {
    }
 
    /**
-    * 保存String
-    * @param imgUrlKey  键
-    * @param imgUrlValue 值
+    * @param imgUrlKey
+    * @param imgUrlValue
     * @return
     */
    public UtilSP putString(int imgUrlKey, String imgUrlValue) {
@@ -87,8 +92,7 @@ public final class UtilSP {
 
    /**
     * @param strList
-    *        缓存的集合
-    *        以集合的形式封装这个url ,将这些数据向后添加到SP文件中
+    *        Encapsulate this URL in the form of a collection, and add the data back to the SP file
     * @param beginKey
     * @return
     */
@@ -103,7 +107,7 @@ public final class UtilSP {
 
    /**
     * @param strList
-    *        封装了你要添加的String数据的字符串
+    *          Encapsulates the string of the string data you want to add
     * @return
     */
    public UtilSP putList(List<String> strList) {
@@ -115,9 +119,9 @@ public final class UtilSP {
    }
 
    /**
+    * Save multiple calls, save different records, number of pages, total number of pages
     * @param countKey
     * @param countValue
-    *        保存 多次调用保存不同的记录数 页数  页码 总数
     */
    public UtilSP putInt(String countKey, int countValue) {
       editor.putInt(countKey, countValue);
@@ -125,21 +129,25 @@ public final class UtilSP {
    }
 
 
-
+   /**
+    * @param objKeyName index
+    * @param object javaBean
+    * @param <T>
+    * @return
+    */
    public <T extends Serializable> UtilSP putBean(String objKeyName, T object) {
-      // 创建字节输出流
+      // Creating a byte output stream
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       ObjectOutputStream oos = null;
       try {
-         // 创建对象输出流，并封装字节流
+         // Creates an object output stream and encapsulates the byte stream
          oos = new ObjectOutputStream(baos);
-         // 将对象写入字节流
+         // Writes an object to a byte stream
          oos.writeObject(object);
-         // 将字节流编码成base64的字符窜
+         // Character channeling encoding byte streams into Base64
          String obj_Base64 = new String(Base64.encode(baos.toByteArray(),URL_SAFE));
          Log.i("xxx", "putBean" +obj_Base64);
          putString(objKeyName, obj_Base64);
-         Log.i("xxx", "putBean" +"ok 存储成功");
       } catch (IOException e) {
          e.printStackTrace();
       } finally {
@@ -159,9 +167,8 @@ public final class UtilSP {
    }
 
    /**
-    * @param keyName
-    *        通过key获取单个数据
-    * @return 读取到的值value
+    * @param keyName get individual data through key
+    * @return  value
     */
    public String getString(int keyName) {
       return sharedPreferences.getString(String.valueOf(keyName), "");
@@ -179,7 +186,9 @@ public final class UtilSP {
       return sharedPreferences.getInt(keyName, 0);
    }
    /**
-    * @param objKey 存储该对象的键,所有非基本数据类型都必须实现序列化接口
+    *
+    * @param objKey
+    *  The key that stores the object, and all non base data types must implement the serialization interface
     * @param <T>
     * @return
     */
@@ -187,14 +196,14 @@ public final class UtilSP {
       T value;
       String objectBase64 = getString(objKey);
       Log.i("xxx", "getBean: " + objectBase64);
-      //读取字节
+      //Read byte
       byte[] base64 = Base64.decode(objectBase64.getBytes(),URL_SAFE);
 
-      //封装到字节流
+      //Encapsulated into byte stream
       ByteArrayInputStream bais = new ByteArrayInputStream(base64);
       ObjectInputStream bis = null;
       try {
-         //再次封装
+         //Re encapsulation
          bis = new ObjectInputStream(bais);
          try {
             value = (T) bis.readObject();
@@ -230,7 +239,7 @@ public final class UtilSP {
    }
 
    /**
-    * 清除sp下的所有数据  刷新数据后，保存数据需要先清空数据
+    * Clear all data under SP, refresh data, save data, you need to empty data first
     * @return
     */
    public UtilSP clearAll() {
@@ -242,14 +251,15 @@ public final class UtilSP {
    }
 
    /*
-   * 使用后手动释放
+   * Manual release after use
    * */
    public void release() {
       instance = null;
    }
 
 
-   /**将图片保存到xml中
+   /**
+    * Save the picture in XML
     * @param key
     * @param bitmap
     * @return
@@ -263,7 +273,7 @@ public final class UtilSP {
    }
 
    /**
-    * 从SP中取出图片
+    * Take pictures from sp
     * @param key
     * @return
     */

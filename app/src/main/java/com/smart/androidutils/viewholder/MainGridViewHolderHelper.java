@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
+import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.SpiderActivity;
@@ -36,15 +37,14 @@ public class MainGridViewHolderHelper implements CommonAdapter.IListHolderHelper
             public void onClick(View v) {
                 if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_sp))) {
                         context.startActivity(new Intent(context, SPActivity.class));
-                }
-                if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_spider))) {
+                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_spider))) {
                         context.startActivity(new Intent(context, SpiderActivity.class));
-                }
-                if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_class))) {
+                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_class))) {
                         context.startActivity(new Intent(context, ClassActivity.class));
-                }
-                if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_reflect))) {
+                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_reflect))) {
                         context.startActivity(new Intent(context, ReflectActivity.class));
+                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_device))) {
+                    context.startActivity(new Intent(context, DeviceActivity.class));
                 }
 
             }

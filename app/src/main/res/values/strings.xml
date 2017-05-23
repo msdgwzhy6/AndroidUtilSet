@@ -4,5 +4,6 @@
     <string name="act_spider">爬虫练习</string>
     <string name="act_class">Class测试</string>
     <string name="act_sp1">Android</string>
+    <string name="act_device">设备信息</string>
     <string name="act_reflect">反射</string>
 </resources>

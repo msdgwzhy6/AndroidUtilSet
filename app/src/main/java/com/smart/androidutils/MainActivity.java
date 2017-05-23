@@ -7,6 +7,7 @@ import android.widget.GridView;
 import com.smart.androidutils.bean.ItemBean;
 import com.smart.androidutils.viewholder.MainGridViewHolderHelper;
 import com.smart.holder_library.CommonAdapter;
+import com.util.InitUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InitUtil.init(this);
         initView();
         initData();
         setTitle("操作面板");
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getString(R.string.act_spider),
                 getResources().getString(R.string.act_class),
                 getResources().getString(R.string.act_reflect),
-                getResources().getString(R.string.act_sp1),
+                getResources().getString(R.string.act_device),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
