@@ -437,11 +437,14 @@ public final class  UtilFile {
             e.printStackTrace();
         }
     }
-    public static String readSourceFromUrl(String urlParam){
+    public static String readSourceFromUrl(String urlParam,String encoding){
         InputStreamReader isr = null;
         StringBuilder html = new StringBuilder();
         InputStream is = null;
-
+        String charset ="utf-8";
+        if (!TextUtils.isEmpty(encoding)) {
+            charset = encoding;
+        }
         try{
             URL url = new URL(urlParam); //根据Strng表现形式创建URL对象
 
@@ -452,7 +455,7 @@ public final class  UtilFile {
 
             is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
 
-            isr = new InputStreamReader(is, "gb2312");
+            isr = new InputStreamReader(is, charset);
 
             BufferedReader br = new BufferedReader(isr);
             String line = "";

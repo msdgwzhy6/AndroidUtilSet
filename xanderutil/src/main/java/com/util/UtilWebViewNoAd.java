@@ -77,7 +77,7 @@ public class UtilWebViewNoAd {
         @Override
         protected String doInBackground(String... strings) {
             baseUrl = strings[0];
-            return readSourceFromUrl(strings[0]);
+            return readSourceFromUrl(strings[0],"gb2312");
 
         }
 
