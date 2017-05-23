@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
+import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.util.UtilWebViewNoAd;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NoAdActivity extends AppCompatActivity {
+public class NoAdActivity extends BaseActivity {
 
     @BindView(R.id.id_web_view)
     WebView mIdWebView;

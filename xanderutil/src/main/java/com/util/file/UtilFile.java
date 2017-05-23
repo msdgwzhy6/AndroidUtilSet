@@ -24,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static android.content.ContentValues.TAG;
 import static com.util.UtilEncript.getMD5;
 
 /***************************************************************************
@@ -32,7 +33,7 @@ import static com.util.UtilEncript.getMD5;
  ***************************************************************************/
 
 public final class  UtilFile {
-
+    protected static final String TAG = "ccc";
     /**
      * Get files based on file paths
      * @param filePath file path
@@ -419,7 +420,7 @@ public final class  UtilFile {
 
             File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                     + "crash_lzhy_moneyhll.txt");
-
+            Log.i(TAG, "writeStr2Log: "+file.getAbsolutePath().toString());
             // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
@@ -446,11 +447,12 @@ public final class  UtilFile {
 
             URLConnection urlConnection = url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
 
+            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentEncoding());
             //urlConnection.setConnectTimeout(4000); //设置链接超时
 
             is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
 
-            isr = new InputStreamReader(is, "utf-8");
+            isr = new InputStreamReader(is, "gb2312");
 
             BufferedReader br = new BufferedReader(isr);
             String line = "";
@@ -474,7 +476,7 @@ public final class  UtilFile {
             }
 
         }
-
+        writeStr2Log(html.toString());
         return html.toString();
     }
 
