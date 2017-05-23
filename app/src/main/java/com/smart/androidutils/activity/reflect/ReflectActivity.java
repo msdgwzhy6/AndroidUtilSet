@@ -24,7 +24,7 @@ public class ReflectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reflect);
-        setTitle("反射机制");
+        setTitle(getResources().getString(R.string.act_reflect));
         ButterKnife.bind(this);
     }
 

@@ -1,4 +1,4 @@
-package com.util;
+package com.util.view;
 
 import android.app.Activity;
 import android.view.View;

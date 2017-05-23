@@ -12,7 +12,7 @@ import com.util.InitUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.util.UtilWidget.getView;
+import static com.util.view.UtilWidget.getView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getString(R.string.act_class),
                 getResources().getString(R.string.act_reflect),
                 getResources().getString(R.string.act_device),
-                getResources().getString(R.string.act_sp1),
+                getResources().getString(R.string.act_no_ad),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),
                 getResources().getString(R.string.act_sp1),

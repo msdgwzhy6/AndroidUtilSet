@@ -1,4 +1,4 @@
-package com.util;
+package com.util.file;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,10 +17,12 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import static com.util.UtilEncript.getMD5;
 
@@ -39,25 +42,25 @@ public final class  UtilFile {
         return TextUtils.isEmpty(filePath) ? null : new File(filePath);
     }
     /**
-     *judge if the file exists by filePath
-     * @param filePath file path
-     * @return {@code true}: existence <br>{@code false}: inexistence
+     * 判断问价是否存在
+     * @param filePath 文件路径
+     * @return {@code true}: 存在  {@code false}: 不存在
      */
     public static boolean isFileExists(String filePath) {
         return isFileExists(getFileByPath(filePath));
     }
 
     /**
-     *judge if the file exists by file
-     * @param file file
-     * @return {@code true}: existence<br>{@code false}: inexistence
+     * 判断问价是否存在
+     * @param file 文件
+     * @return {@code true}: 存在  {@code false}: 不存在
      */
     public static boolean isFileExists(File file) {
         return file != null && file.exists();
     }
 
     /**
-     * deleteFile
+     * 删除文件
      * Deletes a file by specifying the path
      * @param srcFilePath
      * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
@@ -66,7 +69,7 @@ public final class  UtilFile {
         return deleteFile(getFileByPath(srcFilePath));
     }
     /**
-     * deleteFile
+     * 删除文件
      * Deletes a file by specifying the filename
      * @param file
      * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
@@ -433,4 +436,46 @@ public final class  UtilFile {
             e.printStackTrace();
         }
     }
+    public static String readSourceFromUrl(String urlParam){
+        InputStreamReader isr = null;
+        StringBuilder html = new StringBuilder();
+        InputStream is = null;
+
+        try{
+            URL url = new URL(urlParam); //根据Strng表现形式创建URL对象
+
+            URLConnection urlConnection = url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
+
+            //urlConnection.setConnectTimeout(4000); //设置链接超时
+
+            is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
+
+            isr = new InputStreamReader(is, "utf-8");
+
+            BufferedReader br = new BufferedReader(isr);
+            String line = "";
+            while((line = br.readLine()) != null)
+            {
+                html.append(line).append("\r\n");
+            }
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+                if (isr != null) {
+                    isr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return html.toString();
+    }
+
 }

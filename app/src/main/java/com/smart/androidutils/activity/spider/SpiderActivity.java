@@ -32,7 +32,7 @@ public class SpiderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spider);
-        setTitle("抓包");
+        setTitle(getResources().getString(R.string.act_spider));
         ButterKnife.bind(this);
         mHandler = new Handler();
     }

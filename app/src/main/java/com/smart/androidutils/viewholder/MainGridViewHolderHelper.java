@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.smart.androidutils.R;
+import com.smart.androidutils.activity.ad.NoAdActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
@@ -15,7 +16,7 @@ import com.smart.holder_library.CommonAdapter;
 
 import java.util.List;
 
-import static com.util.UtilWidget.getView;
+import static com.util.view.UtilWidget.getView;
 
 /**
  * Created by smart on 2017/5/17.
@@ -45,6 +46,8 @@ public class MainGridViewHolderHelper implements CommonAdapter.IListHolderHelper
                         context.startActivity(new Intent(context, ReflectActivity.class));
                 }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_device))) {
                     context.startActivity(new Intent(context, DeviceActivity.class));
+                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_no_ad))) {
+                    context.startActivity(new Intent(context, NoAdActivity.class));
                 }
 
             }

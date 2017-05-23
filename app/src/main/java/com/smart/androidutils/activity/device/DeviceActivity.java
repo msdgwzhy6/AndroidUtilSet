@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.smart.androidutils.R;
 import com.smart.dialog_library.DialogCustom;
 import com.smart.dialog_library.callback.OnSingleBtnClickedListener;
-import com.util.UtilDevice;
+import com.util.phone.UtilDevice;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +30,7 @@ public class DeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
         ButterKnife.bind(this);
-        setTitle("手机设备信息");
+        setTitle(getResources().getString(R.string.act_device));
     }
 
     @OnClick({R.id.id_btn_device_status, R.id.id_btn_device_sim, R.id.id_btn_device_contact, R.id.id_btn_device_sms})

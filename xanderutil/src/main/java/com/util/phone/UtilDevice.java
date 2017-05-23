@@ -1,4 +1,4 @@
-package com.util;
+package com.util.phone;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -9,6 +9,8 @@ import android.os.SystemClock;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Xml;
+
+import com.util.InitUtil;
 
 import org.xmlpull.v1.XmlSerializer;
 

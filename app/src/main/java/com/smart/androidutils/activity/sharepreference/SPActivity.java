@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.util.UtilEncript;
-import com.util.UtilFile;
-import com.util.UtilSP;
+import com.util.file.UtilFile;
+import com.util.file.UtilSP;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +41,7 @@ public class SPActivity extends BaseActivity {
         setContentView(R.layout.activity_sp);
         mContext = this;
         ButterKnife.bind(this);
-        setTitle("SP工具类,保存图片到xml");
+        setTitle(getResources().getString(R.string.act_sp));
     }
 
     @OnClick(R.id.id_btn_img_net)

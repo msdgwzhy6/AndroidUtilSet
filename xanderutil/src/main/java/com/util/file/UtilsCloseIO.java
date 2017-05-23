@@ -1,4 +1,4 @@
-package com.util;
+package com.util.file;
 
 import java.io.Closeable;
 import java.io.IOException;
