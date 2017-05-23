@@ -1,8 +1,9 @@
-package com.xanderutillibrary.dao.util;
+package com.xanderutillibrary.dao;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -34,13 +35,16 @@ public final class  UtilFile {
     public static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
 
     /**
-     * @param imgUrl
-     * @param imageName
-     * @param fileName
+     * @param imgUrl 图片的url
+     * @param imageName 保存图片的名字
+     * @param fileName 文件名
      * @return
      */
     public static File downloadImg(String imgUrl, String imageName, String fileName){
         Bitmap bitmap =  getNetBitmap(imgUrl);
+        if (TextUtils.isEmpty(fileName)) {
+            fileName = "img_cache";
+        }
         String pathName = rootDir  + fileName + File.separator;
 
         /*
@@ -106,7 +110,7 @@ public final class  UtilFile {
             InputStream is = conn.getInputStream();
             bitmap =  BitmapFactory.decodeStream(is);
         } catch (MalformedURLException e) {
-
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

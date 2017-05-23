@@ -2,6 +2,8 @@ package com.xanderutillibrary.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
@@ -134,7 +136,7 @@ public final class UtilSP {
    }
 
    public String getString(String keyName) {
-      return sharedPreferences.getString(keyName, "");
+      return sharedPreferences.getString(keyName, null);
    }
 
    public int getInt(int keyName) {
@@ -247,5 +249,20 @@ public final class UtilSP {
    * */
    public void release() {
       instance = null;
+   }
+
+   // TODO: 2017/5/22
+   private void putBitmap(String key,Bitmap bitmap){
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+      String imageBase64 = new String(Base64.encodeToString(baos.toByteArray(),Base64.DEFAULT));
+      editor.putString(key,imageBase64 );
+      editor.commit();
+   }
+
+   private Bitmap getBitmap(String key){
+      String temp = getString("key");
+      ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
+      return BitmapFactory.decodeStream(bais);
    }
 }
