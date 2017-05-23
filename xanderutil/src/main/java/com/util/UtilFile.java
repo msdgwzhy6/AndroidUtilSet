@@ -1,4 +1,4 @@
-package com.xanderutillibrary.dao;
+package com.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,83 +21,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.util.UtilEncript.getMD5;
+
 
 /****************************************************************************
- * Created by xu on 2017/1/13.
- * Function:
+ * Created by xu on 2017/5/23.
+ * Function: 对数据进行文件操作的工具类
  ***************************************************************************/
 
 public final class  UtilFile {
 
-    /**
-     * @说明： 保存图片到本地
-     */
-    public static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
 
     /**
-     * @param imgUrl 图片的url
-     * @param imageName 保存图片的名字
-     * @param fileName 文件名
-     * @return
-     */
-    public static File downloadImg(String imgUrl, String imageName, String fileName){
-        Bitmap bitmap =  getNetBitmap(imgUrl);
-        if (TextUtils.isEmpty(fileName)) {
-            fileName = "img_cache";
-        }
-        String pathName = rootDir  + fileName + File.separator;
-
-        /*
-        * 创建目录
-        * */
-        File imgDir = new File(pathName);
-        if (!imgDir.exists()) {
-            imgDir.mkdirs();
-        }
-
-        /*
-        * 创建文件
-        * */
-        String imgName = imageName+".png";
-        File imageFile = new File(imgDir,imgName);//文件
-
-        FileOutputStream out;
-        if (imageFile.exists()) {
-            imageFile.delete();
-        }
-        try{
-            imageFile.createNewFile();
-            out = new FileOutputStream(imageFile);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return imageFile;
-    }
-
-    /**
-     * 通过制定的图片的本地路径得到一张bitmap
-     * @param bitmapPath  本地文件的绝对路径
-     * @return
-     */
-    public static Bitmap getLocalBitmap(String bitmapPath){
-        FileInputStream streamFile;
-        Bitmap bitmap = null;
-        try {
-            streamFile = new FileInputStream(bitmapPath);
-            bitmap =  BitmapFactory.decodeStream(streamFile);
-        }  catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
-    /**
-     * 从网络获取一张图片
+     * 仅仅是从网络获取一张图片
      * @param imgUrl
      * @return
      */
@@ -116,6 +52,80 @@ public final class  UtilFile {
         }
         return bitmap;
     }
+    /**
+     * @说明： 保存图片到本地
+     */
+    public static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
+    /**
+     * 从网络得到一张图片并保存到SD卡
+     * @param imgUrl 图片的url
+     * @param fileName 文件名
+     * @return 图片的文件形式
+     */
+    public static String getNetBitmap2Save(String imgUrl,  String fileName){
+        Bitmap bitmap =  getNetBitmap(imgUrl);
+        if (TextUtils.isEmpty(fileName)) {
+            fileName = "img_cache";
+        }
+        String pathName = rootDir  + fileName + File.separator;
+
+        /*
+        * 创建目录
+        * */
+        File imgDir = new File(pathName);
+        if (!imgDir.exists()) {
+            imgDir.mkdirs();
+        }
+
+        /*
+        * 创建文件
+        * */
+        String imgName = getMD5(imgUrl)+".png";
+        File imageFile = new File(imgDir,imgName);//文件
+
+        FileOutputStream out = null;
+        if (imageFile.exists()) {
+            imageFile.delete();
+        }
+        try{
+            imageFile.createNewFile();
+            out = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return imageFile.getAbsolutePath().toString();
+    }
+
+    /**
+     * 通过制定图片的本地路径得到一张bitmap
+     * @param bitmapPath  本地文件的绝对路径
+     * @return
+     */
+    public static Bitmap getLocalBitmap(String bitmapPath){
+        FileInputStream streamFile;
+        Bitmap bitmap = null;
+        try {
+            streamFile = new FileInputStream(bitmapPath);
+            bitmap =  BitmapFactory.decodeStream(streamFile);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+
     /**
      * 建立HTTP请求，并获取Bitmap对象。
      * @param urlString  图片的URL地址

@@ -7,14 +7,14 @@ import android.view.View;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
-import com.smart.androidutils.activity.spactivity.SPActivity;
+import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.SpiderActivity;
 import com.smart.androidutils.bean.ItemBean;
 import com.smart.holder_library.CommonAdapter;
 
 import java.util.List;
 
-import static com.xanderutillibrary.dao.util.UtilWidget.getView;
+import static com.util.UtilWidget.getView;
 
 /**
  * Created by smart on 2017/5/17.

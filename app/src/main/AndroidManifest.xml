@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.spactivity.SPActivity">
+        <activity android:name=".activity.sharepreference.SPActivity">
         </activity>
         <activity android:name=".activity.spider.SpiderActivity">
         </activity>

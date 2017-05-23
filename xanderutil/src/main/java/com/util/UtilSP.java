@@ -1,9 +1,10 @@
-package com.xanderutillibrary.dao;
+package com.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
@@ -182,7 +183,7 @@ public final class UtilSP {
 
    /**
     * @param objKey
-    *        存储该对象的键
+    *        存储该对象的键,所有非基本数据类型都必须实现序列化接口
     * @param <T>
     * @return
     */
@@ -251,17 +252,30 @@ public final class UtilSP {
       instance = null;
    }
 
-   // TODO: 2017/5/22
-   private void putBitmap(String key,Bitmap bitmap){
+
+   /**将图片保存到xml中
+    * @param key
+    * @param bitmap
+    * @return
+    */
+   public UtilSP putBitmap(String key,Bitmap bitmap){
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
       String imageBase64 = new String(Base64.encodeToString(baos.toByteArray(),Base64.DEFAULT));
-      editor.putString(key,imageBase64 );
-      editor.commit();
+      putString(key,imageBase64 );
+      return this;
    }
 
-   private Bitmap getBitmap(String key){
-      String temp = getString("key");
+   /**
+    * 从SP中取出图片
+    * @param key
+    * @return
+    */
+   public  Bitmap getBitmap(String key){
+      String temp = getString(key);
+      if (TextUtils.isEmpty(temp)) {
+         return null;
+      }
       ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
       return BitmapFactory.decodeStream(bais);
    }

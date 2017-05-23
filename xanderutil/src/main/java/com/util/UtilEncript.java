@@ -1,4 +1,4 @@
-package com.xanderutillibrary.dao;
+package com.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
