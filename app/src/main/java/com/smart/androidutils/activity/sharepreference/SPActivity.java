@@ -41,7 +41,7 @@ public class SPActivity extends BaseActivity {
         setContentView(R.layout.activity_sp);
         mContext = this;
         ButterKnife.bind(this);
-        setTitle("SP工具类");
+        setTitle("SP工具类,保存图片到xml");
     }
 
     @OnClick(R.id.id_btn_img_net)
@@ -51,7 +51,7 @@ public class SPActivity extends BaseActivity {
             public void run() {
                 mBitmap = UtilFile.getNetBitmap(urlImg);
                 UtilSP.getInstance(mContext)
-                        .setFileName(TAG)
+                        .initSP(TAG)
                         .putBitmap(UtilEncript.getMD5(urlImg),mBitmap)
                         .submit();
                 mHandler.post(new Runnable() {
@@ -70,7 +70,7 @@ public class SPActivity extends BaseActivity {
     public void onMBtnImgSpClicked() {
 
         mBitmap = UtilSP.getInstance(mContext)
-                .setFileName(TAG)
+                .initSP(TAG)
                 .getBitmap(UtilEncript.getMD5(urlImg))
                 ;
         mImgViewSp.setImageBitmap(mBitmap);

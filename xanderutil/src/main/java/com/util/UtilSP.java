@@ -29,7 +29,7 @@ import static android.util.Base64.URL_SAFE;
 
 public final class UtilSP {
    private Context mContext;
-   private String mFileName;
+   private String mFileName = "spxml";
 
    private SharedPreferences.Editor editor;
    private SharedPreferences sharedPreferences;
@@ -60,9 +60,9 @@ public final class UtilSP {
 
    /**
     * @param fileName
-    * @return 在设置文件名的时候，再次获取一个SP
+    * @return
     */
-   public UtilSP setFileName(String fileName) {
+   public UtilSP initSP(String fileName) {
       mFileName = fileName;
       sharedPreferences = mContext.getSharedPreferences(fileName, MODE_PRIVATE);
       editor = sharedPreferences.edit();
@@ -71,11 +71,8 @@ public final class UtilSP {
 
    /**
     * 保存String
-    *
-    * @param imgUrlKey
-    *        键
-    * @param imgUrlValue
-    *        值
+    * @param imgUrlKey  键
+    * @param imgUrlValue 值
     * @return
     */
    public UtilSP putString(int imgUrlKey, String imgUrlValue) {
@@ -95,7 +92,7 @@ public final class UtilSP {
     * @param beginKey
     * @return
     */
-   public UtilSP putList(List<String> strList, int beginKey) {
+   public UtilSP putList( int beginKey,List<String> strList) {
       int count = beginKey + strList.size() - 1;
       for (int i = beginKey; i < count; i++) {
          putString(i, strList.get(i));
@@ -127,26 +124,6 @@ public final class UtilSP {
       return instance;
    }
 
-   /**
-    * @param keyName
-    *        通过key获取单个数据
-    * @return 读取到的值value
-    */
-   public String getString(int keyName) {
-      return sharedPreferences.getString(String.valueOf(keyName), "");
-   }
-
-   public String getString(String keyName) {
-      return sharedPreferences.getString(keyName, null);
-   }
-
-   public int getInt(int keyName) {
-      return sharedPreferences.getInt(String.valueOf(keyName), 0);
-   }
-
-   public int getInt(String keyName) {
-      return sharedPreferences.getInt(keyName, 0);
-   }
 
 
    public <T extends Serializable> UtilSP putBean(String objKeyName, T object) {
@@ -182,8 +159,27 @@ public final class UtilSP {
    }
 
    /**
-    * @param objKey
-    *        存储该对象的键,所有非基本数据类型都必须实现序列化接口
+    * @param keyName
+    *        通过key获取单个数据
+    * @return 读取到的值value
+    */
+   public String getString(int keyName) {
+      return sharedPreferences.getString(String.valueOf(keyName), "");
+   }
+
+   public String getString(String keyName) {
+      return sharedPreferences.getString(keyName, null);
+   }
+
+   public int getInt(int keyName) {
+      return sharedPreferences.getInt(String.valueOf(keyName), 0);
+   }
+
+   public int getInt(String keyName) {
+      return sharedPreferences.getInt(keyName, 0);
+   }
+   /**
+    * @param objKey 存储该对象的键,所有非基本数据类型都必须实现序列化接口
     * @param <T>
     * @return
     */
@@ -223,25 +219,25 @@ public final class UtilSP {
             }
          } catch (IOException e) {
             e.printStackTrace();
-            Log.i("xxx", "getBean" );
+//            Log.i("xxx", "getBean" );
          }
       }
       return null;
    }
+   public UtilSP submit() {
+      editor.commit();
+      return instance;
+   }
 
-   /************************************************************
-    * 注释:  清除sp下的所有数据  刷新数据后，保存数据需要先清空数据
-    ************************************************************/
+   /**
+    * 清除sp下的所有数据  刷新数据后，保存数据需要先清空数据
+    * @return
+    */
    public UtilSP clearAll() {
       File file = new File(mContext.getFilesDir(), mFileName + ".xml");
       if (file.exists()) {
          editor.clear();
       }
-      return instance;
-   }
-
-   public UtilSP submit() {
-      editor.commit();
       return instance;
    }
 
