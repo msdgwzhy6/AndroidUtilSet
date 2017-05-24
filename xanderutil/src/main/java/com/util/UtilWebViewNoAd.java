@@ -44,8 +44,8 @@ public class UtilWebViewNoAd {
      * @param url
      * @param webView
      * @param context
-     * @param paramB
-     * @Author; 龙之游 @ xu 596928539@qq.com
+     * @param deleteAD
+     * @Author; Dragon @ xu 596928539@qq.com
      * 时间:2016/12/19 22:20
      * 注释:  * WebView详情页  剔除 js注入的广告
      ************************************************************/
@@ -57,7 +57,7 @@ public class UtilWebViewNoAd {
             return;
         }
         /************************************************************
-         *@Author; 龙之游 @ xu 596928539@qq.com
+         *@Author; Dragon @ xu 596928539@qq.com
          * 时间:2016/12/19 20:10
          * type  2不设置setWebViewClient   1设置正常加载网页   0设置处理地图导航的页面
          * 注释: 处理url 剔除 恶意 脚本
@@ -90,7 +90,7 @@ public class UtilWebViewNoAd {
         protected void onPostExecute(String html) {
             super.onPostExecute(html);
             /************************************************************
-             *@Author; 龙之游 @ xu 596928539@qq.com
+             *@Author; Dragon @ xu 596928539@qq.com
              * 时间:2016/12/19 20:07
              * 注释:  正则处理到的html源码  字符串
              ************************************************************/
@@ -117,7 +117,7 @@ public class UtilWebViewNoAd {
     }
 
     /************************************************************
-     * 创建者;龙之游 @ xu 596928539@qq.com
+     * 创建者;Dragon @ xu 596928539@qq.com
      * 修改时间:2017/1/6 11:49
      * 注释:webview设置
      ************************************************************/
