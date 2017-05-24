@@ -20,12 +20,12 @@ public class SpiderViewHolderHelper implements CommonAdapter.IListHolderHelperCa
     @Override
     public CommonAdapter.IBaseViewHolder initViewHolder(SpiderViewHolder viewHolder, View convertView) {
         viewHolder = new SpiderViewHolder();
-        viewHolder.mTextView = getView(convertView, R.id.id_spider_item);
-        return null;
+        viewHolder.mTextView = getView(convertView, R.id.id_spider_text_item);
+        return viewHolder;
     }
 
     @Override
     public void bindListDataToView(Context context, List<SpiderBean> iBaseBeanList, SpiderViewHolder viewHolder, int position) {
-
+        viewHolder.mTextView.setText(iBaseBeanList.get(position).getText());
     }
 }
