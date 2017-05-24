@@ -9,12 +9,15 @@ import com.util.UtilWebViewNoAd;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.smart.androidutils.constant.Constant.urlMR;
+
+
 public class NoAdActivity extends BaseActivity {
 
     @BindView(R.id.id_web_view)
     WebView mIdWebView;
 
-    private String url = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
+
 
     @Override
     protected int initLayout() {
@@ -31,6 +34,6 @@ public class NoAdActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        UtilWebViewNoAd.htmlDetails(url,mIdWebView,this);
+        UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,this);
     }
 }

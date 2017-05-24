@@ -9,14 +9,20 @@ import android.widget.TextView;
 
 import com.smart.androidutils.R;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.smart.androidutils.constant.Constant.urlMR;
+import static com.smart.androidutils.constant.Constant.userAgent;
 
 public class SpiderActivity extends AppCompatActivity {
 
@@ -26,8 +32,7 @@ public class SpiderActivity extends AppCompatActivity {
     Button mIdSpider;
 
     private Handler mHandler;
-    private String url="http://www.dianping.com/search/category/2/45";
-//    private String url="http://192.168.200.187:8080/Act";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +49,20 @@ public class SpiderActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-//                Connection conn = Jsoup.connect(url);
+                Connection conn = Jsoup.connect(urlMR);
+                // 修改http包中的header,伪装成浏览器进行抓取
+                conn.header("User-Agent", userAgent);
                 // 下载url并解析成html DOM结构
-                Document doc = null;
+                Document doc;
                 try {
-                    doc = Jsoup.connect(url).get();
+                    doc = conn.get();
                     Log.i("xxx", "run" +doc.title());
                     final Document finalDoc = doc;
+                    Elements elements = doc.getElementsByClass("content");
+                    Elements eles = elements.first().getElementsByTag("p");
+                    for (Element element:eles){
+                        Log.i("xxx", "run" +element.text());
+                    }
                     mHandler.post(new Runnable() {
                        @Override
                        public void run() {
