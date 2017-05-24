@@ -2,63 +2,44 @@ package com.smart.androidutils.activity.device;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.widget.GridView;
 
 import com.smart.androidutils.R;
-import com.smart.dialog_library.DialogCustom;
-import com.smart.dialog_library.callback.OnSingleBtnClickedListener;
-import com.util.phone.UtilDevice;
+import com.smart.androidutils.bean.ItemBean;
+import com.smart.androidutils.viewholder.GridViewHolderHelper;
+import com.smart.holder_library.CommonAdapter;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.smart.androidutils.constant.Constant.ITEMS_DEVICE;
+import static com.util.view.UtilWidget.getView;
 
 public class DeviceActivity extends AppCompatActivity {
 
-    @BindView(R.id.id_btn_device_status)
-    Button mBtnDeviceStatus;
-    @BindView(R.id.id_btn_device_sim)
-    Button mBtnDeviceSim;
-    @BindView(R.id.id_btn_device_contact)
-    Button mBtnDeviceContact;
-    @BindView(R.id.id_btn_device_sms)
-    Button mBtnDeviceSms;
+    private GridView mGridView;
+    private List<ItemBean> mItemBeanList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_main);
+
         setTitle(getResources().getString(R.string.act_device));
+        mGridView = getView(this,R.id.main_grif_view);
+        initData();
+        mGridView.setAdapter(new CommonAdapter(this,mItemBeanList,R.layout.main_grid_view_item,new GridViewHolderHelper()));
     }
 
-    @OnClick({R.id.id_btn_device_status, R.id.id_btn_device_sim, R.id.id_btn_device_contact, R.id.id_btn_device_sms})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.id_btn_device_status:
-               /* new DialogCustom(this)
-                        .setToast(UtilDevice.getPhoneStatus(),10000)
-                        .setToastDrawableId(R.drawable.dialog_bg)
-//                        .setDialogOffPos(null,0.2f)
-                        .show();*/
-                new DialogCustom(this).setTitle("默认背景色")
-                        .setMessage(UtilDevice.getPhoneStatus())
-                        .setSingleBtnTextR("one")
-                        .setOnSingleClicedkListener(new OnSingleBtnClickedListener() {
-                            @Override
-                            public void onRightBtnClick(DialogCustom dialogCustom) {
-                                dialogCustom.dismiss();
-                            }
-                        })
-                        .show();
-                break;
-            case R.id.id_btn_device_sim:
-                break;
-            case R.id.id_btn_device_contact:
-                break;
-            case R.id.id_btn_device_sms:
-                break;
+
+    private void initData() {
+
+        ItemBean itemBean;
+        mItemBeanList = new ArrayList<>();
+        for (int i = 0; i < ITEMS_DEVICE.length; i++) {
+            itemBean = new ItemBean();
+            itemBean.setName(ITEMS_DEVICE[i]);
+            mItemBeanList.add(itemBean);
         }
     }
 }

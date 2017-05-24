@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.DownloadListener;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,7 +38,6 @@ import static com.util.file.UtilFile.writeStr2Log;
 
 public class UtilWebViewNoAd {
 
-    private static Activity activity;
     private static final String regexStr = "<script\\b[^>]*?src=\"([^\"]*?)\"[^>]*></script>";
 
     /************************************************************
@@ -46,10 +48,9 @@ public class UtilWebViewNoAd {
      * 时间:2016/12/19 22:20
      * 注释:  * WebView详情页  剔除 js注入的广告
      ************************************************************/
-    public static void htmlDetails(@NotNull String url, @NotNull final WebView webView, @NotNull final Activity context) {
+    public static void htmlDetails(@NotNull final String url, @NotNull final WebView webView, @NotNull final Activity context) {
         webView.loadUrl(url);
         setWebView(webView);
-        activity = context;
 
         /************************************************************
          *@Author; 龙之游 @ xu 596928539@qq.com
@@ -74,10 +75,6 @@ public class UtilWebViewNoAd {
                 return super.onJsBeforeUnload(view, url, message, result);
             }
 
-            @Override
-            public boolean onJsTimeout() {
-                return super.onJsTimeout();
-            }
 
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
@@ -86,17 +83,23 @@ public class UtilWebViewNoAd {
         });
         webView.setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                new AsyncTaskHtml(webView).execute(url);//去广告核心步骤
-                return super.shouldOverrideUrlLoading(view, url);
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                if (Build.VERSION.SDK_INT >21) {
+                    new AsyncTaskHtml(webView).execute(request.getUrl().toString());//去广告核心步骤
+                }else {
+                    new AsyncTaskHtml(webView).execute(url);//去广告核心步骤
+                }
+                return super.shouldInterceptRequest(view, request);
             }
+
+
         });
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String s1, String s2, String s3, long l) {
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                activity.startActivity(intent);
+                context.startActivity(intent);
             }
         });
 
@@ -107,11 +110,11 @@ public class UtilWebViewNoAd {
      * Function:静态内部类 AsyncTaskHtml  配合  htmlDetails 去除恶意脚本
      ***************************************************************************/
 
-    static class AsyncTaskHtml extends AsyncTask<String, Void, String> {
+    private static class AsyncTaskHtml extends AsyncTask<String, Void, String> {
         private WebView mWebView;
         private String baseUrl;
 
-        public AsyncTaskHtml(WebView webView) {
+        AsyncTaskHtml(WebView webView) {
             mWebView = webView;
         }
 
@@ -157,7 +160,7 @@ public class UtilWebViewNoAd {
      * 修改时间:2017/1/6 11:49
      * 注释:webview设置
      ************************************************************/
-    public static void setWebView(WebView webView) {
+    private static void setWebView(WebView webView) {
         webView.requestFocus();
         WebSettings webSettings = webView.getSettings();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -178,7 +181,7 @@ public class UtilWebViewNoAd {
         //开启 database storage API 功能
         webSettings.setDatabaseEnabled(true);
         //不在webiew中保存密码
-        webSettings.setSavePassword(false);
+        webSettings.setSaveFormData(false);
         //设置数据库缓存路径
         //开启 Application Caches 功能
         webSettings.setAppCacheEnabled(true);
@@ -199,7 +202,7 @@ public class UtilWebViewNoAd {
             }
         });
     }
-    public static String readSourceFromUrl(String urlParam,String encoding){
+    private static String readSourceFromUrl(String urlParam, String encoding){
         InputStreamReader isr = null;
         StringBuilder html = new StringBuilder();
         InputStream is = null;
@@ -220,7 +223,7 @@ public class UtilWebViewNoAd {
             isr = new InputStreamReader(is, charset);
 
             BufferedReader br = new BufferedReader(isr);
-            String line = "";
+            String line;
             while((line = br.readLine()) != null)
             {
                 html.append(line).append("\r\n");

@@ -1,10 +1,27 @@
 <resources>
-    <string name="app_name">AndroidUtils</string>
+    <string name="app_name">Apple</string>
     <string name="act_sp">SP测试</string>
-    <string name="act_spider">爬虫练习</string>
+    <string name="act_spider">爬虫</string>
     <string name="act_class">Class测试</string>
     <string name="act_sp1">Android</string>
-    <string name="act_device">设备信息</string>
+    <string name="act_device">手机信息</string>
     <string name="act_reflect">反射</string>
     <string name="act_no_ad">去广告</string>
+
+    <!--手机卡信息-->
+    <string name="telephony_state">"获取手机状态信息"</string>
+    <string name="telephony_sim_net_type">"SIM卡的网络类型"</string>
+    <string name="telephony_sim_support_net">"Sim卡是否支持联网"</string>
+    <string name="telephony_sim_net_connect">"Sim卡是否联网"</string>
+
+    <!--设备信息-->
+    <string name="device_wifi_availalbe">"是否支持WiFi"</string>
+    <string name="device_wifi_connect">"WiFi 是否连接"</string>
+
+    <string name="device_available_memory">"手机当前可用内存"</string>
+    <string name="device_total_memory">"手机总内存"</string>
+
+    <string name="device_sd_total_size">"手机SD卡总大小"</string>
+    <string name="device_sd_available_size">"手机SD卡可用空间"</string>
+
 </resources>

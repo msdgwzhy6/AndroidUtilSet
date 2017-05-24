@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Xml;
 
 import com.util.InitUtil;
@@ -20,37 +23,45 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.telephony.TelephonyManager.CALL_STATE_IDLE;
+import static android.telephony.TelephonyManager.CALL_STATE_OFFHOOK;
+import static android.telephony.TelephonyManager.CALL_STATE_RINGING;
+import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
+import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
+import static android.telephony.TelephonyManager.PHONE_TYPE_NONE;
+import static com.util.phone.UtilNet.getActiveConnectType;
+import static com.util.phone.UtilNet.getConnectState;
+import static com.util.phone.UtilNet.isCurrentConnected;
+
 /**
  * @author xander on  2017/5/23.
- * @function
  */
 
-public class UtilDevice {
+public class UtilTelephony {
+    private static TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);;
     /**
      * 判断设备是否是手机
      *
-     * @return {@code true}: 是<br>{@code false}: 否
+     * @return {@code true}: 是{@code false}: 否
      */
-    public static boolean isPhone() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        return tm != null && tm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
+    private static boolean isPhone() {
+        return tm != null && tm.getPhoneType() != PHONE_TYPE_NONE;
     }
 
     /**
      * 获取IMEI码
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}</p>
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
      * @return IMEI码
      */
     @SuppressLint("HardwareIds")
     public static String getIMEI() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getDeviceId() : null;
     }
 
     /**
      * 获取IMSI码
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}</p>
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
      * @return IMSI码
      */
@@ -59,7 +70,6 @@ public class UtilDevice {
         TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSubscriberId() : null;
     }
-
     /**
      * 获取移动终端类型
      *
@@ -71,40 +81,46 @@ public class UtilDevice {
      * <li>{@link TelephonyManager#PHONE_TYPE_SIP  } : 3</li>
      * </ul>
      */
-    public static int getPhoneType() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        return tm != null ? tm.getPhoneType() : -1;
+    public static String getPhoneType() {
+        int type = tm.getPhoneType();
+        switch (type){
+            case  PHONE_TYPE_NONE:
+                return "无信号";
+            case  PHONE_TYPE_CDMA:
+                return "电信";
+            case PHONE_TYPE_GSM:
+                return "移动或联通";
+            default:
+                return "未知";
+        }
     }
 
     /**
      * 判断sim卡是否准备好
      *
-     * @return {@code true}: 是<br>{@code false}: 否
+     * @return {@code true}: 是{@code false}: 否
      */
     public static boolean isSimCardReady() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY;
     }
 
     /**
      * 获取Sim卡运营商名称
-     * <p>中国移动、如中国联通、中国电信</p>
+     * 中国移动、如中国联通、中国电信
      *
      * @return sim卡运营商名称
      */
     public static String getSimOperatorName() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSimOperatorName() : null;
     }
 
     /**
      * 获取Sim卡运营商名称
-     * <p>中国移动、如中国联通、中国电信</p>
+     * 中国移动、如中国联通、中国电信
      *
      * @return 移动网络运营商名称
      */
     public static String getSimOperatorByMnc() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         String operator = tm != null ? tm.getSimOperator() : null;
         if (operator == null) return null;
         switch (operator) {
@@ -123,52 +139,155 @@ public class UtilDevice {
 
     /**
      * 获取手机状态信息
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}</p>
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
-     * @return DeviceId(IMEI) = 99000311726612<br>
-     * DeviceSoftwareVersion = 00<br>
-     * Line1Number =<br>
-     * NetworkCountryIso = cn<br>
-     * NetworkOperator = 46003<br>
-     * NetworkOperatorName = 中国电信<br>
-     * NetworkType = 6<br>
-     * honeType = 2<br>
-     * SimCountryIso = cn<br>
-     * SimOperator = 46003<br>
-     * SimOperatorName = 中国电信<br>
-     * SimSerialNumber = 89860315045710604022<br>
-     * SimState = 5<br>
-     * SubscriberId(IMSI) = 460030419724900<br>
-     * VoiceMailNumber = *86<br>
+     * @return DeviceId(IMEI) = 99000311726612
+     * DeviceSoftwareVersion = 00
+     * Line1Number =
+     * NetworkCountryIso = cn
+     * NetworkOperator = 46003
+     * NetworkOperatorName = 中国电信
+     * NetworkType = 6
+     * honeType = 2
+     * SimCountryIso = cn
+     * SimOperator = 46003
+     * SimOperatorName = 中国电信
+     * SimSerialNumber = 89860315045710604022
+     * SimState = 5
+     * SubscriberId(IMSI) = 460030419724900
+     * VoiceMailNumber = *86
      */
     @SuppressLint("HardwareIds")
     public static String getPhoneStatus() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext()
-                .getSystemService(Context.TELEPHONY_SERVICE);
-        String str = "";
-        str += "DeviceId(IMEI) = " + tm.getDeviceId() + "\n";
-        str += "DeviceSoftwareVersion = " + tm.getDeviceSoftwareVersion() + "\n";
-        str += "Line1Number = " + tm.getLine1Number() + "\n";
-        str += "NetworkCountryIso = " + tm.getNetworkCountryIso() + "\n";
-        str += "NetworkOperator = " + tm.getNetworkOperator() + "\n";
-        str += "NetworkOperatorName = " + tm.getNetworkOperatorName() + "\n";
-        str += "NetworkType = " + tm.getNetworkType() + "\n";
-        str += "PhoneType = " + tm.getPhoneType() + "\n";
-        str += "SimCountryIso = " + tm.getSimCountryIso() + "\n";
-        str += "SimOperator = " + tm.getSimOperator() + "\n";
-        str += "SimOperatorName = " + tm.getSimOperatorName() + "\n";
-        str += "SimSerialNumber = " + tm.getSimSerialNumber() + "\n";
-        str += "SimState = " + tm.getSimState() + "\n";
-        str += "SubscriberId(IMSI) = " + tm.getSubscriberId() + "\n";
-        str += "VoiceMailNumber = " + tm.getVoiceMailNumber() + "\n";
-        return str;
+        if (!isPhone()) {
+            return "该设备不是手机";
+        }
+        String result = "\n" + "设备Id(IMEI) : " + tm.getDeviceId() + "\n" +
+                "设备的软件版本号 : " + getDeviceSoftwareVersion() + "\n" +
+                "获取ISO标准的国家码，即国际长途区号 : " + tm.getNetworkCountryIso() + "\n" +
+                "手机状态： " + getCallState() + "\n" +
+                "手机类型：" + getPhoneType() + "\n" +
+                "手机号 : " + tm.getLine1Number() + "\n" +
+                "SIM卡的序列号：" + tm.getSimSerialNumber() + "\n" +
+                "SIM卡的状态： " + tm.getSimState() + "\n" +
+                "获取Sim卡运营商名称： " + getSimOperatorByMnc() + "\n" +
+                "是否漫游：" + tm.isNetworkRoaming() + "\n" +
+                "电话方位： " + tm.getCellLocation() + "\n" +
+                "网络类型： " + getNetworkType() + "\n" +
+                "网络状态： " + getConnectState() + "\n" +
+                "设备的软件版本号 = " + tm.getDeviceSoftwareVersion() + "\n";
+        Log.i("xxx", "getPhoneStatus" +result);
+        return result;
+    }
+    /*
+        * 当前使用的网络类型：
+        * 例如： NETWORK_TYPE_UNKNOWN  网络类型未知  0
+          NETWORK_TYPE_GPRS     GPRS网络  1
+          NETWORK_TYPE_EDGE     EDGE网络  2
+          NETWORK_TYPE_UMTS     UMTS网络  3
+          NETWORK_TYPE_HSDPA    HSDPA网络  8
+          NETWORK_TYPE_HSUPA    HSUPA网络  9
+          NETWORK_TYPE_HSPA     HSPA网络  10
+          NETWORK_TYPE_CDMA     CDMA网络,IS95A 或 IS95B.  4
+          NETWORK_TYPE_EVDO_0   EVDO网络, revision 0.  5
+          NETWORK_TYPE_EVDO_A   EVDO网络, revision A.  6
+          NETWORK_TYPE_1xRTT    1xRTT网络  7
+        */
+    private static String getNetworkType() {
+        if (!isCurrentConnected()) {
+            return "当前无网络连接";
+        }
+        int type = getActiveConnectType();
+        switch (type){
+            case ConnectivityManager.TYPE_WIFI:
+                return "当前为 WIFI 连接";
+            case ConnectivityManager.TYPE_MOBILE:
+                return getMobileNetType();
+            default:
+                return "";
+        }
+    }
+
+    /** 获取手机网络类型
+     * @return
+     */
+    public static String getMobileNetType() {
+        int type = tm.getNetworkType();
+        switch (type){
+            case TelephonyManager.NETWORK_TYPE_CDMA:
+            case TelephonyManager.NETWORK_TYPE_EDGE:
+            case TelephonyManager.NETWORK_TYPE_GPRS:
+            case TelephonyManager.NETWORK_TYPE_1xRTT:
+            case TelephonyManager.NETWORK_TYPE_IDEN:
+                return "2G";
+            case TelephonyManager.NETWORK_TYPE_HSDPA:
+            case TelephonyManager.NETWORK_TYPE_UMTS:
+            case TelephonyManager.NETWORK_TYPE_EVDO_0:
+            case TelephonyManager.NETWORK_TYPE_EVDO_A:
+            case TelephonyManager.NETWORK_TYPE_HSUPA:
+            case TelephonyManager.NETWORK_TYPE_HSPA:
+            case TelephonyManager.NETWORK_TYPE_EVDO_B:
+            case TelephonyManager.NETWORK_TYPE_EHRPD:
+            case TelephonyManager.NETWORK_TYPE_HSPAP:
+            case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
+                return "3G";
+            case TelephonyManager.NETWORK_TYPE_LTE:
+            case TelephonyManager.NETWORK_TYPE_IWLAN:
+                return "4G";
+            default:
+                return "网络类型未知,请检查您的手机是否插入SIM";
+        }
+    }
+
+    /**
+     * 待完善
+     * @return
+     */
+    private static String getDeviceSoftwareVersion() {
+        return tm.getDeviceSoftwareVersion();
+    }
+
+
+    //是否wifi连接
+    private static boolean isWifiConnected() {
+        Context context = InitUtil.getContext();
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mWiFiNetworkInfo = mConnectivityManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (mWiFiNetworkInfo != null) {
+                return mWiFiNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
+    /*
+       * 电话状态：
+       * 1.tm.CALL_STATE_IDLE=0    无活动
+       * 2.tm.CALL_STATE_RINGING=1  响铃
+       * 3.tm.CALL_STATE_OFFHOOK=2  摘机
+       */
+    private static String getCallState() {
+        int state = tm.getCallState();
+        switch (state){
+            case CALL_STATE_IDLE:
+                return "无活动";
+            case CALL_STATE_RINGING:
+                return "响铃";
+            case CALL_STATE_OFFHOOK:
+                return "摘机";
+            default:
+                return "";
+        }
     }
 
 
     /**
      * 获取手机联系人
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>}</p>
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_CONTACTS"/>}</p>
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>}
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_CONTACTS"/>}
      *
      * @return 联系人链表
      */
@@ -204,7 +323,7 @@ public class UtilDevice {
                         Cursor c = resolver.query(date_uri, new String[]{"data1",
                                         "mimetype"}, "raw_contact_id=?",
                                 new String[]{contact_id}, null);
-                        HashMap<String, String> map = new HashMap<String, String>();
+                        HashMap<String, String> map = new HashMap<>();
                         // 8.解析c
                         if (c != null) {
                             while (c.moveToNext()) {
@@ -241,8 +360,8 @@ public class UtilDevice {
 
     /**
      * 获取手机短信并保存到xml中
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>}</p>
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_SMS"/>}</p>
+     * 需添加权限 {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>}
+     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_SMS"/>}
      */
     public static void getAllSMS() {
         // 1.获取短信
