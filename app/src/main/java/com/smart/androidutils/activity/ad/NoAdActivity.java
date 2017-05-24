@@ -6,15 +6,12 @@ import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.util.UtilWebViewNoAd;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import static com.smart.androidutils.constant.Constant.urlMR;
+import static com.util.view.UtilWidget.getView;
 
 
 public class NoAdActivity extends BaseActivity {
 
-    @BindView(R.id.id_web_view)
     WebView mIdWebView;
 
 
@@ -22,14 +19,13 @@ public class NoAdActivity extends BaseActivity {
     @Override
     protected int initLayout() {
         setTitle(getResources().getString(R.string.act_no_ad));
-        ButterKnife.bind(this);
         return R.layout.activity_no_ad;
 
     }
 
     @Override
     protected void initView() {
-
+        mIdWebView = getView(this,R.id.id_no_ad_web_view);
     }
 
     @Override
