@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import static android.content.ContentValues.TAG;
 import static com.util.UtilEncript.getMD5;
 
 /***************************************************************************
@@ -203,7 +201,7 @@ public final class  UtilFile {
     }
 
     /**
-     * Judge if the file exists;
+     * 判断文件是否存在
      * if it dose,delete it ;
      * then create file ;
      * @param filePath  file path
@@ -258,7 +256,7 @@ public final class  UtilFile {
     /**
      * @说明： Save picture to local
      */
-    public static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
+    private static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
     /**
      * Get a picture from the network and save it to the SD card
      * @param imgUrl URL of the picture
@@ -277,7 +275,9 @@ public final class  UtilFile {
         * */
         File imgDir = new File(pathName);
         if (!imgDir.exists()) {
-            imgDir.mkdirs();
+            if (!imgDir.mkdirs()) {
+                return "保存失败！";
+            };
         }
 
         /*
@@ -288,14 +288,16 @@ public final class  UtilFile {
 
         FileOutputStream out = null;
         if (imageFile.exists()) {
-            imageFile.delete();
+            if (!imageFile.delete()) {
+                return "删除旧文件失败！";
+            };
         }
         try{
-            imageFile.createNewFile();
+            if (!imageFile.createNewFile()) {
+                return "创建文件失败！";
+            }
             out = new FileOutputStream(imageFile);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }finally {
@@ -308,7 +310,7 @@ public final class  UtilFile {
                 e.printStackTrace();
             }
         }
-        return imageFile.getAbsolutePath().toString();
+        return imageFile.getAbsolutePath();
     }
 
     /**
@@ -368,11 +370,11 @@ public final class  UtilFile {
         return false;
     }
 
-    /************************************************************
+/*    *//************************************************************
      *@Author; 龙之游 @ xu 596928539@qq.com
      * 时间:2016/12/20 13:25
      * 注释:  写文件
-     ************************************************************/
+     ************************************************************//*
     public static File writeLog(String str){
 
 
@@ -407,7 +409,7 @@ public final class  UtilFile {
             System.out.println(ex.getStackTrace());
         }
         return null;
-    }
+    }*/
 
     /**
      * 将字符串写入文件
@@ -418,12 +420,13 @@ public final class  UtilFile {
 
 //            content = "This is the content to write into file";
 
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                    + "crash_lzhy_moneyhll.txt");
-            Log.i(TAG, "writeStr2Log: "+file.getAbsolutePath().toString());
+            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ "crash_lzhy_moneyhll.txt");
+            Log.i(TAG, "writeStr2Log: "+ file.getAbsolutePath());
             // if file doesnt exists, then create it
             if (!file.exists()) {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    return ;
+                }
             }
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
