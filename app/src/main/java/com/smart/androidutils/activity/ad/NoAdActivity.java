@@ -9,6 +9,7 @@ import com.smart.androidutils.R;
 import com.util.UtilWebViewNoAd;
 
 import static com.smart.androidutils.constant.Constant.urlMR;
+import static com.smart.dialog_library.Utils.setViewAlphaAnimation;
 import static com.util.view.UtilWidget.getView;
 
 
@@ -43,6 +44,7 @@ public class NoAdActivity extends BaseActivity {
         mButtonOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                setViewAlphaAnimation(mButtonOff);
                 setTitle(getResources().getString(R.string.act_no_ad_off));
                 UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,NoAdActivity.this,false);
             }
@@ -50,6 +52,7 @@ public class NoAdActivity extends BaseActivity {
         mButtonOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                setViewAlphaAnimation(mButtonOn);
                 setTitle(getResources().getString(R.string.act_no_ad_on));
                 UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,NoAdActivity.this,true);
             }
