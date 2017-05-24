@@ -59,7 +59,7 @@ public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCall
                 }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_device))) {
                     context.startActivity(new Intent(context, DeviceActivity.class));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_no_ad))) {
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_no_ad_off))) {
                     context.startActivity(new Intent(context, NoAdActivity.class));
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_file))) {

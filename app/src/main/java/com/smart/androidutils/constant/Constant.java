@@ -17,7 +17,7 @@ public class Constant {
             InitUtil.getContext().getString(R.string.act_class),
             InitUtil.getContext().getString(R.string.act_reflect),
             InitUtil.getContext().getString(R.string.act_device),
-            InitUtil.getContext().getString(R.string.act_no_ad),
+            InitUtil.getContext().getString(R.string.act_no_ad_off),
             InitUtil.getContext().getString(R.string.act_file),
             InitUtil.getContext().getString(R.string.act_sp1)
     };

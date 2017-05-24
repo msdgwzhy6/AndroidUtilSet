@@ -6,7 +6,8 @@
     <string name="act_sp1">Android</string>
     <string name="act_device">手机信息</string>
     <string name="act_reflect">反射</string>
-    <string name="act_no_ad">去广告</string>
+    <string name="act_no_ad_off">原页面</string>
+    <string name="act_no_ad_on">去广告</string>
     <string name="act_file">文件类</string>
 
     <!--手机卡信息-->

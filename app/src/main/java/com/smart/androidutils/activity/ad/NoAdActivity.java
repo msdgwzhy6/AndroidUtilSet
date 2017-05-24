@@ -20,7 +20,7 @@ public class NoAdActivity extends BaseActivity {
 
     @Override
     protected int initLayout() {
-        setTitle(getResources().getString(R.string.act_no_ad));
+        setTitle(getResources().getString(R.string.act_no_ad_off));
         return R.layout.activity_no_ad;
 
     }
@@ -34,7 +34,7 @@ public class NoAdActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,this,true);
+        UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,this,false);
     }
 
     @Override
@@ -43,12 +43,14 @@ public class NoAdActivity extends BaseActivity {
         mButtonOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                setTitle(getResources().getString(R.string.act_no_ad_off));
                 UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,NoAdActivity.this,false);
             }
         });
         mButtonOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                setTitle(getResources().getString(R.string.act_no_ad_on));
                 UtilWebViewNoAd.htmlDetails(urlMR,mIdWebView,NoAdActivity.this,true);
             }
         });
