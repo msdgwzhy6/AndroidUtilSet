@@ -95,18 +95,19 @@ public class UtilWebViewNoAd {
              * 注释:  正则处理到的html源码  字符串
              ************************************************************/
 //            readSourceFromUrl(html);
-            Pattern p = Pattern.compile(regexStr);
-            Matcher m = p.matcher(html);
-            while (m.find()) {
-                if (!(m.group().contains("www.geyanw.com"))) {
-                    html = html.replace(m.group(), "");
-                }
-            }
+
 
             try {
                 URL url = new URL(baseUrl);
+                Pattern p = Pattern.compile(regexStr);
+                Matcher m = p.matcher(html);
+                while (m.find()) {
+                    if (!(m.group().contains(url.getHost()))) {
+                        html = html.replace(m.group(), "");
+                    }
+                }
                 baseUrl = String.format("%s://%s", url.getProtocol(), url.getHost());
-                Log.i("baseUrl", "onPostExecute: " + baseUrl);
+                Log.i("baseUrl", "onPostExecute: " + url.getHost());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
