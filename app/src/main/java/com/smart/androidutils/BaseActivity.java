@@ -12,13 +12,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(initLayout());
         initView();
         initData();
+        setListener();
     }
 
     protected abstract int initLayout() ;
     protected abstract void initView();
     protected abstract void initData();
 
-
+    protected void setListener(){}
 
 
 }

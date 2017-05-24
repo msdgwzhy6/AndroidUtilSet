@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_no_ad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.smart.androidutils.activity.ad.NoAdActivity">
-<WebView
-    android:id="@+id/id_no_ad_web_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-</RelativeLayout>
+   <LinearLayout
+       android:id="@+id/id_no_ad_button_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <Button
+           android:id="@+id/id_no_ad_off"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:text="原页面"/>
+       <Button
+           android:id="@+id/id_no_ad_on"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:text="去广告"/>
+   </LinearLayout>
+    <WebView
+        android:layout_below="@id/id_no_ad_button_layout"
+        android:id="@+id/id_no_ad_web_view"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+</LinearLayout>

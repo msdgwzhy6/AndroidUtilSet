@@ -44,14 +44,18 @@ public class UtilWebViewNoAd {
      * @param url
      * @param webView
      * @param context
+     * @param paramB
      * @Author; 龙之游 @ xu 596928539@qq.com
      * 时间:2016/12/19 22:20
      * 注释:  * WebView详情页  剔除 js注入的广告
      ************************************************************/
-    public static void htmlDetails(@NotNull final String url, @NotNull final WebView webView, @NotNull final Activity context) {
-        webView.loadUrl(url);
-        setWebView(webView);
-
+    public static void htmlDetails(@NotNull final String url, @NotNull final WebView webView, @NotNull final Activity context, final boolean deleteAD) {
+//
+        setWebView(webView,url,context);
+        if (!deleteAD) {
+            webView.loadUrl(url);
+            return;
+        }
         /************************************************************
          *@Author; 龙之游 @ xu 596928539@qq.com
          * 时间:2016/12/19 20:10
@@ -59,49 +63,6 @@ public class UtilWebViewNoAd {
          * 注释: 处理url 剔除 恶意 脚本
          ************************************************************/
         new AsyncTaskHtml(webView).execute(url);
-        webView.setWebChromeClient(new WebChromeClient(){
-            @Override
-            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-                return super.onJsConfirm(view, url, message, result);
-            }
-
-            @Override
-            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-                return super.onJsPrompt(view, url, message, defaultValue, result);
-            }
-
-            @Override
-            public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
-                return super.onJsBeforeUnload(view, url, message, result);
-            }
-
-
-            @Override
-            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                return super.onJsAlert(view, url, message, result);
-            }
-        });
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                if (Build.VERSION.SDK_INT >21) {
-                    new AsyncTaskHtml(webView).execute(request.getUrl().toString());//去广告核心步骤
-                }else {
-                    new AsyncTaskHtml(webView).execute(url);//去广告核心步骤
-                }
-                return super.shouldInterceptRequest(view, request);
-            }
-
-
-        });
-        webView.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String s1, String s2, String s3, long l) {
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                context.startActivity(intent);
-            }
-        });
 
     }
 
@@ -160,7 +121,7 @@ public class UtilWebViewNoAd {
      * 修改时间:2017/1/6 11:49
      * 注释:webview设置
      ************************************************************/
-    private static void setWebView(WebView webView) {
+    private static void setWebView(final WebView webView, final String url, final Activity paramContext) {
         webView.requestFocus();
         WebSettings webSettings = webView.getSettings();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -199,6 +160,49 @@ public class UtilWebViewNoAd {
             @Override
             public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
                 return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+                return super.onJsConfirm(view, url, message, result);
+            }
+
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+                return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+
+            @Override
+            public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
+                return super.onJsBeforeUnload(view, url, message, result);
+            }
+
+
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                return super.onJsAlert(view, url, message, result);
+            }
+        });
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                if (Build.VERSION.SDK_INT >21) {
+                    new AsyncTaskHtml(webView).execute(request.getUrl().toString());//去广告核心步骤
+                }else {
+                    new AsyncTaskHtml(webView).execute(url);//去广告核心步骤
+                }
+                return super.shouldInterceptRequest(view, request);
+            }
+
+
+        });
+        webView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String s1, String s2, String s3, long l) {
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                paramContext.startActivity(intent);
             }
         });
     }
