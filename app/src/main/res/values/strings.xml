@@ -7,6 +7,7 @@
     <string name="act_device">手机信息</string>
     <string name="act_reflect">反射</string>
     <string name="act_no_ad">去广告</string>
+    <string name="act_file">文件类</string>
 
     <!--手机卡信息-->
     <string name="telephony_state">"获取手机状态信息"</string>

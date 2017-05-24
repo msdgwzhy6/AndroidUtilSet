@@ -41,8 +41,8 @@ public final class  UtilFile {
         return TextUtils.isEmpty(filePath) ? null : new File(filePath);
     }
     /**
-     * 判断问价是否存在
-     * @param filePath 文件路径
+     * Determine whether the file exists
+     * @param filePath file path
      * @return {@code true}: 存在  {@code false}: 不存在
      */
     public static boolean isFileExists(String filePath) {
@@ -50,9 +50,9 @@ public final class  UtilFile {
     }
 
     /**
-     * 判断问价是否存在
-     * @param file 文件
-     * @return {@code true}: 存在  {@code false}: 不存在
+     * Determine whether the file exists
+     * @param file file
+     * @return {@code true}: existence  {@code false}: inexistence
      */
     public static boolean isFileExists(File file) {
         return file != null && file.exists();
@@ -370,11 +370,11 @@ public final class  UtilFile {
         return false;
     }
 
-/*    *//************************************************************
+  /*  ***********************************************************
      *@Author; 龙之游 @ xu 596928539@qq.com
      * 时间:2016/12/20 13:25
      * 注释:  写文件
-     ************************************************************//*
+     ************************************************************/
     public static File writeLog(String str){
 
 
@@ -409,7 +409,7 @@ public final class  UtilFile {
             System.out.println(ex.getStackTrace());
         }
         return null;
-    }*/
+    }
 
     /**
      * 将字符串写入文件

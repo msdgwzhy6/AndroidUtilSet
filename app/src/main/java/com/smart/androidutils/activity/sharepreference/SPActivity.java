@@ -2,7 +2,6 @@ package com.smart.androidutils.activity.sharepreference;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,13 +34,21 @@ public class SPActivity extends BaseActivity {
     private Handler mHandler = new Handler();
     private Context mContext;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sp);
-        mContext = this;
-        ButterKnife.bind(this);
+    protected void initData() {
         setTitle(getResources().getString(R.string.act_sp));
+        mContext = this;
+    }
+
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    protected int initLayout() {
+        return R.layout.activity_sp;
     }
 
     @OnClick(R.id.id_btn_img_net)

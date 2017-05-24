@@ -1,7 +1,5 @@
 package com.smart.androidutils.activity.ad;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
 import com.smart.androidutils.BaseActivity;
@@ -17,12 +15,22 @@ public class NoAdActivity extends BaseActivity {
     WebView mIdWebView;
 
     private String url = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_ad);
-        ButterKnife.bind(this);
+    protected int initLayout() {
         setTitle(getResources().getString(R.string.act_no_ad));
+        ButterKnife.bind(this);
+        return R.layout.activity_no_ad;
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
         UtilWebViewNoAd.htmlDetails(url,mIdWebView,this);
     }
 }

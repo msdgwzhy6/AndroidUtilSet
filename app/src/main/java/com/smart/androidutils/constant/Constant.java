@@ -16,7 +16,7 @@ public class Constant {
             InitUtil.getContext().getString(R.string.act_reflect),
             InitUtil.getContext().getString(R.string.act_device),
             InitUtil.getContext().getString(R.string.act_no_ad),
-            InitUtil.getContext().getString(R.string.act_sp1),
+            InitUtil.getContext().getString(R.string.act_file),
             InitUtil.getContext().getString(R.string.act_sp1)
     };
     public static final String[] ITEMS_DEVICE = new String[]{
