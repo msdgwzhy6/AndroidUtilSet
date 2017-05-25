@@ -21,7 +21,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.util.UtilEncript.getMD5;
 
@@ -444,24 +445,30 @@ public final class  UtilFile {
         InputStreamReader isr = null;
         StringBuilder html = new StringBuilder();
         InputStream is = null;
-        String charset ="utf-8";
+        String charset ="UTF-8";
         if (!TextUtils.isEmpty(encoding)) {
             charset = encoding;
         }
         try{
             URL url = new URL(urlParam); //根据Strng表现形式创建URL对象
 
-            URLConnection urlConnection = url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
 
             Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentEncoding());
+            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentType());
+            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentType().length());
             //urlConnection.setConnectTimeout(4000); //设置链接超时
 
             is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
-
+            Pattern pattern = Pattern.compile("charset=\\S*");
+            Matcher matcher = pattern.matcher(urlConnection.getContentType());
+            if (matcher.find()) {
+                charset = matcher.group().replace("charset=", "");
+            }
             isr = new InputStreamReader(is, charset);
 
             BufferedReader br = new BufferedReader(isr);
-            String line = "";
+            String line;
             while((line = br.readLine()) != null)
             {
                 html.append(line).append("\r\n");
