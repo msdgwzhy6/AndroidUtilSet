@@ -12,7 +12,7 @@ import com.util.InitUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConstantUrl.ITEMS_MAIN;
+import static com.smart.androidutils.constant.ConstantData.ITEMS_MAIN;
 import static com.util.view.UtilWidget.getView;
 
 public class MainActivity extends AppCompatActivity {

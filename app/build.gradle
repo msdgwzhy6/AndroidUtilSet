@@ -25,7 +25,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.smart.holder_library:holder_library:1.1.0'
+
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.smart.dialog_library:dialog_lib:1.1.7'

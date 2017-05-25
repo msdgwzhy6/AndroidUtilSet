@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".activity.ad.NoAdActivity">
         </activity>
+        <activity android:name=".activity.app.AppInfoActivity">
+        </activity>
     </application>
 
 </manifest>

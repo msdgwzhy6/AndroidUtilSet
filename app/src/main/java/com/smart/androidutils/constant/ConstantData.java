@@ -17,7 +17,7 @@ public class ConstantData {
             InitUtil.getContext().getString(R.string.act_device),
             InitUtil.getContext().getString(R.string.act_no_ad_off),
             InitUtil.getContext().getString(R.string.act_file),
-            InitUtil.getContext().getString(R.string.act_sp1)
+            InitUtil.getContext().getString(R.string.app_list_info)
     };
     public static final String[] ITEMS_DEVICE = new String[]{
             InitUtil.getContext().getString(R.string.telephony_state),

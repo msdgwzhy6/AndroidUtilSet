@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.ad.NoAdActivity;
+import com.smart.androidutils.activity.app.AppInfoActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
@@ -16,7 +17,7 @@ import com.smart.androidutils.bean.ItemBean;
 import com.smart.dialog_library.DialogCustom;
 import com.smart.holder_library.CommonAdapter;
 import com.util.phone.UtilNet;
-import com.util.phone.UtilTelephony;
+import com.util.phone.UitlDevice;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ import static com.util.phone.UitlDevice.getSDAvailableSize;
 import static com.util.phone.UitlDevice.getSDTotalSize;
 import static com.util.phone.UitlDevice.getTotalMemory;
 import static com.util.phone.UtilNet.isMobileConnected;
-import static com.util.phone.UtilTelephony.getMobileNetType;
+import static com.util.phone.UitlDevice.getMobileNetType;
 import static com.util.view.UtilWidget.getView;
 
 /**
@@ -87,7 +88,7 @@ public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCall
                 }
                 //手机卡相关的事件处理
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_state))) {
-                    viewHolderToast(UtilTelephony.getPhoneStatus(),10000);
+                    viewHolderToast(UitlDevice.getPhoneStatus(),10000);
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_sim_support_net))) {
                     viewHolderToast(String.valueOf(UtilNet.isMobileNetAvailable()));
@@ -97,6 +98,9 @@ public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCall
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_sim_net_connect))) {
                     viewHolderToast(String.valueOf(isMobileConnected()));
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.app_list_info))) {
+                    context.startActivity(new Intent(context, AppInfoActivity.class));
                 }
 
             }

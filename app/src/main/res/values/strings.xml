@@ -26,4 +26,6 @@
     <string name="device_sd_total_size">"手机SD卡总大小"</string>
     <string name="device_sd_available_size">"手机SD卡可用空间"</string>
 
+    <!--App -->
+    <string name="app_list_info">"App列表"</string>
 </resources>
