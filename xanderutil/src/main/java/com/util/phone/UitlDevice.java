@@ -38,7 +38,7 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 import static android.telephony.TelephonyManager.PHONE_TYPE_NONE;
 import static com.util.phone.UtilNet.getActiveConnectType;
 import static com.util.phone.UtilNet.getConnectState;
-import static com.util.phone.UtilNet.isCurrentConnected;
+import static com.util.phone.UtilNet.isActiveConnected;
 
 /**
  * @author xander on  2017/5/23.
@@ -202,7 +202,7 @@ public class UitlDevice {
           NETWORK_TYPE_1xRTT    1xRTT网络  7
         */
     private static String getNetworkType() {
-        if (!isCurrentConnected()) {
+        if (!isActiveConnected(false)) {
             return "当前无网络连接";
         }
         int type = getActiveConnectType();

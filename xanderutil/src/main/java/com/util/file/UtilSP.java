@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.io.StreamCorruptedException;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -152,9 +151,7 @@ public final class UtilSP {
          e.printStackTrace();
       } finally {
          try {
-            if (baos != null) {
-               baos.close();
-            }
+            baos.close();
             if (oos != null) {
                oos.close();
             }
@@ -212,17 +209,12 @@ public final class UtilSP {
 
             e.printStackTrace();
          }
-      } catch (StreamCorruptedException e) {
-
-         e.printStackTrace();
       } catch (IOException e) {
 
          e.printStackTrace();
       } finally {
          try {
-            if (bais != null) {
-               bais.close();
-            }
+            bais.close();
             if (bis != null) {
                bis.close();
             }
@@ -266,8 +258,8 @@ public final class UtilSP {
     */
    public UtilSP putBitmap(String key,Bitmap bitmap){
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-      String imageBase64 = new String(Base64.encodeToString(baos.toByteArray(),Base64.DEFAULT));
+      bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+      String imageBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
       putString(key,imageBase64 );
       return this;
    }
@@ -283,6 +275,8 @@ public final class UtilSP {
          return null;
       }
       ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
-      return BitmapFactory.decodeStream(bais);
+      BitmapFactory.Options options = new BitmapFactory.Options();
+      options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+      return BitmapFactory.decodeStream(bais, null, options);
    }
 }

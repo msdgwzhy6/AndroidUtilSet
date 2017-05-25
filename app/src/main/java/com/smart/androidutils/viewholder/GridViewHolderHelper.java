@@ -12,21 +12,21 @@ import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
-import com.smart.androidutils.activity.spider.SpiderActivity;
+import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.bean.ItemBean;
 import com.smart.dialog_library.DialogCustom;
 import com.smart.holder_library.CommonAdapter;
-import com.util.phone.UtilNet;
 import com.util.phone.UitlDevice;
+import com.util.phone.UtilNet;
 
 import java.util.List;
 
 import static com.util.phone.UitlDevice.getAvailMemory;
+import static com.util.phone.UitlDevice.getMobileNetType;
 import static com.util.phone.UitlDevice.getSDAvailableSize;
 import static com.util.phone.UitlDevice.getSDTotalSize;
 import static com.util.phone.UitlDevice.getTotalMemory;
 import static com.util.phone.UtilNet.isMobileConnected;
-import static com.util.phone.UitlDevice.getMobileNetType;
 import static com.util.view.UtilWidget.getView;
 
 /**
@@ -44,11 +44,14 @@ public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCall
 
     @Override
     public void bindListDataToView(final Context context, final List<ItemBean> iBaseBeanList, final GridViewHolder viewHolder, final int position) {
+        if (activity == null) {
+            activity = (Activity) context;
+        }
         viewHolder.mNameText.setText(iBaseBeanList.get(position).getName());
         viewHolder.mNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity = (Activity) context;
+
                 if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_sp))) {
                         context.startActivity(new Intent(context, SPActivity.class));
                 }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_spider))) {

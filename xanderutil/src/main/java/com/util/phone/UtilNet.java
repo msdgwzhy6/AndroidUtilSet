@@ -3,6 +3,8 @@ package com.util.phone;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.util.InitUtil;
 
@@ -43,20 +45,27 @@ public class UtilNet {
         }
         return null;
     }
-    /*
-    * 判断当前是否有网络连接
-    * */
-    public static boolean isCurrentConnected() {
+
+    /** 判断当前是否有网络连接
+     * @param toast 是否开启内置的信息提示
+     * @return
+     */
+    public static boolean isActiveConnected(boolean toast) {
         mActiveNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
         if (mActiveNetworkInfo != null) {
             return mActiveNetworkInfo.isConnected();
+        }
+        if (toast) {
+            Looper.prepare();
+            Toast.makeText(InitUtil.getContext(), "网络没有连接", Toast.LENGTH_SHORT).show();
+            Looper.loop();
         }
         return false;
     }
     /*
     * 判断是否已经连接或正在连接
     * */
-    public static boolean isCurrentConnecting(){
+    public static boolean isConnecting(){
         mActiveNetworkInfo = mConnectivityManager.getActiveNetworkInfo();//在使用之前，要先判断是否有网络连接
         if (mActiveNetworkInfo!=null) {
             return mActiveNetworkInfo.isConnectedOrConnecting();

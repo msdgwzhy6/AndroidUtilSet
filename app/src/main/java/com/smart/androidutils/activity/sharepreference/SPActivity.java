@@ -56,7 +56,12 @@ public class SPActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mBitmap = UtilFile.getNetBitmap(urlImg);
+                mBitmap = UtilFile.getNetBitmap(R.mipmap.ios,urlImg);
+               /* if (mBitmap == null) {
+                    Looper.prepare();
+                    Toast.makeText(mContext, "网络图片为空", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }*/
                 UtilSP.getInstance(mContext)
                         .initSP(TAG)
                         .putBitmap(UtilEncript.getMD5(urlImg),mBitmap)

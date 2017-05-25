@@ -6,6 +6,9 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.util.InitUtil;
+import com.util.phone.UtilNet;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -19,7 +22,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -239,16 +241,29 @@ public final class  UtilFile {
      * @param imgUrl
      * @return
      */
+    public static Bitmap getNetBitmap(int id,String imgUrl){
+        URL url ;
+        Bitmap bitmap = null;
+        try {
+            url = new URL(imgUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            if (!UtilNet.isActiveConnected(false));
+            InputStream is = conn.getInputStream();
+            bitmap =  BitmapFactory.decodeStream(is);
+        } catch (IOException e) {
+            bitmap = BitmapFactory.decodeResource(InitUtil.getContext().getResources(),id);
+        }
+        return bitmap;
+    }
     public static Bitmap getNetBitmap(String imgUrl){
         URL url ;
         Bitmap bitmap = null;
         try {
             url = new URL(imgUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            if (!UtilNet.isActiveConnected(false));
             InputStream is = conn.getInputStream();
             bitmap =  BitmapFactory.decodeStream(is);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

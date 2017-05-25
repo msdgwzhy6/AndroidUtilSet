@@ -1,15 +1,9 @@
-package com.smart.androidutils.activity.spider;
+package com.smart.androidutils.activity.spider.modle;
 
 import android.os.Handler;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.smart.androidutils.BaseActivity;
-import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
-import com.smart.androidutils.activity.spider.viewholder.SpiderViewHolderHelper;
-import com.smart.holder_library.CommonAdapter;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -23,38 +17,23 @@ import java.util.List;
 
 import static com.smart.androidutils.constant.ConstantUrl.urlMR;
 import static com.smart.androidutils.constant.ConstantUrl.userAgent;
-import static com.util.view.UtilWidget.getView;
 
-public class SpiderActivity extends BaseActivity {
+/**
+ * @author xander on  2017/5/25.
+ * @function
+ */
 
-
+public class HtmlModle implements IHtmlModle {
     private Handler mHandler;
-
     private List<SpiderBean> mSpiderBeanList;
     private SpiderBean spiderBean;
-    private TextView mIdTitle;
-    private ListView mListView;
-
-    @Override
-    protected int initLayout() {
+    public HtmlModle() {
         mHandler = new Handler();
-        return R.layout.activity_spider;
     }
 
     @Override
-    protected void initView() {
-        mIdTitle = getView(this,R.id.id_spider_title);
-        mListView = getView(this,R.id.id_spider_list_view);
+    public void acquireData(final IHtmlModuleResult htmlModuleResult) {
 
-    }
-
-    @Override
-    protected void initData() {
-        setTitle(getResources().getString(R.string.act_spider));
-        getData();
-    }
-
-    private void getData() {
         new Thread(){
             @Override
             public void run() {
@@ -77,23 +56,21 @@ public class SpiderActivity extends BaseActivity {
                             spiderBean.setText(element.text().trim());
                             mSpiderBeanList.add(spiderBean);
                         }
+                        assert element != null;
                         Log.i("xxx", "run" +element.text().trim().length());
                         Log.i("xxx", "run" +element.text().trim());
                     }
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mIdTitle.setText(finalDoc.title());
-                            mListView.setAdapter(
-                                    new CommonAdapter(SpiderActivity.this,mSpiderBeanList,R.layout.spider_item_layout,new SpiderViewHolderHelper())
-                            );
+
+                            htmlModuleResult.result(mSpiderBeanList,finalDoc.title());
                         }
                     });
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    htmlModuleResult.failure(e);
                 }
             }
         }.start();
     }
-
 }
