@@ -16,9 +16,9 @@ import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.BaseBean;
 import com.util.dialog.DialogCustom;
-import com.smart.holder_library.CommonAdapter;
 import com.util.phone.UitlDevice;
 import com.util.phone.UtilNet;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
@@ -37,14 +37,16 @@ import static com.util.view.UtilWidget.getView;
 public class BaseGridViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
     private Activity activity ;
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder, View convertView) {
+    public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder,
+                                                        View convertView) {
         viewHolder = new BaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;
     }
 
     @Override
-    public void bindListDataToView(final Context context, final List<BaseBean> iBaseBeanList, final BaseGridViewHolder viewHolder, final int position) {
+    public void bindListDataToView(final Context context, final List<BaseBean> iBaseBeanList,
+                                   final BaseGridViewHolder viewHolder, final int position) {
         if (activity == null) {
             activity = (Activity) context;
         }

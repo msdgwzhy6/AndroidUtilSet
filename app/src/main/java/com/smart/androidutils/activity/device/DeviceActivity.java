@@ -7,7 +7,7 @@ import android.widget.GridView;
 import com.smart.androidutils.R;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
-import com.smart.holder_library.CommonAdapter;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,8 @@ public class DeviceActivity extends AppCompatActivity {
         setTitle(getString(R.string.act_device));
         mGridView = getView(this,R.id.main_grif_view);
         initData();
-        mGridView.setAdapter(new CommonAdapter(this, mBaseBeanList,R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
+        mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,
+                R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
     }
 
 

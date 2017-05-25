@@ -9,7 +9,7 @@ import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
 import com.smart.androidutils.activity.spider.presenter.HtmlSpiderPresenter;
 import com.smart.androidutils.activity.spider.viewholder.SpiderViewHolderHelper;
-import com.smart.holder_library.CommonAdapter;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
 

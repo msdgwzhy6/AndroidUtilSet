@@ -107,6 +107,7 @@ public class XanderView extends View implements IDrawType{
         Bitmap bitmap = UtilSP.getInstance(InitUtil.getContext())
                 .initSP("canvas")
                 .getBitmap(UtilEncript.getMD5("canvas"));
+        assert bitmap != null;
         canvas.drawBitmap(bitmap, 200, 200, null);
     }
 

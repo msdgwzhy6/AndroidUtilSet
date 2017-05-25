@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.app.bean.MyAppInfoBean;
-import com.smart.holder_library.CommonAdapter;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
 

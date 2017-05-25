@@ -1,6 +1,7 @@
 package com.smart.androidutils;
 
-import com.smart.holder_library.CommonAdapter;
+
+import com.util.viewholder.CommonAdapter;
 
 /**
  * Created by smart on 2017/5/17.

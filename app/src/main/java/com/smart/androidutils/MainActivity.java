@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
-import com.smart.holder_library.CommonAdapter;
 import com.util.InitUtil;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         setTitle("操作面板");
-        mGridView.setAdapter(new CommonAdapter(this, mBaseBeanList,R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
+        mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,
+                R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
     }
 
 

@@ -33,13 +33,13 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'org.jetbrains:annotations-java5:15.0'
-    compile 'com.smart.holder_library:holder_library:1.1.0'
+//    compile 'com.smart.holder_library:holder_library:1.1.0'
 }
 //添加
 publish {
     userOrg = 'ouyangmuyuan'//bintray.com用户名
     groupId = 'com.xander'//jcenter上的路径
-    artifactId = 'xander'//在jcenter上maven‘util’下创建的报名
+    artifactId = 'xanders'//在jcenter上maven‘util’下创建的报名
     publishVersion = '1.0.0'//版本号
     desc = 'Oh hi, this is a nice description for a project, right?'//描述
     website = 'https://github.com/Xander1024'//网站

@@ -2,7 +2,8 @@ package com.smart.androidutils.activity.spider.viewholder;
 
 import android.widget.TextView;
 
-import com.smart.holder_library.CommonAdapter;
+import com.util.viewholder.CommonAdapter;
+
 
 /**
  * @author xander on  2017/5/24.

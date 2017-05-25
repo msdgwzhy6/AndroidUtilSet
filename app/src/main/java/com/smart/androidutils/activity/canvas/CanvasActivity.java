@@ -7,7 +7,7 @@ import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
 import com.smart.androidutils.activity.canvas.viewholderhelper.CanvasViewHolderHeper;
-import com.smart.holder_library.CommonAdapter;
+import com.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
