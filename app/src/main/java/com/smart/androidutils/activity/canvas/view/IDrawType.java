@@ -13,4 +13,6 @@ public interface IDrawType {
     void onDrawRoundRect(Canvas canvas);
     void onDrawCircle(Canvas canvas);
     void onDrawColor(Canvas canvas);
+    void onDrawBitmap(Canvas canvas);
+    void onDrawText(Canvas canvas);
 }

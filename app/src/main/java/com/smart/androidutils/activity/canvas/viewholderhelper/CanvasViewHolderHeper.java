@@ -11,8 +11,13 @@ import com.smart.holder_library.CommonAdapter;
 
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConstantData.TAG_CIRCLE;
-import static com.smart.androidutils.constant.ConstantData.TAG_LINE;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_BITMAP;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_CIRCLE;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_LINE;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_RECT;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_ROUND_RECT;
+import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
+import static com.smart.dialog_library.Utils.setViewAlphaAnimation;
 import static com.util.view.UtilWidget.getView;
 
 /**
@@ -23,8 +28,14 @@ import static com.util.view.UtilWidget.getView;
 public class CanvasViewHolderHeper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
     private XanderView xanderView;
 
-    public CanvasViewHolderHeper(XanderView xanderView) {
+    public CanvasViewHolderHeper(final XanderView xanderView) {
         this.xanderView = xanderView;
+        this.xanderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setViewAlphaAnimation(xanderView);
+            }
+        });
     }
 
     @Override
@@ -41,10 +52,24 @@ public class CanvasViewHolderHeper implements CommonAdapter.IListHolderHelperCal
             @Override
             public void onClick(View v) {
                 if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_circle))) {
-                    xanderView.setTag(TAG_CIRCLE);
-                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_line))) {
-                    xanderView.setTag(TAG_LINE);
+                    xanderView.setTag(TAG_CIRCLE);//画圆
                 }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_line))) {
+                    xanderView.setTag(TAG_LINE);//划线
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_rect))) {
+                    xanderView.setTag(TAG_RECT);//画矩形
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_round_rect))) {
+                    xanderView.setTag(TAG_ROUND_RECT);//画圆角矩形
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_bitmap))) {
+                    xanderView.setTag(TAG_BITMAP);//位图
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas_text))) {
+                    xanderView.setTag(TAG_TEXT);//文字
+                }
+
                 xanderView.invalidate();
             }
         });

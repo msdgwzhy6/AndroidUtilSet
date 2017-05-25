@@ -14,6 +14,14 @@ public class ConsData {
             InitUtil.getContext().getString(R.string.canvas_line),
             InitUtil.getContext().getString(R.string.canvas_rect),
             InitUtil.getContext().getString(R.string.canvas_bitmap),
+            InitUtil.getContext().getString(R.string.canvas_text),
             InitUtil.getContext().getString(R.string.canvas_round_rect)
     };
+    public static final int TAG_COLOR = 0x00;
+    public static final int TAG_LINE = 0x01;
+    public static final int TAG_CIRCLE = 0x02;
+    public static final int TAG_RECT = 0x03;
+    public static final int TAG_ROUND_RECT = 0x04;
+    public static final int TAG_BITMAP = 0x05;
+    public static final int TAG_TEXT = 0x06;
 }

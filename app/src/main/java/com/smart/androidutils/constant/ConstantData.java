@@ -35,9 +35,5 @@ public class ConstantData {
             InitUtil.getContext().getString(R.string.act_sp1)
     };
 
-    public static final int TAG_COLOR = 0x00;
-    public static final int TAG_CIRCLE = 0x02;
-    public static final int TAG_LINE = 0x01;
-
 
 }

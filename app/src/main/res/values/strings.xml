@@ -33,8 +33,9 @@
     <string name="canvas">"画圆"</string>
 
     <string name="canvas_circle">"画圆"</string>
-    <string name="canvas_rect">"画方"</string>
+    <string name="canvas_rect">"矩形"</string>
     <string name="canvas_round_rect">"圆角矩形"</string>
     <string name="canvas_line">"划线"</string>
-    <string name="canvas_bitmap">画bitmap</string>
+    <string name="canvas_bitmap">位图</string>
+    <string name="canvas_text">文字</string>
 </resources>
