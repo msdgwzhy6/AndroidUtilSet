@@ -13,8 +13,8 @@ import static com.util.constant.ConstantRegex.regexStr;
 import static com.util.file.UtilFile.readSourceFromUrl;
 
 /**
- * @author xander on  2017/5/25.
- * @function
+ * author xander on  2017/5/25.
+ * function
  */
 
 public class WebViewNoAd extends AsyncTask<String, Void, String> {
@@ -23,8 +23,8 @@ public class WebViewNoAd extends AsyncTask<String, Void, String> {
     private String mCharset;
 
     /**
-     * @param webView
-     * @param charset 网页的编码格式
+     *webView
+     *charset 网页的编码格式
      */
     public WebViewNoAd(WebView webView, String charset) {
         mWebView = webView;

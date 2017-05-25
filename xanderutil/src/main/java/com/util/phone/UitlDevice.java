@@ -41,8 +41,7 @@ import static com.util.phone.UtilNet.getConnectState;
 import static com.util.phone.UtilNet.isActiveConnected;
 
 /**
- * @author xander on  2017/5/23.
- * @function
+ * author xander on  2017/5/23.
  */
 
 public class UitlDevice {
@@ -50,7 +49,7 @@ public class UitlDevice {
     /**
      * 判断设备是否是手机
      *
-     * @return {@code true}: 是{@code false}: 否
+     * { true}: 是{ false}: 否
      */
     private static boolean isPhone() {
         return tm != null && tm.getPhoneType() != PHONE_TYPE_NONE;
@@ -58,20 +57,17 @@ public class UitlDevice {
 
     /**
      * 获取IMEI码
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
-     * @return IMEI码
+     * IMEI码
      */
-    @SuppressLint("HardwareIds")
     public static String getIMEI() {
         return tm != null ? tm.getDeviceId() : null;
     }
 
     /**
      * 获取IMSI码
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
-     * @return IMSI码
+     * IMSI码
      */
     @SuppressLint("HardwareIds")
     public static String getIMSI() {
@@ -81,13 +77,7 @@ public class UitlDevice {
     /**
      * 获取移动终端类型
      *
-     * @return 手机制式
-     * <ul>
-     * <li>{@link TelephonyManager#PHONE_TYPE_NONE } : 0 手机制式未知</li>
-     * <li>{@link TelephonyManager#PHONE_TYPE_GSM  } : 1 手机制式为GSM，移动和联通</li>
-     * <li>{@link TelephonyManager#PHONE_TYPE_CDMA } : 2 手机制式为CDMA，电信</li>
-     * <li>{@link TelephonyManager#PHONE_TYPE_SIP  } : 3</li>
-     * </ul>
+     * 手机制式
      */
     public static String getPhoneType() {
         int type = tm.getPhoneType();
@@ -106,7 +96,7 @@ public class UitlDevice {
     /**
      * 判断sim卡是否准备好
      *
-     * @return {@code true}: 是{@code false}: 否
+     * { true}: 是{ false}: 否
      */
     public static boolean isSimCardReady() {
         return tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY;
@@ -116,7 +106,7 @@ public class UitlDevice {
      * 获取Sim卡运营商名称
      * 中国移动、如中国联通、中国电信
      *
-     * @return sim卡运营商名称
+     * sim卡运营商名称
      */
     public static String getSimOperatorName() {
         return tm != null ? tm.getSimOperatorName() : null;
@@ -126,7 +116,7 @@ public class UitlDevice {
      * 获取Sim卡运营商名称
      * 中国移动、如中国联通、中国电信
      *
-     * @return 移动网络运营商名称
+     * 移动网络运营商名称
      */
     public static String getSimOperatorByMnc() {
         String operator = tm != null ? tm.getSimOperator() : null;
@@ -147,9 +137,8 @@ public class UitlDevice {
 
     /**
      * 获取手机状态信息
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}
      *
-     * @return DeviceId(IMEI) = 99000311726612
+     * DeviceId(IMEI) = 99000311726612
      * DeviceSoftwareVersion = 00
      * Line1Number =
      * NetworkCountryIso = cn
@@ -165,7 +154,6 @@ public class UitlDevice {
      * SubscriberId(IMSI) = 460030419724900
      * VoiceMailNumber = *86
      */
-    @SuppressLint("HardwareIds")
     public static String getPhoneStatus() {
         if (!isPhone()) {
             return "该设备不是手机";
@@ -217,7 +205,7 @@ public class UitlDevice {
     }
 
     /** 获取手机网络类型
-     * @return
+     *
      */
     public static String getMobileNetType() {
         int type = tm.getNetworkType();
@@ -249,7 +237,7 @@ public class UitlDevice {
 
     /**
      * 待完善
-     * @return
+     *
      */
     private static String getDeviceSoftwareVersion() {
         return tm.getDeviceSoftwareVersion();
@@ -294,10 +282,8 @@ public class UitlDevice {
 
     /**
      * 获取手机联系人
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>}
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_CONTACTS"/>}
      *
-     * @return 联系人链表
+     * 联系人链表
      */
     public static List<HashMap<String, String>> getAllContactInfo() {
         SystemClock.sleep(3000);
@@ -368,8 +354,6 @@ public class UitlDevice {
 
     /**
      * 获取手机短信并保存到xml中
-     * 需添加权限 {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>}
-     * 需添加权限 {@code <uses-permission android:name="android.permission.READ_SMS"/>}
      */
     public static void getAllSMS() {
         // 1.获取短信
@@ -435,7 +419,7 @@ public class UitlDevice {
     }
     /**
      * 获取手机内存大小
-     * @return
+     *
      */
     public static String getTotalMemory() {
         String str1 = "/proc/meminfo";// 读出的内核信息进行解释
@@ -460,7 +444,7 @@ public class UitlDevice {
     /**
      * 获取当前可用内存大小
      *
-     * @return
+     *
      */
     public static String getAvailMemory() {
         ActivityManager am = (ActivityManager) InitUtil.getContext().getSystemService(Context.ACTIVITY_SERVICE);
@@ -471,7 +455,7 @@ public class UitlDevice {
     /**
      * 获得SD卡总大小
      *
-     * @return
+     *
      */
     public static  String getSDTotalSize() {
         File path = Environment.getExternalStorageDirectory();
@@ -483,7 +467,7 @@ public class UitlDevice {
 
     /**
      * 获得sd卡剩余容量，即可用大小
-     * @return
+     *
      */
     public static  String getSDAvailableSize() {
         File path = Environment.getExternalStorageDirectory();

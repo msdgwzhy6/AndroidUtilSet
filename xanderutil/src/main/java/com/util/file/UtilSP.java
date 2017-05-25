@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.util.viewholder.CommonAdapter;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,7 +23,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.util.Base64.URL_SAFE;
 
 /***************************************************************************
- * @author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
+ * author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
  * Note: save the basic data types and objects, pictures, etc;
  * And any non basic types to implement the serializable interface including internal class
  ***************************************************************************/
@@ -64,8 +66,8 @@ public final class UtilSP {
    }
 
    /**
-    * @param fileName
-    * @return
+    * fileName
+    * 
     */
    public UtilSP initSP(String fileName) {
       mFileName = fileName;
@@ -75,9 +77,9 @@ public final class UtilSP {
    }
 
    /**
-    * @param imgUrlKey
-    * @param imgUrlValue
-    * @return
+    * imgUrlKey
+    * imgUrlValue
+    * 
     */
    public UtilSP putString(int imgUrlKey, String imgUrlValue) {
       editor.putString(String.valueOf(imgUrlKey), imgUrlValue);
@@ -90,10 +92,10 @@ public final class UtilSP {
    }
 
    /**
-    * @param strList
+    * strList
     *        Encapsulate this URL in the form of a collection, and add the data back to the SP file
-    * @param beginKey
-    * @return
+    * beginKey
+    * 
     */
    public UtilSP putList( int beginKey,List<String> strList) {
       int count = beginKey + strList.size() - 1;
@@ -105,9 +107,9 @@ public final class UtilSP {
 
 
    /**
-    * @param strList
+    * strList
     *          Encapsulates the string of the string data you want to add
-    * @return
+    * 
     */
    public UtilSP putList(List<String> strList) {
       int count = strList.size();
@@ -119,8 +121,8 @@ public final class UtilSP {
 
    /**
     * Save multiple calls, save different records, number of pages, total number of pages
-    * @param countKey
-    * @param countValue
+    * countKey
+    * countValue
     */
    public UtilSP putInt(String countKey, int countValue) {
       editor.putInt(countKey, countValue);
@@ -129,10 +131,9 @@ public final class UtilSP {
 
 
    /**
-    * @param objKeyName index
-    * @param object javaBean
-    * @param <T>
-    * @return
+    * objKeyName index
+    * object javaBean
+    * 
     */
    public <T extends Serializable> UtilSP putBean(String objKeyName, T object) {
       // Creating a byte output stream
@@ -164,8 +165,8 @@ public final class UtilSP {
    }
 
    /**
-    * @param keyName get individual data through key
-    * @return  value
+    * keyName get individual data through key
+    *   value
     */
    public String getString(int keyName) {
       return sharedPreferences.getString(String.valueOf(keyName), "");
@@ -184,12 +185,11 @@ public final class UtilSP {
    }
    /**
     *
-    * @param objKey
+    * objKey
     *  The key that stores the object, and all non base data types must implement the serialization interface
-    * @param <T>
-    * @return
+    * 
     */
-   public <T> T getBean(String objKey) {
+   public <T extends Serializable> T getBean(String objKey) {
       T value;
       String objectBase64 = getString(objKey);
       Log.i("xxx", "getBean: " + objectBase64);
@@ -232,7 +232,7 @@ public final class UtilSP {
 
    /**
     * Clear all data under SP, refresh data, save data, you need to empty data first
-    * @return
+    * 
     */
    public UtilSP clearAll() {
       File file = new File(mContext.getFilesDir(), mFileName + ".xml");
@@ -252,9 +252,9 @@ public final class UtilSP {
 
    /**
     * Save the picture in XML
-    * @param key
-    * @param bitmap
-    * @return
+    * key
+    * bitmap
+    * 
     */
    public UtilSP putBitmap(String key,Bitmap bitmap){
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -267,8 +267,8 @@ public final class UtilSP {
 
    /**
     * Take pictures from sp
-    * @param key
-    * @return
+    * key
+    * 
     */
    public  Bitmap getBitmap(String key){
       String temp = getString(key);

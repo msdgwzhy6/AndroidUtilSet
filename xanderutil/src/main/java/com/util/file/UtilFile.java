@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 import static com.util.UtilEncript.getMD5;
 
 /***************************************************************************
- * @author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
+ * author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
  * Function:  A class of tools for file manipulation of data
  ***************************************************************************/
 
@@ -37,16 +37,16 @@ public final class  UtilFile {
     protected static final String TAG = "ccc";
     /**
      * Get files based on file paths
-     * @param filePath file path
-     * @return File
+     *  filePath file path
+     *  File
      */
     public static File getFileByPath(String filePath) {
         return TextUtils.isEmpty(filePath) ? null : new File(filePath);
     }
     /**
      * Determine whether the file exists
-     * @param filePath file path
-     * @return {@code true}: 存在  {@code false}: 不存在
+     *  filePath file path
+     *  { true}: 存在  { false}: 不存在
      */
     public static boolean isFileExists(String filePath) {
         return isFileExists(getFileByPath(filePath));
@@ -54,8 +54,8 @@ public final class  UtilFile {
 
     /**
      * Determine whether the file exists
-     * @param file file
-     * @return {@code true}: existence  {@code false}: inexistence
+     *  file file
+     *  { true}: existence  { false}: inexistence
      */
     public static boolean isFileExists(File file) {
         return file != null && file.exists();
@@ -64,8 +64,8 @@ public final class  UtilFile {
     /**
      * 删除文件
      * Deletes a file by specifying the path
-     * @param srcFilePath
-     * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
+     *  srcFilePath
+     *  { true}: Delete successfully<br>{ false}: Delete failed
      */
     public static boolean deleteFile(String srcFilePath) {
         return deleteFile(getFileByPath(srcFilePath));
@@ -73,8 +73,8 @@ public final class  UtilFile {
     /**
      * 删除文件
      * Deletes a file by specifying the filename
-     * @param file
-     * @return {@code true}: Delete successfully<br>{@code false}: Delete failed
+     *  file
+     *  { true}: Delete successfully<br>{ false}: Delete failed
      */
     public static boolean deleteFile(File file) {
         return file != null && (!file.exists() || file.isFile() && file.delete());
@@ -82,10 +82,10 @@ public final class  UtilFile {
 
     /**
      * Writes an input stream to a file
-     * @param filePath
-     * @param is
-     * @param append   Append at end of file
-     * @return {@code true}: success<br>{@code false}: failure
+     *  filePath
+     *  is
+     *  append   Append at end of file
+     *  { true}: success<br>{ false}: failure
      */
     public static boolean writeFileFromIS(String filePath, InputStream is, boolean append) {
         return writeFileFromIS(getFileByPath(filePath), is, append);
@@ -93,10 +93,10 @@ public final class  UtilFile {
 
     /**
      * Writes an input stream to a file
-     * @param file
-     * @param is
-     * @param append Append at end of file
-     * @return {@code true}: success<br>{@code false}: failure
+     *  file
+     *  is
+     *  append Append at end of file
+     *  { true}: success<br>{ false}: failure
      */
     public static boolean writeFileFromIS(File file, InputStream is, boolean append) {
         if (file == null || is == null) return false;
@@ -120,10 +120,10 @@ public final class  UtilFile {
 
     /**
      * Writes String to File
-     * @param filePath file path
-     * @param content  file content
-     * @param append  Append at end of file
-     * @return {@code true}: success<br>{@code false}: faiure
+     *  filePath file path
+     *  content  file content
+     *  append  Append at end of file
+     *  { true}: success<br>{ false}: faiure
      */
     public static boolean writeFileFromString(String filePath, String content, boolean append) {
         return writeFileFromString(getFileByPath(filePath), content, append);
@@ -131,10 +131,10 @@ public final class  UtilFile {
 
     /**
      * Writes String to File
-     * @param file file name
-     * @param content  file content
-     * @param append  Append at end of file
-     * @return {@code true}: success<br>{@code false}: failure
+     *  file file name
+     *  content  file content
+     *  append  Append at end of file
+     *  { true}: success<br>{ false}: failure
      */
     public static boolean writeFileFromString(File file, String content, boolean append) {
         if (file == null || content == null) return false;
@@ -155,8 +155,8 @@ public final class  UtilFile {
     /**
      * Judge if the directory exists and
      * if not exist then to determine whether the creation succeeded
-     * @param dirPath
-     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     *  dirPath
+     *  { true}: Existence or creation success <br>{ false}: Failure to exist or create
      */
     public static boolean createOrExistsDir(String dirPath) {
         return createOrExistsDir(getFileByPath(dirPath));
@@ -165,8 +165,8 @@ public final class  UtilFile {
     /**
      * Judge if the directory exists and
      * if not exist then to determine whether the creation succeeded
-     * @param file
-     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     *  file
+     *  { true}: Existence or creation success <br>{ false}: Failure to exist or create
      */
     public static boolean createOrExistsDir(File file) {
         // If it exists and it is a directory, returns true; it is not , returns false; if it does not exist, returns the success of creation
@@ -176,8 +176,8 @@ public final class  UtilFile {
     /**
      * Judge if the file exists and
      * if not exist then to determine whether the creation succeeded
-     * @param filePath  file path
-     *  @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     *  filePath  file path
+     *   { true}: Existence or creation success <br>{ false}: Failure to exist or create
      */
     public static boolean createOrExistsFile(String filePath) {
         return createOrExistsFile(getFileByPath(filePath));
@@ -186,8 +186,8 @@ public final class  UtilFile {
     /**
      * Judge if the file exists;
      * if not exist then to create ,and judge whether the creation succeeded
-     * @param file  file
-     * @return {@code true}: Existence or creation success <br>{@code false}: Failure to exist or create
+     *  file  file
+     *  { true}: Existence or creation success <br>{ false}: Failure to exist or create
      */
     public static boolean createOrExistsFile(File file) {
         if (file == null) return false;
@@ -207,8 +207,8 @@ public final class  UtilFile {
      * 判断文件是否存在
      * if it dose,delete it ;
      * then create file ;
-     * @param filePath  file path
-     * @return {@code true}: create success<br>{@code false}: create failure
+     *  filePath  file path
+     *  { true}: create success<br>{ false}: create failure
      */
     public static boolean createFileByDeleteOldFile(String filePath) {
         return createFileByDeleteOldFile(getFileByPath(filePath));
@@ -218,8 +218,8 @@ public final class  UtilFile {
      * Judge if the file exists;
      * if it dose,delete it ;
      * then create file ;
-     * @param file  file
-     * @return {@code true}: create success<br>{@code false}: create failure
+     *  file  file
+     *  { true}: create success<br>{ false}: create failure
      */
     public static boolean createFileByDeleteOldFile(File file) {
         if (file == null) return false;
@@ -238,8 +238,8 @@ public final class  UtilFile {
 
     /**
      * Just get a picture from the Internet
-     * @param imgUrl
-     * @return
+     *  imgUrl
+     * 
      */
     public static Bitmap getNetBitmap(int id,String imgUrl){
         URL url ;
@@ -275,9 +275,9 @@ public final class  UtilFile {
     private static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
     /**
      * Get a picture from the network and save it to the SD card
-     * @param imgUrl URL of the picture
-     * @param fileName File name stored
-     * @return Picture file form
+     *  imgUrl URL of the picture
+     *  fileName File name stored
+     *  Picture file form
      */
     public static String getNetBitmap2Save(String imgUrl,  String fileName){
         Bitmap bitmap =  getNetBitmap(imgUrl);
@@ -331,8 +331,8 @@ public final class  UtilFile {
 
     /**
      * Get a bitmap by specifying the local path of the image
-     * @param bitmapPath  Absolute path of local file
-     * @return
+     *  bitmapPath  Absolute path of local file
+     * 
      */
     public static Bitmap getLocalBitmap(String bitmapPath){
         FileInputStream streamFile;
@@ -349,8 +349,8 @@ public final class  UtilFile {
 
     /**
      * Establish the HTTP request and get the bitmap object
-     * @param urlString  URL of the picture
-     * @return  Parsed bitmap object
+     *  urlString  URL of the picture
+     *   Parsed bitmap object
      */
     public static boolean downloadUrlToStream(String urlString, OutputStream outputStream) {
         HttpURLConnection urlConnection = null;
@@ -429,7 +429,7 @@ public final class  UtilFile {
 
     /**
      * 将字符串写入文件
-     * @param content
+     *  content
      */
     public static void writeStr2Log( String content){
         try {

@@ -36,6 +36,8 @@ import com.util.InitUtil;
 import com.util.file.UtilFile;
 import com.util.file.UtilsCloseIO;
 
+import org.jetbrains.annotations.Contract;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -49,12 +51,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
  *     time  : 2016/08/12
  *     desc  : 图片相关工具类
- * </pre>
  */
 public final class UtilsImage {
 
@@ -65,9 +63,9 @@ public final class UtilsImage {
     /**
      * bitmap转byteArr
      *
-     * @param bitmap bitmap对象
-     * @param format 格式
-     * @return 字节数组
+     *  bitmap bitmap对象
+     *  format 格式
+     *  字节数组
      */
     public static byte[] bitmap2Bytes(Bitmap bitmap, CompressFormat format) {
         if (bitmap == null) return null;
@@ -79,8 +77,8 @@ public final class UtilsImage {
     /**
      * byteArr转bitmap
      *
-     * @param bytes 字节数组
-     * @return bitmap
+     *  bytes 字节数组
+     *  bitmap
      */
     public static Bitmap bytes2Bitmap(byte[] bytes) {
         return (bytes == null || bytes.length == 0) ? null : BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -89,8 +87,8 @@ public final class UtilsImage {
     /**
      * drawable转bitmap
      *
-     * @param drawable drawable对象
-     * @return bitmap
+     *  drawable drawable对象
+     *  bitmap
      */
     public static Bitmap drawable2Bitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
@@ -112,9 +110,9 @@ public final class UtilsImage {
     /**
      * bitmap转drawable
      *
-     * @param res    resources对象
-     * @param bitmap bitmap对象
-     * @return drawable
+     *  res    resources对象
+     *  bitmap bitmap对象
+     *  drawable
      */
     public static Drawable bitmap2Drawable(Resources res, Bitmap bitmap) {
         return bitmap == null ? null : new BitmapDrawable(res, bitmap);
@@ -123,9 +121,9 @@ public final class UtilsImage {
     /**
      * drawable转byteArr
      *
-     * @param drawable drawable对象
-     * @param format   格式
-     * @return 字节数组
+     *  drawable drawable对象
+     *  format   格式
+     *  字节数组
      */
     public static byte[] drawable2Bytes(Drawable drawable, CompressFormat format) {
         return drawable == null ? null : bitmap2Bytes(drawable2Bitmap(drawable), format);
@@ -134,9 +132,9 @@ public final class UtilsImage {
     /**
      * byteArr转drawable
      *
-     * @param res   resources对象
-     * @param bytes 字节数组
-     * @return drawable
+     *  res   resources对象
+     *  bytes 字节数组
+     *  drawable
      */
     public static Drawable bytes2Drawable(Resources res, byte[] bytes) {
         return res == null ? null : bitmap2Drawable(res, bytes2Bitmap(bytes));
@@ -145,8 +143,8 @@ public final class UtilsImage {
     /**
      * view转Bitmap
      *
-     * @param view 视图
-     * @return bitmap
+     *  view 视图
+     *  bitmap
      */
     public static Bitmap view2Bitmap(View view) {
         if (view == null) return null;
@@ -162,13 +160,15 @@ public final class UtilsImage {
         return ret;
     }
 
+
+
     /**
      * 计算采样大小
      *
-     * @param options   选项
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return 采样大小
+     *  options   选项
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  采样大小
      */
     private static int calculateInSampleSize(BitmapFactory.Options options, int maxWidth, int maxHeight) {
         if (maxWidth == 0 || maxHeight == 0) return 1;
@@ -184,8 +184,8 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param file 文件
-     * @return bitmap
+     *  file 文件
+     *  bitmap
      */
     public static Bitmap getBitmap(File file) {
         if (file == null) return null;
@@ -204,10 +204,10 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param file      文件
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  file      文件
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(File file, int maxWidth, int maxHeight) {
         if (file == null) return null;
@@ -231,8 +231,8 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param filePath 文件路径
-     * @return bitmap
+     *  filePath 文件路径
+     *  bitmap
      */
     public static Bitmap getBitmap(String filePath) {
         if (isSpace(filePath)) return null;
@@ -242,10 +242,10 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param filePath  文件路径
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  filePath  文件路径
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(String filePath, int maxWidth, int maxHeight) {
         if (isSpace(filePath)) return null;
@@ -260,8 +260,8 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param is 输入流
-     * @return bitmap
+     *  is 输入流
+     *  bitmap
      */
     public static Bitmap getBitmap(InputStream is) {
         if (is == null) return null;
@@ -271,10 +271,10 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param is        输入流
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  is        输入流
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(InputStream is, int maxWidth, int maxHeight) {
         if (is == null) return null;
@@ -289,9 +289,9 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param data   数据
-     * @param offset 偏移量
-     * @return bitmap
+     *  data   数据
+     *  offset 偏移量
+     *  bitmap
      */
     public static Bitmap getBitmap(byte[] data, int offset) {
         if (data.length == 0) return null;
@@ -301,11 +301,11 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param data      数据
-     * @param offset    偏移量
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  data      数据
+     *  offset    偏移量
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(byte[] data, int offset, int maxWidth, int maxHeight) {
         if (data.length == 0) return null;
@@ -320,9 +320,9 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param res 资源对象
-     * @param id  资源id
-     * @return bitmap
+     *  res 资源对象
+     *  id  资源id
+     *  bitmap
      */
     public static Bitmap getBitmap(Resources res, int id) {
         if (res == null) return null;
@@ -332,11 +332,11 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param res       资源对象
-     * @param id        资源id
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  res       资源对象
+     *  id        资源id
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(Resources res, int id, int maxWidth, int maxHeight) {
         if (res == null) return null;
@@ -351,8 +351,8 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param fd 文件描述
-     * @return bitmap
+     *  fd 文件描述
+     *  bitmap
      */
     public static Bitmap getBitmap(FileDescriptor fd) {
         if (fd == null) return null;
@@ -362,10 +362,10 @@ public final class UtilsImage {
     /**
      * 获取bitmap
      *
-     * @param fd        文件描述
-     * @param maxWidth  最大宽度
-     * @param maxHeight 最大高度
-     * @return bitmap
+     *  fd        文件描述
+     *  maxWidth  最大宽度
+     *  maxHeight 最大高度
+     *  bitmap
      */
     public static Bitmap getBitmap(FileDescriptor fd, int maxWidth, int maxHeight) {
         if (fd == null) return null;
@@ -380,10 +380,10 @@ public final class UtilsImage {
     /**
      * 缩放图片
      *
-     * @param src       源图片
-     * @param newWidth  新宽度
-     * @param newHeight 新高度
-     * @return 缩放后的图片
+     *  src       源图片
+     *  newWidth  新宽度
+     *  newHeight 新高度
+     *  缩放后的图片
      */
     public static Bitmap scale(Bitmap src, int newWidth, int newHeight) {
         return scale(src, newWidth, newHeight, false);
@@ -392,11 +392,11 @@ public final class UtilsImage {
     /**
      * 缩放图片
      *
-     * @param src       源图片
-     * @param newWidth  新宽度
-     * @param newHeight 新高度
-     * @param recycle   是否回收
-     * @return 缩放后的图片
+     *  src       源图片
+     *  newWidth  新宽度
+     *  newHeight 新高度
+     *  recycle   是否回收
+     *  缩放后的图片
      */
     public static Bitmap scale(Bitmap src, int newWidth, int newHeight, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -408,10 +408,10 @@ public final class UtilsImage {
     /**
      * 缩放图片
      *
-     * @param src         源图片
-     * @param scaleWidth  缩放宽度倍数
-     * @param scaleHeight 缩放高度倍数
-     * @return 缩放后的图片
+     *  src         源图片
+     *  scaleWidth  缩放宽度倍数
+     *  scaleHeight 缩放高度倍数
+     *  缩放后的图片
      */
     public static Bitmap scale(Bitmap src, float scaleWidth, float scaleHeight) {
         return scale(src, scaleWidth, scaleHeight, false);
@@ -420,11 +420,11 @@ public final class UtilsImage {
     /**
      * 缩放图片
      *
-     * @param src         源图片
-     * @param scaleWidth  缩放宽度倍数
-     * @param scaleHeight 缩放高度倍数
-     * @param recycle     是否回收
-     * @return 缩放后的图片
+     *  src         源图片
+     *  scaleWidth  缩放宽度倍数
+     *  scaleHeight 缩放高度倍数
+     *  recycle     是否回收
+     *  缩放后的图片
      */
     public static Bitmap scale(Bitmap src, float scaleWidth, float scaleHeight, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -438,12 +438,12 @@ public final class UtilsImage {
     /**
      * 裁剪图片
      *
-     * @param src    源图片
-     * @param x      开始坐标x
-     * @param y      开始坐标y
-     * @param width  裁剪宽度
-     * @param height 裁剪高度
-     * @return 裁剪后的图片
+     *  src    源图片
+     *  x      开始坐标x
+     *  y      开始坐标y
+     *  width  裁剪宽度
+     *  height 裁剪高度
+     *  裁剪后的图片
      */
     public static Bitmap clip(Bitmap src, int x, int y, int width, int height) {
         return clip(src, x, y, width, height, false);
@@ -452,13 +452,13 @@ public final class UtilsImage {
     /**
      * 裁剪图片
      *
-     * @param src     源图片
-     * @param x       开始坐标x
-     * @param y       开始坐标y
-     * @param width   裁剪宽度
-     * @param height  裁剪高度
-     * @param recycle 是否回收
-     * @return 裁剪后的图片
+     *  src     源图片
+     *  x       开始坐标x
+     *  y       开始坐标y
+     *  width   裁剪宽度
+     *  height  裁剪高度
+     *  recycle 是否回收
+     *  裁剪后的图片
      */
     public static Bitmap clip(Bitmap src, int x, int y, int width, int height, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -470,10 +470,10 @@ public final class UtilsImage {
     /**
      * 倾斜图片
      *
-     * @param src 源图片
-     * @param kx  倾斜因子x
-     * @param ky  倾斜因子y
-     * @return 倾斜后的图片
+     *  src 源图片
+     *  kx  倾斜因子x
+     *  ky  倾斜因子y
+     *  倾斜后的图片
      */
     public static Bitmap skew(Bitmap src, float kx, float ky) {
         return skew(src, kx, ky, 0, 0, false);
@@ -482,11 +482,11 @@ public final class UtilsImage {
     /**
      * 倾斜图片
      *
-     * @param src     源图片
-     * @param kx      倾斜因子x
-     * @param ky      倾斜因子y
-     * @param recycle 是否回收
-     * @return 倾斜后的图片
+     *  src     源图片
+     *  kx      倾斜因子x
+     *  ky      倾斜因子y
+     *  recycle 是否回收
+     *  倾斜后的图片
      */
     public static Bitmap skew(Bitmap src, float kx, float ky, boolean recycle) {
         return skew(src, kx, ky, 0, 0, recycle);
@@ -495,12 +495,12 @@ public final class UtilsImage {
     /**
      * 倾斜图片
      *
-     * @param src 源图片
-     * @param kx  倾斜因子x
-     * @param ky  倾斜因子y
-     * @param px  平移因子x
-     * @param py  平移因子y
-     * @return 倾斜后的图片
+     *  src 源图片
+     *  kx  倾斜因子x
+     *  ky  倾斜因子y
+     *  px  平移因子x
+     *  py  平移因子y
+     *  倾斜后的图片
      */
     public static Bitmap skew(Bitmap src, float kx, float ky, float px, float py) {
         return skew(src, kx, ky, px, py, false);
@@ -509,13 +509,13 @@ public final class UtilsImage {
     /**
      * 倾斜图片
      *
-     * @param src     源图片
-     * @param kx      倾斜因子x
-     * @param ky      倾斜因子y
-     * @param px      平移因子x
-     * @param py      平移因子y
-     * @param recycle 是否回收
-     * @return 倾斜后的图片
+     *  src     源图片
+     *  kx      倾斜因子x
+     *  ky      倾斜因子y
+     *  px      平移因子x
+     *  py      平移因子y
+     *  recycle 是否回收
+     *  倾斜后的图片
      */
     public static Bitmap skew(Bitmap src, float kx, float ky, float px, float py, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -529,11 +529,11 @@ public final class UtilsImage {
     /**
      * 旋转图片
      *
-     * @param src     源图片
-     * @param degrees 旋转角度
-     * @param px      旋转点横坐标
-     * @param py      旋转点纵坐标
-     * @return 旋转后的图片
+     *  src     源图片
+     *  degrees 旋转角度
+     *  px      旋转点横坐标
+     *  py      旋转点纵坐标
+     *  旋转后的图片
      */
     public static Bitmap rotate(Bitmap src, int degrees, float px, float py) {
         return rotate(src, degrees, px, py, false);
@@ -542,12 +542,12 @@ public final class UtilsImage {
     /**
      * 旋转图片
      *
-     * @param src     源图片
-     * @param degrees 旋转角度
-     * @param px      旋转点横坐标
-     * @param py      旋转点纵坐标
-     * @param recycle 是否回收
-     * @return 旋转后的图片
+     *  src     源图片
+     *  degrees 旋转角度
+     *  px      旋转点横坐标
+     *  py      旋转点纵坐标
+     *  recycle 是否回收
+     *  旋转后的图片
      */
     public static Bitmap rotate(Bitmap src, int degrees, float px, float py, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -562,8 +562,8 @@ public final class UtilsImage {
     /**
      * 获取图片旋转角度
      *
-     * @param filePath 文件路径
-     * @return 旋转角度
+     *  filePath 文件路径
+     *  旋转角度
      */
     public static int getRotateDegree(String filePath) {
         int degree = 0;
@@ -593,8 +593,8 @@ public final class UtilsImage {
     /**
      * 转为圆形图片
      *
-     * @param src 源图片
-     * @return 圆形图片
+     *  src 源图片
+     *  圆形图片
      */
     public static Bitmap toRound(Bitmap src) {
         return toRound(src, false);
@@ -603,9 +603,9 @@ public final class UtilsImage {
     /**
      * 转为圆形图片
      *
-     * @param src     源图片
-     * @param recycle 是否回收
-     * @return 圆形图片
+     *  src     源图片
+     *  recycle 是否回收
+     *  圆形图片
      */
     public static Bitmap toRound(Bitmap src, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -628,9 +628,9 @@ public final class UtilsImage {
     /**
      * 转为圆角图片
      *
-     * @param src    源图片
-     * @param radius 圆角的度数
-     * @return 圆角图片
+     *  src    源图片
+     *  radius 圆角的度数
+     *  圆角图片
      */
     public static Bitmap toRoundCorner(Bitmap src, float radius) {
         return toRoundCorner(src, radius, false);
@@ -639,10 +639,10 @@ public final class UtilsImage {
     /**
      * 转为圆角图片
      *
-     * @param src     源图片
-     * @param radius  圆角的度数
-     * @param recycle 是否回收
-     * @return 圆角图片
+     *  src     源图片
+     *  radius  圆角的度数
+     *  recycle 是否回收
+     *  圆角图片
      */
     public static Bitmap toRoundCorner(Bitmap src, float radius, boolean recycle) {
         if (null == src) return null;
@@ -664,14 +664,12 @@ public final class UtilsImage {
      * 快速模糊
      * <p>先缩小原图，对小图进行模糊，再放大回原先尺寸</p>
      *
-     * @param src    源图片
-     * @param scale  缩放比例(0...1)
-     * @param radius 模糊半径
-     * @return 模糊后的图片
+     *  src    源图片
+     *  scale  缩放比例(0...1)
+     *  radius 模糊半径
+     *  模糊后的图片
      */
-    public static Bitmap fastBlur(Bitmap src,
-                                  @FloatRange(from = 0, to = 1, fromInclusive = false) float scale,
-                                  @FloatRange(from = 0, to = 25, fromInclusive = false) float radius) {
+    public static Bitmap fastBlur(Bitmap src,float scale,float radius) {
         return fastBlur(src, scale, radius, false);
     }
 
@@ -679,15 +677,13 @@ public final class UtilsImage {
      * 快速模糊图片
      * <p>先缩小原图，对小图进行模糊，再放大回原先尺寸</p>
      *
-     * @param src     源图片
-     * @param scale   缩放比例(0...1)
-     * @param radius  模糊半径(0...25)
-     * @param recycle 是否回收
-     * @return 模糊后的图片
+     *  src     源图片
+     *  scale   缩放比例(0...1)
+     *  radius  模糊半径(0...25)
+     *  recycle 是否回收
+     *  模糊后的图片
      */
-    public static Bitmap fastBlur(Bitmap src,
-                                  @FloatRange(from = 0, to = 1, fromInclusive = false) float scale,
-                                  @FloatRange(from = 0, to = 25, fromInclusive = false) float radius,
+    public static Bitmap fastBlur(Bitmap src, float scale, float radius,
                                   boolean recycle) {
         if (isEmptyBitmap(src)) return null;
         int width = src.getWidth();
@@ -719,12 +715,12 @@ public final class UtilsImage {
      * renderScript模糊图片
      * <p>API大于17</p>
      *
-     * @param src     源图片
-     * @param radius  模糊半径(0...25)
-     * @return 模糊后的图片
+     *  src     源图片
+     *  radius  模糊半径(0...25)
+     *  模糊后的图片
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static Bitmap renderScriptBlur(Bitmap src, @FloatRange(from = 0, to = 25, fromInclusive = false) float radius) {
+    public static Bitmap renderScriptBlur(Bitmap src, float radius) {
         if (isEmptyBitmap(src)) return null;
         RenderScript rs = null;
         try {
@@ -749,10 +745,10 @@ public final class UtilsImage {
     /**
      * stack模糊图片
      *
-     * @param src     源图片
-     * @param radius  模糊半径
-     * @param recycle 是否回收
-     * @return stack模糊后的图片
+     *  src     源图片
+     *  radius  模糊半径
+     *  recycle 是否回收
+     *  stack模糊后的图片
      */
     public static Bitmap stackBlur(Bitmap src, int radius, boolean recycle) {
         Bitmap ret;
@@ -961,10 +957,10 @@ public final class UtilsImage {
     /**
      * 添加颜色边框
      *
-     * @param src         源图片
-     * @param borderWidth 边框宽度
-     * @param color       边框的颜色值
-     * @return 带颜色边框图
+     *  src         源图片
+     *  borderWidth 边框宽度
+     *  color       边框的颜色值
+     *  带颜色边框图
      */
     public static Bitmap addFrame(Bitmap src, int borderWidth, int color) {
         return addRoundRectFrame(src, borderWidth, color, false);
@@ -974,11 +970,11 @@ public final class UtilsImage {
     /**
      * 添加颜色边框
      *
-     * @param src         源图片
-     * @param borderWidth 边框宽度
-     * @param color       边框的颜色值
-     * @param recycle     是否回收
-     * @return 带颜色边框图
+     *  src         源图片
+     *  borderWidth 边框宽度
+     *  color       边框的颜色值
+     *  recycle     是否回收
+     *  带颜色边框图
      */
     public static Bitmap addFrame(Bitmap src, int borderWidth, int color, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1024,9 +1020,9 @@ public final class UtilsImage {
     /**
      * 添加倒影
      *
-     * @param src              源图片的
-     * @param reflectionHeight 倒影高度
-     * @return 带倒影图片
+     *  src              源图片的
+     *  reflectionHeight 倒影高度
+     *  带倒影图片
      */
     public static Bitmap addReflection(Bitmap src, int reflectionHeight) {
         return addReflection(src, reflectionHeight, false);
@@ -1035,10 +1031,10 @@ public final class UtilsImage {
     /**
      * 添加倒影
      *
-     * @param src              源图片的
-     * @param reflectionHeight 倒影高度
-     * @param recycle          是否回收
-     * @return 带倒影图片
+     *  src              源图片的
+     *  reflectionHeight 倒影高度
+     *  recycle          是否回收
+     *  带倒影图片
      */
     public static Bitmap addReflection(Bitmap src, int reflectionHeight, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1071,13 +1067,13 @@ public final class UtilsImage {
     /**
      * 添加文字水印
      *
-     * @param src      源图片
-     * @param content  水印文本
-     * @param textSize 水印字体大小
-     * @param color    水印字体颜色
-     * @param x        起始坐标x
-     * @param y        起始坐标y
-     * @return 带有文字水印的图片
+     *  src      源图片
+     *  content  水印文本
+     *  textSize 水印字体大小
+     *  color    水印字体颜色
+     *  x        起始坐标x
+     *  y        起始坐标y
+     *  带有文字水印的图片
      */
     public static Bitmap addTextWatermark(Bitmap src, String content, int textSize, int color, float x,
                                           float y) {
@@ -1087,14 +1083,14 @@ public final class UtilsImage {
     /**
      * 添加文字水印
      *
-     * @param src      源图片
-     * @param content  水印文本
-     * @param textSize 水印字体大小
-     * @param color    水印字体颜色
-     * @param x        起始坐标x
-     * @param y        起始坐标y
-     * @param recycle  是否回收
-     * @return 带有文字水印的图片
+     *  src      源图片
+     *  content  水印文本
+     *  textSize 水印字体大小
+     *  color    水印字体颜色
+     *  x        起始坐标x
+     *  y        起始坐标y
+     *  recycle  是否回收
+     *  带有文字水印的图片
      */
     public static Bitmap addTextWatermark(Bitmap src, String content, float textSize, int color, float x,
                                           float y, boolean recycle) {
@@ -1114,12 +1110,12 @@ public final class UtilsImage {
     /**
      * 添加图片水印
      *
-     * @param src       源图片
-     * @param watermark 图片水印
-     * @param x         起始坐标x
-     * @param y         起始坐标y
-     * @param alpha     透明度
-     * @return 带有图片水印的图片
+     *  src       源图片
+     *  watermark 图片水印
+     *  x         起始坐标x
+     *  y         起始坐标y
+     *  alpha     透明度
+     *  带有图片水印的图片
      */
     public static Bitmap addImageWatermark(Bitmap src, Bitmap watermark, int x, int y, int alpha) {
         return addImageWatermark(src, watermark, x, y, alpha, false);
@@ -1128,13 +1124,13 @@ public final class UtilsImage {
     /**
      * 添加图片水印
      *
-     * @param src       源图片
-     * @param watermark 图片水印
-     * @param x         起始坐标x
-     * @param y         起始坐标y
-     * @param alpha     透明度
-     * @param recycle   是否回收
-     * @return 带有图片水印的图片
+     *  src       源图片
+     *  watermark 图片水印
+     *  x         起始坐标x
+     *  y         起始坐标y
+     *  alpha     透明度
+     *  recycle   是否回收
+     *  带有图片水印的图片
      */
     public static Bitmap addImageWatermark(Bitmap src, Bitmap watermark, int x, int y, int alpha, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1152,8 +1148,8 @@ public final class UtilsImage {
     /**
      * 转为alpha位图
      *
-     * @param src 源图片
-     * @return alpha位图
+     *  src 源图片
+     *  alpha位图
      */
     public static Bitmap toAlpha(Bitmap src) {
         return toAlpha(src, false);
@@ -1162,9 +1158,9 @@ public final class UtilsImage {
     /**
      * 转为alpha位图
      *
-     * @param src     源图片
-     * @param recycle 是否回收
-     * @return alpha位图
+     *  src     源图片
+     *  recycle 是否回收
+     *  alpha位图
      */
     public static Bitmap toAlpha(Bitmap src, Boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1176,8 +1172,8 @@ public final class UtilsImage {
     /**
      * 转为灰度图片
      *
-     * @param src 源图片
-     * @return 灰度图
+     *  src 源图片
+     *  灰度图
      */
     public static Bitmap toGray(Bitmap src) {
         return toGray(src, false);
@@ -1186,9 +1182,9 @@ public final class UtilsImage {
     /**
      * 转为灰度图片
      *
-     * @param src     源图片
-     * @param recycle 是否回收
-     * @return 灰度图
+     *  src     源图片
+     *  recycle 是否回收
+     *  灰度图
      */
     public static Bitmap toGray(Bitmap src, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1208,10 +1204,10 @@ public final class UtilsImage {
     /**
      * 保存图片
      *
-     * @param src      源图片
-     * @param filePath 要保存到的文件路径
-     * @param format   格式
-     * @return {@code true}: 成功<br>{@code false}: 失败
+     *  src      源图片
+     *  filePath 要保存到的文件路径
+     *  format   格式
+     *  {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, String filePath, CompressFormat format) {
         return save(src, UtilFile.getFileByPath(filePath), format, false);
@@ -1220,10 +1216,10 @@ public final class UtilsImage {
     /**
      * 保存图片
      *
-     * @param src    源图片
-     * @param file   要保存到的文件
-     * @param format 格式
-     * @return {@code true}: 成功<br>{@code false}: 失败
+     *  src    源图片
+     *  file   要保存到的文件
+     *  format 格式
+     *  {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, File file, CompressFormat format) {
         return save(src, file, format, false);
@@ -1232,11 +1228,11 @@ public final class UtilsImage {
     /**
      * 保存图片
      *
-     * @param src      源图片
-     * @param filePath 要保存到的文件路径
-     * @param format   格式
-     * @param recycle  是否回收
-     * @return {@code true}: 成功<br>{@code false}: 失败
+     *  src      源图片
+     *  filePath 要保存到的文件路径
+     *  format   格式
+     *  recycle  是否回收
+     *  {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, String filePath, CompressFormat format, boolean recycle) {
         return save(src, UtilFile.getFileByPath(filePath), format, recycle);
@@ -1245,11 +1241,11 @@ public final class UtilsImage {
     /**
      * 保存图片
      *
-     * @param src     源图片
-     * @param file    要保存到的文件
-     * @param format  格式
-     * @param recycle 是否回收
-     * @return {@code true}: 成功<br>{@code false}: 失败
+     *  src     源图片
+     *  file    要保存到的文件
+     *  format  格式
+     *  recycle 是否回收
+     *  {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, File file, CompressFormat format, boolean recycle) {
         if (isEmptyBitmap(src) || !UtilFile.createOrExistsFile(file)) return false;
@@ -1271,8 +1267,8 @@ public final class UtilsImage {
     /**
      * 根据文件名判断文件是否为图片
      *
-     * @param file 　文件
-     * @return {@code true}: 是<br>{@code false}: 否
+     *  file 　文件
+     *  {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isImage(File file) {
         return file != null && isImage(file.getPath());
@@ -1281,8 +1277,8 @@ public final class UtilsImage {
     /**
      * 根据文件名判断文件是否为图片
      *
-     * @param filePath 　文件路径
-     * @return {@code true}: 是<br>{@code false}: 否
+     *  filePath 　文件路径
+     *  {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isImage(String filePath) {
         String path = filePath.toUpperCase();
@@ -1294,8 +1290,8 @@ public final class UtilsImage {
     /**
      * 获取图片类型
      *
-     * @param filePath 文件路径
-     * @return 图片类型
+     *  filePath 文件路径
+     *  图片类型
      */
     public static String getImageType(String filePath) {
         return getImageType(UtilFile.getFileByPath(filePath));
@@ -1304,8 +1300,8 @@ public final class UtilsImage {
     /**
      * 获取图片类型
      *
-     * @param file 文件
-     * @return 图片类型
+     *  file 文件
+     *  图片类型
      */
     public static String getImageType(File file) {
         if (file == null) return null;
@@ -1324,8 +1320,8 @@ public final class UtilsImage {
     /**
      * 流获取图片类型
      *
-     * @param is 图片输入流
-     * @return 图片类型
+     *  is 图片输入流
+     *  图片类型
      */
     public static String getImageType(InputStream is) {
         if (is == null) return null;
@@ -1341,8 +1337,8 @@ public final class UtilsImage {
     /**
      * 获取图片类型
      *
-     * @param bytes bitmap的前8字节
-     * @return 图片类型
+     *  bytes bitmap的前8字节
+     *  图片类型
      */
     public static String getImageType(byte[] bytes) {
         if (isJPEG(bytes)) return "JPEG";
@@ -1380,8 +1376,8 @@ public final class UtilsImage {
     /**
      * 判断bitmap对象是否为空
      *
-     * @param src 源图片
-     * @return {@code true}: 是<br>{@code false}: 否
+     *  src 源图片
+     *  {@code true}: 是<br>{@code false}: 否
      */
     private static boolean isEmptyBitmap(Bitmap src) {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
@@ -1394,10 +1390,10 @@ public final class UtilsImage {
     /**
      * 按缩放压缩
      *
-     * @param src       源图片
-     * @param newWidth  新宽度
-     * @param newHeight 新高度
-     * @return 缩放压缩后的图片
+     *  src       源图片
+     *  newWidth  新宽度
+     *  newHeight 新高度
+     *  缩放压缩后的图片
      */
     public static Bitmap compressByScale(Bitmap src, int newWidth, int newHeight) {
         return scale(src, newWidth, newHeight, false);
@@ -1406,11 +1402,11 @@ public final class UtilsImage {
     /**
      * 按缩放压缩
      *
-     * @param src       源图片
-     * @param newWidth  新宽度
-     * @param newHeight 新高度
-     * @param recycle   是否回收
-     * @return 缩放压缩后的图片
+     *  src       源图片
+     *  newWidth  新宽度
+     *  newHeight 新高度
+     *  recycle   是否回收
+     *  缩放压缩后的图片
      */
     public static Bitmap compressByScale(Bitmap src, int newWidth, int newHeight, boolean recycle) {
         return scale(src, newWidth, newHeight, recycle);
@@ -1419,10 +1415,10 @@ public final class UtilsImage {
     /**
      * 按缩放压缩
      *
-     * @param src         源图片
-     * @param scaleWidth  缩放宽度倍数
-     * @param scaleHeight 缩放高度倍数
-     * @return 缩放压缩后的图片
+     *  src         源图片
+     *  scaleWidth  缩放宽度倍数
+     *  scaleHeight 缩放高度倍数
+     *  缩放压缩后的图片
      */
     public static Bitmap compressByScale(Bitmap src, float scaleWidth, float scaleHeight) {
         return scale(src, scaleWidth, scaleHeight, false);
@@ -1431,11 +1427,11 @@ public final class UtilsImage {
     /**
      * 按缩放压缩
      *
-     * @param src         源图片
-     * @param scaleWidth  缩放宽度倍数
-     * @param scaleHeight 缩放高度倍数
-     * @param recycle     是否回收
-     * @return 缩放压缩后的图片
+     *  src         源图片
+     *  scaleWidth  缩放宽度倍数
+     *  scaleHeight 缩放高度倍数
+     *  recycle     是否回收
+     *  缩放压缩后的图片
      */
     public static Bitmap compressByScale(Bitmap src, float scaleWidth, float scaleHeight, boolean recycle) {
         return scale(src, scaleWidth, scaleHeight, recycle);
@@ -1444,9 +1440,9 @@ public final class UtilsImage {
     /**
      * 按质量压缩
      *
-     * @param src     源图片
-     * @param quality 质量
-     * @return 质量压缩后的图片
+     *  src     源图片
+     *  quality 质量
+     *  质量压缩后的图片
      */
     public static Bitmap compressByQuality(Bitmap src, @IntRange(from = 0, to = 100) int quality) {
         return compressByQuality(src, quality, false);
@@ -1455,10 +1451,10 @@ public final class UtilsImage {
     /**
      * 按质量压缩
      *
-     * @param src     源图片
-     * @param quality 质量
-     * @param recycle 是否回收
-     * @return 质量压缩后的图片
+     *  src     源图片
+     *  quality 质量
+     *  recycle 是否回收
+     *  质量压缩后的图片
      */
     public static Bitmap compressByQuality(Bitmap src, @IntRange(from = 0, to = 100) int quality, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
@@ -1472,9 +1468,9 @@ public final class UtilsImage {
     /**
      * 按质量压缩
      *
-     * @param src         源图片
-     * @param maxByteSize 允许最大值字节数
-     * @return 质量压缩压缩过的图片
+     *  src         源图片
+     *  maxByteSize 允许最大值字节数
+     *  质量压缩压缩过的图片
      */
     public static Bitmap compressByQuality(Bitmap src, long maxByteSize) {
         return compressByQuality(src, maxByteSize, false);
@@ -1483,10 +1479,10 @@ public final class UtilsImage {
     /**
      * 按质量压缩
      *
-     * @param src         源图片
-     * @param maxByteSize 允许最大值字节数
-     * @param recycle     是否回收
-     * @return 质量压缩压缩过的图片
+     *  src         源图片
+     *  maxByteSize 允许最大值字节数
+     *  recycle     是否回收
+     *  质量压缩压缩过的图片
      */
     public static Bitmap compressByQuality(Bitmap src, long maxByteSize, boolean recycle) {
         if (isEmptyBitmap(src) || maxByteSize <= 0) return null;
@@ -1506,9 +1502,9 @@ public final class UtilsImage {
     /**
      * 按采样大小压缩
      *
-     * @param src        源图片
-     * @param sampleSize 采样率大小
-     * @return 按采样率压缩后的图片
+     *  src        源图片
+     *  sampleSize 采样率大小
+     *  按采样率压缩后的图片
      */
     public static Bitmap compressBySampleSize(Bitmap src, int sampleSize) {
         return compressBySampleSize(src, sampleSize, false);
@@ -1517,10 +1513,10 @@ public final class UtilsImage {
     /**
      * 按采样大小压缩
      *
-     * @param src        源图片
-     * @param sampleSize 采样率大小
-     * @param recycle    是否回收
-     * @return 按采样率压缩后的图片
+     *  src        源图片
+     *  sampleSize 采样率大小
+     *  recycle    是否回收
+     *  按采样率压缩后的图片
      */
     public static Bitmap compressBySampleSize(Bitmap src, int sampleSize, boolean recycle) {
         if (isEmptyBitmap(src)) return null;

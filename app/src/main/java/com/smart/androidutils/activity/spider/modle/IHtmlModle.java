@@ -7,7 +7,7 @@ package com.smart.androidutils.activity.spider.modle;
 
 public interface IHtmlModle {
     /**
-     * @param htmlModuleResult 业务结果入口
+     * htmlModuleResult 业务结果入口
      */
     void acquireData(IHtmlModuleResult htmlModuleResult);
 }

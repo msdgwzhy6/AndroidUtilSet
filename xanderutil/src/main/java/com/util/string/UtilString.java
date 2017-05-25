@@ -1,8 +1,8 @@
 package com.util.string;
 
 /**
- * @author xander on  2017/5/25.
- * @function 字符串相关工具类
+ * author xander on  2017/5/25.
+ * function 字符串相关工具类
  */
 public final class UtilString {
 
@@ -13,8 +13,8 @@ public final class UtilString {
     /**
      * 判断字符串是否为null或长度为0
      *
-     * @param s 待校验字符串
-     * @return {@code true}: 空<br> {@code false}: 不为空
+     *  s 待校验字符串
+     * {true}: 空<br> {false}: 不为空
      */
     public static boolean isEmpty(CharSequence s) {
         return s == null || s.length() == 0;
@@ -23,8 +23,8 @@ public final class UtilString {
     /**
      * 判断字符串是否为null或全为空格
      *
-     * @param s 待校验字符串
-     * @return {@code true}: null或全空格<br> {@code false}: 不为null且不全空格
+     *  s 待校验字符串
+     * {true}: null或全空格<br> {false}: 不为null且不全空格
      */
     public static boolean isTrimEmpty(String s) {
         return (s == null || s.trim().length() == 0);
@@ -33,8 +33,8 @@ public final class UtilString {
     /**
      * 判断字符串是否为null或全为空白字符
      *
-     * @param s 待校验字符串
-     * @return {@code true}: null或全空白字符<br> {@code false}: 不为null且不全空白字符
+     *  s 待校验字符串
+     * {true}: null或全空白字符<br> {false}: 不为null且不全空白字符
      */
     public static boolean isSpace(String s) {
         if (s == null) return true;
@@ -49,9 +49,9 @@ public final class UtilString {
     /**
      * 判断两字符串是否相等
      *
-     * @param a 待校验字符串a
-     * @param b 待校验字符串b
-     * @return {@code true}: 相等<br>{@code false}: 不相等
+     *  a 待校验字符串a
+     *  b 待校验字符串b
+     * {true}: 相等<br>{false}: 不相等
      */
     public static boolean equals(CharSequence a, CharSequence b) {
         if (a == b) return true;
@@ -72,9 +72,9 @@ public final class UtilString {
     /**
      * 判断两字符串忽略大小写是否相等
      *
-     * @param a 待校验字符串a
-     * @param b 待校验字符串b
-     * @return {@code true}: 相等<br>{@code false}: 不相等
+     *  a 待校验字符串a
+     *  b 待校验字符串b
+     * {true}: 相等<br>{false}: 不相等
      */
     public static boolean equalsIgnoreCase(String a, String b) {
         return a == null ? b == null : a.equalsIgnoreCase(b);
@@ -83,8 +83,8 @@ public final class UtilString {
     /**
      * null转为长度为0的字符串
      *
-     * @param s 待转字符串
-     * @return s为null转为长度为0字符串，否则不改变
+     *  s 待转字符串
+     * s为null转为长度为0字符串，否则不改变
      */
     public static String null2Length0(String s) {
         return s == null ? "" : s;
@@ -93,8 +93,8 @@ public final class UtilString {
     /**
      * 返回字符串长度
      *
-     * @param s 字符串
-     * @return null返回0，其他返回自身长度
+     *  s 字符串
+     * null返回0，其他返回自身长度
      */
     public static int length(CharSequence s) {
         return s == null ? 0 : s.length();
@@ -103,8 +103,8 @@ public final class UtilString {
     /**
      * 首字母大写
      *
-     * @param s 待转字符串
-     * @return 首字母大写字符串
+     *  s 待转字符串
+     * 首字母大写字符串
      */
     public static String upperFirstLetter(String s) {
         if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) return s;
@@ -114,8 +114,8 @@ public final class UtilString {
     /**
      * 首字母小写
      *
-     * @param s 待转字符串
-     * @return 首字母小写字符串
+     *  s 待转字符串
+     * 首字母小写字符串
      */
     public static String lowerFirstLetter(String s) {
         if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) return s;
@@ -125,8 +125,8 @@ public final class UtilString {
     /**
      * 反转字符串
      *
-     * @param s 待反转字符串
-     * @return 反转字符串
+     *  s 待反转字符串
+     * 反转字符串
      */
     public static String reverse(String s) {
         int len = length(s);
@@ -145,8 +145,8 @@ public final class UtilString {
     /**
      * 转化为半角字符
      *
-     * @param s 待转字符串
-     * @return 半角字符串
+     *  s 待转字符串
+     * 半角字符串
      */
     public static String toDBC(String s) {
         if (isEmpty(s)) return s;
@@ -166,8 +166,8 @@ public final class UtilString {
     /**
      * 转化为全角字符
      *
-     * @param s 待转字符串
-     * @return 全角字符串
+     *  s 待转字符串
+     * 全角字符串
      */
     public static String toSBC(String s) {
         if (isEmpty(s)) return s;

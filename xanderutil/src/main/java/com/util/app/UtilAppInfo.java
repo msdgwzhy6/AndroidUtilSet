@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * @author xander on  2017/5/25.
- * @function
  */
 
 public class UtilAppInfo{

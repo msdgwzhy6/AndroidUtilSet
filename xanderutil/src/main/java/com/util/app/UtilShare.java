@@ -9,15 +9,14 @@ import java.io.File;
 
 /**
  * @author xander on  2017/5/25.
- * @function 分享
  */
 
 public class UtilShare {
     /**
      * 获取分享文本的意图
      *
-     * @param content 分享文本
-     * @return intent
+     *  content 分享文本
+     *  intent
      */
     public static Intent getShareTextIntent(String content) {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -29,9 +28,9 @@ public class UtilShare {
     /**
      * 获取分享图片的意图
      *
-     * @param content   文本
-     * @param imagePath 图片文件路径
-     * @return intent
+     *  content   文本
+     *  imagePath 图片文件路径
+     *  intent
      */
     public static Intent getShareImageIntent(String content, String imagePath) {
         return getShareImageIntent(content, UtilFile.getFileByPath(imagePath));
@@ -40,9 +39,9 @@ public class UtilShare {
     /**
      * 获取分享图片的意图
      *
-     * @param content 文本
-     * @param image   图片文件
-     * @return intent
+     *  content 文本
+     *  image   图片文件
+     *  intent
      */
     public static Intent getShareImageIntent(String content, File image) {
         if (!UtilFile.isFileExists(image)) return null;
@@ -52,9 +51,9 @@ public class UtilShare {
     /**
      * 获取分享图片的意图
      *
-     * @param content 分享文本
-     * @param uri     图片uri
-     * @return intent
+     *  content 分享文本
+     *  uri     图片uri
+     *  intent
      */
     public static Intent getShareImageIntent(String content, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_SEND);

@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @author xander on  2017/5/23.
- * @function
  */
 
 public class UtilEncript {

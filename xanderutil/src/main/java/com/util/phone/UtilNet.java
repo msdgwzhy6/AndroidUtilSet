@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.util.InitUtil;
 
 /**
- * @author xander on  2017/5/24.
+ * author xander on  2017/5/24.
  */
 
 public class UtilNet {
@@ -47,8 +47,8 @@ public class UtilNet {
     }
 
     /** 判断当前是否有网络连接
-     * @param toast 是否开启内置的信息提示
-     * @return
+     *toast 是否开启内置的信息提示
+     * 
      */
     public static boolean isActiveConnected(boolean toast) {
         mActiveNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
@@ -118,7 +118,7 @@ public class UtilNet {
 
     /**
      * 获取当前网络连接类型 ConnectivityManager.TYPE_WIFI
-     * @return {@code -1} if network disconnect
+     *  { -1} if network disconnect
      */
     public static int getActiveConnectType(){
         mActiveNetworkInfo = mConnectivityManager.getActiveNetworkInfo();

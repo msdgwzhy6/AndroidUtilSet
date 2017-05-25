@@ -3,8 +3,7 @@ package com.util.constant;
 import com.util.InitUtil;
 
 /**
- * @author xander on  2017/5/25.
- * @function
+ * author xander on  2017/5/25.
  */
 
 public class ConstantRegex {

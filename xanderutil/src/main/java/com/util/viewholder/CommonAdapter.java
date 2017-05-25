@@ -10,13 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 
 
-import android.view.MotionEvent;
-
-
-
 /**
  * Created by xubinbin on 2017/4/24.
- * @function 封装adapter，是viewholder和adapter分离
+ * function 封装adapter，是viewholder和adapter分离
  *
  */
 
@@ -31,10 +27,10 @@ public class CommonAdapter<BEAN extends CommonAdapter.IBaseBean> extends BaseAda
     private int listSize;
 
     /**
-     * @param context 上下文
-     * @param iBaseBean 数据集
-     * @param itemViewLayout （item的布局文件）
-     * @param iHolderHelperCallback （viewholder的接口）
+     * param context 上下文
+     * param iBaseBean 数据集
+     * param itemViewLayout （item的布局文件）
+     * param iHolderHelperCallback （viewholder的接口）
      */
     @SuppressWarnings(value={"unchecked"})
     public CommonAdapter(Context context, IBaseBean iBaseBean,int itemViewLayout, IHolderHelperCallback iHolderHelperCallback) {
@@ -45,12 +41,11 @@ public class CommonAdapter<BEAN extends CommonAdapter.IBaseBean> extends BaseAda
     }
 
     /**
-     * @param context 上下文
-     * @param iBaseBeanList 数据集（list的形式传递过来）
-     * @param itemViewLayout （item的布局文件）
-     * @param iListHolderHelperCallback （viewholder的接口）
+     * param context 上下文
+     * param iBaseBeanList 数据集（list的形式传递过来）
+     * param itemViewLayout （item的布局文件）
+     * param iListHolderHelperCallback （viewholder的接口）
      */
-    @SuppressWarnings(value={"unchecked"})
     public CommonAdapter(Context context, List<BEAN> iBaseBeanList, int itemViewLayout, IListHolderHelperCallback iListHolderHelperCallback) {
         mContext = context;
         mIBaseBeanList = iBaseBeanList;
@@ -73,7 +68,6 @@ public class CommonAdapter<BEAN extends CommonAdapter.IBaseBean> extends BaseAda
     }
 
     @Override
-    @SuppressWarnings(value={"unchecked"})
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(mItemViewLayout,parent,false);
@@ -101,28 +95,27 @@ public class CommonAdapter<BEAN extends CommonAdapter.IBaseBean> extends BaseAda
     * */
     public interface IHolderHelperCallback<BASEVIEWHOLDER extends IBaseViewHolder, BASEBEAN extends IBaseBean>{
         /** 用于初始化ViewHolder
-         * @param convertView
+         * param convertView
          */
-        @SuppressWarnings(value={"unchecked"})
+
         IBaseViewHolder initViewHolder(BASEVIEWHOLDER viewHolder, View convertView);
 
         /**用于设置 item中 的每一个控件
-         * @param position
+         * param position
          */
-        @SuppressWarnings(value={"unchecked"})
+
         void bindDataToView(Context context,BASEBEAN basebean, BASEVIEWHOLDER viewHolder, int position);
     }
     public interface IListHolderHelperCallback<BASEVIEWHOLDER extends IBaseViewHolder, BASEBEAN extends IBaseBean>{
         /** 用于初始化ViewHolder
-         * @param convertView
+         * param convertView
          */
-        @SuppressWarnings(value={"unchecked"})
+
         IBaseViewHolder initViewHolder(BASEVIEWHOLDER viewHolder, View convertView);
 
         /**用于将集合中的数据设置 item中 的每一个控件
-         * @param position
+         * param position
          */
-        @SuppressWarnings(value={"unchecked"})
         void bindListDataToView(Context context, List<BASEBEAN> iBaseBeanList, BASEVIEWHOLDER viewHolder, int position);
     }
 

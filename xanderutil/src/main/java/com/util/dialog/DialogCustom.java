@@ -763,8 +763,6 @@ public class DialogCustom extends Dialog {
     }
     /**
      * 下载apk
-     *
-     * @param
      */
 
     private void downloadApk() {
