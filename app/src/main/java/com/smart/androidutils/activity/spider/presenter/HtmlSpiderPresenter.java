@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author xander on  2017/5/25.
- * @function
+ * @function 业务分发 数据提供给view层
  */
 
 public class HtmlSpiderPresenter {

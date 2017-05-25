@@ -20,7 +20,7 @@ import static com.smart.androidutils.constant.ConstantUrl.userAgent;
 
 /**
  * @author xander on  2017/5/25.
- * @function
+ * @function 遵循业务接口 来完成业务
  */
 
 public class HtmlModle implements IHtmlModle {
@@ -63,7 +63,6 @@ public class HtmlModle implements IHtmlModle {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-
                             htmlModuleResult.result(mSpiderBeanList,finalDoc.title());
                         }
                     });
