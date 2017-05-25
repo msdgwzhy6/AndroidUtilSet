@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
-import com.smart.dialog_library.DialogCustom;
+import com.util.dialog.DialogCustom;
 import com.smart.holder_library.CommonAdapter;
 
 import java.util.List;

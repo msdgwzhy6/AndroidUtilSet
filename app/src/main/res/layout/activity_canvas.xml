@@ -16,7 +16,6 @@
         android:id="@+id/id_canvas_grif_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/blue"
         android:numColumns="2"/>
     <com.smart.androidutils.activity.canvas.view.XanderView
         android:id="@+id/id_canvas_xander"

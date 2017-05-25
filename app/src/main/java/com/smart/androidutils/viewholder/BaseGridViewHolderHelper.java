@@ -15,7 +15,7 @@ import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.BaseBean;
-import com.smart.dialog_library.DialogCustom;
+import com.util.dialog.DialogCustom;
 import com.smart.holder_library.CommonAdapter;
 import com.util.phone.UitlDevice;
 import com.util.phone.UtilNet;

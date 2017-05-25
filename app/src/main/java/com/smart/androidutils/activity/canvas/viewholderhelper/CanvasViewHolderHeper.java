@@ -17,8 +17,8 @@ import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_LINE;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_ROUND_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
-import static com.smart.dialog_library.Utils.setViewAlphaAnimation;
 import static com.util.view.UtilWidget.getView;
+import static com.util.view.UtilWidget.setViewAlphaAnimation;
 
 /**
  * @author xander on  2017/5/25.

@@ -19,8 +19,8 @@ import com.smart.androidutils.R;
 import com.util.view.WebViewNoAd;
 
 import static com.smart.androidutils.constant.ConstantUrl.urlMR;
-import static com.smart.dialog_library.Utils.setViewAlphaAnimation;
 import static com.util.view.UtilWidget.getView;
+import static com.util.view.UtilWidget.setViewAlphaAnimation;
 
 
 public class NoAdActivity extends BaseActivity {

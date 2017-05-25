@@ -1,4 +1,8 @@
 <resources>
+    <string name="dialog_title">消息标题</string>
+    <string name="dialog_message">提示消息</string>
+    <string name="dialog_download_data">下载进度  </string>
+    <string name="dialog_total_data">总大小:</string>
     <string name="app_name">XanderUtilLibrary</string>
     <string name="script_web_view_no_ad"><![CDATA[<script\\b[^>]*?src=\"([^\"]*?)\"[^>]*></script>]]></string>
 </resources>
