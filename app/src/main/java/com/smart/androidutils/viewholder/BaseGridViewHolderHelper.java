@@ -8,12 +8,13 @@ import android.view.View;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.ad.NoAdActivity;
 import com.smart.androidutils.activity.app.AppInfoActivity;
+import com.smart.androidutils.activity.canvas.CanvasActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
-import com.smart.androidutils.bean.ItemBean;
+import com.smart.androidutils.BaseBean;
 import com.smart.dialog_library.DialogCustom;
 import com.smart.holder_library.CommonAdapter;
 import com.util.phone.UitlDevice;
@@ -33,17 +34,17 @@ import static com.util.view.UtilWidget.getView;
  * Created by smart on 2017/5/17.
  */
 
-public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<GridViewHolder,ItemBean> {
+public class BaseGridViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
     private Activity activity ;
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(GridViewHolder viewHolder, View convertView) {
-        viewHolder = new GridViewHolder();
+    public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder, View convertView) {
+        viewHolder = new BaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;
     }
 
     @Override
-    public void bindListDataToView(final Context context, final List<ItemBean> iBaseBeanList, final GridViewHolder viewHolder, final int position) {
+    public void bindListDataToView(final Context context, final List<BaseBean> iBaseBeanList, final BaseGridViewHolder viewHolder, final int position) {
         if (activity == null) {
             activity = (Activity) context;
         }
@@ -68,6 +69,9 @@ public class GridViewHolderHelper implements CommonAdapter.IListHolderHelperCall
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_file))) {
                     context.startActivity(new Intent(context, NoAdActivity.class));
+                }
+                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas))) {
+                    context.startActivity(new Intent(context, CanvasActivity.class));
                 }
 
                 //设备相关的事件处理

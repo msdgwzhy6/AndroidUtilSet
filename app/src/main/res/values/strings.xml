@@ -28,4 +28,13 @@
 
     <!--App -->
     <string name="app_list_info">"App列表"</string>
+
+    <!--绘图面板-->
+    <string name="canvas">"画圆"</string>
+
+    <string name="canvas_circle">"画圆"</string>
+    <string name="canvas_rect">"画方"</string>
+    <string name="canvas_round_rect">"圆角矩形"</string>
+    <string name="canvas_line">"划线"</string>
+    <string name="canvas_bitmap">画bitmap</string>
 </resources>

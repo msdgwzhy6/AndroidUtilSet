@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".activity.app.AppInfoActivity">
         </activity>
+        <activity android:name=".activity.canvas.CanvasActivity">
+        </activity>
     </application>
 
 </manifest>

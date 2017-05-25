@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
-import com.smart.androidutils.bean.ItemBean;
-import com.smart.androidutils.viewholder.GridViewHolderHelper;
+import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
 import com.smart.holder_library.CommonAdapter;
 import com.util.InitUtil;
 
@@ -18,7 +17,7 @@ import static com.util.view.UtilWidget.getView;
 public class MainActivity extends AppCompatActivity {
 
     private GridView mGridView;
-    private List<ItemBean> mItemBeanList;
+    private List<BaseBean> mBaseBeanList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         setTitle("操作面板");
-        mGridView.setAdapter(new CommonAdapter(this,mItemBeanList,R.layout.main_grid_view_item,new GridViewHolderHelper()));
+        mGridView.setAdapter(new CommonAdapter(this, mBaseBeanList,R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
     }
 
 
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initData() {
 
-        ItemBean itemBean;
-        mItemBeanList = new ArrayList<>();
+        BaseBean baseBean;
+        mBaseBeanList = new ArrayList<>();
         for (int i = 0; i < ITEMS_MAIN.length; i++) {
-            itemBean = new ItemBean();
-            itemBean.setName(ITEMS_MAIN[i]);
-            mItemBeanList.add(itemBean);
+            baseBean = new BaseBean();
+            baseBean.setName(ITEMS_MAIN[i]);
+            mBaseBeanList.add(baseBean);
         }
     }
 }

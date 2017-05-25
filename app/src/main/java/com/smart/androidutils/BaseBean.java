@@ -1,4 +1,4 @@
-package com.smart.androidutils.bean;
+package com.smart.androidutils;
 
 import com.smart.holder_library.CommonAdapter;
 
@@ -6,7 +6,7 @@ import com.smart.holder_library.CommonAdapter;
  * Created by smart on 2017/5/17.
  */
 
-public class ItemBean implements CommonAdapter.IBaseBean {
+public class BaseBean implements CommonAdapter.IBaseBean {
     private String mName;
 
     public String getName() {

@@ -17,7 +17,9 @@ public class ConstantData {
             InitUtil.getContext().getString(R.string.act_device),
             InitUtil.getContext().getString(R.string.act_no_ad_off),
             InitUtil.getContext().getString(R.string.act_file),
-            InitUtil.getContext().getString(R.string.app_list_info)
+            InitUtil.getContext().getString(R.string.app_list_info),
+            InitUtil.getContext().getString(R.string.canvas),
+            InitUtil.getContext().getString(R.string.act_sp1)
     };
     public static final String[] ITEMS_DEVICE = new String[]{
             InitUtil.getContext().getString(R.string.telephony_state),
@@ -32,4 +34,10 @@ public class ConstantData {
             InitUtil.getContext().getString(R.string.device_sd_available_size),
             InitUtil.getContext().getString(R.string.act_sp1)
     };
+
+    public static final int TAG_COLOR = 0x00;
+    public static final int TAG_CIRCLE = 0x02;
+    public static final int TAG_LINE = 0x01;
+
+
 }
