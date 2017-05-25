@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.smart.androidutils.constant.Constant.urlImg;
+import static com.smart.androidutils.constant.ConstantUrl.urlImg;
 
 public class SPActivity extends BaseActivity {
 

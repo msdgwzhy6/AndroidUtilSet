@@ -1,11 +1,7 @@
 package com.smart.androidutils.activity.spider;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,12 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static com.smart.androidutils.constant.Constant.urlMR;
-import static com.smart.androidutils.constant.Constant.userAgent;
+import static com.smart.androidutils.constant.ConstantUrl.urlMR;
+import static com.smart.androidutils.constant.ConstantUrl.userAgent;
 import static com.util.view.UtilWidget.getView;
 
 public class SpiderActivity extends BaseActivity {

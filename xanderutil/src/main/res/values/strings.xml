@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">XanderUtilLibrary</string>
+    <string name="script_web_view_no_ad"><![CDATA[<script\\b[^>]*?src=\"([^\"]*?)\"[^>]*></script>]]></string>
 </resources>

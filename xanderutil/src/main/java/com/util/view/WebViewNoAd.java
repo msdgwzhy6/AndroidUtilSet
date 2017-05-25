@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.util.constant.ConstantRegex.regexStr;
 import static com.util.file.UtilFile.readSourceFromUrl;
 
 /**
@@ -17,7 +18,6 @@ import static com.util.file.UtilFile.readSourceFromUrl;
  */
 
 public class WebViewNoAd extends AsyncTask<String, Void, String> {
-    private static final String regexStr = "<script\\b[^>]*?src=\"([^\"]*?)\"[^>]*></script>";
     private WebView mWebView;
     private String baseUrl;
     private String mCharset;
