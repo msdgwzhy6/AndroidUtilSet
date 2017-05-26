@@ -31,7 +31,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.IntRange;
 import android.view.View;
 
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 import com.util.file.UtilFile;
 import com.util.file.UtilsCloseIO;
 

@@ -17,7 +17,7 @@ import static com.util.file.UtilFile.readSourceFromUrl;
  * function
  */
 
-public class WebViewNoAd extends AsyncTask<String, Void, String> {
+public final class WebViewNoAd extends AsyncTask<String, Void, String> {
     private WebView mWebView;
     private String baseUrl;
     private String mCharset;

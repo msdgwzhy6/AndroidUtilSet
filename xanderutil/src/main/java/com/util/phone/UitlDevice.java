@@ -17,7 +17,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.util.Xml;
 
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -44,7 +44,7 @@ import static com.util.phone.UtilNet.isActiveConnected;
  * author xander on  2017/5/23.
  */
 
-public class UitlDevice {
+public final class UitlDevice {
     private static TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);;
     /**
      * 判断设备是否是手机

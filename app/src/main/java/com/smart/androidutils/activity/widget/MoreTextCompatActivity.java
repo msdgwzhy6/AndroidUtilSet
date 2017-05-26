@@ -2,19 +2,21 @@ package com.smart.androidutils.activity.widget;
 
 import android.widget.TextView;
 
-import com.smart.androidutils.BaseActivity;
+import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.view.UtilMoreText;
 
-import static com.smart.androidutils.constant.ConstantData.MORE_TEXT_MSG;
+import static com.smart.androidutils.constant.ConMain.MORE_TEXT_MSG;
 import static com.util.view.UtilWidget.getView;
 
 /*
 * 更多展示
 * */
-public class MoreTextActivity extends BaseActivity {
+public class MoreTextCompatActivity extends BaseCompatActivity {
     TextView mMoreText;
     TextView mMoreText1;
+    private String msg1;
+    private String msg2;
 
     @Override
     protected int initLayout() {
@@ -31,12 +33,15 @@ public class MoreTextActivity extends BaseActivity {
     protected void initData() {
         String msg = MORE_TEXT_MSG;
 
-        String msg1 = msg + msg;
-        String msg2 = msg + msg1;
-        String msg3 = msg + msg2;
+        msg1 = msg ;
+        msg2 = msg + msg1;
+    }
 
-        new UtilMoreText(mMoreText, msg);
-        new UtilMoreText(mMoreText1, msg1);
+    @Override
+    protected void bindDataToView() {
+
+        new UtilMoreText(mMoreText, msg1);
+        new UtilMoreText(mMoreText1, msg2);
     }
 
     @Override

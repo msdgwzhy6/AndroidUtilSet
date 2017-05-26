@@ -1,12 +1,12 @@
 package com.util.constant;
 
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 
 /**
  * author xander on  2017/5/25.
  */
 
-public class ConstantRegex {
+public final class ConstantRegex {
     public static final String regexStr;
 
     static {

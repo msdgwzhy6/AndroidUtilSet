@@ -1,9 +1,9 @@
 package com.smart.androidutils.activity.widget;
 
-import com.smart.androidutils.MainActivity;
-import com.smart.androidutils.constant.ConstantData;
+import com.smart.androidutils.MainCompatActivity;
+import com.smart.androidutils.constant.ConMain;
 
-public class WidgetActivity extends MainActivity {
+public class WidgetCompatActivity extends MainCompatActivity {
 
 
     @Override
@@ -14,6 +14,6 @@ public class WidgetActivity extends MainActivity {
     @Override
     protected void setItems() {
         super.setItems();
-        mItems = ConstantData.ITEMS_VIEW;
+        mItemsData = ConMain.ITEMS_VIEW;
     }
 }

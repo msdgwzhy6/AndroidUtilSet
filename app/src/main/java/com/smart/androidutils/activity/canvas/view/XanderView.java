@@ -11,9 +11,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.util.InitUtil;
 import com.util.UtilEncript;
-import com.util.file.UtilSP;
+import com.util.core.InitUtil;
+import com.util.file.UtilSPOnlyPead;
 
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_BITMAP;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_CIRCLE;
@@ -21,6 +21,7 @@ import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_COLOR
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_LINE;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
+import static com.smart.androidutils.util.Util.getBitmapDefault;
 
 /**
  * @author xander on  2017/5/25.
@@ -110,11 +111,11 @@ public class XanderView extends View implements IDrawType{
 
     @Override
     public void onDrawBitmap(Canvas canvas) {
-        Bitmap bitmap = UtilSP.getInstance(InitUtil.getContext())
-                .initSP("canvas")
-                .getBitmap(UtilEncript.getMD5("canvas"));
+        Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
+                .initSPFileName("cut")
+                .getBitmap(UtilEncript.getMD5("cut"));
         assert bitmap != null;
-        canvas.drawBitmap(bitmap, 200, 200, null);
+        canvas.drawBitmap(getBitmapDefault("cut"), 200, 200, null);
     }
 
     @Override

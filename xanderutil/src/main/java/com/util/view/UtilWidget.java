@@ -11,7 +11,7 @@ import android.view.animation.AlphaAnimation;
 * function:
 * Encapsulate findViewById to avoid forced type conversions
 * */
-public class UtilWidget {
+public final class UtilWidget {
     public static <V extends View> V getView(Activity activity , int itemViewId){
         return (V) activity.findViewById(itemViewId);
     }

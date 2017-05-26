@@ -1,6 +1,6 @@
 package com.smart.androidutils.activity.file;
 
-import com.smart.androidutils.BaseActivity;
+import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 
 /**
@@ -8,7 +8,7 @@ import com.smart.androidutils.R;
  * @function
  */
 
-public class FileActivity extends BaseActivity {
+public class FileCompatActivity extends BaseCompatActivity {
 
     @Override
     protected int initLayout() {
@@ -22,6 +22,11 @@ public class FileActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void bindDataToView() {
 
     }
 }

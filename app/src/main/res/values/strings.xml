@@ -42,5 +42,12 @@
     <!--view-->
     <string name="view">widget</string>
     <string name="view_more_text">文本展开和收起</string>
+    <string name="title_activity_base">BaseActivity</string>
 
+    <!--screen-->
+    <string name="screen">屏幕</string>
+    <string name="screen_hide_status_bar">隐藏状态栏</string>
+    <string name="screen_hide_titlt_bar">隐藏标题栏</string>
+    <string name="screen_hide_navigation_bar">隐藏导航栏</string>
+    <string name="screen_capture_without_status_bar">截图不含状态栏</string>
 </resources>

@@ -11,7 +11,7 @@ import java.io.File;
  * @author xander on  2017/5/25.
  */
 
-public class UtilShare {
+public final class UtilShare {
     /**
      * 获取分享文本的意图
      *

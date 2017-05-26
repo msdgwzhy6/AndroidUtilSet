@@ -19,7 +19,7 @@ import android.widget.TextView;
 *
 * 使用说明 new UtilMoreText().setClickableSpan(tv2,msg);
 * */
-public class UtilMoreText  {
+public final class UtilMoreText  {
 
     private OnSpanTextClickListener mSpanTextClickListener;
 

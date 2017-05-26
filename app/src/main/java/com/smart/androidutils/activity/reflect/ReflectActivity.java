@@ -32,7 +32,7 @@ public class ReflectActivity extends AppCompatActivity {
     public void onClickMe() {
 //        Toast.makeText(this, "sds", Toast.LENGTH_SHORT).show();
         try {
-            Class<?> clazz = Class.forName("com.smart.androidutils.activity.reflect.Mooc");
+            Class<?> clazz = Class.forName("com.smart.androidutils.mActivity.reflect.Mooc");
             //这种方式，ReMooc必须有一个默认的public构造函数
             Mooc iReMooc = (Mooc) clazz.newInstance();
             iReMooc.setString("ddddd");

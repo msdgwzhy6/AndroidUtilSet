@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.canvas.constant;
 
 import com.smart.androidutils.R;
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 
 /**
  * @author xander on  2017/5/25.

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.smart.androidutils.activity.ad.NoAdActivity">
+    tools:context="com.smart.androidutils.activity.ad.NoAdCompatActivity">
    <LinearLayout
        android:id="@+id/id_no_ad_button_layout"
        android:layout_width="match_parent"

@@ -12,7 +12,7 @@ import com.util.viewholder.CommonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConstantData.ITEMS_DEVICE;
+import static com.smart.androidutils.constant.ConMain.ITEMS_DEVICE;
 import static com.util.view.UtilWidget.getView;
 
 public class DeviceActivity extends AppCompatActivity {

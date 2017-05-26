@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
  * @author xander on  2017/5/23.
  */
 
-public class UtilEncript {
+public final class UtilEncript {
     /**
      * 获取str的MD5值
      */

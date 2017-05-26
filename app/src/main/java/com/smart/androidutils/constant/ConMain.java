@@ -1,19 +1,20 @@
 package com.smart.androidutils.constant;
 
 import com.smart.androidutils.R;
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 
 /**
  * author xander on  2017/5/25.
  * function
  */
 
-public class ConstantData {
+public class ConMain {
     public static final String [] ITEMS_MAIN = new String[]{
             InitUtil.getContext().getString(R.string.act_sp),
             InitUtil.getContext().getString(R.string.act_spider),
             InitUtil.getContext().getString(R.string.act_class),
             InitUtil.getContext().getString(R.string.act_reflect),
+            InitUtil.getContext().getString(R.string.screen),
             InitUtil.getContext().getString(R.string.act_device),
             InitUtil.getContext().getString(R.string.act_no_ad_off),
             InitUtil.getContext().getString(R.string.act_file),

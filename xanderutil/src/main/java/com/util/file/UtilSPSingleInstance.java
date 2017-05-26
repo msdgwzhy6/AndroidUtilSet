@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
-import com.util.viewholder.CommonAdapter;
+import com.util.bitmap.UtilsImage;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,9 +28,9 @@ import static android.util.Base64.URL_SAFE;
  * And any non basic types to implement the serializable interface including internal class
  ***************************************************************************/
 
-public final class UtilSP {
+public final class UtilSPSingleInstance {
    private Context mContext;
-   private String mFileName = "spxml";
+   private String mFileName = "default_sp_xml";
 
    private SharedPreferences.Editor editor;
    private SharedPreferences sharedPreferences;
@@ -42,23 +42,23 @@ public final class UtilSP {
    * by another thread calls)
    */
 
-   private static volatile UtilSP instance;
+   private static volatile UtilSPSingleInstance instance;
 
 
-   private UtilSP(Context context) {
+   private UtilSPSingleInstance(Context context) {
       mContext = context;
    }
 
-   public static UtilSP getInstance(Context context) {
+   public static UtilSPSingleInstance getInstance(Context context) {
       // When an object is instantiated, or not, it is judged (without using synchronous blocks of code, when the instance is not equal to null),
       // the object is returned directly and the operation efficiency is improve
       if (instance == null) {
          //Synchronous block of code (when the object is uninitialized, using synchronous blocks of code to ensure that
          // the object is not duplicated when it is first created) is accessed by multithreaded access
-         synchronized (UtilSP.class) {
+         synchronized (UtilSPSingleInstance.class) {
             //Uninitialized, the initial instance variable
             if (instance == null) {
-               instance = new UtilSP(context);
+               instance = new UtilSPSingleInstance(context);
             }
          }
       }
@@ -69,9 +69,14 @@ public final class UtilSP {
     * fileName
     * 
     */
-   public UtilSP initSP(String fileName) {
+   public UtilSPSingleInstance initSPFileName(String fileName) {
       mFileName = fileName;
-      sharedPreferences = mContext.getSharedPreferences(fileName, MODE_PRIVATE);
+      sharedPreferences = mContext.getSharedPreferences(mFileName, MODE_PRIVATE);
+      editor = sharedPreferences.edit();
+      return instance;
+   }
+   public UtilSPSingleInstance initSPFileName() {
+      sharedPreferences = mContext.getSharedPreferences(mFileName, MODE_PRIVATE);
       editor = sharedPreferences.edit();
       return instance;
    }
@@ -81,13 +86,14 @@ public final class UtilSP {
     * imgUrlValue
     * 
     */
-   public UtilSP putString(int imgUrlKey, String imgUrlValue) {
+   public UtilSPSingleInstance putString(Integer imgUrlKey, String imgUrlValue) {
       editor.putString(String.valueOf(imgUrlKey), imgUrlValue);
       return instance;
    }
 
-   public UtilSP putString(String imgUrlKey, String imgUrlValue) {
-      editor.putString(imgUrlKey, imgUrlValue);
+   public UtilSPSingleInstance putString(String key, String value) {
+      editor.putString(key, value);
+      Log.i("xxx", "putString" +key);
       return instance;
    }
 
@@ -97,9 +103,9 @@ public final class UtilSP {
     * beginKey
     * 
     */
-   public UtilSP putList( int beginKey,List<String> strList) {
-      int count = beginKey + strList.size() - 1;
-      for (int i = beginKey; i < count; i++) {
+   public UtilSPSingleInstance putList(Integer beginKey, List<String> strList) {
+      Integer count = beginKey + strList.size() - 1;
+      for (Integer i = beginKey; i < count; i++) {
          putString(i, strList.get(i));
       }
       return instance;
@@ -108,12 +114,12 @@ public final class UtilSP {
 
    /**
     * strList
-    *          Encapsulates the string of the string data you want to add
+    *  Encapsulates the string of the string data you want to add
     * 
     */
-   public UtilSP putList(List<String> strList) {
-      int count = strList.size();
-      for (int i = 0; i < count; i++) {
+   public UtilSPSingleInstance putList(List<String> strList) {
+      Integer count = strList.size();
+      for (Integer i = 0; i < count; i++) {
          putString(i, strList.get(i));
       }
       return instance;
@@ -124,18 +130,24 @@ public final class UtilSP {
     * countKey
     * countValue
     */
-   public UtilSP putInt(String countKey, int countValue) {
+   public UtilSPSingleInstance putInt(String countKey, Integer countValue) {
+      if (countValue == null) {
+         throw new NullPointerException("要保存的对象为空！");
+      }
       editor.putInt(countKey, countValue);
       return instance;
    }
 
 
    /**
-    * objKeyName index
+    * key index
     * object javaBean
     * 
     */
-   public <T extends Serializable> UtilSP putBean(String objKeyName, T object) {
+   public <T extends Serializable> UtilSPSingleInstance putBean(String key, T object) {
+      if (object == null) {
+         throw new NullPointerException("要保存的对象为空！");
+      }
       // Creating a byte output stream
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       ObjectOutputStream oos = null;
@@ -147,7 +159,7 @@ public final class UtilSP {
          // Character channeling encoding byte streams into Base64
          String obj_Base64 = new String(Base64.encode(baos.toByteArray(),URL_SAFE));
          Log.i("xxx", "putBean" +obj_Base64);
-         putString(objKeyName, obj_Base64);
+         putString(key, obj_Base64);
       } catch (IOException e) {
          e.printStackTrace();
       } finally {
@@ -165,33 +177,42 @@ public final class UtilSP {
    }
 
    /**
-    * keyName get individual data through key
+    * key get individual data through key
     *   value
     */
-   public String getString(int keyName) {
-      return sharedPreferences.getString(String.valueOf(keyName), "");
+   public String getString(Integer key) {
+      return sharedPreferences.getString(String.valueOf(key), "");
    }
 
-   public String getString(String keyName) {
-      return sharedPreferences.getString(keyName, null);
+   public String getString(String key) {
+      return sharedPreferences.getString(key, null);
    }
 
-   public int getInt(int keyName) {
-      return sharedPreferences.getInt(String.valueOf(keyName), 0);
+   public Integer getInt(Integer key) {
+     String _key = String.valueOf(key);
+      if (TextUtils.isEmpty(_key)) {
+         throw new NullPointerException("没有找到与"+key+"匹配的键");
+      }
+      return sharedPreferences.getInt(_key, 0);
    }
 
-   public int getInt(String keyName) {
-      return sharedPreferences.getInt(keyName, 0);
+   public Integer getInt(String key) {
+      if (TextUtils.isEmpty(key)) {
+         throw new NullPointerException("没有找到与"+key+"匹配的键");
+      }
+      return sharedPreferences.getInt(key, 0);
    }
    /**
     *
-    * objKey
+    * key
     *  The key that stores the object, and all non base data types must implement the serialization interface
     * 
     */
-   public <T extends Serializable> T getBean(String objKey) {
-      T value;
-      String objectBase64 = getString(objKey);
+   public <T extends Serializable> T getBean(String key) {
+      if (TextUtils.isEmpty(key)) {
+         throw new NullPointerException("没有找到与"+key+"匹配的键");
+      }
+      String objectBase64 = getString(key);
       Log.i("xxx", "getBean: " + objectBase64);
       //Read byte
       byte[] base64 = Base64.decode(objectBase64.getBytes(),URL_SAFE);
@@ -203,14 +224,11 @@ public final class UtilSP {
          //Re encapsulation
          bis = new ObjectInputStream(bais);
          try {
-            value = (T) bis.readObject();
-            return value;
+            return (T) bis.readObject();
          } catch (ClassNotFoundException e) {
-
             e.printStackTrace();
          }
       } catch (IOException e) {
-
          e.printStackTrace();
       } finally {
          try {
@@ -225,7 +243,7 @@ public final class UtilSP {
       }
       return null;
    }
-   public UtilSP submit() {
+   public UtilSPSingleInstance submit() {
       editor.commit();
       return instance;
    }
@@ -234,7 +252,7 @@ public final class UtilSP {
     * Clear all data under SP, refresh data, save data, you need to empty data first
     * 
     */
-   public UtilSP clearAll() {
+   public UtilSPSingleInstance clearAll() {
       File file = new File(mContext.getFilesDir(), mFileName + ".xml");
       if (file.exists()) {
          editor.clear();
@@ -248,18 +266,21 @@ public final class UtilSP {
    public void release() {
       instance = null;
    }
-
-
    /**
     * Save the picture in XML
     * key
     * bitmap
     * 
     */
-   public UtilSP putBitmap(String key,Bitmap bitmap){
+   public UtilSPSingleInstance putBitmap(String key, Bitmap bitmap){
+      if (bitmap == null) {
+         throw new NullPointerException("要保存的图片为空！");
+      }
+      Log.i("xxx", "getBitmap" +mFileName);
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//      bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 //      addFrame(toRoundCorner(bitmap,20),10, Color.GREEN).compress(Bitmap.CompressFormat.PNG, 100, baos);
+      UtilsImage.addReflection(bitmap,50).compress(Bitmap.CompressFormat.PNG, 100, baos);
       String imageBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
       putString(key,imageBase64 );
       return this;
@@ -273,7 +294,8 @@ public final class UtilSP {
    public  Bitmap getBitmap(String key){
       String temp = getString(key);
       if (TextUtils.isEmpty(temp)) {
-         return null;
+         Log.i("xxx", "getBitmap" +mFileName);
+         throw new NullPointerException("没有找到与"+key+"匹配的键");
       }
       ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
       BitmapFactory.Options options = new BitmapFactory.Options();

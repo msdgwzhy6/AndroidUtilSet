@@ -12,7 +12,7 @@ import android.view.animation.AlphaAnimation;
  * Created by xu on 2017/3/2.
  */
 
-public class Utils {
+public final class Utils {
     public static void setViewAlphaAnimation(View view) {
         AlphaAnimation alphaAni = new AlphaAnimation(0.05f, 1.0f);
         alphaAni.setDuration(1000);            // 设置动画效果时间

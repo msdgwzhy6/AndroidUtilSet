@@ -14,16 +14,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-import com.smart.androidutils.BaseActivity;
+import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.view.WebViewNoAd;
 
-import static com.smart.androidutils.constant.ConstantUrl.urlMR;
+import static com.smart.androidutils.constant.ConMainUrl.urlMR;
 import static com.util.view.UtilWidget.getView;
 import static com.util.view.UtilWidget.setViewAlphaAnimation;
 
 
-public class NoAdActivity extends BaseActivity {
+public class NoAdCompatActivity extends BaseCompatActivity {
 
     private WebView mIdWebView;
     private Button mButtonOff;
@@ -46,6 +46,11 @@ public class NoAdActivity extends BaseActivity {
     @Override
     protected void initData() {
         mIdWebView.loadUrl(urlMR);
+
+    }
+
+    @Override
+    protected void bindDataToView() {
         setWebView(mIdWebView);
     }
 
@@ -146,7 +151,7 @@ public class NoAdActivity extends BaseActivity {
             public void onDownloadStart(String url, String s1, String s2, String s3, long l) {
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                NoAdActivity.this.startActivity(intent);
+                NoAdCompatActivity.this.startActivity(intent);
             }
         });
     }

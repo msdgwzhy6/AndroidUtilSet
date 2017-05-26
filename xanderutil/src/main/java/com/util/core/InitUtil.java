@@ -1,6 +1,5 @@
-package com.util;
+package com.util.core;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 /**
@@ -8,7 +7,7 @@ import android.content.Context;
 
  */
 
-public class InitUtil {
+public final class InitUtil {
     protected static Context context;
     /**
      * 初始化工具类

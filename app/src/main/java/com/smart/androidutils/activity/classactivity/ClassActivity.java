@@ -39,7 +39,7 @@ public class ClassActivity extends AppCompatActivity {
         Class clazz_for_name;
         try {
             Log.i("xxx", "-------------------------------------");
-            clazz_for_name = Class.forName("com.smart.androidutils.activity.classactivity.Person");
+            clazz_for_name = Class.forName("com.smart.androidutils.mActivity.classactivity.Person");
             Log.i("xxx", "通过forName(\"类名\")获取" + clazz_for_name.getName());
             Log.i("xxx", "-------------------------------------");
         } catch (ClassNotFoundException e) {
@@ -73,7 +73,7 @@ public class ClassActivity extends AppCompatActivity {
         Class clazz = null;
         try {
             //通过字节码文件对象，对指定类进行创建并初始化。
-            clazz = Class.forName("com.smart.androidutils.activity.classactivity.Person");
+            clazz = Class.forName("com.smart.androidutils.mActivity.classactivity.Person");
             Person p = (Person) clazz.newInstance();
             //通过对象调用成员
             //p.function("heihei");
@@ -95,7 +95,7 @@ public class ClassActivity extends AppCompatActivity {
         Class clazz = null;
         try {
             //通过字节码文件对象，对指定类进行创建并初始化。
-            clazz = Class.forName("com.smart.androidutils.activity.classactivity.Person");
+            clazz = Class.forName("com.smart.androidutils.mActivity.classactivity.Person");
             Person p = (Person) clazz.newInstance();
             //通过对象调用成员
             p.setAge(10);

@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConstantUrl.urlMR;
-import static com.smart.androidutils.constant.ConstantUrl.userAgent;
+import static com.smart.androidutils.constant.ConMainUrl.urlMR;
+import static com.smart.androidutils.constant.ConMainUrl.userAgent;
 
 /**
  * @author xander on  2017/5/25.

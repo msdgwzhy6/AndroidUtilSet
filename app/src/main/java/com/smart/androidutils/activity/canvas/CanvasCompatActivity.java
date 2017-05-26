@@ -2,7 +2,7 @@ package com.smart.androidutils.activity.canvas;
 
 import android.widget.GridView;
 
-import com.smart.androidutils.BaseActivity;
+import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
@@ -15,7 +15,7 @@ import java.util.List;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.ITEMS_CANVAS;
 import static com.util.view.UtilWidget.getView;
 
-public class CanvasActivity extends BaseActivity {
+public class CanvasCompatActivity extends BaseCompatActivity {
 
     private GridView mGridView;
     private List<BaseBean> mBaseBeanList;
@@ -42,6 +42,11 @@ public class CanvasActivity extends BaseActivity {
             baseBean.setName(ITEMS_CANVAS[i]);
             mBaseBeanList.add(baseBean);
         }
+
+    }
+
+    @Override
+    protected void bindDataToView() {
         mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,R.layout.main_grid_view_item,new CanvasViewHolderHeper(mXanderView)));
     }
 }

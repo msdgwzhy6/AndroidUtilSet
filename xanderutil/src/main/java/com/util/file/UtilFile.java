@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 import com.util.phone.UtilNet;
 
 import java.io.BufferedInputStream;

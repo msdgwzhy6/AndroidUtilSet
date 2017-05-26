@@ -6,13 +6,13 @@ import android.net.NetworkInfo;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.util.InitUtil;
+import com.util.core.InitUtil;
 
 /**
  * author xander on  2017/5/24.
  */
 
-public class UtilNet {
+public final class UtilNet {
     private static ConnectivityManager mConnectivityManager;
     private static NetworkInfo mActiveNetworkInfo;//当前正在活动的网络
 
