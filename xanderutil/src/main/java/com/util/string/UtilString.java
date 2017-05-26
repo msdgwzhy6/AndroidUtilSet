@@ -48,10 +48,8 @@ public final class UtilString {
 
     /**
      * 判断两字符串是否相等
-     *
      *  a 待校验字符串a
      *  b 待校验字符串b
-     * {true}: 相等<br>{false}: 不相等
      */
     public static boolean equals(CharSequence a, CharSequence b) {
         if (a == b) return true;
@@ -71,10 +69,8 @@ public final class UtilString {
 
     /**
      * 判断两字符串忽略大小写是否相等
-     *
      *  a 待校验字符串a
      *  b 待校验字符串b
-     * {true}: 相等<br>{false}: 不相等
      */
     public static boolean equalsIgnoreCase(String a, String b) {
         return a == null ? b == null : a.equalsIgnoreCase(b);

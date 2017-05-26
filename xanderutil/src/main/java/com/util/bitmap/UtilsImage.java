@@ -28,15 +28,12 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.view.View;
 
 import com.util.InitUtil;
 import com.util.file.UtilFile;
 import com.util.file.UtilsCloseIO;
-
-import org.jetbrains.annotations.Contract;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

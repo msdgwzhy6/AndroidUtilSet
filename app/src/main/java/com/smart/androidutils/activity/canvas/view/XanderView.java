@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -46,6 +46,7 @@ public class XanderView extends View implements IDrawType{
             tag = TAG_COLOR;
         }
         mPaint.reset();
+        canvas.save();
         //分发 绘制
         switch (tag){
             case TAG_LINE:
@@ -66,6 +67,7 @@ public class XanderView extends View implements IDrawType{
             default:
                 onDrawColor(canvas);
         }
+        canvas.restore();
     }
 
     @Override
@@ -73,7 +75,11 @@ public class XanderView extends View implements IDrawType{
         mPaint.setColor(Color.YELLOW);
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(10);
-        canvas.drawLine(200,200,200,300,mPaint);
+        canvas.drawLine(-10,170,200,170,mPaint);//这四个坐标全是相对于父容器的，如果小于0，则为0
+        canvas.drawLine(0,200,200,200,mPaint);
+        canvas.drawLine(10,220,210,220,mPaint);
+        canvas.drawLine(20,240,220,240,mPaint);
+        canvas.drawLine(30,260,230,260,mPaint);
     }
 
     @Override
@@ -113,17 +119,18 @@ public class XanderView extends View implements IDrawType{
 
     @Override
     public void onDrawText(Canvas canvas) {
-        Rect targetRect = new Rect(50, 50, 1000, 200);
+        RectF targetRect = new RectF(50, 50, 500, 200);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(3);
-        paint.setTextSize(80);
-        String testString = "测试：ijkJQKA:1234";
+        paint.setTextSize(20);
+        String testString = "第三个是啊大大大高档货大开大个的改善读过ijkJQKA:1234";
         paint.setColor(Color.CYAN);
-        canvas.drawRect(targetRect, paint);
+        canvas.drawRoundRect(targetRect,50,50, paint);
+//        canvas.drawRect(targetRect, paint);
         paint.setColor(Color.RED);
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         // 转载请注明出处：http://blog.csdn.net/hursing
-        int baseline = (targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
+        int baseline = (int) ((targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2);
         // 下面这行是实现水平居中，drawText对应改为传入targetRect.centerX()
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(testString, targetRect.centerX(), baseline, paint);

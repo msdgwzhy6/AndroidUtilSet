@@ -11,6 +11,7 @@ import com.smart.androidutils.activity.app.AppInfoActivity;
 import com.smart.androidutils.activity.canvas.CanvasActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
+import com.smart.androidutils.activity.file.FileActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
@@ -70,7 +71,7 @@ public class BaseGridViewHolderHelper implements CommonAdapter.IListHolderHelper
                     context.startActivity(new Intent(context, NoAdActivity.class));
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_file))) {
-                    context.startActivity(new Intent(context, NoAdActivity.class));
+                    context.startActivity(new Intent(context, FileActivity.class));
                 }
                 else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas))) {
                     context.startActivity(new Intent(context, CanvasActivity.class));
