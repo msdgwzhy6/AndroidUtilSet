@@ -37,29 +37,7 @@ public class PermissionActivity extends BaseCompatActivity{
 
     @Override
     protected void initData() {
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                , Manifest.permission.READ_PHONE_STATE
-                                , Manifest.permission.SEND_SMS)
-                /*以下为自定义提示语、按钮文字
-                .setDeniedMessage()
-                .setDeniedCloseBtn()
-                .setDeniedSettingBtn()
-                .setRationalMessage()
-                .setRationalBtn()*/
-                        .build(),
-                new RPListener() {
-                    @Override
-                    public void onGranted() {
-                        writeSD();
-                        getIMEI();
-                    }
 
-                    @Override
-                    public void onDenied(List<String> permissions) {
-                        makeText(permissions.toString() + "权限拒绝");
-                    }
-                });
 
     }
 
@@ -214,15 +192,59 @@ public class PermissionActivity extends BaseCompatActivity{
 //    }
 
     private void writeSD() {
-        File acpDir = getCacheDir("acp", this);
-        if (acpDir != null)
-            makeText("写SD成功：" + acpDir.getAbsolutePath());
+        RPermission.getInstance(this).request(new RPOptions.Builder()
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.SEND_SMS)
+                /*以下为自定义提示语、按钮文字
+                .setDeniedMessage()
+                .setDeniedCloseBtn()
+                .setDeniedSettingBtn()
+                .setRationalMessage()
+                .setRationalBtn()*/
+                        .build(),
+                new RPListener() {
+                    @Override
+                    public void onGranted() {
+                        File acpDir = getCacheDir("acp",PermissionActivity.this);
+                        if (acpDir != null)
+                            makeText("写SD成功：" + acpDir.getAbsolutePath());
+                        getIMEI();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        makeText(permissions.toString() + "权限拒绝");
+                    }
+                });
+
     }
 
     private void getIMEI() {
-        TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        if (tm != null)
-            makeText("读imei成功：" + tm.getDeviceId());
+        RPermission.getInstance(this).request(new RPOptions.Builder()
+                        .setPermissions(
+                                Manifest.permission.READ_PHONE_STATE
+                                , Manifest.permission.SEND_SMS)
+                /*以下为自定义提示语、按钮文字
+                .setDeniedMessage()
+                .setDeniedCloseBtn()
+                .setDeniedSettingBtn()
+                .setRationalMessage()
+                .setRationalBtn()*/
+                        .build(),
+                new RPListener() {
+                    @Override
+                    public void onGranted() {
+                        TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+                        if (tm != null)
+                            makeText("读imei成功：" + tm.getDeviceId());
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        makeText(permissions.toString() + "权限拒绝");
+                    }
+                });
+
     }
 
     public static File getCacheDir(String dirName, Context context) {
