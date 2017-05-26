@@ -23,8 +23,9 @@
         </activity>
         <activity android:name=".activity.reflect.ReflectActivity">
         </activity>
-        <activity android:name=".activity.file.FileActivity">
-        </activity>
+        <activity android:name=".activity.file.FileActivity"/>
+        <activity android:name=".BaseActivity"/>
+
         <activity android:name=".activity.device.DeviceActivity">
         </activity>
         <activity android:name=".activity.ad.NoAdActivity">
