@@ -8,7 +8,7 @@ import com.util.file.UtilSPSingleInstance;
 
 /**
  * author xander on  2017/5/26.
- * function
+ * function 为此封装SP工具类
  */
 
 public class Util {
