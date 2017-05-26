@@ -38,4 +38,9 @@
     <string name="canvas_line">"划线"</string>
     <string name="canvas_bitmap">位图</string>
     <string name="canvas_text">文字</string>
+
+    <!--view-->
+    <string name="view">widget</string>
+    <string name="view_more_text">文本展开和收起</string>
+
 </resources>

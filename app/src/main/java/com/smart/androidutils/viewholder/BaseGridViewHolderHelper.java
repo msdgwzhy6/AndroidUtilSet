@@ -16,6 +16,8 @@ import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.BaseBean;
+import com.smart.androidutils.activity.widget.MoreTextActivity;
+import com.smart.androidutils.activity.widget.WidgetActivity;
 import com.util.dialog.DialogCustom;
 import com.util.phone.UitlDevice;
 import com.util.phone.UtilNet;
@@ -33,10 +35,13 @@ import static com.util.view.UtilWidget.getView;
 
 /**
  * Created by smart on 2017/5/17.
+ * 1、在文本末尾，实现点击“展开”---展开所有文本，并把“展开”改为“收起”；点击“收起”，则收起文本；
+ * 2、“展开”和“收起”紧跟文本末尾。并且不换行。
  */
 
 public class BaseGridViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
     private Activity activity ;
+    protected String mItemName;
     @Override
     public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder,
                                                         View convertView) {
@@ -51,68 +56,77 @@ public class BaseGridViewHolderHelper implements CommonAdapter.IListHolderHelper
         if (activity == null) {
             activity = (Activity) context;
         }
-        viewHolder.mNameText.setText(iBaseBeanList.get(position).getName());
+        mItemName = iBaseBeanList.get(position).getName();
+        viewHolder.mNameText.setText(mItemName);
         viewHolder.mNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_sp))) {
+                mItemName = iBaseBeanList.get(position).getName();
+                if (mItemName.equals(context.getResources().getString(R.string.act_sp))) {
                         context.startActivity(new Intent(context, SPActivity.class));
-                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_spider))) {
+                }else if (mItemName.equals(context.getResources().getString(R.string.act_spider))) {
                         context.startActivity(new Intent(context, SpiderActivity.class));
-                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_class))) {
+                }else if (mItemName.equals(context.getResources().getString(R.string.act_class))) {
                         context.startActivity(new Intent(context, ClassActivity.class));
-                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_reflect))) {
+                }else if (mItemName.equals(context.getResources().getString(R.string.act_reflect))) {
                         context.startActivity(new Intent(context, ReflectActivity.class));
-                }else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_device))) {
+                }else if (mItemName.equals(context.getResources().getString(R.string.act_device))) {
                     context.startActivity(new Intent(context, DeviceActivity.class));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_no_ad_off))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.act_no_ad_off))) {
                     context.startActivity(new Intent(context, NoAdActivity.class));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.act_file))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.act_file))) {
                     context.startActivity(new Intent(context, FileActivity.class));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.canvas))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.canvas))) {
                     context.startActivity(new Intent(context, CanvasActivity.class));
                 }
 
                 //设备相关的事件处理
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_wifi_availalbe))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_wifi_availalbe))) {
                     viewHolderToast(String.valueOf(UtilNet.isWifiAvailable()));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_wifi_connect))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_wifi_connect))) {
                     viewHolderToast(String.valueOf(UtilNet.isWifiConnected()));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_available_memory))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_available_memory))) {
                     viewHolderToast(getAvailMemory());
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_total_memory))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_total_memory))) {
                     viewHolderToast(getTotalMemory());
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_sd_total_size))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_sd_total_size))) {
                     viewHolderToast(getSDTotalSize());
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.device_sd_available_size))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.device_sd_available_size))) {
                     viewHolderToast(getSDAvailableSize());
                 }
                 //手机卡相关的事件处理
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_state))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.telephony_state))) {
                     viewHolderToast(UitlDevice.getPhoneStatus(),10000);
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_sim_support_net))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.telephony_sim_support_net))) {
                     viewHolderToast(String.valueOf(UtilNet.isMobileNetAvailable()));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_sim_net_type))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.telephony_sim_net_type))) {
                     viewHolderToast(getMobileNetType());
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.telephony_sim_net_connect))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.telephony_sim_net_connect))) {
                     viewHolderToast(String.valueOf(isMobileConnected()));
                 }
-                else if (viewHolder.mNameText.getText().toString().equals(context.getResources().getString(R.string.app_list_info))) {
+                else if (mItemName.equals(context.getResources().getString(R.string.app_list_info))) {
                     context.startActivity(new Intent(context, AppInfoActivity.class));
                 }
-
+                /*
+                * ViewActivity的相关操作
+                * */
+                else if (mItemName.equals(context.getResources().getString(R.string.view))) {
+                    context.startActivity(new Intent(context, WidgetActivity.class));
+                }
+                else if (mItemName.equals(context.getResources().getString(R.string.view_more_text))) {
+                    context.startActivity(new Intent(context, MoreTextActivity.class));
+                }
             }
         });
     }

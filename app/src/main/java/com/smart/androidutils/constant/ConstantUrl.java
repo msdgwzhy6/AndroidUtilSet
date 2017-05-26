@@ -1,8 +1,8 @@
 package com.smart.androidutils.constant;
 
 /**
- * @author xander on  2017/5/22.
- * @function
+ * author xander on  2017/5/22.
+ * function
  */
 
 public class ConstantUrl {

@@ -1,48 +1,51 @@
 package com.smart.androidutils;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.GridView;
-
 import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
-import com.util.InitUtil;
 import com.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.smart.androidutils.constant.ConstantData.ITEMS_MAIN;
 import static com.util.view.UtilWidget.getView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private GridView mGridView;
-    private List<BaseBean> mBaseBeanList;
+    protected String [] mItems;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        InitUtil.init(this);
-        initView();
-        initData();
-        setTitle("操作面板");
+    protected int initLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void setActivityTitle() {
+        mAvtivitytTitle = "操作面板";
+    }
+
+    @Override
+    protected void initView() {
+        mGridView = getView(this,R.id.main_grif_view);
+    }
+
+    @Override
+    protected void initData() {
+        mBaseBeanList = new ArrayList<>();
+        setItems();
+        BaseBean baseBean;
+        for (int i = 0; i < mItems.length; i++) {
+            baseBean = new BaseBean();
+            baseBean.setName(mItems[i]);
+            mBaseBeanList.add(baseBean);
+        }
         mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,
                 R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
     }
 
 
 
-    private void initView() {
-        mGridView = getView(this,R.id.main_grif_view);
+    protected void setItems() {
+        mItems = ITEMS_MAIN;
     }
-    private void initData() {
 
-        BaseBean baseBean;
-        mBaseBeanList = new ArrayList<>();
-        for (int i = 0; i < ITEMS_MAIN.length; i++) {
-            baseBean = new BaseBean();
-            baseBean.setName(ITEMS_MAIN[i]);
-            mBaseBeanList.add(baseBean);
-        }
-    }
 }

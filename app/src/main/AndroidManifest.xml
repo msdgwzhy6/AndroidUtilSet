@@ -3,6 +3,7 @@
           package="com.smart.androidutils">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ios"
         android:label="@string/app_name"
@@ -25,7 +26,6 @@
         </activity>
         <activity android:name=".activity.file.FileActivity"/>
         <activity android:name=".BaseActivity"/>
-
         <activity android:name=".activity.device.DeviceActivity">
         </activity>
         <activity android:name=".activity.ad.NoAdActivity">
@@ -33,6 +33,10 @@
         <activity android:name=".activity.app.AppInfoActivity">
         </activity>
         <activity android:name=".activity.canvas.CanvasActivity">
+        </activity>
+        <activity android:name=".activity.widget.WidgetActivity">
+        </activity>
+        <activity android:name=".activity.widget.MoreTextActivity">
         </activity>
     </application>
 
