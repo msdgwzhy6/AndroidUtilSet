@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.smart.androidutils">
-
+    package="com.smart.androidutils">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,36 +16,27 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SplashCompatActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainCompatActivity">
-        </activity>
-        <activity android:name=".activity.sharepreference.SPCompatActivity">
-        </activity>
-        <activity android:name=".activity.spider.view.SpiderCompatActivity">
-        </activity>
-        <activity android:name=".activity.classactivity.ClassActivity">
-        </activity>
-        <activity android:name=".activity.reflect.ReflectActivity">
-        </activity>
-        <activity android:name=".activity.file.FileCompatActivity"/>
-        <activity android:name=".BaseCompatActivity"/>
-        <activity android:name=".activity.device.DeviceActivity">
-        </activity>
-        <activity android:name=".activity.ad.NoAdCompatActivity">
-        </activity>
-        <activity android:name=".activity.app.AppInfoCompatActivity">
-        </activity>
-        <activity android:name=".activity.canvas.CanvasCompatActivity">
-        </activity>
-        <activity android:name=".activity.widget.WidgetCompatActivity">
-        </activity>
-        <activity android:name=".activity.widget.MoreTextCompatActivity"/>
-        <activity android:name=".activity.screen.ScreenActivity">
-        </activity>
+        <activity android:name=".MainCompatActivity" />
+        <activity android:name=".activity.sharepreference.SPCompatActivity" />
+        <activity android:name=".activity.spider.view.SpiderCompatActivity" />
+        <activity android:name=".activity.classactivity.ClassActivity" />
+        <activity android:name=".activity.reflect.ReflectActivity" />
+        <activity android:name=".activity.file.FileCompatActivity" />
+        <activity android:name=".BaseCompatActivity" />
+        <activity android:name=".activity.device.DeviceActivity" />
+        <activity android:name=".activity.ad.NoAdCompatActivity" />
+        <activity android:name=".activity.app.AppInfoCompatActivity" />
+        <activity android:name=".activity.canvas.CanvasCompatActivity" />
+        <activity android:name=".activity.widget.WidgetCompatActivity" />
+        <activity android:name=".activity.widget.MoreTextCompatActivity" />
+        <activity android:name=".activity.screen.ScreenActivity" />
+        <activity android:name=".activity.permission.PermissionActivity" />
+        <activity android:name=".activity.permission.BlankActivity"></activity>
     </application>
 
 </manifest>

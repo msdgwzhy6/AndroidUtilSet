@@ -50,4 +50,8 @@
     <string name="screen_hide_titlt_bar">隐藏标题栏</string>
     <string name="screen_hide_navigation_bar">隐藏导航栏</string>
     <string name="screen_capture_without_status_bar">截图不含状态栏</string>
+
+    <!--权限-->
+    <string name="permission">运行时权限</string>
+    <string name="hello_blank_fragment">点我试试imei权限</string>
 </resources>

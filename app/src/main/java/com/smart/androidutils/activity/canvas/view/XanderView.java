@@ -111,11 +111,11 @@ public class XanderView extends View implements IDrawType{
 
     @Override
     public void onDrawBitmap(Canvas canvas) {
-        Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
+       /* Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
                 .initSPFileName("cut")
                 .getBitmap(UtilEncript.getMD5("cut"));
-        assert bitmap != null;
-        canvas.drawBitmap(getBitmapDefault("cut"), 200, 200, null);
+        assert bitmap != null;*/
+        canvas.drawBitmap(getBitmapDefault("cut"), 0, 0, null);
     }
 
     @Override

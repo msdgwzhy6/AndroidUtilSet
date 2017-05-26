@@ -13,6 +13,7 @@ public class ConMain {
             InitUtil.getContext().getString(R.string.act_sp),
             InitUtil.getContext().getString(R.string.act_spider),
             InitUtil.getContext().getString(R.string.act_class),
+            InitUtil.getContext().getString(R.string.permission),
             InitUtil.getContext().getString(R.string.act_reflect),
             InitUtil.getContext().getString(R.string.screen),
             InitUtil.getContext().getString(R.string.act_device),
