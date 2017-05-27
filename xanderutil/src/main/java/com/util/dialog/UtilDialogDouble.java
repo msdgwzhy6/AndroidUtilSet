@@ -233,8 +233,6 @@ public class UtilDialogDouble extends Dialog {
            throw new NullPointerException("使用 UtilDialogDouble 时，消息不能为空！");
         }
         messageTv.setText(messageStr);
-        Log.i("xxx", "setMessageView" +messageStr);
-        Log.i("xxx", "setMessageView" +messageTv.getText().toString());
         messageTv.setGravity(Gravity.CENTER);
         //设置文字颜色
         if (messageTextSize != 0) {
