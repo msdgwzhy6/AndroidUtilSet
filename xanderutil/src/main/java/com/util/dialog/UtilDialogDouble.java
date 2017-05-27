@@ -514,7 +514,7 @@ public class UtilDialogDouble extends Dialog {
     /**
      * 设置按钮
      */
-    public UtilDialogDouble setDoubleBtnTextLR(String leftBtnStr, String rightBtnStr) {
+    public UtilDialogDouble setDoubleBtnText(String leftBtnStr, String rightBtnStr) {
         this.leftBtnStr = leftBtnStr;
         this.rightBtnStr = rightBtnStr;
         return this;
@@ -544,10 +544,6 @@ public class UtilDialogDouble extends Dialog {
             rightBtnDrawable = res.getDrawable(rightBtnDrawableId);
         }
 
-        return this;
-    }
-    public UtilDialogDouble setSingleBtnBackgroungRes(int leftBtnDrawableId) {
-        rightBtnDrawable = res.getDrawable(leftBtnDrawableId);
         return this;
     }
 

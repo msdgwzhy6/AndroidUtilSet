@@ -23,7 +23,7 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.dialog_double))) {
-            new UtilDialogDouble(mActivity).setDoubleBtnTextLR("取消", "确定")
+            new UtilDialogDouble(mActivity).setDoubleBtnText("取消", "确定")
                     .setTitle("设置了背景色")
 //                    .setTitleBackgroundResId(R.drawable.title_bg)
                     .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
