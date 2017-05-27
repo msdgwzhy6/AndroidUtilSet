@@ -25,64 +25,8 @@
             android:layout_height="1dp"
             android:background="@color/title_msg_line"/>
     </LinearLayout>
-    <ScrollView
-        android:id="@+id/scroll_view_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/message_defaule_bg"
-        android:scrollbars="none"
-        >
-        <TextView
-            android:id="@+id/message_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:text="@string/dialog_message" />
-    </ScrollView>
-    <LinearLayout
-        android:id="@+id/ll_btn"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#E4E4E4" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <Button
-                android:id="@+id/btn_left"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/left_btn_bg"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="取消"
-                android:layout_marginRight="0.5dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#E4E4E4" />
-            <Button
-                android:id="@+id/btn_right"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="0.5dp"
-                android:background="@drawable/rihgt_btn_bg"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="确定"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
 
-    </LinearLayout>
+    <include layout="@layout/dialog_message_layout"/>
+
+    <include layout="@layout/dialog_double_button_layout"/>
 </LinearLayout>

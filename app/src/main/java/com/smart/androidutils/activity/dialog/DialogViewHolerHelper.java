@@ -1,13 +1,14 @@
 package com.smart.androidutils.activity.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
 
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.CommonViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.dialog.OnDoubleBtnClickedListener;
 import com.util.dialog.UtilDialogDouble;
+import com.util.dialog.OnDoubleBtnClickedListener;
 
 import java.util.List;
 
@@ -23,19 +24,18 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.dialog_double))) {
-            new UtilDialogDouble(mActivity).setDoubleBtnText("取消", "确定")
+            UtilDialogDouble utilDialogDouble = (UtilDialogDouble) new UtilDialogDouble(mActivity)
+                    .setDoubleBtnText("取消", "确定")
                     .setTitle("设置了背景色")
-//                    .setTitleBackgroundResId(R.drawable.title_bg)
                     .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
-                    .setOutsideClickable(true)
-//                    .setMessageHight(50)
-                    .setOnDoubleBtnClickedListener(new OnDoubleBtnClickedListener() {
+                    .setOutsideClickable(true);
+            utilDialogDouble.setOnDoubleBtnClickedListener(new OnDoubleBtnClickedListener() {
                         @Override
-                        public void onLeftBtnClick(UtilDialogDouble utilDialogDouble) {
+                        public void onLeftBtnClick(Dialog utilDialogDouble) {
                             utilDialogDouble.dismiss();
                         }
                         @Override
-                        public void onRightBtnClick(UtilDialogDouble utilDialogDouble) {
+                        public void onRightBtnClick(Dialog utilDialogDouble) {
                              utilDialogDouble.dismiss();
                         }
                     }).show();
