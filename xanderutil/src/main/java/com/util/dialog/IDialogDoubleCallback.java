@@ -5,6 +5,6 @@ package com.util.dialog;
  * function
  */
 
-interface IDialogDoubleCallback extends IDialogCallback {
+interface IDialogDoubleCallback {
 
 }
