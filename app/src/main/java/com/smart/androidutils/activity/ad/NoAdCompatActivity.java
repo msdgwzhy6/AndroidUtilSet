@@ -31,7 +31,7 @@ public class NoAdCompatActivity extends BaseCompatActivity {
 
     @Override
     protected int initLayout() {
-        setTitle(getResources().getString(R.string.act_no_ad_off));
+        setTitle(getResources().getString(R.string.control_no_ad_off));
         return R.layout.activity_no_ad;
 
     }
@@ -61,7 +61,7 @@ public class NoAdCompatActivity extends BaseCompatActivity {
             @Override
             public void onClick(final View v) {
                 setViewAlphaAnimation(mButtonOff);
-                setTitle(getResources().getString(R.string.act_no_ad_off));
+                setTitle(getResources().getString(R.string.control_no_ad_off));
                 mIdWebView.loadUrl(urlMR);
             }
         });
@@ -69,7 +69,7 @@ public class NoAdCompatActivity extends BaseCompatActivity {
             @Override
             public void onClick(final View v) {
                 setViewAlphaAnimation(mButtonOn);
-                setTitle(getResources().getString(R.string.act_no_ad_on));
+                setTitle(getResources().getString(R.string.control_no_ad_on));
                 new WebViewNoAd(mIdWebView,"gb2312").execute(urlMR);
             }
         });

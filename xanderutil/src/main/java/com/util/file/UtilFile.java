@@ -348,7 +348,7 @@ public final class  UtilFile {
 
 
     /**
-     * Establish the HTTP request and get the bitmap object
+     * Establish the HTTP initPermission and get the bitmap object
      *  urlString  URL of the picture
      *   Parsed bitmap object
      */

@@ -2,9 +2,10 @@ package com.util.permission;
 
 /**
  * author xander on  2017/5/23.
+ * 权限类型
  */
 
-public final class RPOptions {
+public final class PermissionTypes {
     private String mRationalMessage;
     private String mDeniedMessage;
     private String mDeniedCloseBtn;
@@ -12,7 +13,7 @@ public final class RPOptions {
     private String mRationalBtn;
     private String[] mPermissions;
 
-    private RPOptions(Builder builder) {
+    private PermissionTypes(Builder builder) {
         mRationalMessage = builder.mRationalMessage;
         mDeniedMessage = builder.mDeniedMessage;
         mDeniedCloseBtn = builder.mDeniedCloseBtn;
@@ -115,20 +116,17 @@ public final class RPOptions {
 
         /**
          * 需要申请的权限
-         *
-         * @param mPermissions {@linkplain android.Manifest.permission android.Manifest.permission}
-         * @return
          */
-        public Builder setPermissions(String... mPermissions) {
+        public Builder setPermissionTypes(String... mPermissions) {
             this.mPermissions = mPermissions;
             return this;
         }
 
-        public RPOptions build() {
+        public PermissionTypes build() {
             if (this.mPermissions == null || this.mPermissions.length == 0) {
                 throw new IllegalArgumentException("mPermissions no found...");
             }
-            return new RPOptions(this);
+            return new PermissionTypes(this);
         }
     }
 }

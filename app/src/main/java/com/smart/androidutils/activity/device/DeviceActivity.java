@@ -12,7 +12,7 @@ import com.util.viewholder.CommonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConMain.ITEMS_DEVICE;
+import static com.smart.androidutils.constant.ConMainItem.ITEMS_DEVICE;
 import static com.util.view.UtilWidget.getView;
 
 public class DeviceActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class DeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle(getString(R.string.act_device));
+        setTitle(getString(R.string.phone));
         mGridView = getView(this,R.id.main_grif_view);
         initData();
         mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,

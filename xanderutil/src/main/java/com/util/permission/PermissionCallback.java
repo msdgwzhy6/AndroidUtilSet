@@ -6,7 +6,7 @@ import java.util.List;
  * author xander on  2017/5/23.
  */
 
-public interface RPListener {
+public interface PermissionCallback {
     /**
      *同意
      */

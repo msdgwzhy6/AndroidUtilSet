@@ -25,7 +25,6 @@ public class ScreenViewHolderHelper extends CommonViewHolderHelper {
 
     @Override
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
-        super.setOnItemViewClickedCallback(context, iBaseBeanList, viewHolder, position);
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.screen_capture_without_status_bar))) {
             Bitmap bitmap = UtilScreen.captureWithoutStatusBar(mActivity);
@@ -35,7 +34,7 @@ public class ScreenViewHolderHelper extends CommonViewHolderHelper {
             }
             putBitmapDefault("cut",bitmap);
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_spider))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_spider))) {
             context.startActivity(new Intent(context, SpiderCompatActivity.class));
         }
     }

@@ -40,8 +40,17 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
      * 设置activity的标题
      */
     protected void setActivityTitle() {    }
+    /*
+    * 初始化布局
+    * */
     protected abstract int initLayout() ;
+    /*
+    * 初始化view
+    * */
     protected abstract void initView();
+    /*
+    * 初始化数据
+    * */
     protected abstract void initData();
 
 

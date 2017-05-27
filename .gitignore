@@ -1,4 +1,3 @@
-*.iml
 .gradle
 /local.properties
 /.idea
@@ -7,3 +6,4 @@
 /captures
 .externalNativeBuild
 src/main/res/drawable/
+app/src/main/res/drawable/

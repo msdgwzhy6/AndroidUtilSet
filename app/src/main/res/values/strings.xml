@@ -1,30 +1,33 @@
 <resources>
+    
     <string name="app_name">Apple</string>
-    <string name="act_sp">SP测试</string>
-    <string name="act_spider">爬虫</string>
-    <string name="act_class">Class测试</string>
-    <string name="act_sp1">Android</string>
-    <string name="act_device">手机信息</string>
-    <string name="act_reflect">反射</string>
-    <string name="act_no_ad_off">原页面</string>
-    <string name="act_no_ad_on">去广告</string>
-    <string name="act_file">文件类</string>
+    <!--控制面板-->
+    <string name="control">控制面板</string>
+    <string name="control_sp">SP测试</string>
+    <string name="control_spider">爬虫</string>
+    <string name="control_class">Class测试</string>
+
+    <string name="control_reflect">反射</string>
+    <string name="control_no_ad_off">原页面</string>
+    <string name="control_no_ad_on">去广告</string>
+    <string name="control_file">文件类</string>
 
     <!--手机卡信息-->
+    <string name="phone">手机信息</string>
     <string name="telephony_state">"获取手机状态信息"</string>
     <string name="telephony_sim_net_type">"SIM卡的网络类型"</string>
     <string name="telephony_sim_support_net">"Sim卡是否支持联网"</string>
     <string name="telephony_sim_net_connect">"Sim卡是否联网"</string>
 
     <!--设备信息-->
-    <string name="device_wifi_availalbe">"是否支持WiFi"</string>
-    <string name="device_wifi_connect">"WiFi 是否连接"</string>
+    <string name="phone_wifi_availalbe">"是否支持WiFi"</string>
+    <string name="phone_wifi_connect">"WiFi 是否连接"</string>
 
-    <string name="device_available_memory">"手机当前可用内存"</string>
-    <string name="device_total_memory">"手机总内存"</string>
+    <string name="phone_available_memory">"手机当前可用内存"</string>
+    <string name="phone_total_memory">"手机总内存"</string>
 
-    <string name="device_sd_total_size">"手机SD卡总大小"</string>
-    <string name="device_sd_available_size">"手机SD卡可用空间"</string>
+    <string name="phone_sd_total_size">"手机SD卡总大小"</string>
+    <string name="phone_sd_available_size">"手机SD卡可用空间"</string>
 
     <!--App -->
     <string name="app_list_info">"App列表"</string>
@@ -42,7 +45,7 @@
     <!--view-->
     <string name="view">widget</string>
     <string name="view_more_text">文本展开和收起</string>
-    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_controlivity_base">BaseActivity</string>
 
     <!--screen-->
     <string name="screen">屏幕</string>
@@ -54,4 +57,11 @@
     <!--权限-->
     <string name="permission">运行时权限</string>
     <string name="hello_blank_fragment">点我试试imei权限</string>
+
+    <!--对话框-->
+    <string name="dialog">对话框</string>
+    <string name="dialog_double">两个按钮</string>
+    <string name="dialog_single">单个按钮</string>
+    <string name="dialog_download">下载对话框</string>
+    <string name="dialog_toast">弹窗</string>
 </resources>

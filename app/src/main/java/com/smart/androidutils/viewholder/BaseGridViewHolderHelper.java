@@ -11,6 +11,7 @@ import com.smart.androidutils.activity.app.AppInfoCompatActivity;
 import com.smart.androidutils.activity.canvas.CanvasCompatActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
+import com.smart.androidutils.activity.dialog.DialogActivity;
 import com.smart.androidutils.activity.file.FileCompatActivity;
 import com.smart.androidutils.activity.permission.PermissionActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
@@ -40,30 +41,29 @@ import static com.util.phone.UtilNet.isMobileConnected;
 public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
     @Override
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
-        super.setOnItemViewClickedCallback(context, iBaseBeanList, viewHolder, position);
         mItemName = iBaseBeanList.get(position).getName();
-        if (mItemName.equals(context.getResources().getString(R.string.act_sp))) {
+        if (mItemName.equals(context.getResources().getString(R.string.control_sp))) {
             context.startActivity(new Intent(context, SPCompatActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_spider))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_spider))) {
             context.startActivity(new Intent(context, SpiderCompatActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_class))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_class))) {
             context.startActivity(new Intent(context, ClassActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_reflect))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_reflect))) {
             context.startActivity(new Intent(context, ReflectActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_device))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone))) {
             context.startActivity(new Intent(context, DeviceActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_no_ad_off))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_no_ad_off))) {
             context.startActivity(new Intent(context, NoAdCompatActivity.class));
         }
         else if (mItemName.equals(context.getResources().getString(R.string.screen))) {
             context.startActivity(new Intent(context, ScreenActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.act_file))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.control_file))) {
             context.startActivity(new Intent(context, FileCompatActivity.class));
         }
         else if (mItemName.equals(context.getResources().getString(R.string.canvas))) {
@@ -71,22 +71,22 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         }
 
         //设备相关的事件处理
-        else if (mItemName.equals(context.getResources().getString(R.string.device_wifi_availalbe))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_wifi_availalbe))) {
             viewHolderToast(String.valueOf(UtilNet.isWifiAvailable()));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.device_wifi_connect))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_wifi_connect))) {
             viewHolderToast(String.valueOf(UtilNet.isWifiConnected()));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.device_available_memory))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_available_memory))) {
             viewHolderToast(getAvailMemory());
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.device_total_memory))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_total_memory))) {
             viewHolderToast(getTotalMemory());
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.device_sd_total_size))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_sd_total_size))) {
             viewHolderToast(getSDTotalSize());
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.device_sd_available_size))) {
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_sd_available_size))) {
             viewHolderToast(getSDAvailableSize());
         }
         //手机卡相关的事件处理
@@ -120,5 +120,14 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         else if (mItemName.equals(context.getResources().getString(R.string.permission))) {
             context.startActivity(new Intent(context, PermissionActivity.class));
         }
+
+       /*
+       *  对话框
+       *  */
+        else if (mItemName.equals(context.getResources().getString(R.string.dialog))) {
+            context.startActivity(new Intent(context, DialogActivity.class));
+        }
+
+
     }
 }

@@ -8,15 +8,23 @@ import com.util.viewholder.CommonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConMain.ITEMS_MAIN;
+import static com.smart.androidutils.constant.ConMainItem.ITEMS_MAIN;
 import static com.util.view.UtilWidget.getView;
 
+
+/*
+* 网格或者列表的具有这样的特征 只有一个按钮且按钮只有文字的时候
+* */
 public class MainCompatActivity extends BaseCompatActivity {
 
     protected String [] mItemsData;
-    protected boolean mSetAdapter;
     protected List<BaseBean> mBaseBeanList;
 
+    /*
+    * 如果子类需要使用自己的 ViewHolderHelper
+    * 只需在初始化数据的时候 新建一个自己的实例即可
+    * */
+    protected CommonViewHolderHelper mUseSelfViewHolderHelper;
     protected GridView mGridView;
 
     @Override
@@ -37,6 +45,7 @@ public class MainCompatActivity extends BaseCompatActivity {
     @Override
     protected void initData() {
         mBaseBeanList = new ArrayList<>();
+        mUseSelfViewHolderHelper = new BaseGridViewHolderHelper();
         setItems();
         BaseBean baseBean;
         for (int i = 0; i < mItemsData.length; i++) {
@@ -44,22 +53,15 @@ public class MainCompatActivity extends BaseCompatActivity {
             baseBean.setName(mItemsData[i]);
             mBaseBeanList.add(baseBean);
         }
-
+        if (mBaseBeanList == null) {
+            throw new NullPointerException("mBaseBeanList should not to be null");
+        }
     }
 
     @Override
     protected void bindDataToView() {
-        if (mSetAdapter) {
-            setAdapter();
-        }else {
-            mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,
-                    R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
-        }
+        mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,R.layout.main_grid_view_item, mUseSelfViewHolderHelper));
     }
-
-    protected void setAdapter(){
-    }
-
 
     protected void setItems() {
         mItemsData = ITEMS_MAIN;

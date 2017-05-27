@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.widget;
 
 import com.smart.androidutils.MainCompatActivity;
-import com.smart.androidutils.constant.ConMain;
+import com.smart.androidutils.constant.ConMainItem;
 
 public class WidgetCompatActivity extends MainCompatActivity {
 
@@ -14,6 +14,6 @@ public class WidgetCompatActivity extends MainCompatActivity {
     @Override
     protected void setItems() {
         super.setItems();
-        mItemsData = ConMain.ITEMS_VIEW;
+        mItemsData = ConMainItem.ITEMS_VIEW;
     }
 }

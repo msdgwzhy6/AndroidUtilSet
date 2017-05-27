@@ -148,7 +148,7 @@ public final class UtilSPOnlyPead {
    public  Bitmap getBitmap(String key){
       String temp = getString(key);
       if (TextUtils.isEmpty(temp)) {
-         Log.i("xxx", "getBitmap" +mFileName);
+//         Log.i("xxx", "getBitmap" +mFileName);
          throw new NullPointerException("没有找到与"+key+"匹配的键");
       }
       ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));

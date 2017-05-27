@@ -29,7 +29,7 @@ public class ClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class);
         ButterKnife.bind(this);
-        setTitle(getResources().getString(R.string.act_class));
+        setTitle(getResources().getString(R.string.control_class));
     }
 
 

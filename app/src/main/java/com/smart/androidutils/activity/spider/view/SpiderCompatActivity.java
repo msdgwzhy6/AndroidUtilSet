@@ -32,7 +32,7 @@ public class SpiderCompatActivity extends BaseCompatActivity implements IHandleH
 
     @Override
     protected void initData() {
-        setTitle(getResources().getString(R.string.act_spider));
+        setTitle(getResources().getString(R.string.control_spider));
         getData();
     }
 

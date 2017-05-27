@@ -28,7 +28,6 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.annotation.IntRange;
 import android.view.View;
 
 import com.util.core.InitUtil;
@@ -1441,7 +1440,7 @@ public final class UtilsImage {
      *  quality 质量
      *  质量压缩后的图片
      */
-    public static Bitmap compressByQuality(Bitmap src, @IntRange(from = 0, to = 100) int quality) {
+    public static Bitmap compressByQuality(Bitmap src, int quality) {
         return compressByQuality(src, quality, false);
     }
 
@@ -1453,7 +1452,7 @@ public final class UtilsImage {
      *  recycle 是否回收
      *  质量压缩后的图片
      */
-    public static Bitmap compressByQuality(Bitmap src, @IntRange(from = 0, to = 100) int quality, boolean recycle) {
+    public static Bitmap compressByQuality(Bitmap src,  int quality, boolean recycle) {
         if (isEmptyBitmap(src)) return null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         src.compress(Bitmap.CompressFormat.JPEG, quality, baos);

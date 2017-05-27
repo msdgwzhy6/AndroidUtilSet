@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
-import com.util.dialog.DialogCustom;
 import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
@@ -42,17 +41,17 @@ public class SpiderViewHolderHelper implements CommonAdapter.IListHolderHelperCa
 
     }
     private void viewHolderToast(String msg, int time) {
-        new DialogCustom(mActivity)
+        /*new UtilDialogDouble(mActivity)
                 .setToast(msg,time)
                 .setToastDrawableId(R.drawable.dialog_bg)
                 .setOutsideClickable(true)
-                .show();
+                .show();*/
     }
 
     private void viewHolderToast(String msg) {
-        new DialogCustom(mActivity)
+       /* new UtilDialogDouble(mActivity)
                 .setToast(msg,5000)
                 .setToastDrawableId(R.drawable.dialog_bg)
-                .show();
+                .show();*/
     }
 }

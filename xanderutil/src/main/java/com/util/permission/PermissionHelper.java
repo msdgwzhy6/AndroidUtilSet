@@ -13,6 +13,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,52 +21,47 @@ import java.util.Set;
 
 /**
  * author xander on  2017/5/23.
+ * 权限帮助类
  */
 
-class RPManager {
-    private static final String TAG = "RPManager";
+class PermissionHelper {
+    private static final String TAG = "PermissionHelper";
     private static final int REQUEST_CODE_PERMISSION = 0x38;
     private static final int REQUEST_CODE_SETTING = 0x39;
-    private Context mContext;
     private Activity mActivity;
-    private RPService mService;
-    private RPOptions mOptions;
-    private RPListener mCallback;
+    private PermissionTypes mOptions;
+    private PermissionCallback mCallback;
     private final List<String> mDeniedPermissions = new LinkedList<>();
     private final Set<String> mManifestPermissions = new HashSet<>(1);
 
-    RPManager(Context context) {
-        mContext = context;
-        mService = new RPService();
+    PermissionHelper(Activity activity) {
+        mActivity = activity;
         getManifestPermissions();
     }
 
     private synchronized void getManifestPermissions() {
         PackageInfo packageInfo = null;
         try {
-            packageInfo = mContext.getPackageManager().getPackageInfo(
-                    mContext.getPackageName(), PackageManager.GET_PERMISSIONS);
+            packageInfo = mActivity.getPackageManager().getPackageInfo(
+                    mActivity.getPackageName(), PackageManager.GET_PERMISSIONS);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         if (packageInfo != null) {
             String[] permissions = packageInfo.requestedPermissions;
             if (permissions != null) {
-                for (String perm : permissions) {
-                    mManifestPermissions.add(perm);
-                }
+                Collections.addAll(mManifestPermissions, permissions);
             }
         }
     }
 
     /**
      * 开始请求
-     *
      *  options
-     *  RPListener
+     *  permissionCallback
      */
-    synchronized void request(RPOptions options, RPListener RPListener) {
-        mCallback = RPListener;
+    synchronized void request(PermissionTypes options, PermissionCallback permissionCallback) {
+        mCallback = permissionCallback;
         mOptions = options;
         checkSelfPermission();
     }
@@ -86,7 +82,7 @@ class RPManager {
         for (String permission : permissions) {
             //检查申请的权限是否在 AndroidManifest.xml 中
             if (mManifestPermissions.contains(permission)) {
-                int checkSelfPermission = mService.checkSelfPermission(mContext, permission);
+                int checkSelfPermission = checkSelfPermission(mActivity, permission);
                 Log.i(TAG, "checkSelfPermission = " + checkSelfPermission);
                 //如果是拒绝状态则装入拒绝集合中
                 if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {
@@ -109,14 +105,14 @@ class RPManager {
      * 启动处理权限过程的 Activity
      */
     private synchronized void startAcpActivity() {
-        Intent intent = new Intent(mContext, RPActivity.class);
+        Intent intent = new Intent(mActivity, PermissionActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        mActivity.startActivity(intent);
     }
 
     /**
-     * 检查权限是否存在拒绝不再提示
-     *
+     * 检查权限是否存在
+     * 拒绝不再提示
      *  activity
      */
     synchronized void checkRequestPermissionRationale(Activity activity) {
@@ -124,12 +120,12 @@ class RPManager {
         boolean rationale = false;
         //如果有拒绝则提示申请理由提示框，否则直接向系统请求权限
         for (String permission : mDeniedPermissions) {
-            rationale = rationale || mService.shouldShowRequestPermissionRationale(mActivity, permission);
+            rationale = rationale || shouldShowRequestPermissionRationale(mActivity, permission);
         }
         Log.i(TAG, "rationale = " + rationale);
         String[] permissions = mDeniedPermissions.toArray(new String[mDeniedPermissions.size()]);
         if (rationale) showRationalDialog(permissions);
-        else requestPermissions(permissions);
+        else requestPermissions(mActivity, permissions, REQUEST_CODE_PERMISSION);;
     }
 
     /**
@@ -143,19 +139,11 @@ class RPManager {
                 .setPositiveButton(mOptions.getRationalBtnText(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        requestPermissions(permissions);
+                        requestPermissions(mActivity, permissions, REQUEST_CODE_PERMISSION);
                     }
                 }).show();
     }
 
-    /**
-     * 向系统请求权限
-     *
-     *  permissions
-     */
-    private synchronized void requestPermissions(String[] permissions) {
-        mService.requestPermissions(mActivity, permissions, REQUEST_CODE_PERMISSION);
-    }
 
     /**
      * 响应向系统请求权限结果
@@ -211,7 +199,7 @@ class RPManager {
     }
 
     /**
-     * 摧毁本库的 RPActivity
+     * 摧毁本库的 PermissionActivity
      */
     private void onDestroy() {
         if (mActivity != null) {
@@ -262,5 +250,62 @@ class RPManager {
             return;
         }
         checkSelfPermission();
+    }
+    /**
+     * 检查权限授权状态
+     *
+     * param context
+     * param permission
+     * return
+     */
+    int checkSelfPermission(Context context, String permission) {
+        try {
+            final PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), 0);
+            int targetSdkVersion = info.applicationInfo.targetSdkVersion;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (targetSdkVersion >= Build.VERSION_CODES.M) {
+                    Log.i(TAG, "targetSdkVersion >= Build.VERSION_CODES.M");
+                    return context.checkSelfPermission(permission);
+                } else {
+                    return context.checkSelfPermission(permission);
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return context.checkSelfPermission(permission);
+        }
+        return -1000;
+    }
+
+    /**
+     * 向系统请求权限
+     *
+     * param activity
+     * param permissions
+     * param requestCode
+     */
+    private synchronized void requestPermissions(Activity activity, String[] permissions, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.requestPermissions( permissions, requestCode);
+        }
+    }
+
+    /**
+     * 检查权限是否存在拒绝不再提示
+     *
+     * param activity
+     * param permission
+     * return
+     */
+    boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
+        boolean shouldShowRational = false;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            shouldShowRational = activity.shouldShowRequestPermissionRationale( permission);
+        }
+        Log.i(TAG, "shouldShowRational = " + shouldShowRational);
+        return shouldShowRational;
     }
 }

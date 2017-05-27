@@ -38,7 +38,7 @@ public class SPCompatActivity extends BaseCompatActivity {
 
     @Override
     protected void initData() {
-        setTitle(getResources().getString(R.string.act_sp));
+        setTitle(getResources().getString(R.string.control_sp));
         mContext = this;
     }
 

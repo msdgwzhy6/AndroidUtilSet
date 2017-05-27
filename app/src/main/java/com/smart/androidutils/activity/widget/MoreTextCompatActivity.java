@@ -6,7 +6,7 @@ import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.view.UtilMoreText;
 
-import static com.smart.androidutils.constant.ConMain.MORE_TEXT_MSG;
+import static com.smart.androidutils.constant.ConMainItem.MORE_TEXT_MSG;
 import static com.util.view.UtilWidget.getView;
 
 /*

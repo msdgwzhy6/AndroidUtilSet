@@ -5,7 +5,7 @@
                  android:label="@string/app_name"
                  android:supportsRtl="true"
     >
-        <activity android:name=".permission.RPActivity"/>
+        <activity android:name=".permission.PermissionActivity"/>
     </application>
 
 </manifest>

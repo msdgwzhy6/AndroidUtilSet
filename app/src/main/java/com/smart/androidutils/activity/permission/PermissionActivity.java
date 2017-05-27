@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -11,14 +12,15 @@ import android.widget.Toast;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.permission.RPListener;
-import com.util.permission.RPOptions;
-import com.util.permission.RPermission;
+import com.util.permission.Permission;
+import com.util.permission.PermissionCallback;
+import com.util.permission.PermissionTypes;
 
 import java.io.File;
 import java.util.List;
 
-public class PermissionActivity extends BaseCompatActivity{
+public class PermissionActivity extends BaseCompatActivity {
+
     @Override
     protected void setActivityTitle() {
         super.setActivityTitle();
@@ -42,12 +44,12 @@ public class PermissionActivity extends BaseCompatActivity{
     }
 
     public void onClickFragment(View v) {
-        BlankActivity.gotoAct(this);
+//        BlankActivity.gotoAct(this);
     }
 
     public void onClickAll(View v) {
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.READ_PHONE_STATE
                                 , Manifest.permission.SEND_SMS)
                 /*以下为自定义提示语、按钮文字
@@ -57,7 +59,7 @@ public class PermissionActivity extends BaseCompatActivity{
                 .setRationalMessage()
                 .setRationalBtn()*/
                         .build(),
-                new RPListener() {
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         writeSD();
@@ -79,10 +81,10 @@ public class PermissionActivity extends BaseCompatActivity{
 //                    ActivityCompat.requestPermissions(this,
 //                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
 //                }
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .build(),
-                new RPListener() {
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         writeSD();
@@ -117,10 +119,10 @@ public class PermissionActivity extends BaseCompatActivity{
 //                                new String[]{Manifest.permission.READ_PHONE_STATE}, READ_PHONE_STATE_REQUEST_CODE);
 //                    }
 //                }
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(Manifest.permission.READ_PHONE_STATE)
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.READ_PHONE_STATE)
                         .build(),
-                new RPListener() {
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         getIMEI();
@@ -135,8 +137,8 @@ public class PermissionActivity extends BaseCompatActivity{
     }
 
     public void onClickCallPhone(View view) {
-        RPermission.getInstance(this).request(new RPOptions.Builder().setPermissions(Manifest.permission.CALL_PHONE).build(),
-                new RPListener() {
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder().setPermissionTypes(Manifest.permission.CALL_PHONE).build(),
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         //注意：不用用带参的构造方法 否则 android studio 环境出错，提示要你检查授权
@@ -192,8 +194,8 @@ public class PermissionActivity extends BaseCompatActivity{
 //    }
 
     private void writeSD() {
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.SEND_SMS)
                 /*以下为自定义提示语、按钮文字
                 .setDeniedMessage()
@@ -202,10 +204,10 @@ public class PermissionActivity extends BaseCompatActivity{
                 .setRationalMessage()
                 .setRationalBtn()*/
                         .build(),
-                new RPListener() {
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
-                        File acpDir = getCacheDir("acp",PermissionActivity.this);
+                        File acpDir = getCacheDir("acp", PermissionActivity.this);
                         if (acpDir != null)
                             makeText("写SD成功：" + acpDir.getAbsolutePath());
                         getIMEI();
@@ -220,8 +222,8 @@ public class PermissionActivity extends BaseCompatActivity{
     }
 
     private void getIMEI() {
-        RPermission.getInstance(this).request(new RPOptions.Builder()
-                        .setPermissions(
+        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(
                                 Manifest.permission.READ_PHONE_STATE
                                 , Manifest.permission.SEND_SMS)
                 /*以下为自定义提示语、按钮文字
@@ -231,7 +233,7 @@ public class PermissionActivity extends BaseCompatActivity{
                 .setRationalMessage()
                 .setRationalBtn()*/
                         .build(),
-                new RPListener() {
+                new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
@@ -273,5 +275,23 @@ public class PermissionActivity extends BaseCompatActivity{
 
     private void makeText(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

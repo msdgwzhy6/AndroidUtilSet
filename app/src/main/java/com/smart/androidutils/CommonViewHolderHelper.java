@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.View;
 
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.dialog.DialogCustom;
 import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
@@ -14,10 +13,10 @@ import static com.util.view.UtilWidget.getView;
 
 /**
  * author xander on  2017/5/26.
- * function
+ * function 网格或者列表的具有这样的特征 只有一个按钮且按钮只有文字的时候
  */
 
-public class CommonViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
+public abstract class CommonViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
     protected Activity mActivity;
     protected String mItemName;
     @Override
@@ -42,22 +41,24 @@ public class CommonViewHolderHelper implements CommonAdapter.IListHolderHelperCa
         });
     }
 
-    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
-
-    }
+    /*
+    * 子类必须实现的方法
+    * 用于事件处理
+    * */
+    protected abstract void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position);
 
     protected void viewHolderToast(String msg, int time) {
-        new DialogCustom(mActivity)
+       /* new UtilDialogDouble(mActivity)
                 .setToast(msg,time)
                 .setToastDrawableId(R.drawable.dialog_bg)
                 .setOutsideClickable(true)
-                .show();
+                .show();*/
     }
 
     protected void viewHolderToast(String msg) {
-        new DialogCustom(mActivity)
+       /* new UtilDialogDouble(mActivity)
                 .setToast(msg,2000)
                 .setToastDrawableId(R.drawable.dialog_bg)
-                .show();
+                .show();*/
     }
 }
