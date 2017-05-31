@@ -13,7 +13,7 @@ import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.dialog.DialogActivity;
 import com.smart.androidutils.activity.file.FileCompatActivity;
-import com.smart.androidutils.activity.permission.PermissionActivity;
+import com.smart.androidutils.activity.permission.PActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.screen.ScreenActivity;
 import com.smart.androidutils.activity.sharepreference.SPCompatActivity;
@@ -118,7 +118,7 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         * 权限
         * */
         else if (mItemName.equals(context.getResources().getString(R.string.permission))) {
-            context.startActivity(new Intent(context, PermissionActivity.class));
+            context.startActivity(new Intent(context, PActivity.class));
         }
 
        /*

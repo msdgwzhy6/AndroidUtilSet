@@ -9,7 +9,7 @@ import java.io.File;
  * function
  */
 
-final class DragonConstant {
+final class Constant {
 	static final String downloadCachePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
 			+  "Download/";
 

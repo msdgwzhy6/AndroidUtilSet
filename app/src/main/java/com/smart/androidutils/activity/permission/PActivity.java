@@ -6,20 +6,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.permission.Permission;
 import com.util.permission.PermissionCallback;
+import com.util.permission.PermissionHelper;
 import com.util.permission.PermissionTypes;
 
 import java.io.File;
 import java.util.List;
 
-public class PermissionActivity extends BaseCompatActivity {
+public class PActivity extends BaseCompatActivity {
 
     @Override
     protected void setActivityTitle() {
@@ -48,22 +47,22 @@ public class PermissionActivity extends BaseCompatActivity {
     }
 
     public void onClickAll(View v) {
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
                         .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
                                 , Manifest.permission.READ_PHONE_STATE
                                 , Manifest.permission.SEND_SMS)
-                /*以下为自定义提示语、按钮文字
-                .setDeniedMessage()
-                .setDeniedCloseBtn()
-                .setDeniedSettingBtn()
-                .setRationalMessage()
-                .setRationalBtn()*/
+               // 以下为自定义提示语、按钮文字
+                .setDeniedMessage("adadasdasd")
+                .setDeniedCloseBtn("adasd")
+                .setDeniedSettingBtn("adsadad")
+                .setRationalMessage("adadad")
+                .setRationalBtn("avsdad")
                         .build(),
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
                         writeSD();
-                        getIMEI();
+//                        getIMEI();
                     }
 
                     @Override
@@ -81,7 +80,7 @@ public class PermissionActivity extends BaseCompatActivity {
 //                    ActivityCompat.requestPermissions(this,
 //                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
 //                }
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
                         .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .build(),
                 new PermissionCallback() {
@@ -119,13 +118,13 @@ public class PermissionActivity extends BaseCompatActivity {
 //                                new String[]{Manifest.permission.READ_PHONE_STATE}, READ_PHONE_STATE_REQUEST_CODE);
 //                    }
 //                }
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
                         .setPermissionTypes(Manifest.permission.READ_PHONE_STATE)
                         .build(),
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
-                        getIMEI();
+//                        getIMEI();
                     }
 
                     @Override
@@ -137,7 +136,7 @@ public class PermissionActivity extends BaseCompatActivity {
     }
 
     public void onClickCallPhone(View view) {
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder().setPermissionTypes(Manifest.permission.CALL_PHONE).build(),
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder().setPermissionTypes(Manifest.permission.CALL_PHONE).build(),
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
@@ -151,7 +150,7 @@ public class PermissionActivity extends BaseCompatActivity {
 
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_CALL);
-                        intent.setData(Uri.parse("tel:13800138000"));
+                        intent.setData(Uri.parse("tel:18221869775"));
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
@@ -194,9 +193,8 @@ public class PermissionActivity extends BaseCompatActivity {
 //    }
 
     private void writeSD() {
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
-                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                , Manifest.permission.SEND_SMS)
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 /*以下为自定义提示语、按钮文字
                 .setDeniedMessage()
                 .setDeniedCloseBtn()
@@ -207,10 +205,10 @@ public class PermissionActivity extends BaseCompatActivity {
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
-                        File acpDir = getCacheDir("acp", PermissionActivity.this);
+                        File acpDir = getCacheDir("acp", PActivity.this);
                         if (acpDir != null)
                             makeText("写SD成功：" + acpDir.getAbsolutePath());
-                        getIMEI();
+//                        getIMEI();
                     }
 
                     @Override
@@ -221,17 +219,17 @@ public class PermissionActivity extends BaseCompatActivity {
 
     }
 
-    private void getIMEI() {
-        Permission.getInstance(this).initPermission(new PermissionTypes.Builder()
+   /* private void getIMEI() {
+        new PermissionHelper().initPermission(this,new PermissionTypes.Builder()
                         .setPermissionTypes(
                                 Manifest.permission.READ_PHONE_STATE
                                 , Manifest.permission.SEND_SMS)
-                /*以下为自定义提示语、按钮文字
+                *//*以下为自定义提示语、按钮文字
                 .setDeniedMessage()
                 .setDeniedCloseBtn()
                 .setDeniedSettingBtn()
                 .setRationalMessage()
-                .setRationalBtn()*/
+                .setRationalBtn()*//*
                         .build(),
                 new PermissionCallback() {
                     @Override
@@ -247,7 +245,7 @@ public class PermissionActivity extends BaseCompatActivity {
                     }
                 });
 
-    }
+    }*/
 
     public static File getCacheDir(String dirName, Context context) {
         File result;

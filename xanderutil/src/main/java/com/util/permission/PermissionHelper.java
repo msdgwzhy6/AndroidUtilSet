@@ -13,6 +13,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.util.core.InitUtil;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -24,26 +26,48 @@ import java.util.Set;
  * 权限帮助类
  */
 
-class PermissionHelper {
+public class PermissionHelper implements PermissionActivity.CurrentActivityCallback{
     private static final String TAG = "PermissionHelper";
     private static final int REQUEST_CODE_PERMISSION = 0x38;
     private static final int REQUEST_CODE_SETTING = 0x39;
-    private Activity mActivity;
+    private static PermissionHelper mInstance;
     private PermissionTypes mOptions;
     private PermissionCallback mCallback;
     private final List<String> mDeniedPermissions = new LinkedList<>();
     private final Set<String> mManifestPermissions = new HashSet<>(1);
+    private Activity mActivity;
 
-    PermissionHelper(Activity activity) {
-        mActivity = activity;
-        getManifestPermissions();
+    private PermissionHelper() {
+
     }
 
+    public static PermissionHelper getInstance() {
+        if (mInstance == null)
+            synchronized (PermissionHelper.class) {
+                if (mInstance == null) {
+                    mInstance = new PermissionHelper();
+                }
+            }
+        return mInstance;
+    }
+    /**
+     * 开始请求
+     * param types 权限类型
+     * param PermissionCallback
+     */
+    public PermissionHelper initPermission(PermissionTypes types, PermissionCallback permissionCallback) {
+        if (types == null) throw new NullPointerException("PermissionTypes is null...");
+        if (permissionCallback == null) throw new NullPointerException("PermissionCallback is null...");
+
+        getManifestPermissions();
+        request(types, permissionCallback);
+        return this;
+    }
     private synchronized void getManifestPermissions() {
         PackageInfo packageInfo = null;
         try {
-            packageInfo = mActivity.getPackageManager().getPackageInfo(
-                    mActivity.getPackageName(), PackageManager.GET_PERMISSIONS);
+            packageInfo = InitUtil.getContext().getPackageManager().getPackageInfo(
+                    InitUtil.getContext().getPackageName(), PackageManager.GET_PERMISSIONS);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -60,7 +84,7 @@ class PermissionHelper {
      *  options
      *  permissionCallback
      */
-    synchronized void request(PermissionTypes options, PermissionCallback permissionCallback) {
+    private synchronized void request(PermissionTypes options, PermissionCallback permissionCallback) {
         mCallback = permissionCallback;
         mOptions = options;
         checkSelfPermission();
@@ -79,11 +103,15 @@ class PermissionHelper {
             return;
         }
         String[] permissions = mOptions.getPermissions();
+        if (permissions == null) {
+            throw new NullPointerException("ssssssssss");
+        }
         for (String permission : permissions) {
-            //检查申请的权限是否在 AndroidManifest.xml 中
             if (mManifestPermissions.contains(permission)) {
-                int checkSelfPermission = checkSelfPermission(mActivity, permission);
-                Log.i(TAG, "checkSelfPermission = " + checkSelfPermission);
+                if (InitUtil.getContext() == null) {
+                    throw new NullPointerException("Context should not to be null");
+                }
+                int checkSelfPermission = checkSelfPermission(InitUtil.getContext(), permission);
                 //如果是拒绝状态则装入拒绝集合中
                 if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {
                     mDeniedPermissions.add(permission);
@@ -98,16 +126,16 @@ class PermissionHelper {
             onDestroy();
             return;
         }
-        startAcpActivity();
+        startPermissionActivity();
     }
 
     /**
      * 启动处理权限过程的 Activity
      */
-    private synchronized void startAcpActivity() {
-        Intent intent = new Intent(mActivity, PermissionActivity.class);
+    private synchronized void startPermissionActivity() {
+        Intent intent = new Intent("com.util.permission.PermissionActivity");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mActivity.startActivity(intent);
+        InitUtil.getContext().startActivity(intent);
     }
 
     /**
@@ -116,59 +144,63 @@ class PermissionHelper {
      *  activity
      */
     synchronized void checkRequestPermissionRationale(Activity activity) {
-        mActivity = activity;
         boolean rationale = false;
         //如果有拒绝则提示申请理由提示框，否则直接向系统请求权限
+
         for (String permission : mDeniedPermissions) {
-            rationale = rationale || shouldShowRequestPermissionRationale(mActivity, permission);
+            rationale = rationale || shouldShowRequestPermissionRationale(activity, permission);
         }
         Log.i(TAG, "rationale = " + rationale);
+
+
         String[] permissions = mDeniedPermissions.toArray(new String[mDeniedPermissions.size()]);
-        if (rationale) showRationalDialog(permissions);
-        else requestPermissions(mActivity, permissions, REQUEST_CODE_PERMISSION);;
+
+
+        if (rationale) showRationalDialog(activity, permissions);
+        else requestPermissions(activity, permissions, REQUEST_CODE_PERMISSION);;
     }
 
     /**
      * 申请理由对话框
-     *
      *  permissions
      */
-    private synchronized void showRationalDialog(final String[] permissions) {
-        new AlertDialog.Builder(mActivity)
+    private synchronized void showRationalDialog(final Activity activity, final String[] permissions) {
+        new AlertDialog.Builder(activity)
                 .setMessage(mOptions.getRationalMessage())
                 .setPositiveButton(mOptions.getRationalBtnText(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        requestPermissions(mActivity, permissions, REQUEST_CODE_PERMISSION);
+                        requestPermissions(activity, permissions, REQUEST_CODE_PERMISSION);
                     }
                 }).show();
     }
 
-
     /**
      * 响应向系统请求权限结果
-     *
      *  requestCode
      *  permissions
      *  grantResults
      */
-    synchronized void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    synchronized void onRequestPermissionsResult(int requestCode, Activity activity, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_PERMISSION:
                 LinkedList<String> grantedPermissions = new LinkedList<>();
                 LinkedList<String> deniedPermissions = new LinkedList<>();
                 for (int i = 0; i < permissions.length; i++) {
                     String permission = permissions[i];
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                         grantedPermissions.add(permission);
+                    }
                     else deniedPermissions.add(permission);
                 }
                 //全部允许才回调 onGranted 否则只要有一个拒绝都回调 onDenied
                 if (!grantedPermissions.isEmpty() && deniedPermissions.isEmpty()) {
                     if (mCallback != null)
                         mCallback.onGranted();
-                    onDestroy();
-                } else if (!deniedPermissions.isEmpty()) showDeniedDialog(deniedPermissions);
+                        onDestroy();
+                } else if (!deniedPermissions.isEmpty()) {
+                    showDeniedDialog(activity, deniedPermissions);
+                }
                 break;
         }
     }
@@ -178,8 +210,8 @@ class PermissionHelper {
      *
      *  permissions
      */
-    private synchronized void showDeniedDialog(final List<String> permissions) {
-        new AlertDialog.Builder(mActivity)
+    private synchronized void showDeniedDialog(final Activity activity, final List<String> permissions) {
+        new AlertDialog.Builder(activity)
                 .setMessage(mOptions.getDeniedMessage())
                 .setCancelable(false)
                 .setNegativeButton(mOptions.getDeniedCloseBtn(), new DialogInterface.OnClickListener() {
@@ -193,7 +225,7 @@ class PermissionHelper {
                 .setPositiveButton(mOptions.getDeniedSettingBtn(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startSetting();
+                        startSetting(activity);
                     }
                 }).show();
     }
@@ -202,33 +234,38 @@ class PermissionHelper {
      * 摧毁本库的 PermissionActivity
      */
     private void onDestroy() {
+        mCallback = null;
+        if (mInstance != null) {
+            mInstance = null;
+        }
+
         if (mActivity != null) {
             mActivity.finish();
-            mActivity = null;
         }
-        mCallback = null;
+        mActivity = null;
     }
 
     /**
      * 跳转到设置界面
+     * @param activity
      */
-    private void startSetting() {
+    private void startSetting(Activity activity) {
         if (MiuiOs.isMIUI()) {
-            Intent intent = MiuiOs.getSettingIntent(mActivity);
-            if (MiuiOs.isIntentAvailable(mActivity, intent)) {
-                mActivity.startActivityForResult(intent, REQUEST_CODE_SETTING);
+            Intent intent = MiuiOs.getSettingIntent(InitUtil.getContext());
+            if (MiuiOs.isIntentAvailable(InitUtil.getContext(), intent)) {
+                activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
                 return;
             }
         }
         try {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    .setData(Uri.parse("package:" + mActivity.getPackageName()));
-            mActivity.startActivityForResult(intent, REQUEST_CODE_SETTING);
+                    .setData(Uri.parse("package:" + InitUtil.getContext().getPackageName()));
+            activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
             try {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
-                mActivity.startActivityForResult(intent, REQUEST_CODE_SETTING);
+                activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -244,8 +281,7 @@ class PermissionHelper {
      *  data
      */
     synchronized void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mCallback == null || mOptions == null
-                || requestCode != REQUEST_CODE_SETTING) {
+        if (mCallback == null || mOptions == null || requestCode != REQUEST_CODE_SETTING) {
             onDestroy();
             return;
         }
@@ -258,7 +294,7 @@ class PermissionHelper {
      * param permission
      * return
      */
-    int checkSelfPermission(Context context, String permission) {
+    private int checkSelfPermission(Context context, String permission) {
         try {
             final PackageInfo info = context.getPackageManager().getPackageInfo(
                     context.getPackageName(), 0);
@@ -300,12 +336,17 @@ class PermissionHelper {
      * param permission
      * return
      */
-    boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
+    private boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
         boolean shouldShowRational = false;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             shouldShowRational = activity.shouldShowRequestPermissionRationale( permission);
         }
         Log.i(TAG, "shouldShowRational = " + shouldShowRational);
         return shouldShowRational;
+    }
+
+    @Override
+    public void currentActivtiy(Activity activity) {
+        mActivity = activity;
     }
 }

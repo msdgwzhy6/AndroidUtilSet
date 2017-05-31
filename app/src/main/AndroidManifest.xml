@@ -37,7 +37,7 @@
         <activity android:name=".activity.widget.WidgetCompatActivity"/>
         <activity android:name=".activity.widget.MoreTextCompatActivity"/>
         <activity android:name=".activity.screen.ScreenActivity"/>
-        <activity android:name=".activity.permission.PermissionActivity"/>
+        <activity android:name=".activity.permission.PActivity"/>
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.

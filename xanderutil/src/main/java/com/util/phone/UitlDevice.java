@@ -1,5 +1,6 @@
 package com.util.phone;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
@@ -18,6 +19,9 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.util.core.InitUtil;
+import com.util.permission.PermissionCallback;
+import com.util.permission.PermissionHelper;
+import com.util.permission.PermissionTypes;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -71,7 +75,6 @@ public final class UitlDevice {
      */
     @SuppressLint("HardwareIds")
     public static String getIMSI() {
-        TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSubscriberId() : null;
     }
     /**
@@ -155,25 +158,47 @@ public final class UitlDevice {
      * VoiceMailNumber = *86
      */
     public static String getPhoneStatus() {
+        final String[] result = new String[1];
         if (!isPhone()) {
             return "该设备不是手机";
         }
-        String result = "\n" + "设备Id(IMEI) : " + tm.getDeviceId() + "\n" +
-                "设备的软件版本号 : " + getDeviceSoftwareVersion() + "\n" +
-                "获取ISO标准的国家码，即国际长途区号 : " + tm.getNetworkCountryIso() + "\n" +
-                "手机状态： " + getCallState() + "\n" +
-                "手机类型：" + getPhoneType() + "\n" +
-                "手机号 : " + tm.getLine1Number() + "\n" +
-                "SIM卡的序列号：" + tm.getSimSerialNumber() + "\n" +
-                "SIM卡的状态： " + tm.getSimState() + "\n" +
-                "获取Sim卡运营商名称： " + getSimOperatorByMnc() + "\n" +
-                "是否漫游：" + tm.isNetworkRoaming() + "\n" +
-                "电话方位： " + tm.getCellLocation() + "\n" +
-                "网络类型： " + getNetworkType() + "\n" +
-                "网络状态： " + getConnectState() + "\n" +
-                "设备的软件版本号 = " + tm.getDeviceSoftwareVersion() + "\n";
-        Log.i("xxx", "getPhoneStatus" +result);
-        return result;
+        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
+                        .setPermissionTypes(Manifest.permission.READ_PHONE_STATE
+                        ,Manifest.permission.ACCESS_COARSE_LOCATION)
+                        // 以下为自定义提示语、按钮文字
+                        .setDeniedMessage("adadasdasd")
+                        .setDeniedCloseBtn("adasd")
+                        .setDeniedSettingBtn("adsadad")
+                        .setRationalMessage("adadad")
+                        .setRationalBtn("avsdad")
+                        .build(),
+                new PermissionCallback() {
+                    @Override
+                    public void onGranted() {
+                        result[0] = "\n" + "设备Id(IMEI) : " + tm.getDeviceId() + "\n" +
+                                "设备的软件版本号 : " + getDeviceSoftwareVersion() + "\n" +
+                                "获取ISO标准的国家码，即国际长途区号 : " + tm.getNetworkCountryIso() + "\n" +
+                                "手机状态： " + getCallState() + "\n" +
+                                "手机类型：" + getPhoneType() + "\n" +
+                                "手机号 : " + tm.getLine1Number() + "\n" +
+                                "SIM卡的序列号：" + tm.getSimSerialNumber() + "\n" +
+                                "SIM卡的状态： " + tm.getSimState() + "\n" +
+                                "获取Sim卡运营商名称： " + getSimOperatorByMnc() + "\n" +
+                                "是否漫游：" + tm.isNetworkRoaming() + "\n" +
+                                "电话方位： " + tm.getCellLocation() + "\n" +
+                                "网络类型： " + getNetworkType() + "\n" +
+                                "网络状态： " + getConnectState() + "\n" +
+                                "设备的软件版本号 = " + tm.getDeviceSoftwareVersion() + "\n";
+                        Log.i("xxx", "getPhoneStatus" + result[0]);
+
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+
+                    }
+                });
+        return result[0];
     }
     /*
         * 当前使用的网络类型：

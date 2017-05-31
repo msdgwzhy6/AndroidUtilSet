@@ -16,14 +16,15 @@ public class PermissionActivity extends Activity {
         //不接受触摸屏事件
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         if (savedInstanceState == null) {
-            Permission.getInstance(this).getPermissionHelper().checkRequestPermissionRationale(this);
+            PermissionHelper.getInstance().checkRequestPermissionRationale(this);
         }
+        PermissionHelper.getInstance().currentActivtiy(this);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Permission.getInstance(this).getPermissionHelper().checkRequestPermissionRationale(this);
+        PermissionHelper.getInstance().checkRequestPermissionRationale(this);
     }
 
     @Override
@@ -32,11 +33,21 @@ public class PermissionActivity extends Activity {
             throw new NullPointerException("permissions or grantResults should not to be null !!");
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Permission.getInstance(this).getPermissionHelper().onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.getInstance().onRequestPermissionsResult(requestCode, this, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Permission.getInstance(this).getPermissionHelper().onActivityResult(requestCode, resultCode, data);
+        PermissionHelper.getInstance().onActivityResult(requestCode, resultCode, data);
+    }
+
+    public interface CurrentActivityCallback{
+        void currentActivtiy(Activity activity);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }
