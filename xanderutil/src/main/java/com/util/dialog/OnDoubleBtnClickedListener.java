@@ -3,10 +3,9 @@ package com.util.dialog;
 import android.app.Dialog;
 
 /**
- * Created by xu on 2017/3/11.
+ * author xander on  2017/3/11.
+ * function
  */
-
-
 public interface OnDoubleBtnClickedListener extends OnSingleBtnClickedListener {
-    void onLeftBtnClick(Dialog dialog);
+        void onLeftBtnClick(Dialog dialog);
 }

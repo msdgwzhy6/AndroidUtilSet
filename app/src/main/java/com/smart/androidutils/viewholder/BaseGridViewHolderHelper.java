@@ -13,6 +13,7 @@ import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.dialog.DialogActivity;
 import com.smart.androidutils.activity.file.FileCompatActivity;
+import com.smart.androidutils.activity.http.HttpActivity;
 import com.smart.androidutils.activity.permission.PActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
 import com.smart.androidutils.activity.screen.ScreenActivity;
@@ -68,6 +69,9 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         }
         else if (mItemName.equals(context.getResources().getString(R.string.canvas))) {
             context.startActivity(new Intent(context, CanvasCompatActivity.class));
+        }
+        else if (mItemName.equals(context.getResources().getString(R.string.http))) {
+            context.startActivity(new Intent(context, HttpActivity.class));
         }
 
         //设备相关的事件处理

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_double_btn"
+    android:id="@+id/ll_single_btn"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content">
@@ -14,28 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <Button
-            android:id="@+id/btn_left"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/left_btn_bg"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="取消"
-            android:layout_marginRight="0.5dp"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"/>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#E4E4E4"/>
-        <Button
-            android:id="@+id/btn_right"
+            android:id="@+id/btn_single"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="0.5dp"
-            android:background="@drawable/rihgt_btn_bg"
+            android:background="@drawable/single_btn_bg"
             android:gravity="center"
             android:singleLine="true"
             android:text="确定"

@@ -28,10 +28,10 @@ dependencies {
     //    compile 'com.smart.dialog_library:dialog_lib:1.1.7'
 
     compile project(':xanderutil')
+//    compile 'com.smart:xanderutil:1.0.1'
 //    compile 'com.github.Xander1024:AndroidUtilSet:1.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

@@ -1,5 +1,5 @@
 <resources>
-    
+
     <string name="app_name">Apple</string>
     <!--控制面板-->
     <string name="control">控制面板</string>
@@ -34,6 +34,8 @@
 
     <!--绘图面板-->
     <string name="canvas">"画圆"</string>
+    <!--网络-->
+    <string name="http">"网络"</string>
 
     <string name="canvas_circle">"画圆"</string>
     <string name="canvas_rect">"矩形"</string>

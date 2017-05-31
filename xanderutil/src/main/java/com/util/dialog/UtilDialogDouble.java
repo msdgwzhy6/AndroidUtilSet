@@ -15,7 +15,7 @@ import com.util.R;
 /**
  * Created by xu on 2017/3/3.
  */
-public class UtilDialogDouble extends UtilDialogSingle{
+public class UtilDialogDouble extends UtilDialogSingle<UtilDialogDouble>{
 
     private Button rightBtn;
     private Button leftBtn;
@@ -42,7 +42,7 @@ public class UtilDialogDouble extends UtilDialogSingle{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        parentView = mContext.getLayoutInflater().inflate(R.layout.layout_dialog,null);
+        parentView = mContext.getLayoutInflater().inflate(R.layout.layout_dialog_button,null);
         setContentView(parentView);
 
         initIitltAndMessageView();
@@ -63,7 +63,7 @@ public class UtilDialogDouble extends UtilDialogSingle{
         /*
         * 按钮
         * */
-        linearLayout_btn = getView(R.id.ll_btn);
+        linearLayout_btn = getView(R.id.ll_double_btn);
         rightBtn = getView(R.id.btn_right);
         leftBtn = getView(R.id.btn_left);
     }

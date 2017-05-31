@@ -22,6 +22,7 @@ public class ConMainItem {
             InitUtil.getContext().getString(R.string.view),
             InitUtil.getContext().getString(R.string.app_list_info),
             InitUtil.getContext().getString(R.string.canvas),
+            InitUtil.getContext().getString(R.string.http),
             InitUtil.getContext().getString(R.string.dialog),
             InitUtil.getContext().getString(R.string.control)
     };

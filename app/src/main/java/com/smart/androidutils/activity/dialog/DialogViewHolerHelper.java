@@ -7,8 +7,10 @@ import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.CommonViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.dialog.UtilDialogDouble;
 import com.util.dialog.OnDoubleBtnClickedListener;
+import com.util.dialog.OnSingleBtnClickedListener;
+import com.util.dialog.UtilDialogDouble;
+import com.util.dialog.UtilDialogSingle;
 
 import java.util.List;
 
@@ -24,12 +26,12 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.dialog_double))) {
-            UtilDialogDouble utilDialogDouble = (UtilDialogDouble) new UtilDialogDouble(mActivity)
+            new UtilDialogDouble(mActivity)
                     .setDoubleBtnText("取消", "确定")
                     .setTitle("设置了背景色")
                     .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
-                    .setOutsideClickable(true);
-            utilDialogDouble.setOnDoubleBtnClickedListener(new OnDoubleBtnClickedListener() {
+                    .setOutsideClickable(true)
+                    .setOnDoubleBtnClickedListener(new OnDoubleBtnClickedListener() {
                         @Override
                         public void onLeftBtnClick(Dialog utilDialogDouble) {
                             utilDialogDouble.dismiss();
@@ -51,6 +53,16 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
                         }
                     })
                     .show();*/
+            new UtilDialogSingle(mActivity)
+                    .setTitle("设置了背景色")
+                    .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
+                    .setOutsideClickable(true)
+                    .setOnSingleClicedkListener(new OnSingleBtnClickedListener() {
+                        @Override
+                        public void onRightBtnClick(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         }
         else if (mItemName.equals(context.getResources().getString(R.string.dialog_download_data))) {
             String apkUrl = "http://hiao.com/android/bus/QingDaoBus.apk";

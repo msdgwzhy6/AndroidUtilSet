@@ -36,9 +36,10 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
     private final List<String> mDeniedPermissions = new LinkedList<>();
     private final Set<String> mManifestPermissions = new HashSet<>(1);
     private Activity mActivity;
+    private Context mContext;
 
     private PermissionHelper() {
-
+        mContext = InitUtil.getContext();
     }
 
     public static PermissionHelper getInstance() {
@@ -66,8 +67,8 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
     private synchronized void getManifestPermissions() {
         PackageInfo packageInfo = null;
         try {
-            packageInfo = InitUtil.getContext().getPackageManager().getPackageInfo(
-                    InitUtil.getContext().getPackageName(), PackageManager.GET_PERMISSIONS);
+            packageInfo = mContext.getPackageManager().getPackageInfo(
+                    mContext.getPackageName(), PackageManager.GET_PERMISSIONS);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -104,14 +105,14 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
         }
         String[] permissions = mOptions.getPermissions();
         if (permissions == null) {
-            throw new NullPointerException("ssssssssss");
+            throw new NullPointerException("permissions should not to be null");
         }
         for (String permission : permissions) {
             if (mManifestPermissions.contains(permission)) {
-                if (InitUtil.getContext() == null) {
+                if (mContext == null) {
                     throw new NullPointerException("Context should not to be null");
                 }
-                int checkSelfPermission = checkSelfPermission(InitUtil.getContext(), permission);
+                int checkSelfPermission = checkSelfPermission(permission);
                 //如果是拒绝状态则装入拒绝集合中
                 if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {
                     mDeniedPermissions.add(permission);
@@ -135,7 +136,7 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
     private synchronized void startPermissionActivity() {
         Intent intent = new Intent("com.util.permission.PermissionActivity");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        InitUtil.getContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     /**
@@ -251,15 +252,15 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
      */
     private void startSetting(Activity activity) {
         if (MiuiOs.isMIUI()) {
-            Intent intent = MiuiOs.getSettingIntent(InitUtil.getContext());
-            if (MiuiOs.isIntentAvailable(InitUtil.getContext(), intent)) {
+            Intent intent = MiuiOs.getSettingIntent(mContext);
+            if (MiuiOs.isIntentAvailable(mContext, intent)) {
                 activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
                 return;
             }
         }
         try {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    .setData(Uri.parse("package:" + InitUtil.getContext().getPackageName()));
+                    .setData(Uri.parse("package:" + mContext.getPackageName()));
             activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
@@ -294,24 +295,24 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
      * param permission
      * return
      */
-    private int checkSelfPermission(Context context, String permission) {
+    private int checkSelfPermission(String permission) {
         try {
-            final PackageInfo info = context.getPackageManager().getPackageInfo(
-                    context.getPackageName(), 0);
+            final PackageInfo info = mContext.getPackageManager().getPackageInfo(
+                    mContext.getPackageName(), 0);
             int targetSdkVersion = info.applicationInfo.targetSdkVersion;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (targetSdkVersion >= Build.VERSION_CODES.M) {
                     Log.i(TAG, "targetSdkVersion >= Build.VERSION_CODES.M");
-                    return context.checkSelfPermission(permission);
+                    return mContext.checkSelfPermission(permission);
                 } else {
-                    return context.checkSelfPermission(permission);
+                    return mContext.checkSelfPermission(permission);
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.checkSelfPermission(permission);
+            return mContext.checkSelfPermission(permission);
         }
         return -1000;
     }
