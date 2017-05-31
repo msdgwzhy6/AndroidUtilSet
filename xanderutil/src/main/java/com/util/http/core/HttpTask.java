@@ -1,34 +1,32 @@
-package com.util.http.asynctask;
+package com.util.http.core;
 
 import android.os.AsyncTask;
+
+import com.util.http.core.callback.OnHttpCallback;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import static com.util.http.ConHttp.HTTP_TYPE_GET;
-import static com.util.http.HttpHelper.mHttpTimeout;
+import static com.util.http.core.HttpHelper.HTTP_TYPE;
+import static com.util.http.core.HttpHelper.mHttpTimeout;
 
 /**
  * author xander on  2017/5/31.
  * function  处理具体的业务逻辑 ，获取字符串
  */
 
-public class HttpTask extends AsyncTask<String, Void, InputStream> {
-    private Integer mType = HTTP_TYPE_GET;
-
+public class HttpTask<T> extends AsyncTask<String, Void, T> {
     private OnHttpCallback mHttpCallback;
-    public HttpTask(Integer type,OnHttpCallback httpCallback) {
-        if (type != null) {
-            mType = type;
-        }
+    public HttpTask(OnHttpCallback httpCallback) {
         mHttpCallback = httpCallback;
     }
 
 
     @Override
-    protected InputStream doInBackground(String... params) {
+    @SuppressWarnings("unchecked")
+    protected T doInBackground(String... params) {
         if (params == null || params.length == 0) {
             return null;
         }
@@ -43,7 +41,7 @@ public class HttpTask extends AsyncTask<String, Void, InputStream> {
             httpUrlCon.setDoOutput(true); // 从连接中读取数据
             httpUrlCon.setUseCaches(false); // 禁止缓存
             httpUrlCon.setInstanceFollowRedirects(true);
-            switch (mType) {
+            switch (HTTP_TYPE) {
                 case HTTP_TYPE_GET:
                     httpUrlCon.setRequestMethod("GET");// 设置请求类型为
                     break;
@@ -61,7 +59,8 @@ public class HttpTask extends AsyncTask<String, Void, InputStream> {
             httpUrlCon.connect();
             //check the result of connection
             if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                return httpUrlCon.getInputStream();
+                InputStream inputStream  = httpUrlCon.getInputStream();
+                return (T) mHttpCallback.onDoing(inputStream);
             }
 
         } catch (IOException e) {
@@ -76,9 +75,10 @@ public class HttpTask extends AsyncTask<String, Void, InputStream> {
         return null;
     }
 
-        @Override
-    protected void onPostExecute(InputStream s) {
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void onPostExecute(T  s) {
         super.onPostExecute(s);
-        mHttpCallback.onSuccess(s);
+            mHttpCallback.onSuccess(s);
     }
 }

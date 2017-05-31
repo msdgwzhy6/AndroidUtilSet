@@ -5,7 +5,7 @@ import android.util.Log;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.http.asynctask.string.HttpStringHelper;
-import com.util.http.callback.IStringCallback;
+import com.util.http.core.callback.IStringCallback;
 
 public class HttpActivity extends BaseCompatActivity {
 
@@ -23,8 +23,9 @@ public class HttpActivity extends BaseCompatActivity {
     @Override
     protected void initData() {
            new HttpStringHelper()
-                .get("https://tcc.taobao.com/cc/json/mobile_tel_segment.htm")
-                .addParam("tel","18221869775")
+                .get("http://www.imooc.com/api/teacher?type=4&num=30")
+                .addParam("type","4")
+                .addParam("num","30")
                 .setCharset("GBK")
         .initHttpStringCallback(new IStringCallback() {
             @Override
@@ -33,8 +34,8 @@ public class HttpActivity extends BaseCompatActivity {
             }
 
             @Override
-            public void failure(Exception e) {
-
+            public void onFailure(Exception e) {
+                Log.i(TAG, "onFailure: "+e.getMessage());
             }
         });
     }

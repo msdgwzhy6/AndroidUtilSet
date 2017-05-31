@@ -38,52 +38,52 @@ import static com.util.dialog.Constant.ANIM_SLIDE_UP_DOWN;
 public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
     protected Resources res;
     Activity mContext;
-    protected T instance;
+    T instance;
 
-    protected View parentView;
+    View parentView;
     /*
     * dialog的一些属性
     * */
-    protected boolean clickedAnimation;//是否开启动画，即视觉交互效果，开启后，体验更佳
-    protected int inOutAnimationStyle = 0x00;//动画的样式
-    protected long ANITIME = 100;//动画效果持续的时间
+    boolean clickedAnimation;//是否开启动画，即视觉交互效果，开启后，体验更佳
+    private int inOutAnimationStyle = 0x00;//动画的样式
+    long ANITIME = 100;//动画效果持续的时间
 
-    protected boolean outsideClickable  ;//设置对话框白色区域是否可以点击,默认可以点击
-    protected boolean cancelable = true;//返回键可用
+    private boolean outsideClickable  ;//设置对话框白色区域是否可以点击,默认可以点击
+    private boolean cancelable = true;//返回键可用
 
-    protected boolean dialogScale;//是否开启缩放
-    protected Float scaleHeight = 0.3f;//相对于屏幕的宽度的缩放大小
-    protected Float scaleWidth = 0.75f;
+    private boolean dialogScale;//是否开启缩放
+    private Float scaleHeight = 0.3f;//相对于屏幕的宽度的缩放大小
+    private Float scaleWidth = 0.75f;
 
-    protected Float offPosX;
-    protected Float offPosY;
+    private Float offPosX;
+    private Float offPosY;
 
 
     /*
     * 标题
      */
-    protected LinearLayout mLinearLayoutTitle;//标题父布局
-    protected TextView titleTv;//消息标题文本
-    protected ColorStateList titleTextColor;//标题字体颜色
-    protected String titleStr;//从外界设置的title文本
-    protected int titleSize;//标题大小
-    protected Drawable titleDrawable;//标题的背景
+    private LinearLayout mLinearLayoutTitle;//标题父布局
+    private TextView titleTv;//消息标题文本
+    private ColorStateList titleTextColor;//标题字体颜色
+    private String titleStr;//从外界设置的title文本
+    private int titleSize;//标题大小
+    private Drawable titleDrawable;//标题的背景
 
     /*
     * 消息
     */
-    protected ScrollView mScrollViewMsg;//标题父布局
-    protected TextView messageTv;//消息提示文本
-    protected String messageStr="";//从外界设置的消息文本
+    private ScrollView mScrollViewMsg;//标题父布局
+    private TextView messageTv;//消息提示文本
+    private String messageStr="";//从外界设置的消息文本
 
-    protected Integer mScrollViewSize;
-    protected int messageTextSize;
-    protected ColorStateList messageTextColor;
-    protected Drawable messageDrawable;//消息的背景
+    private Integer mScrollViewSize;
+    private int messageTextSize;
+    private ColorStateList messageTextColor;
+    private Drawable messageDrawable;//消息的背景
     /*
     * 按钮
     * */
-    protected LinearLayout linearLayout_btn;
+    LinearLayout linearLayout_btn;
 
     private Button singleBtn;
     private String singleBtnStr;
@@ -108,7 +108,7 @@ public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
         this(context, R.style.MyTechDialog);
     }
 
-    public UtilDialogSingle(Activity context, int themeResId) {
+    UtilDialogSingle(Activity context, int themeResId) {
         super(context, themeResId);
         mContext = context;
         res = mContext.getResources();
@@ -198,7 +198,7 @@ public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
             linearLayout_btn.setVisibility(View.VISIBLE);
             singleBtn.setVisibility(View.VISIBLE);
 
-            singleBtn.setBackground( singleBtnDrawable = res.getDrawable(R.drawable.single_btn_bg));
+            singleBtn.setBackground(singleBtnDrawable);
             singleBtn.setGravity(Gravity.CENTER);//按钮设置居中
             singleBtn.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));//匹配父布局
@@ -272,10 +272,12 @@ public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
     /*
     * 设置进入退出效果
     * */
-    void setInOutAnimation() {
+    private void setInOutAnimation() {
         if (inOutAnimationStyle != 0x00) {
             Window dialogWindow = getWindow();
-            dialogWindow.setWindowAnimations(inOutAnimationStyle);//设置对话框的进出效果
+            if (dialogWindow != null) {
+                dialogWindow.setWindowAnimations(inOutAnimationStyle);//设置对话框的进出效果
+            }
         }
     }
 
@@ -300,6 +302,7 @@ public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
     /*
     * 通過 id 获取 view 的实例
     * */
+    @SuppressWarnings("unchecked")
     <V extends View> V getView(int id){
         if (parentView == null) {
             throw new NullPointerException("parentView不能为空");

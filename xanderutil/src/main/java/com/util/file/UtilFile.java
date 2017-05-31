@@ -85,7 +85,7 @@ public final class  UtilFile {
      *  filePath
      *  is
      *  append   Append at end of file
-     *  { true}: success<br>{ false}: failure
+     *  { true}: success<br>{ false}: onFailure
      */
     public static boolean writeFileFromIS(String filePath, InputStream is, boolean append) {
         return writeFileFromIS(getFileByPath(filePath), is, append);
@@ -96,7 +96,7 @@ public final class  UtilFile {
      *  file
      *  is
      *  append Append at end of file
-     *  { true}: success<br>{ false}: failure
+     *  { true}: success<br>{ false}: onFailure
      */
     public static boolean writeFileFromIS(File file, InputStream is, boolean append) {
         if (file == null || is == null) return false;
@@ -134,7 +134,7 @@ public final class  UtilFile {
      *  file file name
      *  content  file content
      *  append  Append at end of file
-     *  { true}: success<br>{ false}: failure
+     *  { true}: success<br>{ false}: onFailure
      */
     public static boolean writeFileFromString(File file, String content, boolean append) {
         if (file == null || content == null) return false;
@@ -208,7 +208,7 @@ public final class  UtilFile {
      * if it dose,delete it ;
      * then create file ;
      *  filePath  file path
-     *  { true}: create success<br>{ false}: create failure
+     *  { true}: create success<br>{ false}: create onFailure
      */
     public static boolean createFileByDeleteOldFile(String filePath) {
         return createFileByDeleteOldFile(getFileByPath(filePath));
@@ -219,7 +219,7 @@ public final class  UtilFile {
      * if it dose,delete it ;
      * then create file ;
      *  file  file
-     *  { true}: create success<br>{ false}: create failure
+     *  { true}: create success<br>{ false}: create onFailure
      */
     public static boolean createFileByDeleteOldFile(File file) {
         if (file == null) return false;

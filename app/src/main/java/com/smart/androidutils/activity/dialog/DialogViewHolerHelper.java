@@ -83,7 +83,7 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
                         }
 
                         @Override
-                        public void failure(Exception e, UtilDialogDouble dialogCustom) {
+                        public void onFailure(Exception e, UtilDialogDouble dialogCustom) {
                             dialogCustom.dismiss();
                         }
                     }).show();*/

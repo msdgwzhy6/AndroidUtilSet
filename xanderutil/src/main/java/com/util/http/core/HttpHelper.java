@@ -1,4 +1,4 @@
-package com.util.http;
+package com.util.http.core;
 
 import android.util.Log;
 
@@ -11,8 +11,8 @@ import static com.util.http.ConHttp.HTTP_TYPE_GET;
 
 public class HttpHelper <T extends HttpHelper>{
     protected String mUrl;
-    protected int HTTP_TYPE;
-    protected String mCharset = "utf-8";
+    public static int HTTP_TYPE;
+    public static  String mCharset = "utf-8";
     public static int mHttpTimeout = 2000;
     public HttpHelper() {
 

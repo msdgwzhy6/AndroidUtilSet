@@ -51,6 +51,6 @@ public class SpiderCompatActivity extends BaseCompatActivity implements IHandleH
     public void failure(Exception e) {
         mIdTitle.setText("sss");
         e.printStackTrace();
-        Log.i("xxx", "failure" +e.getMessage());
+        Log.i("xxx", "onFailure" +e.getMessage());
     }
 }

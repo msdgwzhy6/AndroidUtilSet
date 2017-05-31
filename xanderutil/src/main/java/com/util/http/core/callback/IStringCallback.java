@@ -1,4 +1,4 @@
-package com.util.http.callback;
+package com.util.http.core.callback;
 
 public interface IStringCallback extends IFailureCallback {
     void onStringResult(final String result);

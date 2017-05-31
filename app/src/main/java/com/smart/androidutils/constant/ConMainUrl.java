@@ -6,6 +6,7 @@ package com.smart.androidutils.constant;
  */
 
 public class ConMainUrl {
+//    public static final String urlImg="http://img.mukewang.com//5523711700016d1606000338.jpg";
     public static final String urlImg="http://img.my.csdn.net/uploads/201407/26/1406383243_5120.jpg";
     public static final String urlMR = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
 //    public static final String urlMR = "http://blog.csdn.net/anddlecn/article/details/51382432";

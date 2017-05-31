@@ -1,4 +1,4 @@
-package com.util.http.callback;
+package com.util.http.core.callback;
 
 /**
  * author xander on  2017/5/31.
@@ -6,5 +6,5 @@ package com.util.http.callback;
  */
 
 public interface IFailureCallback {
-    void failure(Exception e);
+    void onFailure(Exception e);
 }
