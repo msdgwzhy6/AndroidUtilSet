@@ -35,12 +35,11 @@ import static com.util.dialog.DragonConstant.ANIM_SLIDE_UP_DOWN;
 /**
  * Created by xu on 2017/3/3.
  */
-public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
+public class UtilDialogSingle extends Dialog {
     protected Resources res;
     Activity mContext;
     protected UtilDialogSingle instance;
 
-    protected T mT;
     protected View parentView;
     /*
     * dialog的一些属性
@@ -113,7 +112,6 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
         super(context, themeResId);
         mContext = context;
         res = mContext.getResources();
-        mT = (T) this;
         instance = this;
     }
 
@@ -397,104 +395,104 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
     /**
      * 设置title文字
      */
-    public T setTitle(String title) {
+    public UtilDialogSingle setTitle(String title) {
         titleStr = title;
-        return mT;
+        return this;
     }
 
     /*
     * 设置外部是否可以点击
     * */
-    public T setOutsideClickable(boolean outsideClickable) {
+    public UtilDialogSingle setOutsideClickable(boolean outsideClickable) {
         this.outsideClickable = outsideClickable;
-        return mT;
+        return this;
     }
 
     /*
     * 禁用返回键
     * */
-    public T setForbiddenBackKey(boolean cancelable) {
+    public UtilDialogSingle setForbiddenBackKey(boolean cancelable) {
         this.cancelable = cancelable;
-        return mT;
+        return this;
     }
 
     /*
     * 设置title文字大小
     * */
-    public T setTitleSize(int titleSize){
+    public UtilDialogSingle setTitleSize(int titleSize){
         this.titleSize = titleSize;
-        return mT;
+        return this;
     }
     /*
     *设置title文字颜色
     * */
-    public T setTitleColor(int titleTextColor) {
+    public UtilDialogSingle setTitleColor(int titleTextColor) {
         this.titleTextColor =  res.getColorStateList(titleTextColor);
-        return mT;
+        return this;
     }
 
     /**
      * drawableId :可以是drawable资源文件、color值、一张图片
      */
-    public T setTitleBackgroundResId(int drawableId){
+    public UtilDialogSingle setTitleBackgroundResId(int drawableId){
         titleDrawable = res.getDrawable(drawableId);
-        return mT;
+        return this;
     }
 
     /**
      * 设置消息
      */
-    public T setMessage(String message) {
+    public UtilDialogSingle setMessage(String message) {
         if (message != null) {
             messageStr = message;
         }
-        return mT;
+        return this;
     }
-    public T setMessageTextSize(int messageSize){
+    public UtilDialogSingle setMessageTextSize(int messageSize){
         this.messageTextSize = messageSize;
-        return mT;
+        return this;
     }
-    public T setMessageTextColor(int messageTextColor){
+    public UtilDialogSingle setMessageTextColor(int messageTextColor){
         this.messageTextColor =  res.getColorStateList(messageTextColor);
-        return mT;
+        return this;
     }
 
     /*
     * 设置消息背景
     * */
-    public T setMessageBackgroundResId(int resId){
+    public UtilDialogSingle setMessageBackgroundResId(int resId){
         messageDrawable = res.getDrawable(resId);
-        return mT;
+        return this;
     }
 
     /**
      * 设置按钮
      */
-    public T setSingleBtnText(String rightBtnStr) {
+    public UtilDialogSingle setSingleBtnText(String rightBtnStr) {
         this.singleBtnStr = rightBtnStr;
-        return (T) this;
+        return (UtilDialogSingle) this;
     }
-    public T setSingleBtnTextColor(int colorId){
+    public UtilDialogSingle setSingleBtnTextColor(int colorId){
         this.singleBtnColor = res.getColorStateList(colorId);
-        return mT;
+        return this;
     }
-    public T setSingleBtnBackgroungRes(int leftBtnDrawableId) {
+    public UtilDialogSingle setSingleBtnBackgroungRes(int leftBtnDrawableId) {
         singleBtnDrawable = res.getDrawable(leftBtnDrawableId);
-        return mT;
+        return this;
     }
 
     /*
     * 作为Toast使用的时候
     * */
-    public T setToastDrawableId(int drawableId){
+    public UtilDialogSingle setToastDrawableId(int drawableId){
         toastDrawable = res.getDrawable(drawableId);
-        return mT;
+        return this;
     }
 
     /*
     *设置Toast
     * */
-    public T setToast(String messageStr, long timeDelay) {
+    public UtilDialogSingle setToast(String messageStr, long timeDelay) {
         titleStr = "";
         singleBtnStr = "";
         notToast = false;//是toast,则要调整相应的布局
@@ -513,7 +511,7 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
             }
         }, timeDelay);
 
-        return mT;
+        return this;
     }
 
 
@@ -521,17 +519,17 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
     * 设置消息内容的容器高度
     * */
 
-     public T setMessageHight(int messageHight) {
+     public UtilDialogSingle setMessageHight(int messageHight) {
         mScrollViewSize = messageHight;
-        return mT;
+        return this;
     }
 
 
-    public T setClickedAnimation(boolean clickedAnimation){
+    public UtilDialogSingle setClickedAnimation(boolean clickedAnimation){
         this.clickedAnimation = clickedAnimation;
-        return mT;
+        return this;
     }
-    public T setInOutAnimationStyle(int  inOutAnimationStyle){
+    public UtilDialogSingle setInOutAnimationStyle(int  inOutAnimationStyle){
         switch (inOutAnimationStyle){
             case ANIM_SLIDE_UP_DOWN:
                 this.inOutAnimationStyle = R.style.slide_up_down;
@@ -559,24 +557,24 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
                 break;
         }
 
-        return mT;
+        return this;
     }
-    public T setInnerInOutAnimationStyle(int  inOutAnimationStyle){
+    public UtilDialogSingle setInnerInOutAnimationStyle(int  inOutAnimationStyle){
         this.inOutAnimationStyle = inOutAnimationStyle;
-        return mT;
+        return this;
     }
 
 
     /*按钮的监听器*/
-    public T setOnSingleClicedkListener(OnSingleBtnClickedListener singleBtnClickedListener){
+    public UtilDialogSingle setOnSingleClicedkListener(OnSingleBtnClickedListener singleBtnClickedListener){
         this.singleBtnClickedListener = singleBtnClickedListener;
-        return mT;
+        return this;
     }
     /*
     * 设置宽高的缩放范围
     * 默认情况下：宽度为屏幕的3/4 ；高度为屏幕的1/3
     * */
-    public T setDialogScale(Float scaleWidth, Float scaleHeight){
+    public UtilDialogSingle setDialogScale(Float scaleWidth, Float scaleHeight){
         dialogScale = true;
         if (scaleWidth != null) {
             this.scaleWidth = scaleWidth;
@@ -584,7 +582,7 @@ public class UtilDialogSingle <T extends IDialogDoubleCallback>extends Dialog {
         if (scaleHeight != null) {
             this.scaleHeight = scaleHeight;
         }
-        return mT;
+        return this;
     }
 
     public UtilDialogSingle setDialogOffPos(Float offPosX, Float offPosY){
