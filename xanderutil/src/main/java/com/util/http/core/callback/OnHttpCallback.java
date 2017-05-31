@@ -8,7 +8,7 @@ public interface OnHttpCallback<T>{
     * 处理得到的输入流,运行在子线程
     * */
 
-    T   onDoing(InputStream inputStream);
+    T onThread(InputStream inputStream);
 
     /*
     * 返回到UI线程

@@ -21,7 +21,7 @@ public class HttpBitmapHelper extends HttpHelper<HttpBitmapHelper> {
     public void initHttpBitmapCallback(final IBitmapCallback bitmapCallback){
         new HttpTask<Bitmap>(new OnHttpCallback<Bitmap>() {
             @Override
-            public Bitmap onDoing(InputStream inputStream) {
+            public Bitmap onThread(InputStream inputStream) {
                 return BitmapFactory.decodeStream(inputStream);
             }
 

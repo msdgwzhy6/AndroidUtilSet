@@ -21,7 +21,7 @@ public class HttpStringHelper extends HttpHelper<HttpStringHelper> {
     public void initHttpStringCallback(final IStringCallback stringCallback){
         new HttpTask<String>(new OnHttpCallback<String>() {
             @Override
-            public String onDoing(InputStream inputStream) {
+            public String onThread(InputStream inputStream) {
                 InputStreamReader isr;
                 try {
                     isr = new InputStreamReader(inputStream,mCharset);

@@ -60,7 +60,7 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
             //check the result of connection
             if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream  = httpUrlCon.getInputStream();
-                return (T) mHttpCallback.onDoing(inputStream);
+                return (T) mHttpCallback.onThread(inputStream);
             }
 
         } catch (IOException e) {
