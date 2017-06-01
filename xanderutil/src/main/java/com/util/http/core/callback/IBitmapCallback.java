@@ -8,5 +8,5 @@ import android.graphics.Bitmap;
  */
 
 public interface IBitmapCallback extends IFailureCallback {
-    void onSuccess(Bitmap bitmap);
+    void onBitmapSuccess(Bitmap bitmap);
 }

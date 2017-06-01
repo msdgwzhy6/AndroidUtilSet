@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.http.asynctask.string.HttpStringHelper;
+import com.util.http.UtilHttpString;
 import com.util.http.core.callback.IStringCallback;
 
 public class HttpActivity extends BaseCompatActivity {
@@ -22,15 +22,15 @@ public class HttpActivity extends BaseCompatActivity {
 
     @Override
     protected void initData() {
-           new HttpStringHelper()
+           new UtilHttpString()
                 .get("http://www.imooc.com/api/teacher?type=4&num=30")
                 .addParam("type","4")
                 .addParam("num","30")
                 .setCharset("GBK")
         .initHttpStringCallback(new IStringCallback() {
             @Override
-            public void onStringResult(String result) {
-                Log.i("xxx", "onStringResult" +result);
+            public void onStringSuccess(String result) {
+                Log.i("xxx", "onStringSuccess" +result);
             }
 
             @Override

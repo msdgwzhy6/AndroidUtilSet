@@ -1,4 +1,4 @@
-package com.util.http.asynctask.string;
+package com.util.http;
 
 import com.util.http.core.HttpHelper;
 import com.util.http.core.HttpTask;
@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
  * function 处理字符串
  */
 
-public class HttpStringHelper extends HttpHelper<HttpStringHelper> {
+public class UtilHttpString extends HttpHelper<UtilHttpString> {
 
     @SuppressWarnings("unchecked")
     public void initHttpStringCallback(final IStringCallback stringCallback){
@@ -44,7 +44,7 @@ public class HttpStringHelper extends HttpHelper<HttpStringHelper> {
 
             @Override
             public void onSuccess(String s) {
-                stringCallback.onStringResult(s);
+                stringCallback.onStringSuccess(s);
             }
 
             @Override

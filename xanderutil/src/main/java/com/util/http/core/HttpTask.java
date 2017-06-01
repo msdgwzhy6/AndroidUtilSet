@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import static com.util.http.ConHttp.HTTP_TYPE_GET;
+import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 import static com.util.http.core.HttpHelper.HTTP_TYPE;
 import static com.util.http.core.HttpHelper.mHttpTimeout;
 

@@ -2,7 +2,7 @@ package com.util.http.core;
 
 import android.util.Log;
 
-import static com.util.http.ConHttp.HTTP_TYPE_GET;
+import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 
 /**
  * author xander on  2017/5/31.

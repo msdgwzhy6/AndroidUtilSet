@@ -1,4 +1,4 @@
-package com.util.http;
+package com.util.http.core;
 
 /**
  * author xander on  2017/5/31.

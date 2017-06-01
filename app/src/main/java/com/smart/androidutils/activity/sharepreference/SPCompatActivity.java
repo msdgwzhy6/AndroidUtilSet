@@ -14,7 +14,7 @@ import com.smart.androidutils.R;
 import com.util.UtilEncript;
 import com.util.file.UtilFile;
 import com.util.file.UtilSPSingleInstance;
-import com.util.http.asynctask.bitmap.HttpBitmapHelper;
+import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
 
 import butterknife.BindView;
@@ -63,10 +63,10 @@ public class SPCompatActivity extends BaseCompatActivity {
 
     @OnClick(R.id.id_btn_img_net)
     public void onMBtnImgNetClicked() {
-        new HttpBitmapHelper().get(urlImg)
+        new UtilHttpBitmap().get(urlImg)
                 .initHttpBitmapCallback(new IBitmapCallback() {
                     @Override
-                    public void onSuccess(Bitmap bitmap) {
+                    public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
                       /*  UtilSPSingleInstance.getInstance(mContext)
                                 .initSPFileName(TAG)

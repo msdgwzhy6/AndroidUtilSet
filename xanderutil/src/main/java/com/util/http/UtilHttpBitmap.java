@@ -1,8 +1,7 @@
-package com.util.http.asynctask.bitmap;
+package com.util.http;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
 
 import com.util.http.core.HttpHelper;
 import com.util.http.core.HttpTask;
@@ -16,7 +15,7 @@ import java.io.InputStream;
  * function 处理图片
  */
 
-public class HttpBitmapHelper extends HttpHelper<HttpBitmapHelper> {
+public class UtilHttpBitmap extends HttpHelper<UtilHttpBitmap> {
     @SuppressWarnings("unchecked")
     public void initHttpBitmapCallback(final IBitmapCallback bitmapCallback){
         new HttpTask<Bitmap>(new OnHttpCallback<Bitmap>() {
@@ -27,7 +26,7 @@ public class HttpBitmapHelper extends HttpHelper<HttpBitmapHelper> {
 
             @Override
             public void onSuccess(Bitmap bitmap) {
-                bitmapCallback.onSuccess(bitmap);
+                bitmapCallback.onBitmapSuccess(bitmap);
             }
 
             @Override
