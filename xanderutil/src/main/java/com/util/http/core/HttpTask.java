@@ -30,6 +30,9 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
     @Override
     @SuppressWarnings("unchecked")
     protected T doInBackground(String... params) {
+        if (isCancelled()) {
+            return null;
+        }
         if (params == null || params.length == 0) {
             return null;
         }
@@ -91,6 +94,8 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
     @SuppressWarnings("unchecked")
     protected void onPostExecute(T  s) {
         super.onPostExecute(s);
-        mHttpCallback.onSuccess(s);
+        if (s != null) {
+            mHttpCallback.onSuccess(s);
+        }
     }
 }
