@@ -11,18 +11,6 @@ import com.util.core.InitSDK;
 public class ConDialog {
     public static final String [] ITEMS_DIALOG = new String[]{
             InitSDK.getContext().getString(R.string.dialog_double),
-            InitSDK.getContext().getString(R.string.dialog_single),
-            InitSDK.getContext().getString(R.string.dialog_download),
-            InitSDK.getContext().getString(R.string.dialog_toast),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog),
-            InitSDK.getContext().getString(R.string.dialog)
+            InitSDK.getContext().getString(R.string.dialog_toast)
     };
 }

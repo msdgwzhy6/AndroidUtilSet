@@ -8,9 +8,7 @@ import com.smart.androidutils.CommonViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
 import com.util.dialog.OnDoubleBtnClickedListener;
-import com.util.dialog.OnSingleBtnClickedListener;
 import com.util.dialog.UtilDialogDouble;
-import com.util.dialog.UtilDialogSingle;
 import com.util.dialog.UtilDialogToast;
 
 import java.util.List;
@@ -40,28 +38,6 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
                         @Override
                         public void onRightBtnClick(Dialog utilDialogDouble) {
                              utilDialogDouble.dismiss();
-                        }
-                    }).show();
-        }
-        else if (mItemName.equals(context.getResources().getString(R.string.dialog_single))) {
-            /*new UtilDialogDouble(mActivity).setTitle("默认背景色")
-                    .setMessage("默认背景色")
-                    .setSingleBtnTextR("one")
-                    .setOnSingleClicedkListener(new OnSingleBtnClickedListener() {
-                        @Override
-                        public void onRightBtnClick(UtilDialogDouble utilDialogDouble) {
-                            utilDialogDouble.dismiss();
-                        }
-                    })
-                    .show();*/
-            new UtilDialogSingle(mActivity)
-                    .setTitle("单个按钮的对话框")
-                    .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
-                    .setOutsideClickable(true)
-                    .setOnSingleClicedkListener(new OnSingleBtnClickedListener() {
-                        @Override
-                        public void onRightBtnClick(Dialog dialog) {
-                            dialog.dismiss();
                         }
                     }).show();
         }
