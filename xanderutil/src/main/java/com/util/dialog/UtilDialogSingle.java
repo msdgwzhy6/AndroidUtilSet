@@ -33,8 +33,10 @@ import static com.util.dialog.Constant.ANIM_SLIDE_UP_DOWN;
 
 
 /**
- * Created by xu on 2017/3/3.
+ * author xander on  2017/3/3.
+ * function  此类准备废除
  */
+@Deprecated
 public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
     protected Resources res;
     Activity mContext;
@@ -104,11 +106,13 @@ public class UtilDialogSingle<T extends UtilDialogSingle> extends Dialog {
     private OnSingleBtnClickedListener singleBtnClickedListener;//左侧按钮被点击了的监听器
 
 
+    @Deprecated
     public UtilDialogSingle(Activity context) {
         this(context, R.style.MyTechDialog);
     }
 
-    UtilDialogSingle(Activity context, int themeResId) {
+    @SuppressWarnings("unchecked")
+    private UtilDialogSingle(Activity context, int themeResId) {
         super(context, themeResId);
         mContext = context;
         res = mContext.getResources();

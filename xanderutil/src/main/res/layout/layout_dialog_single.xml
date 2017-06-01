@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="vertical">
     <LinearLayout
@@ -25,8 +25,6 @@
             android:layout_height="1dp"
             android:background="@color/title_msg_line"/>
     </LinearLayout>
-
     <include layout="@layout/dialog_message_layout"/>
-
     <include layout="@layout/dialog_single_button_layout"/>
 </LinearLayout>

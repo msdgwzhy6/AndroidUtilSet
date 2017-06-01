@@ -7,7 +7,7 @@ import android.app.Activity;
  * function
  */
 
-public class UtilToas {
+public class UtilToast {
     public static void toast(String msg, Activity activity, int time) {
        /* new UtilDialogDouble(activity)
                 .setToast(msg,time)

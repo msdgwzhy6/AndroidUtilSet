@@ -11,6 +11,7 @@ import com.util.dialog.OnDoubleBtnClickedListener;
 import com.util.dialog.OnSingleBtnClickedListener;
 import com.util.dialog.UtilDialogDouble;
 import com.util.dialog.UtilDialogSingle;
+import com.util.dialog.UtilDialogToast;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
                     })
                     .show();*/
             new UtilDialogSingle(mActivity)
-                    .setTitle("设置了背景色")
+                    .setTitle("单个按钮的对话框")
                     .setMessage(MORE_TEXT_MSG+MORE_TEXT_MSG+MORE_TEXT_MSG)
                     .setOutsideClickable(true)
                     .setOnSingleClicedkListener(new OnSingleBtnClickedListener() {
@@ -64,36 +65,10 @@ public class DialogViewHolerHelper extends CommonViewHolderHelper {
                         }
                     }).show();
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.dialog_download_data))) {
-            String apkUrl = "http://hiao.com/android/bus/QingDaoBus.apk";
-           /* new UtilDownloadUtilDialog(mActivity)
-                    .setTitle("您确定要下载么？")
-                    .setTitleBackgroundResId(R.mipmap.ic_launcher)
-                    .setDownloadBtnText("取消", "确定")
-                    .setInOutAnimationStyle(R.style.slide_left_right)
-                    .setLeftBtnTextColor(R.color.white)
-//                    .setDoubleBtnBackgroungRes(R.drawable.left_btn_bg, R.drawable.right_btn_bg)
-                    .setMessage("cccccccc")
-                    .setDownloadUrl(apkUrl, "")
-                    .setClickedAnimation(true)
-                    .setOnDownloadListener(new OnDownloadApkListener() {
-                        @Override
-                        public void result(UtilDialogDouble dialogCustom) {
-                            dialogCustom.dismiss();
-                        }
-
-                        @Override
-                        public void onFailure(Exception e, UtilDialogDouble dialogCustom) {
-                            dialogCustom.dismiss();
-                        }
-                    }).show();*/
-        }
         else if (mItemName.equals(context.getResources().getString(R.string.dialog_toast))) {
-            /*new UtilDialogDouble(mActivity)
+            new UtilDialogToast(mActivity)
                     .setToast("发撒好方法放假还是发生了疯狂就爱疯了",2000)
-                    .setToastDrawableId(R.drawable.dialog_bg)
-                    .setDialogOffPos(null,0.2f)
-                    .show();*/
+                    .show();
         }
     }
 }
