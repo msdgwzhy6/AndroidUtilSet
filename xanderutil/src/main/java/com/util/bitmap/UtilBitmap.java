@@ -30,7 +30,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 import com.util.file.UtilFile;
 import com.util.file.UtilsCloseIO;
 
@@ -720,7 +720,7 @@ public final class UtilBitmap {
         if (isEmptyBitmap(src)) return null;
         RenderScript rs = null;
         try {
-            rs = RenderScript.create(InitUtil.getContext());
+            rs = RenderScript.create(InitSDK.getContext());
             rs.setMessageHandler(new RenderScript.RSMessageHandler());
             Allocation input = Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation
                     .USAGE_SCRIPT);

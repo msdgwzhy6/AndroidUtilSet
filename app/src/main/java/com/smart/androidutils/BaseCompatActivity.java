@@ -3,6 +3,8 @@ package com.smart.androidutils;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 /*
 * activity的基类
@@ -20,6 +22,11 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initSystemUI();
+        if (mFullScreen) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         setContentView(initLayout());
 
         setActivityTitle();
@@ -27,13 +34,16 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         if (mIsAllowScreenRoate) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//只能是竖屏
         }
-
         initView();
         initData();
 
         bindDataToView();
 
         setListener();
+    }
+
+    protected void initSystemUI() {
+
     }
 
     /**
@@ -51,7 +61,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     /*
     * 初始化数据
     * */
-    protected abstract void initData();
+    protected void initData(){};
 
 
     /**

@@ -18,7 +18,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.util.Xml;
 
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 import com.util.permission.PermissionCallback;
 import com.util.permission.PermissionHelper;
 import com.util.permission.PermissionTypes;
@@ -49,7 +49,7 @@ import static com.util.phone.UtilNet.isActiveConnected;
  */
 
 public final class UitlDevice {
-    private static TelephonyManager tm = (TelephonyManager) InitUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);;
+    private static TelephonyManager tm = (TelephonyManager) InitSDK.getContext().getSystemService(Context.TELEPHONY_SERVICE);;
     /**
      * 判断设备是否是手机
      *
@@ -271,7 +271,7 @@ public final class UitlDevice {
 
     //是否wifi连接
     private static boolean isWifiConnected() {
-        Context context = InitUtil.getContext();
+        Context context = InitSDK.getContext();
         if (context != null) {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -314,7 +314,7 @@ public final class UitlDevice {
         SystemClock.sleep(3000);
         ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         // 1.获取内容解析者
-        ContentResolver resolver = InitUtil.getContext().getContentResolver();
+        ContentResolver resolver = InitSDK.getContext().getContentResolver();
         // 2.获取内容提供者的地址:com.android.contacts
         // raw_contacts表的地址 :raw_contacts
         // view_data表的地址 : data
@@ -383,7 +383,7 @@ public final class UitlDevice {
     public static void getAllSMS() {
         // 1.获取短信
         // 1.1获取内容解析者
-        ContentResolver resolver = InitUtil.getContext().getContentResolver();
+        ContentResolver resolver = InitSDK.getContext().getContentResolver();
         // 1.2获取内容提供者地址   sms,sms表的地址:null  不写
         // 1.3获取查询路径
         Uri uri = Uri.parse("content://sms");
@@ -464,7 +464,7 @@ public final class UitlDevice {
 
         } catch (IOException ignored) {
         }
-        return Formatter.formatFileSize(InitUtil.getContext(), initial_memory);// Byte转换为KB或者MB，内存大小规格化
+        return Formatter.formatFileSize(InitSDK.getContext(), initial_memory);// Byte转换为KB或者MB，内存大小规格化
     }
     /**
      * 获取当前可用内存大小
@@ -472,10 +472,10 @@ public final class UitlDevice {
      *
      */
     public static String getAvailMemory() {
-        ActivityManager am = (ActivityManager) InitUtil.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) InitSDK.getContext().getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         am.getMemoryInfo(mi);
-        return Formatter.formatFileSize(InitUtil.getContext(), mi.availMem);
+        return Formatter.formatFileSize(InitSDK.getContext(), mi.availMem);
     }
     /**
      * 获得SD卡总大小
@@ -487,7 +487,7 @@ public final class UitlDevice {
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long totalBlocks = stat.getBlockCount();
-        return Formatter.formatFileSize(InitUtil.getContext(), blockSize * totalBlocks);
+        return Formatter.formatFileSize(InitSDK.getContext(), blockSize * totalBlocks);
     }
 
     /**
@@ -499,7 +499,7 @@ public final class UitlDevice {
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
         long availableBlocks = stat.getAvailableBlocks();
-        return Formatter.formatFileSize(InitUtil.getContext(), blockSize * availableBlocks);
+        return Formatter.formatFileSize(InitSDK.getContext(), blockSize * availableBlocks);
     }
 
 }

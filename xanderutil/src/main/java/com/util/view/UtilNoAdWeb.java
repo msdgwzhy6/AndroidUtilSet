@@ -17,7 +17,7 @@ import static com.util.file.UtilFile.readSourceFromUrl;
  * function
  */
 
-public final class WebViewNoAd extends AsyncTask<String, Void, String> {
+public final class UtilNoAdWeb extends AsyncTask<String, Void, String> {
     private WebView mWebView;
     private String baseUrl;
     private String mCharset;
@@ -26,7 +26,7 @@ public final class WebViewNoAd extends AsyncTask<String, Void, String> {
      *webView
      *charset 网页的编码格式
      */
-    public WebViewNoAd(WebView webView, String charset) {
+    public UtilNoAdWeb(WebView webView, String charset) {
         mWebView = webView;
         mCharset = charset;
     }

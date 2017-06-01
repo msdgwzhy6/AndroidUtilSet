@@ -208,6 +208,7 @@ public final class UtilSPSingleInstance {
     *  The key that stores the object, and all non base data types must implement the serialization interface
     * 
     */
+   @SuppressWarnings("unchecked")
    public <T extends Serializable> T getBean(String key) {
       if (TextUtils.isEmpty(key)) {
          throw new NullPointerException("没有找到与"+key+"匹配的键");

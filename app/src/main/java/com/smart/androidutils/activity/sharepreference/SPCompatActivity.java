@@ -3,16 +3,13 @@ package com.smart.androidutils.activity.sharepreference;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.UtilEncript;
-import com.util.file.UtilFile;
 import com.util.file.UtilSPSingleInstance;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
@@ -68,16 +65,17 @@ public class SPCompatActivity extends BaseCompatActivity {
                     @Override
                     public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
-                      /*  UtilSPSingleInstance.getInstance(mContext)
+                        UtilSPSingleInstance.getInstance(mContext)
                                 .initSPFileName(TAG)
                                 .putBitmap(UtilEncript.getMD5(urlImg),bitmap)
-                                .submit();*/
+                                .submit();
                     }
 
                     @Override
-                    public void onFailure(Exception e) {
-                        Log.i(TAG, "onFailure" +e.getMessage());
+                    public void onBitmapFailure(Exception e) {
+                        Log.i("xxx", "onFailure" +e.getMessage());
                     }
+
                 });
 
 
@@ -87,33 +85,6 @@ public class SPCompatActivity extends BaseCompatActivity {
     @OnClick(R.id.id_btn_img_sp)
     public void onMBtnImgSpClicked() {
 
-       /* mBitmap = UtilSPSingleInstance.getInstance(mContext)
-                .initSPFileName(TAG)
-                .getBitmap(UtilEncript.getMD5(urlImg))
-                ;
-        mImgViewSp.setImageBitmap(getBitmapDefault("cut"));*/
-           new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mBitmap = UtilFile.getNetBitmap(R.mipmap.ios,urlImg);
-                if (mBitmap == null) {
-                    Looper.prepare();
-                    Toast.makeText(mContext, "网络图片为空", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-                UtilSPSingleInstance.getInstance(mContext)
-                        .initSPFileName(TAG)
-                        .putBitmap(UtilEncript.getMD5(urlImg),mBitmap)
-                        .submit();
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mImgViewNet.setImageBitmap(mBitmap);
-                    }
-                });
-
-            }
-        }).start();
     }
 
 }

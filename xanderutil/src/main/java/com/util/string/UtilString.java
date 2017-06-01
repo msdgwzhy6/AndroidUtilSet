@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.util.http.core.HttpHelper.mCharset;
 
 /**
  * author xander on  2017/5/25.

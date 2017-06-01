@@ -7,4 +7,5 @@ package com.util.http.core.callback;
 
 public interface IFailureCallback {
     void onFailure(Exception e);
+
 }

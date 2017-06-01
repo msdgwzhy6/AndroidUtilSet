@@ -13,7 +13,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,7 +39,7 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
     private Context mContext;
 
     private PermissionHelper() {
-        mContext = InitUtil.getContext();
+        mContext = InitSDK.getContext();
     }
 
     public static PermissionHelper getInstance() {

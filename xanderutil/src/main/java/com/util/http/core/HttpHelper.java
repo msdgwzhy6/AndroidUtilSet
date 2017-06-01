@@ -1,6 +1,6 @@
 package com.util.http.core;
 
-import android.util.Log;
+import android.text.TextUtils;
 
 import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 
@@ -12,19 +12,22 @@ import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 public class HttpHelper <T extends HttpHelper>{
     protected String mUrl;
     static int HTTP_TYPE;
-    public static  String mCharset = "utf-8";
     static int mHttpTimeout = 2000;
-    public HttpHelper() {
-
-    }
+    private T instance;
     @SuppressWarnings("unchecked")
+    public HttpHelper() {
+        instance = (T) this;
+    }
+
     public T get(String url){
         mUrl = url;
         HTTP_TYPE = HTTP_TYPE_GET;
-        return (T) this;
+        return instance;
     }
-    @SuppressWarnings("unchecked")
     public T addParam(String key,String value){
+        if (TextUtils.isEmpty(key)) {
+            return instance;
+        }
         switch (HTTP_TYPE){
             case HTTP_TYPE_GET:
                 if (!mUrl.contains("?")) {
@@ -32,20 +35,14 @@ public class HttpHelper <T extends HttpHelper>{
                 } else  {
                     mUrl = mUrl + "&"+ key +"="+value;
                 }
-                Log.i("xxx", "addParam" +mUrl);
                 break;
         }
-        return (T) this;
+        return instance;
     }
-    @SuppressWarnings("unchecked")
-    public T setCharset(String  charset){
-        mCharset  = charset;
-        return (T) this;
-    }
-    @SuppressWarnings("unchecked")
+
     public T setTimeout(int timeout){
         mHttpTimeout = timeout;
-        return (T) this;
+        return instance;
     }
 
 }

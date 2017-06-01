@@ -15,6 +15,12 @@ import static com.util.string.UtilString.is2String;
  */
 
 public class UtilHttpString extends HttpHelper<UtilHttpString> {
+    private static  String mCharset = "utf-8";
+    @SuppressWarnings("unchecked")
+    public UtilHttpString setCharset(String  charset){
+        mCharset  = charset;
+        return   this;
+    }
 
     @SuppressWarnings("unchecked")
     public void initHttpStringCallback(final IStringCallback stringCallback){

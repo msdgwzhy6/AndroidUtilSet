@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 
 /**
  * author xander on  2017/5/24.
@@ -17,14 +17,14 @@ public final class UtilNet {
     private static NetworkInfo mActiveNetworkInfo;//当前正在活动的网络
 
     static {
-        Context context = InitUtil.getContext();
+        Context context = InitSDK.getContext();
         if (context != null) {
             mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (mConnectivityManager == null) {
                 throw new NullPointerException("ConnectivityManager  is null！");
             }
         }else {
-            throw new NullPointerException("Please initialise  InitUtil.init(Context mContext) in your Application or Activity before using Context！After you can get global variable by InitUtil.getContext()");
+            throw new NullPointerException("Please initialise  InitSDK.init(Context mContext) in your Application or Activity before using Context！After you can get global variable by InitSDK.getContext()");
         }
     }
 
@@ -48,7 +48,8 @@ public final class UtilNet {
 
     /** 判断当前是否有网络连接
      *toast 是否开启内置的信息提示
-     * 
+     *  ture 开启弹窗提示用户
+     *  false 不提示用户
      */
     public static boolean isActiveConnected(boolean toast) {
         mActiveNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
@@ -57,7 +58,7 @@ public final class UtilNet {
         }
         if (toast) {
             Looper.prepare();
-            Toast.makeText(InitUtil.getContext(), "网络没有连接", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InitSDK.getContext(), "网络没有连接", Toast.LENGTH_SHORT).show();
             Looper.loop();
         }
         return false;

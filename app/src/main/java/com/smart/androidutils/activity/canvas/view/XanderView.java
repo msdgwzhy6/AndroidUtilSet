@@ -1,7 +1,6 @@
 package com.smart.androidutils.activity.canvas.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,10 +9,6 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-
-import com.util.UtilEncript;
-import com.util.core.InitUtil;
-import com.util.file.UtilSPOnlyPead;
 
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_BITMAP;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_CIRCLE;
@@ -111,7 +106,7 @@ public class XanderView extends View implements IDrawType{
 
     @Override
     public void onDrawBitmap(Canvas canvas) {
-       /* Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
+       /* Bitmap bitmap = UtilSPOnlyPead.getInstance(InitSDK.getContext())
                 .initSPFileName("cut")
                 .getBitmap(UtilEncript.getMD5("cut"));
         assert bitmap != null;*/

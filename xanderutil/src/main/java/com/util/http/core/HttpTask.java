@@ -1,13 +1,16 @@
 package com.util.http.core;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import com.util.http.core.callback.OnHttpCallback;
+import com.util.phone.UtilNet;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 import static com.util.http.core.HttpHelper.HTTP_TYPE;
 import static com.util.http.core.HttpHelper.mHttpTimeout;
@@ -22,7 +25,7 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
     public HttpTask(OnHttpCallback httpCallback) {
         mHttpCallback = httpCallback;
     }
-
+    private Handler mHandler = new Handler();
 
     @Override
     @SuppressWarnings("unchecked")
@@ -56,6 +59,9 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
                     break;
 
             }
+            if (!UtilNet.isActiveConnected(true)) {
+                return null;
+            }
             httpUrlCon.connect();
             //check the result of connection
             if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -63,10 +69,16 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
                 return (T) mHttpCallback.onThread(inputStream);
             }
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             //如果需要处理超时，可以在这里写
-            mHttpCallback.onFailure(e);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mHttpCallback.onFailure(e);
+                }
+            });
+
         } finally {
             if (httpUrlCon != null) {
                 httpUrlCon.disconnect(); // 断开连接
@@ -79,6 +91,6 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
     @SuppressWarnings("unchecked")
     protected void onPostExecute(T  s) {
         super.onPostExecute(s);
-            mHttpCallback.onSuccess(s);
+        mHttpCallback.onSuccess(s);
     }
 }

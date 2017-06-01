@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.dialog;
 
 import com.smart.androidutils.R;
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 
 /**
  * author xander on  2017/5/27.
@@ -10,19 +10,19 @@ import com.util.core.InitUtil;
 
 public class ConDialog {
     public static final String [] ITEMS_DIALOG = new String[]{
-            InitUtil.getContext().getString(R.string.dialog_double),
-            InitUtil.getContext().getString(R.string.dialog_single),
-            InitUtil.getContext().getString(R.string.dialog_download),
-            InitUtil.getContext().getString(R.string.dialog_toast),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog),
-            InitUtil.getContext().getString(R.string.dialog)
+            InitSDK.getContext().getString(R.string.dialog_double),
+            InitSDK.getContext().getString(R.string.dialog_single),
+            InitSDK.getContext().getString(R.string.dialog_download),
+            InitSDK.getContext().getString(R.string.dialog_toast),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog),
+            InitSDK.getContext().getString(R.string.dialog)
     };
 }

@@ -27,12 +27,19 @@ public class UtilHttpBitmap extends HttpHelper<UtilHttpBitmap> {
 
             @Override
             public void onSuccess(Bitmap bitmap) {
-                bitmapCallback.onBitmapSuccess(bitmap);
+                if (bitmap != null) {
+                    bitmapCallback.onBitmapSuccess(bitmap);
+                }
+
             }
 
             @Override
             public void onFailure(Exception e) {
-            bitmapCallback.onFailure(e);
+                /*
+                * 如果获取失败，就返回错误信息和一张默认的图片
+                * 默认图片 可以有用户指定
+                * */
+                bitmapCallback.onBitmapFailure(e);
             }
         }).execute(mUrl);
     }

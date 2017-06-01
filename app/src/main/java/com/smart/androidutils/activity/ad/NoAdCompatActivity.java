@@ -16,7 +16,7 @@ import android.widget.Button;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.view.WebViewNoAd;
+import com.util.view.UtilNoAdWeb;
 
 import static com.smart.androidutils.constant.ConMainUrl.urlMR;
 import static com.util.view.UtilWidget.getView;
@@ -70,7 +70,7 @@ public class NoAdCompatActivity extends BaseCompatActivity {
             public void onClick(final View v) {
                 setViewAlphaAnimation(mButtonOn);
                 setTitle(getResources().getString(R.string.control_no_ad_on));
-                new WebViewNoAd(mIdWebView,"gb2312").execute(urlMR);
+                new UtilNoAdWeb(mIdWebView,"gb2312").execute(urlMR);
             }
         });
     }

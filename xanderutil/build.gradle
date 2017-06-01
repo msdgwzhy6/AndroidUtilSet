@@ -99,7 +99,8 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "xander"    //发布到JCenter上的项目名字，必须填写(新库修改)=================================================================================================
+        name = "xander"
+        //发布到JCenter上的项目名字，必须填写(新库修改)=================================================================================================
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
@@ -108,7 +109,7 @@ bintray {
 }
 
 javadoc {
-    options{
+    options {
         encoding "UTF-8"
         charSet 'UTF-8'
         author true

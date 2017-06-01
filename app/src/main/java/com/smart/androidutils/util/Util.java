@@ -2,7 +2,7 @@ package com.smart.androidutils.util;
 
 import android.graphics.Bitmap;
 
-import com.util.core.InitUtil;
+import com.util.core.InitSDK;
 import com.util.file.UtilSPOnlyPead;
 import com.util.file.UtilSPSingleInstance;
 
@@ -13,7 +13,7 @@ import com.util.file.UtilSPSingleInstance;
 
 public class Util {
   public static Bitmap getBitmapDefault(String key){
-      Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
+      Bitmap bitmap = UtilSPOnlyPead.getInstance(InitSDK.getContext())
               .initSPFileName()
               .getBitmap(key);
       if (bitmap == null) {
@@ -25,7 +25,7 @@ public class Util {
       if (bitmap == null) {
           throw new NullPointerException("bitmap is null");
       }
-      UtilSPSingleInstance.getInstance(InitUtil.getContext())
+      UtilSPSingleInstance.getInstance(InitSDK.getContext())
               .initSPFileName()
               .putBitmap(key,bitmap)
               .submit();

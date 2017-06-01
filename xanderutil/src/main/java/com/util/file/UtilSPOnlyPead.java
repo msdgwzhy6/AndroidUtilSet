@@ -21,7 +21,7 @@ import static android.util.Base64.URL_SAFE;
  * 这个类设计为只读SP，为了避免你在一个类里存在读取的时候，读取不同文件下的数据造成空指针的问题
  * 举个栗子：
  *         1 ......  地方先用了保存数据，文件名为 cut
- *          Bitmap bitmap = UtilSPOnlyPead.getInstance(InitUtil.getContext())
+ *          Bitmap bitmap = UtilSPOnlyPead.getInstance(InitSDK.getContext())
                                         .initSPFileName("cut")//................................... 1
                                         .getBitmap(UtilEncript.getMD5("cut"));
             assert bitmap != null;
@@ -147,13 +147,12 @@ public final class UtilSPOnlyPead {
     */
    public  Bitmap getBitmap(String key){
       String temp = getString(key);
-      if (TextUtils.isEmpty(temp)) {
-//         Log.i("xxx", "getBitmap" +mFileName);
-         throw new NullPointerException("没有找到与"+key+"匹配的键");
+      if (!TextUtils.isEmpty(temp)) {
+         ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
+         BitmapFactory.Options options = new BitmapFactory.Options();
+         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+         return BitmapFactory.decodeStream(bais, null, options);
       }
-      ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(temp.getBytes(), Base64.DEFAULT));
-      BitmapFactory.Options options = new BitmapFactory.Options();
-      options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-      return BitmapFactory.decodeStream(bais, null, options);
+    return null;
    }
 }

@@ -7,7 +7,7 @@ import android.content.Context;
 
  */
 
-public final class InitUtil {
+public final class InitSDK {
     protected static Context context;
     /**
      * 初始化工具类
@@ -15,7 +15,7 @@ public final class InitUtil {
      *  context 上下文
      */
     public static void init(Context context) {
-        InitUtil.context = context.getApplicationContext();
+        InitSDK.context = context.getApplicationContext();
     }
 
     /**

@@ -6,9 +6,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.util.core.InitUtil;
-import com.util.phone.UtilNet;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -25,8 +22,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.util.UtilEncript.getMD5;
 
 /***************************************************************************
  * author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
@@ -235,100 +230,6 @@ public final class  UtilFile {
         }
     }
 
-
-    /**
-     * Just get a picture from the Internet
-     *  imgUrl
-     * 
-     */
-    public static Bitmap getNetBitmap(int id,String imgUrl){
-        URL url ;
-        Bitmap bitmap = null;
-        try {
-            url = new URL(imgUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            if (!UtilNet.isActiveConnected(false));
-            InputStream is = conn.getInputStream();
-            bitmap =  BitmapFactory.decodeStream(is);
-        } catch (IOException e) {
-            bitmap = BitmapFactory.decodeResource(InitUtil.getContext().getResources(),id);
-        }
-        return bitmap;
-    }
-    public static Bitmap getNetBitmap(String imgUrl){
-        URL url ;
-        Bitmap bitmap = null;
-        try {
-            url = new URL(imgUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            if (!UtilNet.isActiveConnected(false));
-            InputStream is = conn.getInputStream();
-            bitmap =  BitmapFactory.decodeStream(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-    /**
-     * @说明： Save picture to local
-     */
-    private static String rootDir = Environment.getExternalStorageDirectory() .getAbsolutePath()+ File.separator;
-    /**
-     * Get a picture from the network and save it to the SD card
-     *  imgUrl URL of the picture
-     *  fileName File name stored
-     *  Picture file form
-     */
-    public static String getNetBitmap2Save(String imgUrl,  String fileName){
-        Bitmap bitmap =  getNetBitmap(imgUrl);
-        if (TextUtils.isEmpty(fileName)) {
-            fileName = "img_cache";
-        }
-        String pathName = rootDir  + fileName + File.separator;
-
-        /*
-        * create directory
-        * */
-        File imgDir = new File(pathName);
-        if (!imgDir.exists()) {
-            if (!imgDir.mkdirs()) {
-                return "保存失败！";
-            };
-        }
-
-        /*
-        * create a file
-        * */
-        String imgName = getMD5(imgUrl)+".png";
-        File imageFile = new File(imgDir,imgName);//文件
-
-        FileOutputStream out = null;
-        if (imageFile.exists()) {
-            if (!imageFile.delete()) {
-                return "删除旧文件失败！";
-            };
-        }
-        try{
-            if (!imageFile.createNewFile()) {
-                return "创建文件失败！";
-            }
-            out = new FileOutputStream(imageFile);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            try {
-                if (out != null) {
-                    out.flush();
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return imageFile.getAbsolutePath();
-    }
-
     /**
      * Get a bitmap by specifying the local path of the image
      *  bitmapPath  Absolute path of local file
@@ -468,11 +369,6 @@ public final class  UtilFile {
             URL url = new URL(urlParam); //根据Strng表现形式创建URL对象
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();//返回一个 URLConnection 对象，它表示到 URL 所引用的远程对象的连接
-
-            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentEncoding());
-            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentType());
-            Log.i(TAG, "readSourceFromUrl: "+urlConnection.getContentType().length());
-            //urlConnection.setConnectTimeout(4000); //设置链接超时
 
             is = urlConnection.getInputStream();//返回从打开的连接中读取到的输入流对象
             Pattern pattern = Pattern.compile("charset=\\S*");
