@@ -50,9 +50,9 @@ import java.io.OutputStream;
  *     time  : 2016/08/12
  *     desc  : 图片相关工具类
  */
-public final class UtilsImage {
+public final class UtilBitmap {
 
-    private UtilsImage() {
+    private UtilBitmap() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

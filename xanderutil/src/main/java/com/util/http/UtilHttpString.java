@@ -2,13 +2,12 @@ package com.util.http;
 
 import com.util.http.core.HttpHelper;
 import com.util.http.core.HttpTask;
-import com.util.http.core.callback.OnHttpCallback;
 import com.util.http.core.callback.IStringCallback;
+import com.util.http.core.callback.OnHttpCallback;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import static com.util.string.UtilString.is2String;
 
 /**
  * author xander on  2017/5/31.
@@ -22,31 +21,12 @@ public class UtilHttpString extends HttpHelper<UtilHttpString> {
         new HttpTask<String>(new OnHttpCallback<String>() {
             @Override
             public String onThread(InputStream inputStream) {
-                InputStreamReader isr;
-                try {
-                    isr = new InputStreamReader(inputStream,mCharset);
-
-                    BufferedReader br = new BufferedReader(isr);
-                    String line;
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while((line = br.readLine()) != null)
-                    {
-                        stringBuilder.append(line).append("\n");
-                    }
-                    return stringBuilder.toString();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    stringCallback.onFailure(e);
-                }
-
-                return null;
+                return is2String(inputStream,mCharset);
             }
-
             @Override
             public void onSuccess(String s) {
                 stringCallback.onStringSuccess(s);
             }
-
             @Override
             public void onFailure(Exception e) {
                 stringCallback.onFailure(e);

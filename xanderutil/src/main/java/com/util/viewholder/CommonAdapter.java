@@ -68,6 +68,7 @@ public class CommonAdapter<BEAN extends CommonAdapter.IBaseBean> extends BaseAda
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(mItemViewLayout,parent,false);

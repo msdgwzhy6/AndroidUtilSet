@@ -1,5 +1,12 @@
 package com.util.string;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static com.util.http.core.HttpHelper.mCharset;
+
 /**
  * author xander on  2017/5/25.
  * function 字符串相关工具类
@@ -180,4 +187,25 @@ public final class UtilString {
         return new String(chars);
     }
 
+    /*
+    * 将输入流转换为字符串
+    * */
+    public static String is2String(InputStream inputStream,String charset){
+        InputStreamReader isr;
+        try {
+            isr = new InputStreamReader(inputStream,charset);
+
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while((line = br.readLine()) != null)
+            {
+                stringBuilder.append(line).append("\n");
+            }
+            return stringBuilder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }

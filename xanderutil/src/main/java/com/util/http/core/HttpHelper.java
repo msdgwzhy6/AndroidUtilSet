@@ -11,17 +11,19 @@ import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
 
 public class HttpHelper <T extends HttpHelper>{
     protected String mUrl;
-    public static int HTTP_TYPE;
+    static int HTTP_TYPE;
     public static  String mCharset = "utf-8";
-    public static int mHttpTimeout = 2000;
+    static int mHttpTimeout = 2000;
     public HttpHelper() {
 
     }
+    @SuppressWarnings("unchecked")
     public T get(String url){
         mUrl = url;
         HTTP_TYPE = HTTP_TYPE_GET;
         return (T) this;
     }
+    @SuppressWarnings("unchecked")
     public T addParam(String key,String value){
         switch (HTTP_TYPE){
             case HTTP_TYPE_GET:
@@ -35,10 +37,12 @@ public class HttpHelper <T extends HttpHelper>{
         }
         return (T) this;
     }
+    @SuppressWarnings("unchecked")
     public T setCharset(String  charset){
         mCharset  = charset;
         return (T) this;
     }
+    @SuppressWarnings("unchecked")
     public T setTimeout(int timeout){
         mHttpTimeout = timeout;
         return (T) this;
