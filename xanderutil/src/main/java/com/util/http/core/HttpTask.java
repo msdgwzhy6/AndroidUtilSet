@@ -43,10 +43,10 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
             httpUrlCon = (HttpURLConnection) httpUrl.openConnection();
             httpUrlCon.setConnectTimeout(mHttpTimeout);// 建立连接超时时间
             httpUrlCon.setReadTimeout(mHttpTimeout);//数据传输超时时间，很重要，必须设置。
-            httpUrlCon.setDoInput(true); // 向连接中写入数据
+            /*httpUrlCon.setDoInput(true); // 向连接中写入数据
             httpUrlCon.setDoOutput(true); // 从连接中读取数据
             httpUrlCon.setUseCaches(false); // 禁止缓存
-            httpUrlCon.setInstanceFollowRedirects(true);
+            httpUrlCon.setInstanceFollowRedirects(true);*/
             switch (HTTP_TYPE) {
                 case HTTP_TYPE_GET:
                     httpUrlCon.setRequestMethod("GET");// 设置请求类型为
@@ -67,10 +67,12 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
             }
             httpUrlCon.connect();
             //check the result of connection
-            if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            /*if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream  = httpUrlCon.getInputStream();
                 return (T) mHttpCallback.onThread(inputStream);
-            }
+            }*/
+            InputStream inputStream  = httpUrlCon.getInputStream();
+            return (T) mHttpCallback.onThread(inputStream);
 
         } catch (final IOException e) {
             e.printStackTrace();

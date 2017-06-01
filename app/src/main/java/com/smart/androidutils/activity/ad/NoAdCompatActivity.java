@@ -70,7 +70,7 @@ public class NoAdCompatActivity extends BaseCompatActivity {
             public void onClick(final View v) {
                 setViewAlphaAnimation(mButtonOn);
                 setTitle(getResources().getString(R.string.control_no_ad_on));
-                new UtilNoAdWeb(mIdWebView,"gb2312").execute(urlMR);
+                new UtilNoAdWeb(mIdWebView,"gb2312", urlMR);
             }
         });
     }

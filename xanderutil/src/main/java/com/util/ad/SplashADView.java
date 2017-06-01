@@ -14,7 +14,6 @@ import com.util.file.UtilSPOnlyPead;
 import com.util.file.UtilSPSingleInstance;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
-import com.util.view.UtilNoAdWeb;
 
 import static com.util.UtilEncript.getMD5;
 import static com.util.view.UtilWidget.setWebView;
@@ -70,7 +69,7 @@ public final class SplashADView implements ExitButtonListener{
                 * */
                 mImageView.setVisibility(View.GONE);
                 String url = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
-                new UtilNoAdWeb(mWebView,"gb2312").execute(url);
+//                new UtilNoAdWeb(mWebView,"gb2312", url).execute(url);
                 setWebView(mWebView);
             }
         });
