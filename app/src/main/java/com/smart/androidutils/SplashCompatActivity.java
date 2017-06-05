@@ -25,7 +25,7 @@ public class SplashCompatActivity extends BaseCompatActivity {
     }
     @Override
     protected void initView() {
-        SplashADView.getInstance().initADView().setADTime(1000).setSplashViewCallback(new SplashADView.SplashViewCallback() {
+        SplashADView.getInstance().initADView().setADDismissTime(1000).setSplashViewCallback(new SplashADView.SplashViewCallback() {
             @Override
             public void onADFailure(Exception e) {
                 //广告加载失败的 操作

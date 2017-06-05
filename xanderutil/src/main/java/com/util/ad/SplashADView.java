@@ -34,6 +34,7 @@ public final class SplashADView implements ExitButtonListener{
     private boolean bClickedAd;//是否点击了广告
 
     private final String url = "http://img.mukewang.com//551de0570001134f06000338-300-170.jpg";
+    private int mAdTime = 5000;
 
     private SplashADView(){
 
@@ -54,7 +55,7 @@ public final class SplashADView implements ExitButtonListener{
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSplashViewCallback.onADFinish();//进入详情页之前先跳转到主界面
+                mSplashViewCallback.onADFinish();//进入详情页之前先跳转到主界面,该方式，可以是该类不用单利模式，之前用单利是为了解决跳转后的回调问题（暂未移除单利模式）
                 bClickedAd = true;
                 String url = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
                 /*
@@ -66,13 +67,8 @@ public final class SplashADView implements ExitButtonListener{
         });
         return instance;
     }
-    /**
-     * param adTime 广告时长
-     * return
-     */
-    public SplashADView setADTime(int adTime){
-//        mAdTime = adTime;
-        adTime = 5000;
+
+    private void defaultEntry() {
         mImageView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -81,11 +77,21 @@ public final class SplashADView implements ExitButtonListener{
                     bClickedAd = false;
                 }
             }
-        }, adTime);
+        }, mAdTime);
+    }
+
+    /**
+     * param adTime 广告时长
+     * return
+     */
+    public SplashADView setADDismissTime(int adTime){
+        mAdTime = adTime;
+//        adTime = 5000;
         return this;
     }
     public SplashADView setSplashViewCallback(SplashViewCallback splashViewCallback){
         mSplashViewCallback = splashViewCallback;
+        defaultEntry();
         /*
         * 先从本地拿数据；
         * 测试：暂时没有对比本地数据和网络数据的可靠性
