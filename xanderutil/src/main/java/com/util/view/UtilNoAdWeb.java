@@ -20,6 +20,7 @@ import static com.util.constant.ConstantRegex.regexStr;
 
 public final class UtilNoAdWeb {
     private WebView mWebView;
+    private URL mTempUrl;
     private String baseUrl;
     private String mCharset;
 
@@ -27,32 +28,30 @@ public final class UtilNoAdWeb {
      *webView
      *charset 网页的编码格式
      */
-    public UtilNoAdWeb(WebView webView, String charset, String url) {
+    public UtilNoAdWeb(WebView webView, String charset, final String url) {
         mWebView = webView;
         mCharset = charset;
-        baseUrl = url;
+        try {
+            mTempUrl = new URL(url);
+            baseUrl = String.format("%s://%s", mTempUrl.getProtocol(), mTempUrl.getHost());
+            Log.i("mTempUrl", "onPostExecute: " + mTempUrl.getHost());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         new UtilHttpString().get(url)
                 .setCharset(charset)
                 .initHttpStringCallback(new IStringCallback() {
                     @Override
                     public void onStringSuccess(String result) {
-                        try {
-                            URL url = new URL(baseUrl);
-                            Pattern p = Pattern.compile(regexStr);
-                            Matcher m = p.matcher(result);
-                            while (m.find()) {
-                                if (!(m.group().contains(url.getHost()))) {
-                                    result = result.replace(m.group(), "");
-                                }
+                        Pattern p = Pattern.compile(regexStr);
+                        Matcher m = p.matcher(result);
+                        while (m.find()) {
+                            if (!(m.group().contains(mTempUrl.getHost()))) {
+                                result = result.replace(m.group(), "");
                             }
-                            baseUrl = String.format("%s://%s", url.getProtocol(), url.getHost());
-                            Log.i("baseUrl", "onPostExecute: " + url.getHost());
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
                         }
                         mWebView.loadDataWithBaseURL(baseUrl, result, "text/html", mCharset, "file:///android_asset/error_page.html");
                     }
-
                     @Override
                     public void onFailure(Exception e) {
 
@@ -62,7 +61,7 @@ public final class UtilNoAdWeb {
 
     /*@Override
     protected String doInBackground(String... strings) {
-        baseUrl = strings[0];
+        mTempUrl = strings[0];
         return readSourceFromUrl(strings[0],mCharset);
     }
 

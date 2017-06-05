@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidUtilSet.iml" filepath="$PROJECT_DIR$/AndroidUtilSet.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidUtils.iml" filepath="$PROJECT_DIR$/AndroidUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/xanderutil/xanderutil.iml" filepath="$PROJECT_DIR$/xanderutil/xanderutil.iml" />
       <module fileurl="file://$PROJECT_DIR$/xanderutil/xanderutil.iml" filepath="$PROJECT_DIR$/xanderutil/xanderutil.iml" />
     </modules>
   </component>

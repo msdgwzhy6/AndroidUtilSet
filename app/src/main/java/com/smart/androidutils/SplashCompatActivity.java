@@ -35,8 +35,7 @@ public class SplashCompatActivity extends BaseCompatActivity {
             @Override
             public void onLoadADView(View view) {
                 ViewGroup viewGroup = getView(SplashCompatActivity.this, R.id.activity_splash);
-                viewGroup.addView(view, RelativeLayout.LayoutParams.MATCH_PARENT,
-                        1000);
+                viewGroup.addView(view, RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
                 Log.i("xxx", "onLoadADView" );
             }
 

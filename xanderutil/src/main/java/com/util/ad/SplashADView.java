@@ -39,7 +39,7 @@ public final class SplashADView implements ExitButtonListener{
     * 这些广告图片数据应该从服务器获取
     * 获取后，加密保存到本地
     * */
-    private final String url = "http://img.mukewang.com//5523711700016d1606000338.jpg";
+    private final String url = "http://img.my.csdn.net/uploads/201407/26/1406383243_5120.jpg";
 
     private SplashADView(){
 
