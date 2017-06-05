@@ -37,9 +37,9 @@ public class DeviceActivity extends AppCompatActivity {
 
         BaseBean baseBean;
         mBaseBeanList = new ArrayList<>();
-        for (int i = 0; i < ITEMS_DEVICE.length; i++) {
+        for (String aITEMS_DEVICE : ITEMS_DEVICE) {
             baseBean = new BaseBean();
-            baseBean.setName(ITEMS_DEVICE[i]);
+            baseBean.setName(aITEMS_DEVICE);
             mBaseBeanList.add(baseBean);
         }
     }

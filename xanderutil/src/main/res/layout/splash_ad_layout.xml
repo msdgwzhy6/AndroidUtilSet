@@ -4,10 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <WebView
-        android:id="@+id/id_splash_web_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
     <ImageView
         android:id="@+id/id_splash_view"
         android:layout_width="match_parent"

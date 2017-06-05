@@ -1,11 +1,9 @@
 package com.util.ad;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.util.R;
@@ -16,7 +14,7 @@ import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
 
 import static com.util.UtilEncript.getMD5;
-import static com.util.view.UtilWidget.setWebView;
+import static com.util.common.UtilCommon.useWebView;
 
 /**
  * author xander on  2017/5/31.
@@ -31,19 +29,16 @@ public final class SplashADView implements ExitButtonListener{
 
     private ViewGroup mViewGroup;
     private ImageView mImageView;
-    private WebView mWebView;
     private SplashViewCallback mSplashViewCallback;
     private static SplashADView instance;
-    private boolean enterAd;
-    /*
-    * 这些广告图片数据应该从服务器获取
-    * 获取后，加密保存到本地
-    * */
-    private final String url = "http://img.my.csdn.net/uploads/201407/26/1406383243_5120.jpg";
+    private boolean bClickedAd;//是否点击了广告
+
+    private final String url = "http://img.mukewang.com//551de0570001134f06000338-300-170.jpg";
 
     private SplashADView(){
 
     }
+
     public static SplashADView getInstance(){
         if (instance == null) {
             instance = new SplashADView();
@@ -55,22 +50,18 @@ public final class SplashADView implements ExitButtonListener{
         mViewGroup = (ViewGroup) LayoutInflater.from(InitSDK.getContext()).inflate(R.layout.splash_ad_layout,null);
 
         mImageView = (ImageView) mViewGroup.findViewById(R.id.id_splash_view);
-        mWebView = (WebView) mViewGroup.findViewById(R.id.id_splash_web_view);
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterAd = true;
-               /*
-               * 加载webview
-               * */
-                /*
-                * 隐藏图片，显示webview
-                * */
-                mImageView.setVisibility(View.GONE);
+                mSplashViewCallback.onADFinish();//进入详情页之前先跳转到主界面
+                bClickedAd = true;
                 String url = "http://www.geyanw.com/html/renshenggeyan/2012/0503/295.html";
-//                new UtilNoAdWeb(mWebView,"gb2312", url).execute(url);
-                setWebView(mWebView);
+                /*
+                * 选择展示广告详情的方式
+                * */
+//                useDefaultBrowser(url);
+                useWebView(url);
             }
         });
         return instance;
@@ -85,8 +76,9 @@ public final class SplashADView implements ExitButtonListener{
         mImageView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!enterAd) {
-                    mSplashViewCallback.onFinish();
+                if (!bClickedAd) {
+                    mSplashViewCallback.onADFinish();
+                    bClickedAd = false;
                 }
             }
         }, adTime);
@@ -94,16 +86,15 @@ public final class SplashADView implements ExitButtonListener{
     }
     public SplashADView setSplashViewCallback(SplashViewCallback splashViewCallback){
         mSplashViewCallback = splashViewCallback;
-           /*
+        /*
         * 先从本地拿数据；
         * 测试：暂时没有对比本地数据和网络数据的可靠性
-        *
         * */
 
         Bitmap bitmap = getLocal();
         if (bitmap != null) {
             mImageView.setImageBitmap(bitmap);
-            mSplashViewCallback.onLoadADView(mViewGroup);
+            mSplashViewCallback.onLoadAD(mViewGroup);
         }else {
               /*
                 * 从网络拿数据
@@ -115,15 +106,16 @@ public final class SplashADView implements ExitButtonListener{
                             /*
                             * 保存到本地xml,也可以选择保存到SD卡中
                             * */
+                            String item = getMD5(url);
                             UtilSPSingleInstance.getInstance(InitSDK.getContext())
                                     .initSPFileName(TAG)
-                                    .putBitmap(getMD5(url),bitmap)
+                                    .putBitmap(item,bitmap)
                                     .submit();
                         }
 
                         @Override
                         public void onBitmapFailure(Exception e) {
-                            mSplashViewCallback.onSplashViewFailure(e);
+                            mSplashViewCallback.onADFailure(e);
                         }
 
                     });
@@ -138,14 +130,26 @@ public final class SplashADView implements ExitButtonListener{
     }
 
     @Override
-    public void exit(Activity activity) {
-        mSplashViewCallback.onFinish();
+    public void exit() {
+//        mSplashViewCallback.onADFinish();
     }
 
+
     public interface SplashViewCallback{
-        void onSplashViewFailure(Exception e);
-        void onLoadADView(View view);
-        void onFinish();
+
+        /*
+        * 广告加载失败的回调
+        * */
+        void onADFailure(Exception e);
+        /*
+        * 加载广告页
+        * */
+        void onLoadAD(View view);
+
+        /*
+        * 广告结束的回调函数
+        * */
+        void onADFinish();
     }
 
 }

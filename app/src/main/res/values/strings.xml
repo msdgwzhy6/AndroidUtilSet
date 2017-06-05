@@ -18,7 +18,6 @@
     <string name="telephony_sim_net_type">"SIM卡的网络类型"</string>
     <string name="telephony_sim_support_net">"Sim卡是否支持联网"</string>
     <string name="telephony_sim_net_connect">"Sim卡是否联网"</string>
-
     <!--设备信息-->
     <string name="phone_wifi_availalbe">"是否支持WiFi"</string>
     <string name="phone_wifi_connect">"WiFi 是否连接"</string>
@@ -28,6 +27,8 @@
 
     <string name="phone_sd_total_size">"手机SD卡总大小"</string>
     <string name="phone_sd_available_size">"手机SD卡可用空间"</string>
+    <string name="phone_display">"手机屏幕尺寸"</string>
+    <string name="phone_location">"位置信息"</string>
 
     <!--App -->
     <string name="app_list_info">"App列表"</string>

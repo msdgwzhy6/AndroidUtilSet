@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.util.core.InitSDK;
@@ -26,27 +27,28 @@ import java.util.Set;
  * 权限帮助类
  */
 
-public class PermissionHelper implements PermissionActivity.CurrentActivityCallback{
-    private static final String TAG = "PermissionHelper";
+public class UtilPermission implements PermissionActivity.CurrentActivityCallback{
+    private static final String TAG = "UtilPermission";
     private static final int REQUEST_CODE_PERMISSION = 0x38;
     private static final int REQUEST_CODE_SETTING = 0x39;
-    private static PermissionHelper mInstance;
+    private static UtilPermission mInstance;
     private PermissionTypes mOptions;
     private PermissionCallback mCallback;
     private final List<String> mDeniedPermissions = new LinkedList<>();
     private final Set<String> mManifestPermissions = new HashSet<>(1);
     private Activity mActivity;
     private Context mContext;
+    PermissionTypes permissionTypes;
 
-    private PermissionHelper() {
+    private UtilPermission() {
         mContext = InitSDK.getContext();
     }
 
-    public static PermissionHelper getInstance() {
+    public static UtilPermission getInstance() {
         if (mInstance == null)
-            synchronized (PermissionHelper.class) {
+            synchronized (UtilPermission.class) {
                 if (mInstance == null) {
-                    mInstance = new PermissionHelper();
+                    mInstance = new UtilPermission();
                 }
             }
         return mInstance;
@@ -56,12 +58,20 @@ public class PermissionHelper implements PermissionActivity.CurrentActivityCallb
      * param types 权限类型
      * param PermissionCallback
      */
-    public PermissionHelper initPermission(PermissionTypes types, PermissionCallback permissionCallback) {
-        if (types == null) throw new NullPointerException("PermissionTypes is null...");
-        if (permissionCallback == null) throw new NullPointerException("PermissionCallback is null...");
+    public UtilPermission initPermissionTypes(String ...types) {
 
+        if (TextUtils.isEmpty(types[0]))throw new NullPointerException("PermissionTypes is null...");
+        permissionTypes = new PermissionTypes.Builder()
+                .setPermissionTypes(types)
+                .build();
         getManifestPermissions();
-        request(types, permissionCallback);
+
+        return this;
+    }
+    public UtilPermission setPermissionCallback(PermissionCallback permissionCallback){
+        if (permissionCallback == null) throw new NullPointerException("PermissionCallback is null...");
+        if (permissionTypes == null) throw new NullPointerException("permissionTypes is null...");
+        request(permissionTypes, permissionCallback);
         return this;
     }
     private synchronized void getManifestPermissions() {

@@ -1,10 +1,12 @@
-package com.util.screen;
+package com.util.phone;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.View;
+
+import com.util.core.InitSDK;
 
 /**
  * author xander on  2017/5/26.
@@ -39,5 +41,20 @@ public final class UtilScreen {
         Bitmap ret = Bitmap.createBitmap(bmp, 0, statusBarHeight, dm.widthPixels, dm.heightPixels - statusBarHeight);
         view.destroyDrawingCache();
         return ret;
+    }
+    public static int getScreenHight(){
+        DisplayMetrics dm2 = InitSDK.getContext().getResources().getDisplayMetrics();
+
+        return dm2.heightPixels;
+
+    }
+    public static int getScreenWidth(){
+        DisplayMetrics dm2 = InitSDK.getContext().getResources().getDisplayMetrics();
+        return dm2.widthPixels;
+    }
+    public static String  getScreenWH(){
+        DisplayMetrics dm2 = InitSDK.getContext().getResources().getDisplayMetrics();
+
+        return dm2.widthPixels + " X "+dm2.heightPixels;
     }
 }

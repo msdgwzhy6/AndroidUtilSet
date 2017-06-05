@@ -1,33 +1,29 @@
 package com.util.view;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.webkit.DownloadListener;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.util.core.InitSDK;
-
 /**
- * Created by smart on 2017/4/28.
+ * author xander on  2017/4/28.
+ * function
  */
 /*
 * function:
 * Encapsulate findViewById to avoid forced type conversions
 * */
 public final class UtilWidget {
+    @SuppressWarnings("unchecked")
     public static <V extends View> V getView(Activity activity , int itemViewId){
         return (V) activity.findViewById(itemViewId);
     }
+    @SuppressWarnings("unchecked")
     public static <V extends View> V getView(View convertView, int itemViewId){
         return (V) convertView.findViewById(itemViewId);
     }
@@ -66,22 +62,7 @@ public final class UtilWidget {
         //设置数据库缓存路径
         //开启 Application Caches 功能
         webSettings.setAppCacheEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                return super.onJsAlert(view, url, message, result);
-            }
 
-            @Override
-            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-                return super.onJsConfirm(view, url, message, result);
-            }
-
-            @Override
-            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-                return super.onJsPrompt(view, url, message, defaultValue, result);
-            }
-        });
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
@@ -106,20 +87,11 @@ public final class UtilWidget {
         });
         webView.setWebViewClient(new WebViewClient(){
             @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-//
-                return super.shouldInterceptRequest(view, request);
-            }
-
-
-        });
-        webView.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String s1, String s2, String s3, long l) {
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                InitSDK.getContext().startActivity(intent);
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return super.shouldOverrideUrlLoading(view, url);
             }
         });
+
     }
 }

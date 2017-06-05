@@ -8,6 +8,9 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.util.R;
+import com.util.core.InitSDK;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -153,6 +156,6 @@ public final class UtilSPOnlyPead {
          options.inPreferredConfig = Bitmap.Config.ARGB_8888;
          return BitmapFactory.decodeStream(bais, null, options);
       }
-    return null;
+    return BitmapFactory.decodeResource(InitSDK.getContext().getResources(),R.mipmap.xcv);
    }
 }

@@ -12,8 +12,7 @@ import android.widget.Toast;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.permission.PermissionCallback;
-import com.util.permission.PermissionHelper;
-import com.util.permission.PermissionTypes;
+import com.util.permission.UtilPermission;
 
 import java.io.File;
 import java.util.List;
@@ -47,29 +46,20 @@ public class PActivity extends BaseCompatActivity {
     }
 
     public void onClickAll(View v) {
-        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
-                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                , Manifest.permission.READ_PHONE_STATE
-                                , Manifest.permission.SEND_SMS)
-               // 以下为自定义提示语、按钮文字
-                .setDeniedMessage("adadasdasd")
-                .setDeniedCloseBtn("adasd")
-                .setDeniedSettingBtn("adsadad")
-                .setRationalMessage("adadad")
-                .setRationalBtn("avsdad")
-                        .build(),
-                new PermissionCallback() {
-                    @Override
-                    public void onGranted() {
-                        writeSD();
+        UtilPermission.getInstance().initPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE
+                , Manifest.permission.READ_PHONE_STATE
+                , Manifest.permission.SEND_SMS).setPermissionCallback( new PermissionCallback() {
+            @Override
+            public void onGranted() {
+                writeSD();
 //                        getIMEI();
-                    }
+            }
 
-                    @Override
-                    public void onDenied(List<String> permissions) {
-                        makeText(permissions.toString() + "权限拒绝");
-                    }
-                });
+            @Override
+            public void onDenied(List<String> permissions) {
+                makeText(permissions.toString() + "权限拒绝");
+            }
+        });
     }
 
     public void onClickSd(View v) {
@@ -80,9 +70,7 @@ public class PActivity extends BaseCompatActivity {
 //                    ActivityCompat.requestPermissions(this,
 //                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
 //                }
-        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
-                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .build(),
+        UtilPermission.getInstance().initPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE).setPermissionCallback(
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
@@ -118,25 +106,24 @@ public class PActivity extends BaseCompatActivity {
 //                                new String[]{Manifest.permission.READ_PHONE_STATE}, READ_PHONE_STATE_REQUEST_CODE);
 //                    }
 //                }
-        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
-                        .setPermissionTypes(Manifest.permission.READ_PHONE_STATE)
-                        .build(),
-                new PermissionCallback() {
-                    @Override
-                    public void onGranted() {
+        UtilPermission.getInstance().initPermissionTypes(Manifest.permission.READ_PHONE_STATE)
+        .setPermissionCallback( new PermissionCallback() {
+            @Override
+            public void onGranted() {
 //                        getIMEI();
-                    }
+            }
 
-                    @Override
-                    public void onDenied(List<String> permissions) {
-                        makeText(permissions.toString() + "权限拒绝");
-                    }
-                });
+            @Override
+            public void onDenied(List<String> permissions) {
+                makeText(permissions.toString() + "权限拒绝");
+            }
+        });
 
     }
 
     public void onClickCallPhone(View view) {
-        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder().setPermissionTypes(Manifest.permission.CALL_PHONE).build(),
+        UtilPermission.getInstance().initPermissionTypes(Manifest.permission.CALL_PHONE)
+        .setPermissionCallback(
                 new PermissionCallback() {
                     @Override
                     public void onGranted() {
@@ -193,59 +180,11 @@ public class PActivity extends BaseCompatActivity {
 //    }
 
     private void writeSD() {
-        PermissionHelper.getInstance().initPermission(new PermissionTypes.Builder()
-                        .setPermissionTypes(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                /*以下为自定义提示语、按钮文字
-                .setDeniedMessage()
-                .setDeniedCloseBtn()
-                .setDeniedSettingBtn()
-                .setRationalMessage()
-                .setRationalBtn()*/
-                        .build(),
-                new PermissionCallback() {
-                    @Override
-                    public void onGranted() {
-                        File acpDir = getCacheDir("acp", PActivity.this);
-                        if (acpDir != null)
-                            makeText("写SD成功：" + acpDir.getAbsolutePath());
-//                        getIMEI();
-                    }
-
-                    @Override
-                    public void onDenied(List<String> permissions) {
-                        makeText(permissions.toString() + "权限拒绝");
-                    }
-                });
-
+        File acpDir = getCacheDir("acp", PActivity.this);
+        if (acpDir != null)
+            makeText("写SD成功：" + acpDir.getAbsolutePath());
     }
 
-   /* private void getIMEI() {
-        new PermissionHelper().initPermission(this,new PermissionTypes.Builder()
-                        .setPermissionTypes(
-                                Manifest.permission.READ_PHONE_STATE
-                                , Manifest.permission.SEND_SMS)
-                *//*以下为自定义提示语、按钮文字
-                .setDeniedMessage()
-                .setDeniedCloseBtn()
-                .setDeniedSettingBtn()
-                .setRationalMessage()
-                .setRationalBtn()*//*
-                        .build(),
-                new PermissionCallback() {
-                    @Override
-                    public void onGranted() {
-                        TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-                        if (tm != null)
-                            makeText("读imei成功：" + tm.getDeviceId());
-                    }
-
-                    @Override
-                    public void onDenied(List<String> permissions) {
-                        makeText(permissions.toString() + "权限拒绝");
-                    }
-                });
-
-    }*/
 
     public static File getCacheDir(String dirName, Context context) {
         File result;

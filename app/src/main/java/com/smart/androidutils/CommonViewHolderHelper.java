@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
+import com.util.dialog.UtilDialogToast;
 import com.util.viewholder.CommonAdapter;
 
 import java.util.List;
@@ -53,6 +54,9 @@ public abstract class CommonViewHolderHelper implements CommonAdapter.IListHolde
                 .setToastDrawableId(R.drawable.dialog_bg)
                 .setOutsideClickable(true)
                 .show();*/
+        new UtilDialogToast(mActivity)
+                .setToast(msg,2000)
+                .show();
     }
 
     protected void viewHolderToast(String msg) {
@@ -60,5 +64,8 @@ public abstract class CommonViewHolderHelper implements CommonAdapter.IListHolde
                 .setToast(msg,2000)
                 .setToastDrawableId(R.drawable.dialog_bg)
                 .show();*/
+        new UtilDialogToast(mActivity)
+                .setToast(msg,2000)
+                .show();
     }
 }

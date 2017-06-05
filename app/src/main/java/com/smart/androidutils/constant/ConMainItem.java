@@ -51,6 +51,8 @@ public class ConMainItem {
             InitSDK.getContext().getString(R.string.phone_total_memory),
             InitSDK.getContext().getString(R.string.phone_sd_total_size),
             InitSDK.getContext().getString(R.string.phone_sd_available_size),
+            InitSDK.getContext().getString(R.string.phone_display),
+            InitSDK.getContext().getString(R.string.phone_location),
             InitSDK.getContext().getString(R.string.phone)
     };
     public static final String MORE_TEXT_MSG = "晚风扑面水溢香" +

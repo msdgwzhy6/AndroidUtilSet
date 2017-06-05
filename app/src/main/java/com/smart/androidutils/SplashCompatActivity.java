@@ -25,22 +25,23 @@ public class SplashCompatActivity extends BaseCompatActivity {
     }
     @Override
     protected void initView() {
-        SplashADView.getInstance().initADView().setADTime(100).setSplashViewCallback(new SplashADView.SplashViewCallback() {
+        SplashADView.getInstance().initADView().setADTime(1000).setSplashViewCallback(new SplashADView.SplashViewCallback() {
             @Override
-            public void onSplashViewFailure(Exception e) {
+            public void onADFailure(Exception e) {
                 //广告加载失败的 操作
                 // startActivity(new Intent(SplashCompatActivity.this,MainCompatActivity.class));
+                Log.i("xxx", "onADFailure"+e.getMessage());
             }
 
             @Override
-            public void onLoadADView(View view) {
+            public void onLoadAD(View view) {
                 ViewGroup viewGroup = getView(SplashCompatActivity.this, R.id.activity_splash);
                 viewGroup.addView(view, RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-                Log.i("xxx", "onLoadADView" );
+                Log.i("xxx", "onLoadAD" );
             }
 
             @Override
-            public void onFinish() {
+            public void onADFinish() {
                 startActivity(new Intent(SplashCompatActivity.this,MainCompatActivity.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

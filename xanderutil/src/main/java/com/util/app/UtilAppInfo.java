@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 
+import com.util.core.InitSDK;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -83,4 +85,26 @@ public class UtilAppInfo{
         return applicationName;
     }
 
+    private static PackageInfo getPackageInfo(){
+        //获取packagemanager的实例
+        Context context = InitSDK.getContext();
+        PackageManager packageManager = context.getPackageManager();
+        //getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo;
+        try {
+            packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            return packInfo;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getVersionName() {
+        return getPackageInfo().versionName;
+    }
+
+    public static int getVersionCode() {
+        return getPackageInfo().versionCode;
+    }
 }

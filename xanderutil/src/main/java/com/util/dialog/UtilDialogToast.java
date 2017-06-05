@@ -18,7 +18,6 @@ public class UtilDialogToast extends UtilDialogBase<UtilDialogToast> {
     public UtilDialogToast(Activity activity) {
         super(activity,R.layout.layout_dialog_base);
         mBackgroundDrawable = res.getDrawable(R.drawable.toast_dialog_bg);
-
     }
 
 

@@ -21,16 +21,20 @@ import com.smart.androidutils.activity.sharepreference.SPCompatActivity;
 import com.smart.androidutils.activity.spider.view.SpiderCompatActivity;
 import com.smart.androidutils.activity.widget.MoreTextCompatActivity;
 import com.smart.androidutils.activity.widget.WidgetCompatActivity;
-import com.util.phone.UitlDevice;
+import com.util.phone.UitlPhone;
+import com.util.phone.UtilDevice;
 import com.util.phone.UtilNet;
+import com.util.phone.UtilScreen;
 
 import java.util.List;
 
-import static com.util.phone.UitlDevice.getAvailMemory;
-import static com.util.phone.UitlDevice.getMobileNetType;
-import static com.util.phone.UitlDevice.getSDAvailableSize;
-import static com.util.phone.UitlDevice.getSDTotalSize;
-import static com.util.phone.UitlDevice.getTotalMemory;
+
+import static com.util.phone.UitlPhone.getMobileNetType;
+
+import static com.util.phone.UtilDevice.getAvailMemory;
+import static com.util.phone.UtilDevice.getSDAvailableSize;
+import static com.util.phone.UtilDevice.getSDTotalSize;
+import static com.util.phone.UtilDevice.getTotalMemory;
 import static com.util.phone.UtilNet.isMobileConnected;
 
 /**
@@ -93,9 +97,12 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         else if (mItemName.equals(context.getResources().getString(R.string.phone_sd_available_size))) {
             viewHolderToast(getSDAvailableSize());
         }
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_location))) {
+            UtilDevice.getLocation();
+        }
         //手机卡相关的事件处理
         else if (mItemName.equals(context.getResources().getString(R.string.telephony_state))) {
-            viewHolderToast(UitlDevice.getPhoneStatus(),10000);
+            viewHolderToast(UitlPhone.getPhoneStatus(),10000);
         }
         else if (mItemName.equals(context.getResources().getString(R.string.telephony_sim_support_net))) {
             viewHolderToast(String.valueOf(UtilNet.isMobileNetAvailable()));
@@ -105,6 +112,9 @@ public class BaseGridViewHolderHelper extends CommonViewHolderHelper{
         }
         else if (mItemName.equals(context.getResources().getString(R.string.telephony_sim_net_connect))) {
             viewHolderToast(String.valueOf(isMobileConnected()));
+        }
+        else if (mItemName.equals(context.getResources().getString(R.string.phone_display))) {
+            viewHolderToast(String.valueOf(UtilScreen.getScreenWH()));
         }
         else if (mItemName.equals(context.getResources().getString(R.string.app_list_info))) {
             context.startActivity(new Intent(context, AppInfoCompatActivity.class));

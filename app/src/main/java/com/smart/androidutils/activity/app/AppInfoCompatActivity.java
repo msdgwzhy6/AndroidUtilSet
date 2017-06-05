@@ -20,6 +20,12 @@ public class AppInfoCompatActivity extends BaseCompatActivity {
     private MyAppInfoBean mAppInfoBean;
 
     @Override
+    protected void setActivityTitle() {
+        super.setActivityTitle();
+        mAvtivitytTitle = "VersionName = "+UtilAppInfo.getVersionName();
+    }
+
+    @Override
     protected int initLayout() {
         return R.layout.activity_app_info;
     }
