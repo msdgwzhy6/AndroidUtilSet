@@ -29,5 +29,5 @@
     <ImageView
         android:id="@+id/id_img_view_sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

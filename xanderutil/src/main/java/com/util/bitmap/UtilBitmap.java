@@ -45,7 +45,6 @@ public final class UtilBitmap {
 
     /**
      * bitmap转byteArr
-     *
      *  bitmap bitmap对象
      *  format 格式
      *  字节数组

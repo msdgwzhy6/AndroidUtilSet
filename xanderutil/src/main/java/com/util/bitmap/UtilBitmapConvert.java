@@ -41,6 +41,7 @@ public final class UtilBitmapConvert {
     private static boolean isEmptyBitmap(Bitmap src) {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
     }
+
     /**
      * 裁剪图片
      *

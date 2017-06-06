@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.UtilEncript;
+import com.util.bitmap.UtilBitmapConvert;
 import com.util.cache.DiskLruCacheHelper;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
@@ -73,6 +74,7 @@ public class SPCompatActivity extends BaseCompatActivity {
                     @Override
                     public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
+
                         helper.put(UtilEncript.getMD5(urlImg),bitmap);
 
                     }
@@ -95,6 +97,8 @@ public class SPCompatActivity extends BaseCompatActivity {
         if (bitmap == null) {
             return;
         }
+        bitmap = UtilBitmapConvert.toGray(bitmap);
+//        bitmap = scale(bitmap,780,1280);
         mImgViewSp.setImageBitmap(bitmap);
     }
 
