@@ -543,7 +543,7 @@ public final class UtilBitmap {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
     }
     /**
-     * @说明： 保存图片到本地
+     * 说明： 保存图片到本地
      */
 
     public static void saveBitmap(Bitmap bitmap, String imageName){
