@@ -1,4 +1,4 @@
-package com.util.ad;
+package com.util.sdk;
 
 interface ExitButtonListener{
       void exit();

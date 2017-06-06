@@ -1,4 +1,4 @@
-package com.util.ad;
+package com.util.sdk;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;

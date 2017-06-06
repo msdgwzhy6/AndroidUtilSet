@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.util.ad.DetailActivity">
+        <activity android:name="com.util.sdk.DetailActivity">
            <!-- <intent-filter>
                 <action android:name="com.sdk.ad.how.old.are.you"/>
                 <category android:name="android.intent.category.DEFAULT"/>

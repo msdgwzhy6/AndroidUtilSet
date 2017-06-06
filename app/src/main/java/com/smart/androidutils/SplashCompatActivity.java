@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.util.ad.SplashADView;
+import com.util.sdk.SplashADView;
 
 import static com.util.view.UtilWidget.getView;
 

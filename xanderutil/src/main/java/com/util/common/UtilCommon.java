@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.util.activity.UtilActivityManager;
-import com.util.ad.DetailActivity;
+import com.util.sdk.DetailActivity;
 
 /**
  * author xander on  2017/6/1.

@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.util.ad.DetailActivity">
+    tools:context="com.util.sdk.DetailActivity">
     <WebView
         android:id="@+id/id_splash_web_view"
         android:layout_width="match_parent"

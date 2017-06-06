@@ -1,4 +1,4 @@
-package com.util.ad;
+package com.util.sdk;
 
 import android.app.Activity;
 import android.content.Intent;
