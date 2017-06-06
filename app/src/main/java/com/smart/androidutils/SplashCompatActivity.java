@@ -1,15 +1,8 @@
 package com.smart.androidutils;
 
 import android.content.Intent;
-import android.util.Log;
+import android.os.Handler;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import com.util.sdk.SplashADView;
-
-import static com.util.view.UtilWidget.getView;
 
 public class SplashCompatActivity extends BaseCompatActivity {
     @Override
@@ -25,31 +18,9 @@ public class SplashCompatActivity extends BaseCompatActivity {
     }
     @Override
     protected void initView() {
-        SplashADView.getInstance().initADView().setADDismissTime(1000).setSplashViewCallback(new SplashADView.SplashViewCallback() {
-            @Override
-            public void onADFailure(Exception e) {
-                //广告加载失败的 操作
-                // startActivity(new Intent(SplashCompatActivity.this,MainCompatActivity.class));
-                Log.i("xxx", "onADFailure"+e.getMessage());
-            }
 
-            @Override
-            public void onLoadAD(View view) {
-                ViewGroup viewGroup = getView(SplashCompatActivity.this, R.id.activity_splash);
-                viewGroup.addView(view, RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-                Log.i("xxx", "onLoadAD" );
-            }
-
-            @Override
-            public void onADFinish() {
-                startActivity(new Intent(SplashCompatActivity.this,MainCompatActivity.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
-            }
-        });
     }
-
-/*    @Override
+    @Override
     protected void initData() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -59,7 +30,7 @@ public class SplashCompatActivity extends BaseCompatActivity {
                 finish();
             }
         },10000);
-    }*/
+    }
 @Override
 public boolean onKeyDown(int keyCode, KeyEvent event) {
     if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
