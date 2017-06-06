@@ -16,12 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.util.R;
+import com.util.dialog.core.UtilDialogBase;
 
 
 /**
  * Created by xu on 2017/3/3.
  */
-public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble>{
+public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
 
 
 

@@ -1,4 +1,4 @@
-package com.util.dialog;
+package com.util.dialog.core;
 
 import android.os.Environment;
 

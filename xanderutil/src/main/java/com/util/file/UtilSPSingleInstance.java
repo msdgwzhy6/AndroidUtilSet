@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
-import com.util.bitmap.UtilBitmap;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,6 +19,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.util.Base64.URL_SAFE;
+import static com.util.bitmap.UtilBitmapConvert.addReflection;
 
 /***************************************************************************
  * author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.
@@ -281,7 +280,7 @@ public final class UtilSPSingleInstance {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //      bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 //      addFrame(toRoundCorner(bitmap,20),10, Color.GREEN).compress(Bitmap.CompressFormat.PNG, 100, baos);
-      UtilBitmap.addReflection(bitmap,50).compress(Bitmap.CompressFormat.PNG, 100, baos);
+      addReflection(bitmap,50).compress(Bitmap.CompressFormat.PNG, 100, baos);
       String imageBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
       putString(key,imageBase64 );
       return this;

@@ -23,13 +23,13 @@ import android.widget.TextView;
 
 import com.util.R;
 
-import static com.util.dialog.Constant.ANIM_FADE_IN_OUT;
-import static com.util.dialog.Constant.ANIM_HYPERSPACE_IN_OUT;
-import static com.util.dialog.Constant.ANIM_PUSH_LEFT_IN_OUT;
-import static com.util.dialog.Constant.ANIM_PUSH_UP_IN_OUT;
-import static com.util.dialog.Constant.ANIM_SCALE_IN_ALPHA_OUT;
-import static com.util.dialog.Constant.ANIM_SLIDE_LEFT_RIGHT;
-import static com.util.dialog.Constant.ANIM_SLIDE_UP_DOWN;
+import static com.util.dialog.core.Constant.ANIM_FADE_IN_OUT;
+import static com.util.dialog.core.Constant.ANIM_HYPERSPACE_IN_OUT;
+import static com.util.dialog.core.Constant.ANIM_PUSH_LEFT_IN_OUT;
+import static com.util.dialog.core.Constant.ANIM_PUSH_UP_IN_OUT;
+import static com.util.dialog.core.Constant.ANIM_SCALE_IN_ALPHA_OUT;
+import static com.util.dialog.core.Constant.ANIM_SLIDE_LEFT_RIGHT;
+import static com.util.dialog.core.Constant.ANIM_SLIDE_UP_DOWN;
 
 
 /**
