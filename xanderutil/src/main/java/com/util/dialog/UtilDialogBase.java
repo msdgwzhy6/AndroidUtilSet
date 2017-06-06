@@ -1,4 +1,4 @@
-package com.util.dialog.core;
+package com.util.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,7 +21,7 @@ import com.util.R;
  * function  弹窗、单（不准备做这个了，需求不大）、双按钮对话框的基础类
  */
 
-class UtilDialogBase<T extends UtilDialogBase> extends Dialog {
+public class UtilDialogBase<T extends UtilDialogBase> extends Dialog {
     Resources res;//资源管理器
     T instance;//该基础类的实现类
 
@@ -76,7 +76,7 @@ class UtilDialogBase<T extends UtilDialogBase> extends Dialog {
     * 通過 id 获取 view 的实例
     * */
     @SuppressWarnings("unchecked")
-    <V extends View> V getView(int id){
+    public <V extends View> V getView(int id){
         if (parentView == null) {
             throw new NullPointerException("parentView不能为空");
         }

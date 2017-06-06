@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.util.R;
-import com.util.dialog.core.UtilDialogBase;
 
 
 /**

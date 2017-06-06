@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.util.R;
-import com.util.dialog.core.UtilDialogBase;
 
 /**
  * author xander on  2017/6/1.

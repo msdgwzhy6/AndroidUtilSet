@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.UtilEncript;
-import com.util.file.UtilSPSingleInstance;
+import com.util.cache.DiskLruCacheHelper;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,11 +38,17 @@ public class SPCompatActivity extends BaseCompatActivity {
     private Handler mHandler = new Handler();
     private Context mContext;
 
+    private DiskLruCacheHelper helper;
 
     @Override
     protected void initData() {
         setTitle(getResources().getString(R.string.control_sp));
         mContext = this;
+        try {
+            helper = new DiskLruCacheHelper(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -65,10 +73,8 @@ public class SPCompatActivity extends BaseCompatActivity {
                     @Override
                     public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
-                        UtilSPSingleInstance.getInstance(mContext)
-                                .initSPFileName(TAG)
-                                .putBitmap(UtilEncript.getMD5(urlImg),bitmap)
-                                .submit();
+                        helper.put(UtilEncript.getMD5(urlImg),bitmap);
+
                     }
 
                     @Override
@@ -85,6 +91,11 @@ public class SPCompatActivity extends BaseCompatActivity {
     @OnClick(R.id.id_btn_img_sp)
     public void onMBtnImgSpClicked() {
 
+        Bitmap bitmap =helper.getAsBitmap(UtilEncript.getMD5(urlImg));
+        if (bitmap == null) {
+            return;
+        }
+        mImgViewSp.setImageBitmap(bitmap);
     }
 
 }

@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.util.core.InitSDK;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -29,7 +31,19 @@ import java.util.regex.Pattern;
  ***************************************************************************/
 
 public final class  UtilFile {
-    protected static final String TAG = "ccc";
+    public static File getDiskCacheDir() {
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            cachePath = InitSDK.getContext().getExternalCacheDir().getPath();
+        } else {
+            cachePath = InitSDK.getContext().getCacheDir().getPath();
+        }
+        Log.i("xxx", "getDiskCacheDir" +cachePath);
+        return new File(cachePath + File.separator);
+    }
+
+
     /**
      * Get files based on file paths
      *  filePath file path
@@ -338,7 +352,7 @@ public final class  UtilFile {
 //            content = "This is the content to write into file";
 
             File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+ "crash_lzhy_moneyhll.txt");
-            Log.i(TAG, "writeStr2Log: "+ file.getAbsolutePath());
+            Log.i("xxx", "writeStr2Log: "+ file.getAbsolutePath());
             // if file doesnt exists, then create it
             if (!file.exists()) {
                 if (!file.createNewFile()) {

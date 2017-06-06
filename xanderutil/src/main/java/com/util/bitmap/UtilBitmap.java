@@ -10,9 +10,12 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
+import android.util.Log;
 import android.view.View;
 
+import com.util.core.InitSDK;
 import com.util.file.UtilFile;
+import com.util.file.UtilSPSingleInstance;
 import com.util.file.UtilsCloseIO;
 
 import java.io.BufferedInputStream;
@@ -27,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import static com.util.file.UtilFile.getDiskCacheDir;
 import static com.util.string.UtilString.isSpace;
 
 /**
@@ -539,5 +543,44 @@ public final class UtilBitmap {
     public static boolean isEmptyBitmap(Bitmap src) {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
     }
+    /**
+     * @说明： 保存图片到本地
+     */
 
+    public static void saveBitmap(Bitmap bitmap, String imageName){
+        String pathName = getDiskCacheDir()+File.separator;
+        String imgName = imageName+".png";
+        File myDir = new File(pathName);
+        if (!myDir.exists()) {
+            myDir.mkdirs();
+        }
+        File image = new File(myDir,imgName);
+
+        Log.i("TAG", "savePicture: "+image.toString());
+        UtilSPSingleInstance.getInstance(InitSDK.getContext())
+                .initSPFileName("adchche")
+                .putString(imageName,image.toString())
+                .submit();
+        FileOutputStream out;
+        if (image.exists()) {
+            image.delete();
+        }
+        try
+        {
+            image.createNewFile();
+            out = new FileOutputStream(image);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
+            Log.i("qqqq", "savePicture: ");
+            e.printStackTrace();
+        }
+
+    }
 }
