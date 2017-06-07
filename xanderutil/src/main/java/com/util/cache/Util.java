@@ -31,9 +31,7 @@ final class Util
     static final Charset US_ASCII = Charset.forName("US-ASCII");
     static final Charset UTF_8 = Charset.forName("UTF-8");
 
-    private Util()
-    {
-    }
+    private Util(){ }
 
     static String readFully(Reader reader) throws IOException
     {
