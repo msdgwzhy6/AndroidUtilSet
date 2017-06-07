@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.util.activity.UtilActivityManager;
+import com.util.httpx.XanderHttp;
 
 /**
  * @author xander on  2017/5/23.
@@ -20,6 +21,7 @@ public final class InitSDK {
      *  context 上下文
      */
     public static void init(Application context) {
+        XanderHttp.init(context);
         InitSDK.context = context.getApplicationContext();
         activityLifecycleCallbacks(context);
     }

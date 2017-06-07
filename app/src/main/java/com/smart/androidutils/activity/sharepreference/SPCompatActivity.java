@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.UtilEncript;
+import com.util.encript.UtilEncript;
 import com.util.bitmap.UtilBitmapConvert;
 import com.util.cache.DiskLruCacheHelper;
 import com.util.http.UtilHttpBitmap;

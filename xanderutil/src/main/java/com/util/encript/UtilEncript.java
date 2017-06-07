@@ -1,4 +1,4 @@
-package com.util;
+package com.util.encript;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

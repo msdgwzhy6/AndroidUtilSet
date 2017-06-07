@@ -6,12 +6,14 @@ import android.os.Handler;
 import com.util.http.core.callback.OnHttpCallback;
 import com.util.phone.UtilNet;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static com.util.http.core.ConHttp.HTTP_TYPE_GET;
+import static com.util.http.core.ConHttp.HTTP_TYPE_POST;
 import static com.util.http.core.HttpHelper.HTTP_TYPE;
 import static com.util.http.core.HttpHelper.mHttpTimeout;
 
@@ -43,21 +45,20 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
             httpUrlCon = (HttpURLConnection) httpUrl.openConnection();
             httpUrlCon.setConnectTimeout(mHttpTimeout);// 建立连接超时时间
             httpUrlCon.setReadTimeout(mHttpTimeout);//数据传输超时时间，很重要，必须设置。
-            /*httpUrlCon.setDoInput(true); // 向连接中写入数据
-            httpUrlCon.setDoOutput(true); // 从连接中读取数据
-            httpUrlCon.setUseCaches(false); // 禁止缓存
-            httpUrlCon.setInstanceFollowRedirects(true);*/
+
             switch (HTTP_TYPE) {
                 case HTTP_TYPE_GET:
                     httpUrlCon.setRequestMethod("GET");// 设置请求类型为
                     break;
-               /* case HTTP_TYPE_POST:
+                case HTTP_TYPE_POST:
+                    httpUrlCon.setDoInput(true); // 向连接中写入数据
+                    httpUrlCon.setDoOutput(true); // 从连接中读取数据
                     httpUrlCon.setRequestMethod("POST");// 设置请求类型为
                     DataOutputStream out = new DataOutputStream(httpUrlCon.getOutputStream()); // 获取输出流
-                    out.write(mParams.getBytes("utf-8"));// 将要传递的数据写入数据输出流,不要使用out.writeBytes(param); 否则中文时会出错
+                    out.write(params[0].getBytes("utf-8"));// 将要传递的数据写入数据输出流,不要使用out.writeBytes(param); 否则中文时会出错
                     out.flush(); // 输出缓存
                     out.close(); // 关闭数据输出流
-                    break;*/
+                    break;
                 default:
                     break;
 
@@ -84,10 +85,6 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
                 }
             });
 
-        } finally {
-            if (httpUrlCon != null) {
-                httpUrlCon.disconnect(); // 断开连接
-            }
         }
         return null;
     }
