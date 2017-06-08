@@ -3,8 +3,8 @@ package com.util.xhttp.cache;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.JJHttp;
+import com.util.logger.JJLogger;
+import com.util.xhttp.JJHttp;
 
 
 class CacheHelper extends SQLiteOpenHelper {

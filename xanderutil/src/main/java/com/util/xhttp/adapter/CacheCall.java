@@ -2,18 +2,18 @@ package com.util.xhttp.adapter;
 
 import android.graphics.Bitmap;
 
-import com.sdk.util.xhttp.JJHttp;
-import com.sdk.util.xhttp.cache.CacheEntity;
-import com.sdk.util.xhttp.cache.CacheManager;
-import com.sdk.util.xhttp.cache.CacheMode;
-import com.sdk.util.xhttp.callback.AbsCallback;
-import com.sdk.util.xhttp.callback.AbsCallbackWrapper;
-import com.sdk.util.xhttp.exception.JJhttpException;
-import com.sdk.util.xhttp.model.HttpHeaders;
-import com.sdk.util.xhttp.model.Response;
-import com.sdk.util.xhttp.request.BaseRequest;
-import com.sdk.util.xhttp.utils.HeaderParser;
-import com.sdk.util.xhttp.utils.HttpUtils;
+import com.util.xhttp.JJHttp;
+import com.util.xhttp.cache.CacheEntity;
+import com.util.xhttp.cache.CacheManager;
+import com.util.xhttp.cache.CacheMode;
+import com.util.xhttp.callback.AbsCallback;
+import com.util.xhttp.callback.AbsCallbackWrapper;
+import com.util.xhttp.exception.JJhttpException;
+import com.util.xhttp.model.HttpHeaders;
+import com.util.xhttp.model.Response;
+import com.util.xhttp.request.BaseRequest;
+import com.util.xhttp.utils.HeaderParser;
+import com.util.xhttp.utils.HttpUtils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;

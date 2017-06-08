@@ -1,8 +1,8 @@
 package com.util.xhttp.request;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.model.HttpHeaders;
-import com.sdk.util.xhttp.utils.HttpUtils;
+import com.util.logger.JJLogger;
+import com.util.xhttp.model.HttpHeaders;
+import com.util.xhttp.utils.HttpUtils;
 
 import java.io.IOException;
 

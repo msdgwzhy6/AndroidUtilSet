@@ -2,7 +2,7 @@ package com.util.xhttp.callback;
 
 import android.graphics.Bitmap;
 
-import com.sdk.util.xhttp.convert.BitmapConvert;
+import com.util.xhttp.convert.BitmapConvert;
 
 import okhttp3.Response;
 

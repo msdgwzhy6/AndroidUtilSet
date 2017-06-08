@@ -1,7 +1,7 @@
 package com.util.xhttp.request;
 
 
-import com.sdk.util.xhttp.utils.HttpUtils;
+import com.util.xhttp.utils.HttpUtils;
 
 import okhttp3.Request;
 import okhttp3.RequestBody;

@@ -1,9 +1,9 @@
 package com.util.xhttp.adapter;
 
 
-import com.sdk.util.xhttp.callback.AbsCallback;
-import com.sdk.util.xhttp.model.Response;
-import com.sdk.util.xhttp.request.BaseRequest;
+import com.util.xhttp.callback.AbsCallback;
+import com.util.xhttp.model.Response;
+import com.util.xhttp.request.BaseRequest;
 
 /**
  * ================================================

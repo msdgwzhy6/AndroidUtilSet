@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.sdk.util.logger.JJLogger;
+import com.util.logger.JJLogger;
 
 import java.util.ArrayList;
 import java.util.List;

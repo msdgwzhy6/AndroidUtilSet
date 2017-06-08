@@ -3,8 +3,8 @@ package com.util.xhttp.cache;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.model.HttpHeaders;
+import com.util.logger.JJLogger;
+import com.util.xhttp.model.HttpHeaders;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sdk.util.xhttp.JJHttp;
+import com.util.xhttp.JJHttp;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

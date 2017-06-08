@@ -3,8 +3,8 @@ package com.util.xhttp.model;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.JJHttp;
+import com.util.logger.JJLogger;
+import com.util.xhttp.JJHttp;
 
 import org.json.JSONException;
 import org.json.JSONObject;

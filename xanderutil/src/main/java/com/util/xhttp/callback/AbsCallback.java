@@ -1,8 +1,8 @@
 package com.util.xhttp.callback;
 
 
-import com.sdk.util.xhttp.convert.Converter;
-import com.sdk.util.xhttp.request.BaseRequest;
+import com.util.xhttp.convert.Converter;
+import com.util.xhttp.request.BaseRequest;
 
 import okhttp3.Call;
 import okhttp3.Response;

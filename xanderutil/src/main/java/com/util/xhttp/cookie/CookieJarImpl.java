@@ -1,7 +1,7 @@
 package com.util.xhttp.cookie;
 
 
-import com.sdk.util.xhttp.cookie.store.CookieStore;
+import com.util.xhttp.cookie.store.CookieStore;
 
 import java.util.List;
 

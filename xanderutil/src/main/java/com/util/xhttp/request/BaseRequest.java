@@ -2,17 +2,17 @@ package com.util.xhttp.request;
 
 import android.text.TextUtils;
 
-import com.sdk.util.xhttp.JJHttp;
-import com.sdk.util.xhttp.adapter.CacheCall;
-import com.sdk.util.xhttp.adapter.Call;
-import com.sdk.util.xhttp.adapter.CallAdapter;
-import com.sdk.util.xhttp.adapter.DefaultCallAdapter;
-import com.sdk.util.xhttp.cache.CacheEntity;
-import com.sdk.util.xhttp.cache.CacheMode;
-import com.sdk.util.xhttp.callback.AbsCallback;
-import com.sdk.util.xhttp.convert.Converter;
-import com.sdk.util.xhttp.model.HttpHeaders;
-import com.sdk.util.xhttp.model.HttpParams;
+import com.util.xhttp.JJHttp;
+import com.util.xhttp.adapter.CacheCall;
+import com.util.xhttp.adapter.Call;
+import com.util.xhttp.adapter.CallAdapter;
+import com.util.xhttp.adapter.DefaultCallAdapter;
+import com.util.xhttp.cache.CacheEntity;
+import com.util.xhttp.cache.CacheMode;
+import com.util.xhttp.callback.AbsCallback;
+import com.util.xhttp.convert.Converter;
+import com.util.xhttp.model.HttpHeaders;
+import com.util.xhttp.model.HttpParams;
 
 import java.io.IOException;
 import java.util.ArrayList;

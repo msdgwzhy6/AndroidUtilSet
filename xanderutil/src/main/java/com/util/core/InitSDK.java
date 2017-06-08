@@ -10,8 +10,7 @@ import com.util.xhttp.JJHttp;
 
 
 /**
- * @author xander on  2017/5/23.
-
+ * author xander on  2017/5/23.
  */
 
 public final class InitSDK {
@@ -27,11 +26,11 @@ public final class InitSDK {
         activityLifecycleCallbacks(context);
     }
     /************************************************************
-     *@Author; 龙之游 @ xu 596928539@qq.com
+     *Author; 龙之游 @ xu 596928539@qq.com
      * 时间:2017/1/13 12:03
      * 注释: 用于获取 栈顶 activity  //// Activity的生命周期事件进行集中处理
      ***********************************************************
-     * @param context*/
+     * param context*/
     private static void activityLifecycleCallbacks(Application context) {
         context.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override

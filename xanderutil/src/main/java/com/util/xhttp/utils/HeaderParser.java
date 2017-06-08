@@ -2,11 +2,11 @@ package com.util.xhttp.utils;
 
 import android.text.TextUtils;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.cache.CacheEntity;
-import com.sdk.util.xhttp.cache.CacheMode;
-import com.sdk.util.xhttp.model.HttpHeaders;
-import com.sdk.util.xhttp.request.BaseRequest;
+import com.util.logger.JJLogger;
+import com.util.xhttp.cache.CacheEntity;
+import com.util.xhttp.cache.CacheMode;
+import com.util.xhttp.model.HttpHeaders;
+import com.util.xhttp.request.BaseRequest;
 
 import java.util.Locale;
 import java.util.StringTokenizer;

@@ -37,7 +37,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    compile 'com.squareup.okio:okio:1.13.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
 }
 
 def siteUrl = 'https://github.com/Xander1024'      // 项目的主页   这个是说明，可随便填

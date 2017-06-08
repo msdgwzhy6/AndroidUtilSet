@@ -3,10 +3,10 @@ package com.util.xhttp.convert;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.JJHttp;
-import com.sdk.util.xhttp.callback.AbsCallback;
-import com.sdk.util.xhttp.utils.HttpUtils;
+import com.util.logger.JJLogger;
+import com.util.xhttp.JJHttp;
+import com.util.xhttp.callback.AbsCallback;
+import com.util.xhttp.utils.HttpUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

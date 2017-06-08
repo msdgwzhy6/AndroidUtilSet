@@ -1,7 +1,7 @@
 package com.util.xhttp.https;
 
 
-import com.sdk.util.logger.JJLogger;
+import com.util.logger.JJLogger;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,7 +1,7 @@
 package com.util.xhttp.callback;
 
 
-import com.sdk.util.xhttp.convert.StringConvert;
+import com.util.xhttp.convert.StringConvert;
 
 import okhttp3.Response;
 

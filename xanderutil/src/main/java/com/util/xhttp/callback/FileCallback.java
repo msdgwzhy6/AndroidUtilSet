@@ -1,7 +1,7 @@
 package com.util.xhttp.callback;
 
 
-import com.sdk.util.xhttp.convert.FileConvert;
+import com.util.xhttp.convert.FileConvert;
 
 import java.io.File;
 

@@ -1,7 +1,7 @@
 package com.util.xhttp.request;
 
 
-import com.sdk.util.xhttp.model.HttpParams;
+import com.util.xhttp.model.HttpParams;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

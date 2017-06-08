@@ -2,9 +2,9 @@ package com.util.xhttp.utils;
 
 import android.text.TextUtils;
 
-import com.sdk.util.logger.JJLogger;
-import com.sdk.util.xhttp.model.HttpHeaders;
-import com.sdk.util.xhttp.model.HttpParams;
+import com.util.logger.JJLogger;
+import com.util.xhttp.model.HttpHeaders;
+import com.util.xhttp.model.HttpParams;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
