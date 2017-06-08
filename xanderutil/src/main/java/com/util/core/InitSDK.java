@@ -5,8 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.util.activity.UtilActivityManager;
-import com.util.httpx.XanderHttp;
+import com.util.manager.ManagerActivity;
+import com.util.xhttp.JJHttp;
+
 
 /**
  * @author xander on  2017/5/23.
@@ -21,7 +22,7 @@ public final class InitSDK {
      *  context 上下文
      */
     public static void init(Application context) {
-        XanderHttp.init(context);
+        JJHttp.init(context);
         InitSDK.context = context.getApplicationContext();
         activityLifecycleCallbacks(context);
     }
@@ -46,7 +47,7 @@ public final class InitSDK {
             @Override
             public void onActivityResumed(Activity activity) {
                 //监听onActivityResumed()方法
-                UtilActivityManager.getInstance().setCurrentActivity(activity);
+                ManagerActivity.getInstance().setCurrentActivity(activity);
             }
 
             @Override

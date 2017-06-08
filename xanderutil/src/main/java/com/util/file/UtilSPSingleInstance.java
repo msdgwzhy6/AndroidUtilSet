@@ -19,7 +19,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.util.Base64.URL_SAFE;
-import static com.util.bitmap.UtilBitmapConvert.addReflection;
+import static com.util.convert.BitmapConvert.addReflection;
 
 /***************************************************************************
  * author : Dragon TOUR @ xbb 596928539@qq.com on technology 2016/12/20.

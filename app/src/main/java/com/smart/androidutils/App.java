@@ -2,7 +2,7 @@ package com.smart.androidutils;
 
 import android.app.Application;
 
-import com.lzy.okgo.OkGo;
+
 import com.util.core.InitSDK;
 
 /**
@@ -14,7 +14,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         InitSDK.init(this);
-        //必须调用初始化
-        OkGo.init(this);
+
     }
 }

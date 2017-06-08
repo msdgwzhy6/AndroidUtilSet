@@ -3,7 +3,7 @@ package com.util.common;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.util.activity.UtilActivityManager;
+import com.util.manager.ManagerActivity;
 
 /**
  * author xander on  2017/6/1.
@@ -21,19 +21,19 @@ public class UtilCommon {
         Uri content_url = Uri.parse(url);
         intent.setData(content_url);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        UtilActivityManager.getInstance().getCurrentActivity().startActivity(intent);
+        ManagerActivity.getInstance().getCurrentActivity().startActivity(intent);
     }
 /*    *//*
     * 在新的activity中用webview浏览网页
     * *//*
     public static void useWebView(String url){
-        Intent intent = new Intent(UtilActivityManager.getInstance().getCurrentActivity(),DetailActivity.class);
+        Intent intent = new Intent(ManagerActivity.getInstance().getCurrentActivity(),DetailActivity.class);
 //                intent.setAction("com.sdk.ad.how.old.are.you");
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
         bundle.putString("url",url);
         intent.putExtras(bundle);
 
-        UtilActivityManager.getInstance().getCurrentActivity().startActivity(intent);
+        ManagerActivity.getInstance().getCurrentActivity().startActivity(intent);
     }*/
 }

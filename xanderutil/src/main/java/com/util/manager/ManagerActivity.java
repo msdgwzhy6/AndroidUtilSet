@@ -1,4 +1,4 @@
-package com.util.activity;
+package com.util.manager;
 
 import android.app.Activity;
 
@@ -8,17 +8,17 @@ import java.lang.ref.WeakReference;
  * * 时间:2016/12/20 15:59
 ************************************************************/
 
-public final class UtilActivityManager {
+public final class ManagerActivity {
 
-    private static UtilActivityManager sInstance = new UtilActivityManager();
+    private static ManagerActivity sInstance = new ManagerActivity();
 	  private WeakReference<Activity> sCurrentActivityWeakRef;
 	 
 	 
-	  private UtilActivityManager() {
+	  private ManagerActivity() {
 	 
 	  }
 	 
-	  public static UtilActivityManager getInstance() {
+	  public static ManagerActivity getInstance() {
 	    return sInstance;
 	  }
 	 

@@ -1,4 +1,4 @@
-package com.util.bitmap;
+package com.util.convert;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
@@ -31,7 +31,7 @@ import java.io.IOException;
  * function 图片的变换
  */
 
-public final class UtilBitmapConvert {
+public final class BitmapConvert {
     /**
      * 判断bitmap对象是否为空
      *

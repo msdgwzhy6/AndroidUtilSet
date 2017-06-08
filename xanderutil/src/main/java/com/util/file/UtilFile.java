@@ -53,9 +53,6 @@ public final class  UtilFile {
         return TextUtils.isEmpty(filePath) ? null : new File(filePath);
     }
     /**
-     * Determine whether the file exists
-     *  filePath file path
-     *  { true}: 存在  { false}: 不存在
      */
     public static boolean isFileExists(String filePath) {
         return isFileExists(getFileByPath(filePath));

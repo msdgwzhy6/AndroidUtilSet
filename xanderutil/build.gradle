@@ -13,12 +13,13 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 26
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
 
     }
     lintOptions {
@@ -30,12 +31,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+//    compile 'com.squareup.okio:okio:1.13.0'
 }
 
 def siteUrl = 'https://github.com/Xander1024'      // 项目的主页   这个是说明，可随便填

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
 import com.util.encript.UtilEncript;
-import com.util.bitmap.UtilBitmapConvert;
+import com.util.convert.BitmapConvert;
 import com.util.cache.DiskLruCacheHelper;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
@@ -97,7 +97,7 @@ public class SPCompatActivity extends BaseCompatActivity {
         if (bitmap == null) {
             return;
         }
-        bitmap = UtilBitmapConvert.toGray(bitmap);
+        bitmap = BitmapConvert.toGray(bitmap);
 //        bitmap = scale(bitmap,780,1280);
         mImgViewSp.setImageBitmap(bitmap);
     }

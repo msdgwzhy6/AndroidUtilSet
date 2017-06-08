@@ -3,9 +3,13 @@ package com.smart.androidutils.activity.http;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.http.core.okhttp3.Call;
+import com.http.core.okhttp3.Response;
+import com.http.xhttp.JJHttp;
+import com.http.xhttp.cache.CacheMode;
+import com.http.xhttp.callback.StringCallback;
 import com.smart.androidutils.BaseCompatActivity;
 import com.smart.androidutils.R;
-import com.util.http.UtilHttpString;
 import com.util.http.core.callback.IStringCallback;
 
 import static com.util.view.UtilWidget.getView;
@@ -27,10 +31,10 @@ public class HttpActivity extends BaseCompatActivity implements IStringCallback{
 
     @Override
     protected void initData() {
-           new UtilHttpString()
+           /*new UtilHttpString()
                    .get(url)
-                    .initHttpStringCallback(this);
-  /*      OkGo.get(url)     // 请求方式和请求url
+                    .initHttpStringCallback(this);*/
+        JJHttp.get(url)     // 请求方式和请求url
                 .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("cacheKey")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
@@ -38,8 +42,9 @@ public class HttpActivity extends BaseCompatActivity implements IStringCallback{
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         // s 即为所需要的结果
+                        Log.i("xxx", "onSuccess" +s);
                     }
-                });*/
+                });
     }
 
     @Override
