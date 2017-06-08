@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="@color/title_msg_line"
-    tools:context="com.smart.androidutils.MainCompatActivity">
+    tools:context="com.smart.androidutils.MainActivity">
 
     <GridView
         android:id="@+id/id_canvas_grif_view"

@@ -1,11 +1,11 @@
 package com.smart.androidutils.activity.screen;
 
-import com.smart.androidutils.MainCompatActivity;
+import com.smart.androidutils.MainActivity;
 import com.smart.androidutils.activity.screen.viewholder.ScreenViewHolderHelper;
 
 import static com.smart.androidutils.activity.screen.constant.ConScreen.ITEMS_SCREEN;
 
-public class ScreenActivity extends MainCompatActivity{
+public class ScreenActivity extends MainActivity {
     @Override
     protected void initData() {
         super.initData();

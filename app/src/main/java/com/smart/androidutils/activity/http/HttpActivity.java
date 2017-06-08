@@ -3,18 +3,19 @@ package com.smart.androidutils.activity.http;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.http.core.okhttp3.Call;
-import com.http.core.okhttp3.Response;
-import com.http.xhttp.JJHttp;
-import com.http.xhttp.cache.CacheMode;
-import com.http.xhttp.callback.StringCallback;
-import com.smart.androidutils.BaseCompatActivity;
+import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.util.http.core.callback.IStringCallback;
+import com.util.xhttp.JJHttp;
+import com.util.xhttp.cache.CacheMode;
+import com.util.xhttp.callback.StringCallback;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 import static com.util.view.UtilWidget.getView;
 
-public class HttpActivity extends BaseCompatActivity implements IStringCallback{
+public class HttpActivity extends BaseActivity implements IStringCallback{
 
     private TextView mTextView;
     private String url = "http://www.tngou.net/api/top/list";

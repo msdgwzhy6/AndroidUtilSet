@@ -19,6 +19,7 @@ public class ConMainItem {
             InitSDK.getContext().getString(R.string.phone),
             InitSDK.getContext().getString(R.string.control_no_ad_off),
             InitSDK.getContext().getString(R.string.control_file),
+            InitSDK.getContext().getString(R.string.qr_code),
             InitSDK.getContext().getString(R.string.view),
             InitSDK.getContext().getString(R.string.app_list_info),
             InitSDK.getContext().getString(R.string.canvas),

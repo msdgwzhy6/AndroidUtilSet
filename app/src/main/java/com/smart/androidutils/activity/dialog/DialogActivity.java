@@ -1,11 +1,11 @@
 package com.smart.androidutils.activity.dialog;
 
-import com.smart.androidutils.MainCompatActivity;
+import com.smart.androidutils.MainActivity;
 import com.smart.androidutils.R;
 
 import static com.smart.androidutils.activity.dialog.ConDialog.ITEMS_DIALOG;
 
-public class DialogActivity extends MainCompatActivity {
+public class DialogActivity extends MainActivity {
     @Override
     protected void setActivityTitle() {
         super.setActivityTitle();

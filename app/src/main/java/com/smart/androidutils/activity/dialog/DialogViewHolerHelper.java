@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.CommonViewHolderHelper;
+import com.smart.androidutils.ComHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
 import com.util.dialog.OnDoubleBtnClickedListener;
@@ -20,7 +20,7 @@ import static com.smart.androidutils.constant.ConMainItem.MORE_TEXT_MSG;
  * function  对话框下的网格item的响应事件
  */
 
-public class DialogViewHolerHelper extends CommonViewHolderHelper {
+public class DialogViewHolerHelper extends ComHolderHelper {
     @Override
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();

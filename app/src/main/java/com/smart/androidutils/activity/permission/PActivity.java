@@ -9,7 +9,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
-import com.smart.androidutils.BaseCompatActivity;
+import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.util.permission.PermissionCallback;
 import com.util.permission.UtilPermission;
@@ -17,7 +17,7 @@ import com.util.permission.UtilPermission;
 import java.io.File;
 import java.util.List;
 
-public class PActivity extends BaseCompatActivity {
+public class PActivity extends BaseActivity {
 
     @Override
     protected void setActivityTitle() {

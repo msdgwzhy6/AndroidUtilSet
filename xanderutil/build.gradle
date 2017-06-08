@@ -22,9 +22,7 @@ android {
 
 
     }
-    lintOptions {
-        abortOnError false
-    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -38,6 +36,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile files('lib/zxing-android-core-3.1.0.jar')
+    compile files('lib/zxing-android-integration-3.1.0.jar')
+    compile files('lib/zxing-core-3.1.0.jar')
 }
 
 def siteUrl = 'https://github.com/Xander1024'      // 项目的主页   这个是说明，可随便填

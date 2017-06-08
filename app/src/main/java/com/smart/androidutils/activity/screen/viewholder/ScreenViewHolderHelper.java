@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.CommonViewHolderHelper;
+import com.smart.androidutils.ComHolderHelper;
 import com.smart.androidutils.R;
-import com.smart.androidutils.activity.spider.view.SpiderCompatActivity;
+import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
 import com.util.phone.UtilScreen;
 
@@ -21,7 +21,7 @@ import static com.smart.androidutils.util.Util.putBitmapDefault;
  * function
  */
 
-public class ScreenViewHolderHelper extends CommonViewHolderHelper {
+public class ScreenViewHolderHelper extends ComHolderHelper {
 
     @Override
     protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
@@ -35,7 +35,7 @@ public class ScreenViewHolderHelper extends CommonViewHolderHelper {
             putBitmapDefault("cut",bitmap);
         }
         else if (mItemName.equals(context.getResources().getString(R.string.control_spider))) {
-            context.startActivity(new Intent(context, SpiderCompatActivity.class));
+            context.startActivity(new Intent(context, SpiderActivity.class));
         }
     }
 }

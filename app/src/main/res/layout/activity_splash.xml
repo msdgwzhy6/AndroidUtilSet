@@ -6,6 +6,6 @@
     android:background="@mipmap/asda"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smart.androidutils.SplashCompatActivity">
+    tools:context="com.smart.androidutils.SplashActivity">
 
 </RelativeLayout>

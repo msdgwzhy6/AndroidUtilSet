@@ -67,4 +67,5 @@
     <string name="dialog_single">单个按钮</string>
     <string name="dialog_download">下载对话框</string>
     <string name="dialog_toast">弹窗</string>
+    <string name="qr_code">二维码</string>
 </resources>
