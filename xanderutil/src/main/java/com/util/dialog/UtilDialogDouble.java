@@ -44,7 +44,7 @@ public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
     private Drawable rightBtnDrawable;//右侧按钮的背景
     private Drawable leftBtnDrawable;//左侧按钮的背景
 
-    LinearLayout linearLayout_btn;
+    private LinearLayout linearLayout_btn;
     /*
     * 监听器
     * */
@@ -99,7 +99,7 @@ public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
     /**
      * 初始化界面控件的控件
      */
-    void initTitle() {
+    private void initTitle() {
         /*
         * 标题
         * */
@@ -111,7 +111,7 @@ public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
     /*
       * 设置标题信息
       * */
-    void setTitleView() {
+    private void setTitleView() {
 
         if (!TextUtils.isEmpty(titleStr)) {
             mLinearLayoutTitle.setVisibility(View.VISIBLE);
@@ -140,7 +140,7 @@ public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
     /*
     * 设置消息信息
     * */
-    void initMessageView() {
+    private void initMessageView() {
 
         if (mScrollViewSize != null) {
             mScrollViewMsg.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,mScrollViewSize));
@@ -191,7 +191,7 @@ public class UtilDialogDouble extends UtilDialogBase<UtilDialogDouble> {
             drawable = res.getDrawable(resId);
         }
         return drawable;
-    };
+    }
     /**
      * 设置title文字
      */
