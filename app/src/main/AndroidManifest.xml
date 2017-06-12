@@ -55,10 +55,6 @@
         </activity>
         <activity android:name=".activity.http.HttpActivity">
         </activity>
-        <activity android:name=".activity.scan.ScanActivity"
-                  android:launchMode="singleTop">
-
-        </activity>
     </application>
 
 </manifest>

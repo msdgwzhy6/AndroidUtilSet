@@ -2,18 +2,17 @@ package com.smart.androidutils.activity.sharepreference;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.encript.UtilEncript;
-import com.util.convert.BitmapConvert;
 import com.util.cache.DiskLruCacheHelper;
+import com.util.convert.BitmapConvert;
+import com.util.encript.UtilEncript;
 import com.util.http.UtilHttpBitmap;
 import com.util.http.core.callback.IBitmapCallback;
+import com.util.logger.JJLogger;
 
 import java.io.IOException;
 
@@ -34,9 +33,6 @@ public class SPActivity extends BaseActivity {
     @BindView(R.id.id_img_view_sp)
     ImageView mImgViewSp;
 
-
-    private Bitmap mBitmap;
-    private Handler mHandler = new Handler();
     private Context mContext;
 
     private DiskLruCacheHelper helper;
@@ -81,7 +77,7 @@ public class SPActivity extends BaseActivity {
 
                     @Override
                     public void onBitmapFailure(Exception e) {
-                        Log.i("xxx", "onFailure" +e.getMessage());
+                       JJLogger.i("asadas"+e.getLocalizedMessage());
                     }
 
                 });

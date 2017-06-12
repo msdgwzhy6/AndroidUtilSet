@@ -75,4 +75,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setListener(){}
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }

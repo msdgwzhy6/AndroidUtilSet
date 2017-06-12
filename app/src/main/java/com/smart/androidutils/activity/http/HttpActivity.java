@@ -10,7 +10,6 @@ import com.util.xhttp.JJHttp;
 import com.util.xhttp.cache.CacheMode;
 import com.util.xhttp.callback.StringCallback;
 
-import okhttp3.Call;
 import okhttp3.Response;
 
 import static com.util.view.UtilWidget.getView;
@@ -41,7 +40,7 @@ public class HttpActivity extends BaseActivity implements IStringCallback{
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
                 .execute(new StringCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onSuccess(String s, okhttp3.Call call, Response response) {
                         // s 即为所需要的结果
                         Log.i("xxx", "onSuccess" +s);
                     }

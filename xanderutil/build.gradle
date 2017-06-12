@@ -7,7 +7,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.6"//这个是版本号，必须填写
+version = "1.0.7"//这个是版本号，必须填写
 
 android {
     compileSdkVersion 25
@@ -35,10 +35,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile files('lib/zxing-android-core-3.1.0.jar')
-    compile files('lib/zxing-android-integration-3.1.0.jar')
-    compile files('lib/zxing-core-3.1.0.jar')
 }
 
 def siteUrl = 'https://github.com/Xander1024'      // 项目的主页   这个是说明，可随便填

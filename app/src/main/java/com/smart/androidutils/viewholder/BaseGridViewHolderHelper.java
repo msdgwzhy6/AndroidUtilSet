@@ -16,7 +16,6 @@ import com.smart.androidutils.activity.file.FileActivity;
 import com.smart.androidutils.activity.http.HttpActivity;
 import com.smart.androidutils.activity.permission.PActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
-import com.smart.androidutils.activity.scan.ScanActivity;
 import com.smart.androidutils.activity.screen.ScreenActivity;
 import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
@@ -29,9 +28,7 @@ import com.util.phone.UtilScreen;
 
 import java.util.List;
 
-
 import static com.util.phone.UitlPhone.getMobileNetType;
-
 import static com.util.phone.UtilDevice.getAvailMemory;
 import static com.util.phone.UtilDevice.getSDAvailableSize;
 import static com.util.phone.UtilDevice.getSDTotalSize;
@@ -60,9 +57,7 @@ public class BaseGridViewHolderHelper extends ComHolderHelper {
         else if (mItemName.equals(context.getResources().getString(R.string.control_reflect))) {
             context.startActivity(new Intent(context, ReflectActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.qr_code))) {
-            context.startActivity(new Intent(context, ScanActivity.class));
-        }
+
         else if (mItemName.equals(context.getResources().getString(R.string.phone))) {
             context.startActivity(new Intent(context, DeviceActivity.class));
         }

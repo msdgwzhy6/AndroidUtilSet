@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import com.util.logger.JJLogger;
 import com.util.manager.ManagerActivity;
-import com.util.xhttp.JJHttp;
 
 
 /**
@@ -22,7 +21,6 @@ public final class InitSDK {
      *  context 上下文
      */
     public static void init(Application context) {
-        JJHttp.init(context);
         JJLogger.debug(true);
         InitSDK.context = context.getApplicationContext();
         activityLifecycleCallbacks(context);

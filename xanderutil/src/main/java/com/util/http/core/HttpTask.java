@@ -76,7 +76,7 @@ public class HttpTask<T> extends AsyncTask<String, Void, T> {
             return (T) mHttpCallback.onThread(inputStream);
 
         } catch (final IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             //如果需要处理超时，可以在这里写
             mHandler.post(new Runnable() {
                 @Override
