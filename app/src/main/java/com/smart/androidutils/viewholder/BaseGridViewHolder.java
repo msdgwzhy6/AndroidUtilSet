@@ -3,7 +3,7 @@ package com.smart.androidutils.viewholder;
 
 import android.widget.Button;
 
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 
 /**

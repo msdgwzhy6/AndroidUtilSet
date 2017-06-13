@@ -7,12 +7,12 @@ import android.widget.ImageView;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.cache.DiskLruCacheHelper;
-import com.util.convert.BitmapConvert;
-import com.util.encript.UtilEncript;
-import com.util.http.UtilHttpBitmap;
-import com.util.http.core.callback.IBitmapCallback;
-import com.util.logger.JJLogger;
+import com.sdk.util.cache.DiskLruCacheHelper;
+import com.sdk.util.convert.BitmapConvert;
+import com.sdk.util.encript.UtilEncript;
+import com.sdk.util.http.UtilHttpBitmap;
+import com.sdk.util.http.core.callback.IBitmapCallback;
+import com.sdk.util.logger.JJLogger;
 
 import java.io.IOException;
 

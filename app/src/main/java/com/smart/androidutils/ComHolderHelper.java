@@ -5,12 +5,12 @@ import android.content.Context;
 import android.view.View;
 
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.dialog.UtilDialogToast;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.dialog.UtilDialogToast;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 /**
  * author xander on  2017/5/26.

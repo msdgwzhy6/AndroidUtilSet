@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.spider.bean;
 
 
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 /**
  * @author xander on  2017/5/24.

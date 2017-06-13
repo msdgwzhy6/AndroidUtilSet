@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.dialog;
 
 import com.smart.androidutils.R;
-import com.util.core.InitSDK;
+import com.sdk.core.InitSDK;
 
 /**
  * author xander on  2017/5/27.

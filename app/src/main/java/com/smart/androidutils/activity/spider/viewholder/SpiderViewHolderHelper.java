@@ -6,11 +6,11 @@ import android.view.View;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 /**
  * @author xander on  2017/5/24.

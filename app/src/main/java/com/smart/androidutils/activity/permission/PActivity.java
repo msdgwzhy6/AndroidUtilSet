@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.permission.PermissionCallback;
-import com.util.permission.UtilPermission;
+import com.sdk.util.permission.PermissionCallback;
+import com.sdk.util.permission.UtilPermission;
 
 import java.io.File;
 import java.util.List;

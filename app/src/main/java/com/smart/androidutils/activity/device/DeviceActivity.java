@@ -7,13 +7,13 @@ import android.widget.GridView;
 import com.smart.androidutils.R;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.smart.androidutils.constant.ConMainItem.ITEMS_DEVICE;
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 public class DeviceActivity extends AppCompatActivity {
 

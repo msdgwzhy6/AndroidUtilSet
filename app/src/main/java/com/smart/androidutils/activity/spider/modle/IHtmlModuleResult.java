@@ -1,7 +1,7 @@
 package com.smart.androidutils.activity.spider.modle;
 
 
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 

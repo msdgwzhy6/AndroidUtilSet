@@ -7,13 +7,13 @@ import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
 import com.smart.androidutils.activity.canvas.viewholderhelper.CanvasViewHolderHeper;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.smart.androidutils.activity.canvas.constant.ConsData.ITEMS_CANVAS;
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 public class CanvasActivity extends BaseActivity {
 

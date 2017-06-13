@@ -7,7 +7,7 @@ import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_LINE;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_ROUND_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
-import static com.util.view.UtilWidget.getView;
-import static com.util.view.UtilWidget.setViewAlphaAnimation;
+import static com.sdk.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.setViewAlphaAnimation;
 
 /**
  * @author xander on  2017/5/25.

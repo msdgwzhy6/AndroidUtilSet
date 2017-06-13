@@ -2,7 +2,7 @@ package com.smart.androidutils.activity.app.bean;
 
 import android.graphics.drawable.Drawable;
 
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 
 /**

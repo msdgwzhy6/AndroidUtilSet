@@ -4,10 +4,10 @@ import android.widget.TextView;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.view.UtilMoreText;
+import com.sdk.util.view.UtilMoreText;
 
 import static com.smart.androidutils.constant.ConMainItem.MORE_TEXT_MSG;
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 /*
 * 更多展示

@@ -21,18 +21,18 @@ import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.activity.widget.MoreTextActivity;
 import com.smart.androidutils.activity.widget.WidgetActivity;
-import com.util.phone.UtilNet;
-import com.util.phone.UtilScreen;
-import com.util.phone.UtilTelephone;
+import com.sdk.util.phone.UtilNet;
+import com.sdk.util.phone.UtilScreen;
+import com.sdk.util.phone.UtilTelephone;
 
 import java.util.List;
 
-import static com.util.phone.UtilDevice.getAvailMemory;
-import static com.util.phone.UtilDevice.getSDAvailableSize;
-import static com.util.phone.UtilDevice.getSDTotalSize;
-import static com.util.phone.UtilDevice.getTotalMemory;
-import static com.util.phone.UtilNet.isMobileConnected;
-import static com.util.phone.UtilTelephone.getMobileNetType;
+import static com.sdk.util.phone.UtilDevice.getAvailMemory;
+import static com.sdk.util.phone.UtilDevice.getSDAvailableSize;
+import static com.sdk.util.phone.UtilDevice.getSDTotalSize;
+import static com.sdk.util.phone.UtilDevice.getTotalMemory;
+import static com.sdk.util.phone.UtilNet.isMobileConnected;
+import static com.sdk.util.phone.UtilTelephone.getMobileNetType;
 
 /**
  * Created by smart on 2017/5/17.

@@ -1,6 +1,6 @@
 package com.smart.androidutils;
 
-import com.util.core.UtilApp;
+import com.sdk.core.UtilApp;
 
 /**
  *author xander on  2017/5/26.

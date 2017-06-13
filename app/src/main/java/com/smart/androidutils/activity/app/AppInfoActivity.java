@@ -7,9 +7,9 @@ import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.app.bean.MyAppInfoBean;
 import com.smart.androidutils.activity.app.viewholder.AppViewHolderHelper;
-import com.util.app.AppBeanCallback;
-import com.util.app.UtilAppInfo;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.app.AppBeanCallback;
+import com.sdk.util.app.UtilAppInfo;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,9 +2,9 @@ package com.smart.androidutils.util;
 
 import android.graphics.Bitmap;
 
-import com.util.core.InitSDK;
-import com.util.file.UtilSPOnlyPead;
-import com.util.file.UtilSPSingleInstance;
+import com.sdk.core.InitSDK;
+import com.sdk.util.file.UtilSPOnlyPead;
+import com.sdk.util.file.UtilSPSingleInstance;
 
 /**
  * author xander on  2017/5/26.

@@ -7,9 +7,9 @@ import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.ComHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.dialog.OnDoubleBtnClickedListener;
-import com.util.dialog.UtilDialogDouble;
-import com.util.dialog.UtilDialogToast;
+import com.sdk.util.dialog.OnDoubleBtnClickedListener;
+import com.sdk.util.dialog.UtilDialogDouble;
+import com.sdk.util.dialog.UtilDialogToast;
 
 import java.util.List;
 

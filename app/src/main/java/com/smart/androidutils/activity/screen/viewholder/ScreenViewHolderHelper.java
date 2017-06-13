@@ -10,7 +10,7 @@ import com.smart.androidutils.ComHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.util.phone.UtilScreen;
+import com.sdk.util.phone.UtilScreen;
 
 import java.util.List;
 

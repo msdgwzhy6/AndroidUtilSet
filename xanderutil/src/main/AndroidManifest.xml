@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.util">
+          package="com.sdk">
 
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name="com.util.permission.PermissionActivity">
+        <activity android:name="com.sdk.util.permission.PermissionActivity">
             <intent-filter>
                 <action android:name="com.util.permission.PermissionActivity"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.util.sdk.DetailActivity">
 
-        </activity>
-        <activity android:name="com.zxing.activity.CaptureActivity"/>
     </application>
 
 </manifest>

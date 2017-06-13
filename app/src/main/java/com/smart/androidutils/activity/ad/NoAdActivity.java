@@ -16,11 +16,11 @@ import android.widget.Button;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.view.UtilNoAdWeb;
+import com.sdk.util.view.UtilNoAdWeb;
 
 import static com.smart.androidutils.constant.ConMainUrl.urlMR;
-import static com.util.view.UtilWidget.getView;
-import static com.util.view.UtilWidget.setViewAlphaAnimation;
+import static com.sdk.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.setViewAlphaAnimation;
 
 
 public class NoAdActivity extends BaseActivity {

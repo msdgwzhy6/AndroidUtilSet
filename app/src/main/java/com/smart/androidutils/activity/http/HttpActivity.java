@@ -5,14 +5,14 @@ import android.widget.TextView;
 
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.util.http.core.callback.IStringCallback;
+import com.sdk.util.http.core.callback.IStringCallback;
 import com.util.xhttp.JJHttp;
 import com.util.xhttp.cache.CacheMode;
 import com.util.xhttp.callback.StringCallback;
 
 import okhttp3.Response;
 
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 public class HttpActivity extends BaseActivity implements IStringCallback{
 

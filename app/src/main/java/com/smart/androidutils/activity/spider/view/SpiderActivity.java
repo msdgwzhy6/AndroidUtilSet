@@ -9,11 +9,11 @@ import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
 import com.smart.androidutils.activity.spider.presenter.HtmlSpiderPresenter;
 import com.smart.androidutils.activity.spider.viewholder.SpiderViewHolderHelper;
-import com.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
-import static com.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.getView;
 
 public class SpiderActivity extends BaseActivity implements IHandleHtmlData<SpiderBean> {
     private TextView mIdTitle;
