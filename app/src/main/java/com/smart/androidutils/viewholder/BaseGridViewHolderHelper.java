@@ -21,19 +21,18 @@ import com.smart.androidutils.activity.sharepreference.SPActivity;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
 import com.smart.androidutils.activity.widget.MoreTextActivity;
 import com.smart.androidutils.activity.widget.WidgetActivity;
-import com.util.phone.UtilTelephone;
-import com.util.phone.UtilDevice;
 import com.util.phone.UtilNet;
 import com.util.phone.UtilScreen;
+import com.util.phone.UtilTelephone;
 
 import java.util.List;
 
-import static com.util.phone.UtilTelephone.getMobileNetType;
 import static com.util.phone.UtilDevice.getAvailMemory;
 import static com.util.phone.UtilDevice.getSDAvailableSize;
 import static com.util.phone.UtilDevice.getSDTotalSize;
 import static com.util.phone.UtilDevice.getTotalMemory;
 import static com.util.phone.UtilNet.isMobileConnected;
+import static com.util.phone.UtilTelephone.getMobileNetType;
 
 /**
  * Created by smart on 2017/5/17.
@@ -96,9 +95,7 @@ public class BaseGridViewHolderHelper extends ComHolderHelper {
         else if (mItemName.equals(context.getResources().getString(R.string.phone_sd_available_size))) {
             viewHolderToast(getSDAvailableSize());
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.phone_location))) {
-            UtilDevice.getLocation();
-        }
+
         //手机卡相关的事件处理
         else if (mItemName.equals(context.getResources().getString(R.string.telephony_state))) {
             viewHolderToast(UtilTelephone.getPhoneStatus(),10000);
