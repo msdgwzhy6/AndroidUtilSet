@@ -1,6 +1,7 @@
 package com.util.http;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.util.http.core.HttpHelper;
 import com.util.http.core.HttpTask;
@@ -8,8 +9,6 @@ import com.util.http.core.callback.IBitmapCallback;
 import com.util.http.core.callback.OnHttpCallback;
 
 import java.io.InputStream;
-
-import static com.util.bitmap.UtilBitmap.getBitmap;
 
 /**
  * author xander on  2017/5/31.
@@ -22,7 +21,7 @@ public class UtilHttpBitmap extends HttpHelper<UtilHttpBitmap> {
         new HttpTask<Bitmap>(new OnHttpCallback<Bitmap>() {
             @Override
             public Bitmap onThread(InputStream inputStream) {
-                return getBitmap(inputStream);
+                return BitmapFactory.decodeStream(inputStream);
             }
 
             @Override

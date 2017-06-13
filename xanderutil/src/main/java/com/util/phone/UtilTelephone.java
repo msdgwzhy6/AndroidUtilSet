@@ -40,7 +40,7 @@ import static com.util.phone.UtilNet.isActiveConnected;
  * author xander on  2017/5/23.
  */
 
-public final class UitlPhone {
+public final class UtilTelephone {
     private static TelephonyManager tm = (TelephonyManager) InitSDK.getContext().getSystemService(Context.TELEPHONY_SERVICE);;
     /**
      * 判断设备是否是手机

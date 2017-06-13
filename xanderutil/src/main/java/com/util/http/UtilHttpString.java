@@ -7,7 +7,9 @@ import com.util.http.core.callback.OnHttpCallback;
 
 import java.io.InputStream;
 
+import static com.util.http.core.ConfigHttp.mCharset;
 import static com.util.string.UtilString.is2String;
+
 
 /**
  * author xander on  2017/5/31.
@@ -15,7 +17,7 @@ import static com.util.string.UtilString.is2String;
  */
 
 public class UtilHttpString extends HttpHelper<UtilHttpString> {
-    private static  String mCharset = "utf-8";
+
     @SuppressWarnings("unchecked")
     public UtilHttpString setCharset(String  charset){
         mCharset  = charset;
@@ -24,7 +26,7 @@ public class UtilHttpString extends HttpHelper<UtilHttpString> {
 
     @SuppressWarnings("unchecked")
     public void initHttpStringCallback(final IStringCallback stringCallback){
-        new HttpTask<String>(new OnHttpCallback<String>() {
+        new HttpTask<String>(mParams,new OnHttpCallback<String>() {
             @Override
             public String onThread(InputStream inputStream) {
                 return is2String(inputStream,mCharset);
