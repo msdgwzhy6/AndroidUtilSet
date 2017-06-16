@@ -7,7 +7,7 @@ import java.util.Calendar;
  
 /**
  * DATE 继承于 java.util.Date，多实现了很多方法。
- * @author 沙琪玛 QQ：862990787
+ *  沙琪玛 QQ：862990787
  * May 29, 2013 9:52:51 AM
  */
 public class Date extends java.util.Date {
@@ -19,9 +19,9 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：转换为Calendar。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Aug 21, 2013 8:58:31 AM
-     * @return Calendar
+     *  Calendar
      */
     public static Calendar toCalendar() {
         Calendar c = Calendar.getInstance();
@@ -31,10 +31,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：判断日期是否和当前date对象在同一天。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Aug 21, 2013 7:15:53 AM
-     * @param date 比较的日期
-     * @return boolean 如果在返回true，否则返回false。
+     *  date 比较的日期
+     *  boolean 如果在返回true，否则返回false。
      */
     public static boolean isSameDay(Date date) {
         if (date == null) {
@@ -47,10 +47,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：判断日期是否和当前date对象在同一天。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Aug 21, 2013 7:15:53 AM
-     * @param cal 比较的日期
-     * @return boolean 如果在返回true，否则返回false。
+     *  cal 比较的日期
+     *  boolean 如果在返回true，否则返回false。
      */
     public  static boolean isSameDay(Calendar cal) {
         if (cal == null) {
@@ -66,10 +66,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的秒数进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param second 秒数
-     * @return 设置后的日期
+     *  second 秒数
+     *  设置后的日期
      */
     public static Date setSecondNew(int second){
         Calendar c = Calendar.getInstance();
@@ -80,10 +80,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的分钟进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param minute 分钟数
-     * @return 设置后的日期
+     *  minute 分钟数
+     *  设置后的日期
      */
     public static Date setMinuteNew(int minute){
         Calendar c = Calendar.getInstance();
@@ -94,10 +94,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的小时进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param hour 小时数 (24小时制)
-     * @return 设置后的日期
+     *  hour 小时数 (24小时制)
+     *  设置后的日期
      */
     public static Date setHourNew(int hour){
         Calendar c = Calendar.getInstance();
@@ -108,10 +108,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的天进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param day 某一天
-     * @return 设置后的日期
+     *  day 某一天
+     *  设置后的日期
      */
     public static Date setDayNew(int day){
         Calendar c = Calendar.getInstance();
@@ -122,10 +122,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的月进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param month 某一月
-     * @return 设置后的日期
+     *  month 某一月
+     *  设置后的日期
      */
     public Date setMonthNew(int month){
         Calendar c = Calendar.getInstance();
@@ -136,10 +136,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：将当前日期的年进行重新设置。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 31, 2013 2:42:36 PM
-     * @param year 某一年
-     * @return 设置后的日期
+     *  year 某一年
+     *  设置后的日期
      */
     public Date setYearNew(int year){
         Calendar c = Calendar.getInstance();
@@ -150,9 +150,9 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：得到当月有多少天。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * Jul 2, 2013 4:59:41 PM
-     * @return int
+     *  int
      */
     public static int daysNumOfMonth(){
         Calendar cal = Calendar.getInstance();
@@ -161,10 +161,9 @@ public class Date extends java.util.Date {
     }
      
     /**
-     * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
-     * @param dateStr 时间字符串
-     * @param dataFormat 当前时间字符串的格式。
-     * @return net.maxt.util.Date 日期 ,转换异常时返回null。
+     *  dateStr 时间字符串
+     *  dataFormat 当前时间字符串的格式。
+     *  net.maxt.util.Date 日期 ,转换异常时返回null。
      */
     public static Date parseDate(String dateStr,SimpleDateFormat dataFormat){
         try {
@@ -177,9 +176,8 @@ public class Date extends java.util.Date {
     }
      
     /**
-     * 将yyyy-MM-dd HH:mm:ss字符串转换成日期(net.maxt.util.Date)<br/>
-     * @param dateStr yyyy-MM-dd HH:mm:ss字符串
-     * @return net.maxt.util.Date 日期 ,转换异常时返回null。
+     *  dateStr yyyy-MM-dd HH:mm:ss字符串
+     *  net.maxt.util.Date 日期 ,转换异常时返回null。
      */
     public static Date parseDate(String dateStr){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -197,10 +195,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加毫秒数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param milliseconds 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  milliseconds 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addMilliseconds(int milliseconds){
         Calendar c = Calendar.getInstance();
@@ -211,10 +209,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加秒数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param seconds 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  seconds 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addSeconds(int seconds){
         Calendar c = Calendar.getInstance();
@@ -225,10 +223,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加分钟数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param minutes 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  minutes 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addMinutes(int minutes){
         Calendar c = Calendar.getInstance();
@@ -239,10 +237,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加小时数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param hours 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  hours 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addHours(int hours){
         Calendar c = Calendar.getInstance();
@@ -253,10 +251,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加天数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param days 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  days 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addDays(int days){
         Calendar c = Calendar.getInstance();
@@ -267,10 +265,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加月数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param months 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  months 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addMonths(int months){
         Calendar c = Calendar.getInstance();
@@ -281,10 +279,10 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：当前时间增加年数。注意遇到2月29日情况，系统会自动延后或者减少一天。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:26:27 AM
-     * @param years 正值时时间延后，负值时时间提前。
-     * @return Date
+     *  years 正值时时间延后，负值时时间提前。
+     *  Date
      */
     public Date addYears(int years){
         Calendar c = Calendar.getInstance();
@@ -293,43 +291,36 @@ public class Date extends java.util.Date {
         return new Date(c.getTimeInMillis());
     }
      
-    /**
-     * 得到秒。格式：56<br/>
-     * @return int
-     */
+
     public int secondInt() {
         return Integer.parseInt(toString("ss"));
     }
      
     /**
-     * 得到分钟。格式：56<br/>
-     * @return int
+     *  int
      */
     public int minuteInt() {
         return Integer.parseInt(toString("mm"));
     }
      
     /**
-     * 得到小时。格式：23<br/>
-     * @return int
+     *  int
      */
     public int hourInt() {
         return Integer.parseInt(toString("HH"));
     }
      
     /**
-     * 得到日。格式：26<br/>
      * 注意：这里1日返回1,2日返回2。
-     * @return int
+     *  int
      */
     public int dayInt() {
         return Integer.parseInt(toString("dd"));
     }
      
     /**
-     * 得到月。格式：5<br/>
      * 注意：这里1月返回1,2月返回2。
-     * @return int
+     *  int
      */
     public int monthInt() {
         return Integer.parseInt(toString("MM"));
@@ -337,7 +328,7 @@ public class Date extends java.util.Date {
      
     /**
      * 得到年。格式：2013
-     * @return int
+     *  int
      */
     public int yearInt() {
         return Integer.parseInt(toString("yyyy"));
@@ -345,7 +336,7 @@ public class Date extends java.util.Date {
      
     /**
      * 得到短时间。格式：12:01
-     * @return String
+     *  String
      */
     public String shortTime() {
         return toString("HH:mm");
@@ -353,7 +344,7 @@ public class Date extends java.util.Date {
      
     /**
      * 得到长时间。格式：12:01:01
-     * @return String
+     *  String
      */
     public String longTime() {
         return toString("HH:mm:ss");
@@ -361,7 +352,7 @@ public class Date extends java.util.Date {
      
     /**
      * 得到今天的第一秒的时间。
-     * @return Date
+     *  Date
      */
     public Date dayStart() {
         Calendar c = Calendar.getInstance();
@@ -374,7 +365,7 @@ public class Date extends java.util.Date {
      
     /**
      * 得到当前所在自然月的第一天的开始,格式为长日期格式。例如：2012-03-01 00:00:00。
-     * @return Date
+     *  Date
      */
     public Date monthStart(){
         Calendar c=Calendar.getInstance();
@@ -384,7 +375,7 @@ public class Date extends java.util.Date {
  
     /**
      * 得到今天的最后一秒的时间。
-     * @return Date
+     *  Date
      */
     public Date dayEnd() {
         Calendar c = Calendar.getInstance();
@@ -396,9 +387,8 @@ public class Date extends java.util.Date {
     }
      
     /**
-     * 根据日期得到星期几,得到数字。<br/>
      * 7, 1, 2, 3, 4, 5, 6
-     * @return Integer 如：6
+     *  Integer 如：6
      */
     public int dayOfWeekInt() {
         Integer dayNames[] = { 7, 1, 2, 3, 4, 5, 6 };
@@ -412,7 +402,7 @@ public class Date extends java.util.Date {
      
     /**
      * 将日期转换成长日期字符串 例如：2009-09-09 01:01:01
-     * @return String
+     *  String
      */
     public String toLongDate() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -420,10 +410,9 @@ public class Date extends java.util.Date {
     }
      
     /**
-     * 将日期按照一定的格式进行格式化为字符串。<br/>
      * 例如想将时间格式化为2012-03-05 12:56 ,则只需要传入formate为yyyy-MM-dd HH:mm即可。
-     * @param formate 格式化格式，如：yyyy-MM-dd HH:mm
-     * @return String 格式后的日期字符串。如果当前对象为null，则直接返回null。
+     *  formate 格式化格式，如：yyyy-MM-dd HH:mm
+     *  String 格式后的日期字符串。如果当前对象为null，则直接返回null。
      */
     public String toString(String formate) {
         DateFormat df = new SimpleDateFormat(formate);
@@ -432,7 +421,7 @@ public class Date extends java.util.Date {
  
     /**
      * 得到某个时间的时间戳yyyyMMddHHmmss。
-     * @return String 如果当前对象为null，则直接返回null。
+     *  String 如果当前对象为null，则直接返回null。
      */
     public String toTimeStamp() {
         DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -441,7 +430,7 @@ public class Date extends java.util.Date {
      
     /**
      * 将日期转换成短日期字符串,例如：2009-09-09。
-     * @return String ,如果当前对象为null，返回null。
+     *  String ,如果当前对象为null，返回null。
      */
     public String toShortDate() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -450,9 +439,9 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：用java.util.Date进行构造。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 10:59:05 AM
-     * @param  date
+     *   date
      */
     public Date(java.util.Date date) {
         super(date.getTime());
@@ -460,9 +449,9 @@ public class Date extends java.util.Date {
      
     /**
      * 功能：用毫秒进行构造。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 10:59:05 AM
-     * @param timeInMillis
+     *  timeInMillis
      */
     public Date(long timeInMillis) {
         super(timeInMillis);
@@ -471,7 +460,7 @@ public class Date extends java.util.Date {
  
     /**
      * 功能：默认构造函数。
-     * @author 沙琪玛 QQ：862990787
+     *  沙琪玛 QQ：862990787
      * May 29, 2013 11:00:05 AM
      */
     public Date() {
