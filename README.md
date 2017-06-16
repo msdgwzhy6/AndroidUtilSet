@@ -1,7 +1,9 @@
 # AndroidUtilSDK
 ####引用方式
     compile 'com.smart:xanderutil:1.1.0'
-## 各种测试demo，持续开发中..展示是很早之前的了，代码有更新，详情请下载呆魔..
+##### 各种测试demo，持续开发中...
+##### 展示是很早之前的了，代码有更新，详情请下载呆魔...
+##### 使用文档暂时更新一个 类 的使用方式，其他类的使用说明，会抽时间慢慢跟进来...
 ![](https://github.com/Xander1024/AndroidUtilSet/blob/master/gif/3.gif)
 
 ## 初始化
