@@ -27,8 +27,50 @@
 
 ## 开始使用
 
-### 通用 viewholder的 CommonAdapter 使用
-#### 关于数据
-##### 一、编写 JavaBean（其他形式的json数据使用，请下载demo查看），必须实现 Serializable 接口即可，以获取手机内app安装信息为例。
+### 一、通用 viewholder的 CommonAdapter 使用
+##### 1、准备数据：编写 JavaBean（其他形式的json数据使用，请下载demo查看），必须实现 Serializable 接口即可，以获取手机内app安装信息为例。
+
+    /**
+     * @author xander on  16/3/3.
+     * @function
+     */
+    public class MyAppInfoBean implements java.io.Serializable {
+        private Drawable AppIcon;//App图标
+        private String appName;//App名字
+
+        public MyAppInfoBean(Drawable image, String appName) {
+            this.AppIcon = image;
+            this.appName = appName;
+        }
+        public MyAppInfoBean() {
+
+        }
+
+        public Drawable getAppIcon() {
+            return AppIcon;
+        }
+
+        public void setAppIcon(Drawable appIcon) {
+            this.AppIcon = appIcon;
+        }
+
+        public String getAppName() {
+            return appName;
+        }
+
+        public void setAppName(String appName) {
+            this.appName = appName;
+        }
+    }
+#### 2、自定义viewholder，这一步跟你用传统的方式是一样的，里面封装了 item 控件的引用；但是，要实现 BaseViewHolder 接口。
+    /**
+     * @author xander on  2017/5/25.
+     * @function
+     */
+
+    public class AppViewHolder implements BaseItemViewHolder {
+        TextView mTextView;
+        ImageView mImageView;
+    }
 
 

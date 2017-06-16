@@ -3,7 +3,7 @@ package com.smart.androidutils.activity.canvas.viewholderhelper;
 import android.content.Context;
 import android.view.View;
 
-import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.BaseItemViewHolder;
 import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
@@ -40,7 +40,7 @@ public class CanvasViewHolderHeper implements IListDataViewHolderHelper<BaseGrid
     }
 
     @Override
-    public IBaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
+    public BaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
         viewHolder = new BaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;

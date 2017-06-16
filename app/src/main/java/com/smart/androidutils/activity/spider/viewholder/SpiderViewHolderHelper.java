@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
-import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.BaseItemViewHolder;
 import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
@@ -23,7 +23,7 @@ public class SpiderViewHolderHelper implements IListDataViewHolderHelper<SpiderV
 
 
     @Override
-    public IBaseItemViewHolder initItemViewHolder(SpiderViewHolder viewHolder, View convertView) {
+    public BaseItemViewHolder initItemViewHolder(SpiderViewHolder viewHolder, View convertView) {
         viewHolder = new SpiderViewHolder();
         viewHolder.mTextView = getView(convertView, R.id.id_spider_text_item);
         return viewHolder;

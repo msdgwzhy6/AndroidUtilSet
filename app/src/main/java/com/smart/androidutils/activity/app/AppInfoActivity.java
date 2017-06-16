@@ -44,7 +44,7 @@ public class AppInfoActivity extends BaseActivity {
                 for (int i = 0; i < packageName.size(); i++) {
                     mAppInfoBean = new MyAppInfoBean();
                     mAppInfoBean.setAppName(packageName.get(i));
-                    mAppInfoBean.setImage(iconDrawable.get(i));
+                    mAppInfoBean.setAppIcon(iconDrawable.get(i));
                     mItemBeanList.add(mAppInfoBean);
                 }
 

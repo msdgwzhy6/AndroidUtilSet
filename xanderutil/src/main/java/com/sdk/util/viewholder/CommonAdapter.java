@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.BaseItemViewHolder;
 import com.sdk.util.viewholder.callback.IDataItemViewHolderHelper;
 import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapter{
     protected final int mItemViewLayout;//item布局文件
     protected Context mContext;
-    protected IBaseItemViewHolder mBaseViewHolder;
+    protected BaseItemViewHolder mBaseViewHolder;
     protected IDataItemViewHolderHelper mDataItemViewHolderHelper;
     protected IListDataViewHolderHelper mListDataViewHolderHelper;
     protected Serializable mIBaseBean;
@@ -89,7 +89,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
 
             convertView.setTag(mBaseViewHolder);
         }else {
-            mBaseViewHolder = (IBaseItemViewHolder)convertView.getTag();
+            mBaseViewHolder = (BaseItemViewHolder)convertView.getTag();
         }
         if (mIBaseBeanList == null) {
             mDataItemViewHolderHelper.bindDataToView(mContext, mIBaseBean,mBaseViewHolder,position);

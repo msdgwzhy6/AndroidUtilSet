@@ -8,23 +8,23 @@ import android.graphics.drawable.Drawable;
  * @function
  */
 public class MyAppInfoBean implements java.io.Serializable {
-    private Drawable image;
-    private String appName;
+    private Drawable AppIcon;//App图标
+    private String appName;//App名字
 
     public MyAppInfoBean(Drawable image, String appName) {
-        this.image = image;
+        this.AppIcon = image;
         this.appName = appName;
     }
     public MyAppInfoBean() {
 
     }
 
-    public Drawable getImage() {
-        return image;
+    public Drawable getAppIcon() {
+        return AppIcon;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
+    public void setAppIcon(Drawable appIcon) {
+        this.AppIcon = appIcon;
     }
 
     public String getAppName() {
