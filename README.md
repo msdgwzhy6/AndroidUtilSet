@@ -20,6 +20,7 @@
         public void onCreate() {
             super.onCreate();
             InitSDK.init(this);
+            //下面开始你的表演
         }
     }
 ### 以上两种初始化方式并没实质性区别
