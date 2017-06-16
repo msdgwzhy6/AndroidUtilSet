@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.smart.androidutils.constant.ConMainUrl.urlMR;
+import static com.smart.androidutils.constant.ConMainUrl.urlMRSP;
 import static com.smart.androidutils.constant.ConMainUrl.userAgent;
 
 /**
@@ -38,7 +38,7 @@ public class HtmlModle implements IHtmlModle {
             @Override
             public void run() {
                 super.run();
-                Connection conn = Jsoup.connect(urlMR);
+                Connection conn = Jsoup.connect(urlMRSP);
                 // 修改http包中的header,伪装成浏览器进行抓取
                 conn.header("User-Agent", userAgent);
                 // 下载url并解析成html DOM结构

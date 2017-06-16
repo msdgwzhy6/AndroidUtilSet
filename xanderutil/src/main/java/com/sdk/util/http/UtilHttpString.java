@@ -1,13 +1,17 @@
 package com.sdk.util.http;
 
-import com.sdk.util.http.core.ConfigHttp;
-import com.sdk.util.http.core.HttpHelper;
-import com.sdk.util.http.core.HttpTask;
-import com.sdk.util.http.core.callback.IStringCallback;
-import com.sdk.util.http.core.callback.OnHttpCallback;
-import com.sdk.util.string.UtilString;
+import android.text.TextUtils;
 
+import com.sdk.util.common.ErrorCode;
+import com.sdk.util.http.core.HttpTask;
+import com.sdk.util.http.core.callback.OnHttpCallback;
+import com.sdk.util.http.core.callback.StringCallback;
+import com.sdk.util.logger.JJLogger;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 /**
@@ -15,29 +19,59 @@ import java.io.InputStream;
  * function 处理字符串
  */
 
-public class UtilHttpString extends HttpHelper<UtilHttpString> {
-
+public class UtilHttpString extends HttpTask<UtilHttpString,String> {
+    private  String mCharset = "utf-8";
     @SuppressWarnings("unchecked")
     public UtilHttpString setCharset(String  charset){
-        ConfigHttp.mCharset  = charset;
+        mCharset  = charset;
         return   this;
     }
 
-    @SuppressWarnings("unchecked")
-    public void initHttpStringCallback(final IStringCallback stringCallback){
-        new HttpTask<String>(mParams,new OnHttpCallback<String>() {
+    public UtilHttpString setStringCallback(final StringCallback stringCallback){
+        setOnHttpCallback(new OnHttpCallback<String>() {
             @Override
-            public String onThread(InputStream inputStream) {
-                return UtilString.is2String(inputStream, ConfigHttp.mCharset);
+            public String onChildThread(InputStream inputStream) {
+                InputStreamReader isr;
+                if (inputStream == null) {
+                    return null;
+                }
+                try {
+                    isr = new InputStreamReader(inputStream, mCharset);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((line = br.readLine()) != null) {
+                        if(interceptFlag ){
+                            //用户取消
+                            interceptFlag = true;
+                            JJLogger.i("-------用户取消请求");
+                            //跳出任务
+                            return "用户取消请求";
+                        }
+                        stringBuilder.append(line).append("\n");
+                    }
+                    return stringBuilder.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return e.getMessage();
+                }
+
             }
             @Override
-            public void onSuccess(String s) {
-                stringCallback.onStringSuccess(s);
+            public void onUISuccess(String s) {
+                if (!TextUtils.isEmpty(s)) {
+                    stringCallback.onStringSuccess(s);
+                }else {
+                    JJLogger.i("没有得到数据");
+                    stringCallback.onRequestFailure(ErrorCode.CODE_REQUEST_DATA);
+                }
             }
             @Override
-            public void onFailure(Exception e) {
-                stringCallback.onFailure(e);
+            public void onFailure(int errorCode) {
+                stringCallback.onRequestFailure(errorCode);
             }
         }).execute(mUrl);
+        return this;
     }
+
 }

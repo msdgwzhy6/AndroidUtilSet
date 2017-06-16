@@ -3,9 +3,9 @@ package com.sdk.util.http;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.sdk.util.common.ErrorCode;
 import com.sdk.util.http.core.HttpTask;
-import com.sdk.util.http.core.callback.IBitmapCallback;
-import com.sdk.util.http.core.HttpHelper;
+import com.sdk.util.http.core.callback.BitmapCallback;
 import com.sdk.util.http.core.callback.OnHttpCallback;
 
 import java.io.InputStream;
@@ -15,31 +15,39 @@ import java.io.InputStream;
  * function 处理图片
  */
 
-public class UtilHttpBitmap extends HttpHelper<UtilHttpBitmap> {
+public class UtilHttpBitmap extends HttpTask<UtilHttpBitmap,Bitmap> {
     @SuppressWarnings("unchecked")
-    public void initHttpBitmapCallback(final IBitmapCallback bitmapCallback){
-        new HttpTask<Bitmap>(new OnHttpCallback<Bitmap>() {
+    public UtilHttpBitmap setBitmapCallback(final BitmapCallback bitmapCallback){
+        setOnHttpCallback(new OnHttpCallback<Bitmap>() {
             @Override
-            public Bitmap onThread(InputStream inputStream) {
-                return BitmapFactory.decodeStream(inputStream);
+            public Bitmap onChildThread(InputStream inputStream) {
+                if (!interceptFlag) {
+                    return BitmapFactory.decodeStream(inputStream);
+                }else {
+                    return null;
+                }
             }
 
             @Override
-            public void onSuccess(Bitmap bitmap) {
+            public void onUISuccess(Bitmap bitmap) {
+                if (interceptFlag) {
+                    return;
+                }
                 if (bitmap != null) {
                     bitmapCallback.onBitmapSuccess(bitmap);
+                }else {
+                    bitmapCallback.onBitmapFailure(ErrorCode.CODE_REQUEST_IMAGE);
                 }
-
             }
 
             @Override
-            public void onFailure(Exception e) {
+            public void onFailure(int errorCode) {
                 /*
-                * 如果获取失败，就返回错误信息和一张默认的图片
-                * 默认图片 可以有用户指定
+                * 如果获取失败
                 * */
-                bitmapCallback.onBitmapFailure(e);
+                bitmapCallback.onBitmapFailure(errorCode);
             }
         }).execute(mUrl);
+        return this;
     }
 }

@@ -5,14 +5,13 @@ import android.graphics.Bitmap;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.smart.androidutils.BaseActivity;
-import com.smart.androidutils.R;
 import com.sdk.util.cache.DiskLruCacheHelper;
 import com.sdk.util.convert.BitmapConvert;
 import com.sdk.util.encript.UtilEncript;
 import com.sdk.util.http.UtilHttpBitmap;
-import com.sdk.util.http.core.callback.IBitmapCallback;
-import com.sdk.util.logger.JJLogger;
+import com.sdk.util.http.core.callback.BitmapCallback;
+import com.smart.androidutils.BaseActivity;
+import com.smart.androidutils.R;
 
 import java.io.IOException;
 
@@ -66,7 +65,7 @@ public class SPActivity extends BaseActivity {
     @OnClick(R.id.id_btn_img_net)
     public void onMBtnImgNetClicked() {
         new UtilHttpBitmap().get(urlImg)
-                .initHttpBitmapCallback(new IBitmapCallback() {
+                .setBitmapCallback(new BitmapCallback() {
                     @Override
                     public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
@@ -76,10 +75,9 @@ public class SPActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onBitmapFailure(Exception e) {
-                       JJLogger.i("asadas"+e.getLocalizedMessage());
-                    }
+                    public void onBitmapFailure(int errorCode) {
 
+                    }
                 });
 
 

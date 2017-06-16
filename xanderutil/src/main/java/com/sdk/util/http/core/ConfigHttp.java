@@ -12,6 +12,6 @@ public class ConfigHttp {
     public final static int PROTOCOL_TYPE_HTTPS = 0x21;
 
     public static int mHttpTimeout = 2000;
-    public static String mCharset = "utf-8";
+
     public static int httpType = HTTP_TYPE_GET;
 }

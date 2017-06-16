@@ -3,18 +3,14 @@ package com.smart.androidutils.activity.http;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.sdk.util.http.UtilHttpString;
+import com.sdk.util.http.core.callback.StringCallback;
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
-import com.sdk.util.http.core.callback.IStringCallback;
-import com.util.xhttp.JJHttp;
-import com.util.xhttp.cache.CacheMode;
-import com.util.xhttp.callback.StringCallback;
-
-import okhttp3.Response;
 
 import static com.sdk.util.view.UtilWidget.getView;
 
-public class HttpActivity extends BaseActivity implements IStringCallback{
+public class HttpActivity extends BaseActivity implements StringCallback {
 
     private TextView mTextView;
     private String url = "http://www.tngou.net/api/top/list";
@@ -31,20 +27,9 @@ public class HttpActivity extends BaseActivity implements IStringCallback{
 
     @Override
     protected void initData() {
-           /*new UtilHttpString()
+           new UtilHttpString()
                    .get(url)
-                    .initHttpStringCallback(this);*/
-        JJHttp.get(url)     // 请求方式和请求url
-                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
-                .cacheKey("cacheKey")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
-                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, okhttp3.Call call, Response response) {
-                        // s 即为所需要的结果
-                        Log.i("xxx", "onSuccess" +s);
-                    }
-                });
+                    .setStringCallback(this);
     }
 
     @Override
@@ -53,10 +38,9 @@ public class HttpActivity extends BaseActivity implements IStringCallback{
         mTextView.setText(result);
     }
 
+
     @Override
-    public void onFailure(Exception e) {
-        Log.i(TAG, "onFailure: "+e.getMessage());
+    public void onRequestFailure(int errorCode) {
+
     }
-
-
 }

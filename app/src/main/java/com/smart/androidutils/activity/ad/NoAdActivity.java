@@ -46,7 +46,6 @@ public class NoAdActivity extends BaseActivity {
     @Override
     protected void initData() {
         mIdWebView.loadUrl(urlMR);
-
     }
 
     @Override

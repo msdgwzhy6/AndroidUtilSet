@@ -3,8 +3,8 @@ package com.sdk.util.view;
 import android.util.Log;
 import android.webkit.WebView;
 
-import com.sdk.util.http.core.callback.IStringCallback;
 import com.sdk.util.http.UtilHttpString;
+import com.sdk.util.http.core.callback.StringCallback;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,7 +40,12 @@ public final class UtilNoAdWeb {
         }
         new UtilHttpString().get(url)
                 .setCharset(charset)
-                .initHttpStringCallback(new IStringCallback() {
+                .setStringCallback(new StringCallback() {
+                    @Override
+                    public void onRequestFailure(int errorCode) {
+
+                    }
+
                     @Override
                     public void onStringSuccess(String result) {
                         Pattern p = Pattern.compile(regexStr);
@@ -52,10 +57,7 @@ public final class UtilNoAdWeb {
                         }
                         mWebView.loadDataWithBaseURL(baseUrl, result, "text/html", mCharset, "file:///android_asset/error_page.html");
                     }
-                    @Override
-                    public void onFailure(Exception e) {
 
-                    }
                 });
     }
 

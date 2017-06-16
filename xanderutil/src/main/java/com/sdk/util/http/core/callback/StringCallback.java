@@ -1,5 +1,5 @@
 package com.sdk.util.http.core.callback;
 
-public interface IStringCallback extends IFailureCallback {
+public interface StringCallback extends FailureCallback {
     void onStringSuccess(final String result);
 }

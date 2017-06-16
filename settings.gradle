@@ -1,1 +1,1 @@
-include ':app', ':xanderutil', ':httplibrary'
+include ':app', ':xanderutil'
