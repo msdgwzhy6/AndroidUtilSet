@@ -1,5 +1,5 @@
 # AndroidUtilSDK
-####引用方式
+#### 引用方式
     compile 'com.smart:xanderutil:1.1.0'
 ##### 各种测试demo，持续开发中...
 ##### 展示是很早之前的了，代码有更新，详情请下载呆魔...
