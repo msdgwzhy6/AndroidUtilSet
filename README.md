@@ -1,4 +1,4 @@
-# AndroidUtilSDK ——原则：提高开发效率；节约维护成本
+# AndroidUtilSDK ——封装目的：提高开发效率；节约维护成本
 #### 引用方式
     compile 'com.smart:xanderutil:1.1.0'
 ##### 各种测试demo，持续开发中...
