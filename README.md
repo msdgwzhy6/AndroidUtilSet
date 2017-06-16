@@ -3,6 +3,7 @@
 ![](https://github.com/Xander1024/AndroidUtilSet/blob/master/gif/3.gif)
 
 ##初始化
+
 ###方式一：首先在 Application 或者 MainActicity 中初始化SDK
     public class YourApp extends Application {
         @Override
