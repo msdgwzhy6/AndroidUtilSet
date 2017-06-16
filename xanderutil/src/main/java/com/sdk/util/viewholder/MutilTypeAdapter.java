@@ -17,14 +17,35 @@ import java.util.List;
 public class MutilTypeAdapter <BEAN extends Serializable> extends CommonAdapter {
 
 
-    public MutilTypeAdapter(Context context, Serializable iBaseBean, int listDataSize, int itemViewLayout, IDataItemViewHolderHelper dataItemViewHolderHelper) {
-        super(context, iBaseBean, listDataSize, itemViewLayout, dataItemViewHolderHelper);
+    public MutilTypeAdapter(Context context, int listDataSize,  IDataItemViewHolderHelper dataItemViewHolderHelper) {
+        super(context, null, listDataSize, 0, dataItemViewHolderHelper);
     }
 
-    public MutilTypeAdapter(Context context, List<BEAN> iBaseBeanList, int itemViewLayout, IListDataViewHolderHelper iListDataViewHolderHelper) {
-        super(context, iBaseBeanList, itemViewLayout, iListDataViewHolderHelper);
+    public MutilTypeAdapter(Context context, IListDataViewHolderHelper iListDataViewHolderHelper) {
+        super(context, null, 0, iListDataViewHolderHelper);
     }
 
+    /*
+    * 设置布局，依次把布局添加进来
+    * */
+    public MutilTypeAdapter setLayout(int [] itemViewLayouts){
+
+        return this;
+    }
+    /*
+    * 设置数据，依次把对应布局所需要的数据添加进来
+    * */
+    public MutilTypeAdapter setData(Serializable[] iBaseBean){
+
+        return this;
+    }
+    /*
+    * 设置数据，依次把对应布局所需要的数据添加进来
+    * */
+    public MutilTypeAdapter setDataList(List<BEAN> iBaseBeanList){
+
+        return this;
+    }
     @Override
     public int getItemViewType(int position) {
        /* if (mListDataViewHolderHelper != null) {

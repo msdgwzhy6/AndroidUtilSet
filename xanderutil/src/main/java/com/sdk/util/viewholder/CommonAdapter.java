@@ -47,6 +47,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
         listSize = listDataSize;
     }
 
+
     /**
      * param context 上下文
      * param iBaseBeanList 数据集（list的形式传递过来）
