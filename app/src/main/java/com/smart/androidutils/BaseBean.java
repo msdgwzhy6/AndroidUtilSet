@@ -1,13 +1,13 @@
 package com.smart.androidutils;
 
 
-import com.sdk.util.viewholder.CommonAdapter;
+import java.io.Serializable;
 
 /**
  * Created by smart on 2017/5/17.
  */
 
-public class BaseBean implements CommonAdapter.IBaseBean {
+public class BaseBean implements Serializable {
     private String mName;
 
     public String getName() {

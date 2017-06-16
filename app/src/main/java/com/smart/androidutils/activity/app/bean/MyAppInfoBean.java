@@ -2,14 +2,12 @@ package com.smart.androidutils.activity.app.bean;
 
 import android.graphics.drawable.Drawable;
 
-import com.sdk.util.viewholder.CommonAdapter;
-
 
 /**
  * @author xander on  16/3/3.
  * @function
  */
-public class MyAppInfoBean implements CommonAdapter.IBaseBean{
+public class MyAppInfoBean implements java.io.Serializable {
     private Drawable image;
     private String appName;
 

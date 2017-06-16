@@ -3,13 +3,13 @@ package com.smart.androidutils.viewholder;
 
 import android.widget.Button;
 
-import com.sdk.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
 
 
 /**
  * Created by smart on 2017/5/17.
  */
 
-public class BaseGridViewHolder implements CommonAdapter.IBaseViewHolder {
+public class BaseGridViewHolder implements IBaseItemViewHolder {
     public Button mNameText;//控制面板上的itemview
 }

@@ -3,9 +3,10 @@ package com.smart.androidutils.activity.app.viewholder;
 import android.content.Context;
 import android.view.View;
 
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.app.bean.MyAppInfoBean;
-import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
@@ -16,9 +17,11 @@ import static com.sdk.util.view.UtilWidget.getView;
  * @function
  */
 
-public class AppViewHolderHelper implements CommonAdapter.IListHolderHelperCallback <AppViewHolder,MyAppInfoBean>{
+public class AppViewHolderHelper implements IListDataViewHolderHelper<AppViewHolder,MyAppInfoBean> {
+
+
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(AppViewHolder viewHolder, View convertView) {
+    public IBaseItemViewHolder initItemViewHolder(AppViewHolder viewHolder, View convertView) {
         viewHolder = new AppViewHolder();
         viewHolder.mTextView = getView(convertView, R.id.tv_app_name);
         viewHolder.mImageView = getView(convertView, R.id.iv_app_icon);

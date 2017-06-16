@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
-import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
@@ -17,10 +18,12 @@ import static com.sdk.util.view.UtilWidget.getView;
  * @function
  */
 
-public class SpiderViewHolderHelper implements CommonAdapter.IListHolderHelperCallback<SpiderViewHolder,SpiderBean> {
+public class SpiderViewHolderHelper implements IListDataViewHolderHelper<SpiderViewHolder,SpiderBean> {
     private Activity mActivity;
+
+
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(SpiderViewHolder viewHolder, View convertView) {
+    public IBaseItemViewHolder initItemViewHolder(SpiderViewHolder viewHolder, View convertView) {
         viewHolder = new SpiderViewHolder();
         viewHolder.mTextView = getView(convertView, R.id.id_spider_text_item);
         return viewHolder;

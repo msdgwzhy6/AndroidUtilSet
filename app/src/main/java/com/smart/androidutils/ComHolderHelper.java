@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
-import com.smart.androidutils.viewholder.BaseGridViewHolder;
 import com.sdk.util.dialog.UtilDialogToast;
-import com.sdk.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
+import com.smart.androidutils.viewholder.BaseGridViewHolder;
 
 import java.util.List;
 
@@ -17,11 +18,15 @@ import static com.sdk.util.view.UtilWidget.getView;
  * function 网格或者列表的具有这样的特征 只有一个按钮且按钮只有文字的时候
  */
 
-public abstract class ComHolderHelper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
+public abstract class ComHolderHelper implements IListDataViewHolderHelper<BaseGridViewHolder,BaseBean> {
     protected Activity mActivity;
     protected String mItemName;
+    /*
+    * 实例化前，要知道item的类型
+    * */
+
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder, View convertView) {
+    public IBaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
         viewHolder = new BaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;

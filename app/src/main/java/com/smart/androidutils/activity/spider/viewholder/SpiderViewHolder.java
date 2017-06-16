@@ -2,7 +2,7 @@ package com.smart.androidutils.activity.spider.viewholder;
 
 import android.widget.TextView;
 
-import com.sdk.util.viewholder.CommonAdapter;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
 
 
 /**
@@ -10,6 +10,6 @@ import com.sdk.util.viewholder.CommonAdapter;
  * @function
  */
 
-public class SpiderViewHolder implements CommonAdapter.IBaseViewHolder {
+public class SpiderViewHolder implements IBaseItemViewHolder {
     TextView mTextView;
 }

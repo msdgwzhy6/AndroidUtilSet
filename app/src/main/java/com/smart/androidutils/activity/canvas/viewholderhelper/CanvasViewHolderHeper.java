@@ -3,29 +3,30 @@ package com.smart.androidutils.activity.canvas.viewholderhelper;
 import android.content.Context;
 import android.view.View;
 
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
 import com.smart.androidutils.viewholder.BaseGridViewHolder;
-import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
 
+import static com.sdk.util.view.UtilWidget.getView;
+import static com.sdk.util.view.UtilWidget.setViewAlphaAnimation;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_BITMAP;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_CIRCLE;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_LINE;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_ROUND_RECT;
 import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
-import static com.sdk.util.view.UtilWidget.getView;
-import static com.sdk.util.view.UtilWidget.setViewAlphaAnimation;
 
 /**
  * @author xander on  2017/5/25.
  * @function
  */
 
-public class CanvasViewHolderHeper implements CommonAdapter.IListHolderHelperCallback<BaseGridViewHolder,BaseBean> {
+public class CanvasViewHolderHeper implements IListDataViewHolderHelper<BaseGridViewHolder,BaseBean> {
     private XanderView xanderView;
 
     public CanvasViewHolderHeper(final XanderView xanderView) {
@@ -39,7 +40,7 @@ public class CanvasViewHolderHeper implements CommonAdapter.IListHolderHelperCal
     }
 
     @Override
-    public CommonAdapter.IBaseViewHolder initViewHolder(BaseGridViewHolder viewHolder, View convertView) {
+    public IBaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
         viewHolder = new BaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;

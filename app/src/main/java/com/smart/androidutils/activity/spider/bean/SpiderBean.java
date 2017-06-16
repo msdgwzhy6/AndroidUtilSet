@@ -1,14 +1,12 @@
 package com.smart.androidutils.activity.spider.bean;
 
 
-import com.sdk.util.viewholder.CommonAdapter;
-
 /**
  * @author xander on  2017/5/24.
  * @function
  */
 
-public class SpiderBean implements CommonAdapter.IBaseBean {
+public class SpiderBean implements java.io.Serializable {
     private String text;
 
     public String getText() {

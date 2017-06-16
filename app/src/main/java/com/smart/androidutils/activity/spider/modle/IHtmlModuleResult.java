@@ -1,8 +1,6 @@
 package com.smart.androidutils.activity.spider.modle;
 
 
-import com.sdk.util.viewholder.CommonAdapter;
-
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  * @function  获取数据结果的接口
  */
 
-public interface IHtmlModuleResult <T extends CommonAdapter.IBaseBean>{
+public interface IHtmlModuleResult <T extends java.io.Serializable>{
     void result(List<T> resultList,String title);
     void failure(Exception e);
 }
