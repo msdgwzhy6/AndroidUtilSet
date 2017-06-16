@@ -15,7 +15,7 @@ public class DialogActivity extends MainActivity {
     @Override
     protected void initData() {
         super.initData();
-        mUseSelfViewHolderHelper = new DialogViewHolerHelper();
+        mUseSelfViewHolderHelper = new DialogViewHolerHelperI();
     }
 
     @Override

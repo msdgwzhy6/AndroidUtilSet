@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.ComHolderHelper;
+import com.smart.androidutils.ComHolderHelperI;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.ad.NoAdActivity;
 import com.smart.androidutils.activity.app.AppInfoActivity;
@@ -40,9 +40,9 @@ import static com.sdk.util.phone.UtilTelephone.getMobileNetType;
  * 2、“展开”和“收起”紧跟文本末尾。并且不换行。
  */
 
-public class BaseGridViewHolderHelper extends ComHolderHelper {
+public class IBaseGridViewHolderHelper extends ComHolderHelperI {
     @Override
-    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
+    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, IBaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.control_sp))) {
             context.startActivity(new Intent(context, SPActivity.class));

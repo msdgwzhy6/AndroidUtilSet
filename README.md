@@ -62,15 +62,42 @@
             this.appName = appName;
         }
     }
-#### 2、自定义viewholder，这一步跟你用传统的方式是一样的，里面封装了 item 控件的引用；但是，要实现 BaseViewHolder 接口。
+#### 2、自定义viewholder，这一步跟你用传统的方式是一样的，里面封装了 item 控件的引用；但是，要实现 IBaseViewHolder 接口。
     /**
      * @author xander on  2017/5/25.
      * @function
      */
 
-    public class AppViewHolder implements BaseItemViewHolder {
+    public class AppViewHolder implements IBaseItemViewHolder {
         TextView mTextView;
         ImageView mImageView;
+    }
+#### 3、自定义 ViewHolderHelper，分两种情况
+##### 3.1 传递一个简单的实体类对象,继承自IDataItemViewHolderHelper< T，B >，来实现 viewholder的实例化和数据绑定。
+##### 3.2 传递一个List对象,继承自IListDataViewHolderHelper< T，B >，来实现 viewholder的实例化和数据绑定。
+##### 3.3 要泛型参数说明 T ，也就是你自定义的自定义viewholder；
+##### 3.4 泛型参数说明 B ，也就是你的实体类；
+    /**
+     * @author xander on  2017/5/25.
+     * @function
+     */
+
+    public class AppViewHolderHelper implements IListDataViewHolderHelperI<AppViewHolder,MyAppInfoBean> {
+
+
+        @Override
+        public IBaseItemViewHolder initItemViewHolder(AppViewHolder viewHolder, View convertView) {
+            viewHolder = new AppViewHolder();
+            viewHolder.mTextView = getView(convertView, R.id.tv_app_name);
+            viewHolder.mImageView = getView(convertView, R.id.iv_app_icon);
+            return viewHolder;
+        }
+
+        @Override
+        public void bindListDataToView(Context context, List<MyAppInfoBean> iBaseBeanList, AppViewHolder viewHolder, int position) {
+            viewHolder.mTextView.setText(iBaseBeanList.get(position).getAppName());
+            viewHolder.mImageView.setImageDrawable(iBaseBeanList.get(position).getAppIcon());
+        }
     }
 
 

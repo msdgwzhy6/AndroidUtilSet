@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.ComHolderHelper;
+import com.smart.androidutils.ComHolderHelperI;
 import com.smart.androidutils.R;
-import com.smart.androidutils.viewholder.BaseGridViewHolder;
+import com.smart.androidutils.viewholder.IBaseGridViewHolder;
 import com.sdk.util.dialog.OnDoubleBtnClickedListener;
 import com.sdk.util.dialog.UtilDialogDouble;
 import com.sdk.util.dialog.UtilDialogToast;
@@ -20,9 +20,9 @@ import static com.smart.androidutils.constant.ConMainItem.MORE_TEXT_MSG;
  * function  对话框下的网格item的响应事件
  */
 
-public class DialogViewHolerHelper extends ComHolderHelper {
+public class DialogViewHolerHelperI extends ComHolderHelperI {
     @Override
-    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
+    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, IBaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.dialog_double))) {
             new UtilDialogDouble(mActivity)

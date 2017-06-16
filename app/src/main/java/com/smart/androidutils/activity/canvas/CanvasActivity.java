@@ -6,7 +6,7 @@ import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
-import com.smart.androidutils.activity.canvas.viewholderhelper.CanvasViewHolderHeper;
+import com.smart.androidutils.activity.canvas.viewholderhelper.CanvasViewHolderHeperI;
 import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
@@ -47,6 +47,6 @@ public class CanvasActivity extends BaseActivity {
 
     @Override
     protected void bindDataToView() {
-        mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,R.layout.main_grid_view_item,new CanvasViewHolderHeper(mXanderView)));
+        mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,R.layout.main_grid_view_item,new CanvasViewHolderHeperI(mXanderView)));
     }
 }

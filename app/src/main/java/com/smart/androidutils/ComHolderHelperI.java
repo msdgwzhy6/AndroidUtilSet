@@ -5,9 +5,9 @@ import android.content.Context;
 import android.view.View;
 
 import com.sdk.util.dialog.UtilDialogToast;
-import com.sdk.util.viewholder.callback.BaseItemViewHolder;
-import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
-import com.smart.androidutils.viewholder.BaseGridViewHolder;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelperI;
+import com.smart.androidutils.viewholder.IBaseGridViewHolder;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import static com.sdk.util.view.UtilWidget.getView;
  * function 网格或者列表的具有这样的特征 只有一个按钮且按钮只有文字的时候
  */
 
-public abstract class ComHolderHelper implements IListDataViewHolderHelper<BaseGridViewHolder,BaseBean> {
+public abstract class ComHolderHelperI implements IListDataViewHolderHelperI<IBaseGridViewHolder,BaseBean> {
     protected Activity mActivity;
     protected String mItemName;
     /*
@@ -26,14 +26,14 @@ public abstract class ComHolderHelper implements IListDataViewHolderHelper<BaseG
     * */
 
     @Override
-    public BaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
-        viewHolder = new BaseGridViewHolder();
+    public IBaseItemViewHolder initItemViewHolder(IBaseGridViewHolder viewHolder, View convertView) {
+        viewHolder = new IBaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;
     }
 
     @Override
-    public void bindListDataToView(final Context context, final List<BaseBean> iBaseBeanList, final BaseGridViewHolder viewHolder, final int position) {
+    public void bindListDataToView(final Context context, final List<BaseBean> iBaseBeanList, final IBaseGridViewHolder viewHolder, final int position) {
         if (mActivity == null) {
             mActivity = (Activity) context;
         }
@@ -51,7 +51,7 @@ public abstract class ComHolderHelper implements IListDataViewHolderHelper<BaseG
     * 子类必须实现的方法
     * 用于事件处理
     * */
-    protected abstract void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position);
+    protected abstract void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, IBaseGridViewHolder viewHolder, int position);
 
     protected void viewHolderToast(String msg, int time) {
        /* new UtilDialogDouble(mActivity)

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
-import com.sdk.util.viewholder.callback.BaseItemViewHolder;
-import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelperI;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
 
@@ -18,19 +18,19 @@ import static com.sdk.util.view.UtilWidget.getView;
  * @function
  */
 
-public class SpiderViewHolderHelper implements IListDataViewHolderHelper<SpiderViewHolder,SpiderBean> {
+public class SpiderViewHolderHelperI implements IListDataViewHolderHelperI<SpiderViewHolderI,SpiderBean> {
     private Activity mActivity;
 
 
     @Override
-    public BaseItemViewHolder initItemViewHolder(SpiderViewHolder viewHolder, View convertView) {
-        viewHolder = new SpiderViewHolder();
+    public IBaseItemViewHolder initItemViewHolder(SpiderViewHolderI viewHolder, View convertView) {
+        viewHolder = new SpiderViewHolderI();
         viewHolder.mTextView = getView(convertView, R.id.id_spider_text_item);
         return viewHolder;
     }
 
     @Override
-    public void bindListDataToView(Context context, final List<SpiderBean> iBaseBeanList, SpiderViewHolder viewHolder, final int position) {
+    public void bindListDataToView(Context context, final List<SpiderBean> iBaseBeanList, SpiderViewHolderI viewHolder, final int position) {
         if (mActivity == null) {
             mActivity = (Activity) context;
         }

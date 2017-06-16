@@ -8,7 +8,7 @@ import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
 import com.smart.androidutils.activity.spider.presenter.HtmlSpiderPresenter;
-import com.smart.androidutils.activity.spider.viewholder.SpiderViewHolderHelper;
+import com.smart.androidutils.activity.spider.viewholder.SpiderViewHolderHelperI;
 import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class SpiderActivity extends BaseActivity implements IHandleHtmlData<Spid
     @Override
     public void handleData(List<SpiderBean> dataLists, String title) {
         mIdTitle.setText(title);
-        mListView.setAdapter(new CommonAdapter<>(SpiderActivity.this,dataLists,R.layout.spider_item_layout,new SpiderViewHolderHelper())
+        mListView.setAdapter(new CommonAdapter<>(SpiderActivity.this,dataLists,R.layout.spider_item_layout,new SpiderViewHolderHelperI())
         );
     }
 

@@ -6,7 +6,7 @@ import android.widget.GridView;
 
 import com.smart.androidutils.R;
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
+import com.smart.androidutils.viewholder.IBaseGridViewHolderHelper;
 import com.sdk.util.viewholder.CommonAdapter;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class DeviceActivity extends AppCompatActivity {
         mGridView = getView(this,R.id.main_grif_view);
         initData();
         mGridView.setAdapter(new CommonAdapter<BaseBean>(this, mBaseBeanList,
-                R.layout.main_grid_view_item,new BaseGridViewHolderHelper()));
+                R.layout.main_grid_view_item,new IBaseGridViewHolderHelper()));
     }
 
 

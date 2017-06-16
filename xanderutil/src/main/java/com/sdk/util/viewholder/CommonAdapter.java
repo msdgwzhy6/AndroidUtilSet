@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.sdk.util.viewholder.callback.BaseItemViewHolder;
-import com.sdk.util.viewholder.callback.IDataItemViewHolderHelper;
-import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IDataItemViewHolderHelperI;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelperI;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
 public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapter{
     protected final int mItemViewLayout;//item布局文件
     protected Context mContext;
-    protected BaseItemViewHolder mBaseViewHolder;
-    protected IDataItemViewHolderHelper mDataItemViewHolderHelper;
-    protected IListDataViewHolderHelper mListDataViewHolderHelper;
+    protected IBaseItemViewHolder mBaseViewHolder;
+    protected IDataItemViewHolderHelperI mDataItemViewHolderHelper;
+    protected IListDataViewHolderHelperI mListDataViewHolderHelper;
     protected Serializable mIBaseBean;
     protected List<BEAN> mIBaseBeanList;
     protected int listSize;
@@ -39,7 +39,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
      * 如果没有，则传 1)
      * param dataItemViewHolderHelper （viewholder的接口）
      */
-    public CommonAdapter(Context context, Serializable iBaseBean, int listDataSize, int itemViewLayout, IDataItemViewHolderHelper dataItemViewHolderHelper) {
+    public CommonAdapter(Context context, Serializable iBaseBean, int listDataSize, int itemViewLayout, IDataItemViewHolderHelperI dataItemViewHolderHelper) {
         mContext = context;
         mIBaseBean = iBaseBean;
         mItemViewLayout = itemViewLayout;
@@ -54,7 +54,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
      * param itemViewLayout （item的布局文件）
      * param iListDataViewHolderHelper （viewholder的接口）
      */
-    public CommonAdapter(Context context, List<BEAN> iBaseBeanList, int itemViewLayout, IListDataViewHolderHelper iListDataViewHolderHelper) {
+    public CommonAdapter(Context context, List<BEAN> iBaseBeanList, int itemViewLayout, IListDataViewHolderHelperI iListDataViewHolderHelper) {
         mContext = context;
         mIBaseBeanList = iBaseBeanList;
         mItemViewLayout = itemViewLayout;
@@ -89,7 +89,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
 
             convertView.setTag(mBaseViewHolder);
         }else {
-            mBaseViewHolder = (BaseItemViewHolder)convertView.getTag();
+            mBaseViewHolder = (IBaseItemViewHolder)convertView.getTag();
         }
         if (mIBaseBeanList == null) {
             mDataItemViewHolderHelper.bindDataToView(mContext, mIBaseBean,mBaseViewHolder,position);

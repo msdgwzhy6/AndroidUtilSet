@@ -3,12 +3,12 @@ package com.smart.androidutils.activity.canvas.viewholderhelper;
 import android.content.Context;
 import android.view.View;
 
-import com.sdk.util.viewholder.callback.BaseItemViewHolder;
-import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelperI;
 import com.smart.androidutils.BaseBean;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.canvas.view.XanderView;
-import com.smart.androidutils.viewholder.BaseGridViewHolder;
+import com.smart.androidutils.viewholder.IBaseGridViewHolder;
 
 import java.util.List;
 
@@ -26,10 +26,10 @@ import static com.smart.androidutils.activity.canvas.constant.ConsData.TAG_TEXT;
  * @function
  */
 
-public class CanvasViewHolderHeper implements IListDataViewHolderHelper<BaseGridViewHolder,BaseBean> {
+public class CanvasViewHolderHeperI implements IListDataViewHolderHelperI<IBaseGridViewHolder,BaseBean> {
     private XanderView xanderView;
 
-    public CanvasViewHolderHeper(final XanderView xanderView) {
+    public CanvasViewHolderHeperI(final XanderView xanderView) {
         this.xanderView = xanderView;
         this.xanderView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,14 +40,14 @@ public class CanvasViewHolderHeper implements IListDataViewHolderHelper<BaseGrid
     }
 
     @Override
-    public BaseItemViewHolder initItemViewHolder(BaseGridViewHolder viewHolder, View convertView) {
-        viewHolder = new BaseGridViewHolder();
+    public IBaseItemViewHolder initItemViewHolder(IBaseGridViewHolder viewHolder, View convertView) {
+        viewHolder = new IBaseGridViewHolder();
         viewHolder.mNameText = getView(convertView, R.id.main_grid_text);
         return viewHolder;
     }
 
     @Override
-    public void bindListDataToView(final Context context, List<BaseBean> iBaseBeanList, final BaseGridViewHolder viewHolder, int position) {
+    public void bindListDataToView(final Context context, List<BaseBean> iBaseBeanList, final IBaseGridViewHolder viewHolder, int position) {
         viewHolder.mNameText.setText(iBaseBeanList.get(position).getName());
         viewHolder.mNameText.setOnClickListener(new View.OnClickListener() {
             @Override

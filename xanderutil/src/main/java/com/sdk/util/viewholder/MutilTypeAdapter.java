@@ -2,8 +2,8 @@ package com.sdk.util.viewholder;
 
 import android.content.Context;
 
-import com.sdk.util.viewholder.callback.IDataItemViewHolderHelper;
-import com.sdk.util.viewholder.callback.IListDataViewHolderHelper;
+import com.sdk.util.viewholder.callback.IDataItemViewHolderHelperI;
+import com.sdk.util.viewholder.callback.IListDataViewHolderHelperI;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,11 +17,11 @@ import java.util.List;
 public class MutilTypeAdapter <BEAN extends Serializable> extends CommonAdapter {
 
 
-    public MutilTypeAdapter(Context context, int listDataSize,  IDataItemViewHolderHelper dataItemViewHolderHelper) {
+    public MutilTypeAdapter(Context context, int listDataSize,  IDataItemViewHolderHelperI dataItemViewHolderHelper) {
         super(context, null, listDataSize, 0, dataItemViewHolderHelper);
     }
 
-    public MutilTypeAdapter(Context context, IListDataViewHolderHelper iListDataViewHolderHelper) {
+    public MutilTypeAdapter(Context context, IListDataViewHolderHelperI iListDataViewHolderHelper) {
         super(context, null, 0, iListDataViewHolderHelper);
     }
 

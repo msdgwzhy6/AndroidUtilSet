@@ -3,7 +3,7 @@ package com.smart.androidutils;
 import android.widget.GridView;
 
 import com.sdk.util.viewholder.CommonAdapter;
-import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
+import com.smart.androidutils.viewholder.IBaseGridViewHolderHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity {
     * 如果子类需要使用自己的 ViewHolderHelper
     * 只需在初始化数据的时候 新建一个自己的实例即可
     * */
-    protected ComHolderHelper mUseSelfViewHolderHelper;
+    protected ComHolderHelperI mUseSelfViewHolderHelper;
     protected GridView mGridView;
 
     @Override
@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         mBaseBeanList = new ArrayList<>();
-        mUseSelfViewHolderHelper = new BaseGridViewHolderHelper();
+        mUseSelfViewHolderHelper = new IBaseGridViewHolderHelper();
         setItems();
         BaseBean baseBean;
         for (int i = 0; i < mItemsData.length; i++) {

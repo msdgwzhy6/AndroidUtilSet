@@ -6,10 +6,10 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.smart.androidutils.BaseBean;
-import com.smart.androidutils.ComHolderHelper;
+import com.smart.androidutils.ComHolderHelperI;
 import com.smart.androidutils.R;
 import com.smart.androidutils.activity.spider.view.SpiderActivity;
-import com.smart.androidutils.viewholder.BaseGridViewHolder;
+import com.smart.androidutils.viewholder.IBaseGridViewHolder;
 import com.sdk.util.phone.UtilScreen;
 
 import java.util.List;
@@ -21,10 +21,10 @@ import static com.smart.androidutils.util.Util.putBitmapDefault;
  * function
  */
 
-public class ScreenViewHolderHelper extends ComHolderHelper {
+public class ScreenViewHolderHelperI extends ComHolderHelperI {
 
     @Override
-    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, BaseGridViewHolder viewHolder, int position) {
+    protected void setOnItemViewClickedCallback(Context context, List<BaseBean> iBaseBeanList, IBaseGridViewHolder viewHolder, int position) {
         mItemName = iBaseBeanList.get(position).getName();
         if (mItemName.equals(context.getResources().getString(R.string.screen_capture_without_status_bar))) {
             Bitmap bitmap = UtilScreen.captureWithoutStatusBar(mActivity);

@@ -3,7 +3,7 @@ package com.smart.androidutils.activity.app.viewholder;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sdk.util.viewholder.callback.BaseItemViewHolder;
+import com.sdk.util.viewholder.callback.IBaseItemViewHolder;
 
 
 /**
@@ -11,7 +11,7 @@ import com.sdk.util.viewholder.callback.BaseItemViewHolder;
  * @function
  */
 
-public class AppViewHolder implements BaseItemViewHolder {
+public class AppViewHolder implements IBaseItemViewHolder {
     TextView mTextView;
     ImageView mImageView;
 }
