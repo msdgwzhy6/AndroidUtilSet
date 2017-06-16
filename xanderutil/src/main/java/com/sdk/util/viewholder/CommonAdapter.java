@@ -60,6 +60,7 @@ public class CommonAdapter<BEAN extends java.io.Serializable> extends BaseAdapte
         mItemViewLayout = itemViewLayout;
         mListDataViewHolderHelper = iListDataViewHolderHelper;
     }
+
     @Override
     public int getCount() {
         return mIBaseBeanList==null?listSize:mIBaseBeanList.size();

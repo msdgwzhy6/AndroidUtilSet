@@ -2,7 +2,7 @@ package com.smart.androidutils;
 
 import android.widget.GridView;
 
-import com.sdk.util.viewholder.MutilTypeAdapter;
+import com.sdk.util.viewholder.CommonAdapter;
 import com.smart.androidutils.viewholder.BaseGridViewHolderHelper;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void bindDataToView() {
-        mGridView.setAdapter(new MutilTypeAdapter<BaseBean>(this, mBaseBeanList,R.layout.main_grid_view_item, mUseSelfViewHolderHelper));
+        mGridView.setAdapter(new CommonAdapter<>(this, mBaseBeanList,R.layout.main_grid_view_item, mUseSelfViewHolderHelper));
     }
 
     protected void setItems() {
