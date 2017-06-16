@@ -107,4 +107,14 @@ public class UtilAppInfo{
     public static int getVersionCode() {
         return getPackageInfo().versionCode;
     }
+
+    public static int getAppVersion() {
+        try {
+            PackageInfo info = InitSDK.getContext().getPackageManager().getPackageInfo(InitSDK.getContext().getPackageName(), 0);
+            return info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
 }

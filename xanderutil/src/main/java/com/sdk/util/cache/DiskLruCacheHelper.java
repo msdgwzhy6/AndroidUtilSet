@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -22,65 +23,64 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 
+
+import static com.sdk.util.app.UtilAppInfo.getAppVersion;
+import static com.sdk.util.cache.Utils.bitmap2Bytes;
+import static com.sdk.util.cache.Utils.bitmap2Drawable;
+import static com.sdk.util.cache.Utils.bytes2Bitmap;
+import static com.sdk.util.cache.Utils.drawable2Bitmap;
+import static com.sdk.util.cache.Utils.hashKeyForDisk;
+
 /**
- * Created by zhy on 15/7/28.
- * 本地缓存
+ * author xander on  2017/6/6.
+ * function  通过相同键（图片的索引）来保存图片和图片的详情
  */
-public class DiskLruCacheHelper
-{
+public class DiskLruCacheHelper {
     private static final String DIR_NAME = "diskCache";
     private static final int MAX_COUNT = 5 * 1024 * 1024;
     private static final int DEFAULT_APP_VERSION = 1;
-	
-	/**
-	* The default valueCount when open DiskLruCache.
-	*/
-	private static final int DEFAULT_VALUE_COUNT = 1;
+
+    /**
+     * The default valueCount when open DiskLruCache.
+     */
+    private static final int DEFAULT_VALUE_COUNT = 1;
 
     private static final String TAG = "DiskLruCacheHelper";
 
     private DiskLruCache mDiskLruCache;
 
-    public DiskLruCacheHelper(Context context) throws IOException
-    {
+    public DiskLruCacheHelper(Context context) throws IOException {
         mDiskLruCache = generateCache(context, DIR_NAME, MAX_COUNT);
     }
 
-    public DiskLruCacheHelper(Context context, String dirName) throws IOException
-    {
+    public DiskLruCacheHelper(Context context, String dirName) throws IOException {
         mDiskLruCache = generateCache(context, dirName, MAX_COUNT);
     }
 
-    public DiskLruCacheHelper(Context context, String dirName, int maxCount) throws IOException
-    {
+    public DiskLruCacheHelper(Context context, String dirName, int maxCount) throws IOException {
         mDiskLruCache = generateCache(context, dirName, maxCount);
     }
 
     //custom cache dir
-    public DiskLruCacheHelper(File dir) throws IOException
-    {
+    public DiskLruCacheHelper(File dir) throws IOException {
         mDiskLruCache = generateCache(null, dir, MAX_COUNT);
     }
 
-    public DiskLruCacheHelper(Context context, File dir) throws IOException
-    {
+    public DiskLruCacheHelper(Context context, File dir) throws IOException {
         mDiskLruCache = generateCache(context, dir, MAX_COUNT);
     }
 
-    public DiskLruCacheHelper(Context context, File dir, int maxCount) throws IOException
-    {
+    public DiskLruCacheHelper(Context context, File dir, int maxCount) throws IOException {
         mDiskLruCache = generateCache(context, dir, maxCount);
     }
 
-    private DiskLruCache generateCache(Context context, File dir, int maxCount) throws IOException
-    {
-        if (!dir.exists() || !dir.isDirectory())
-        {
+    private DiskLruCache generateCache(Context context, File dir, int maxCount) throws IOException {
+        if (!dir.exists() || !dir.isDirectory()) {
             throw new IllegalArgumentException(
                     dir + " is not a directory or does not exists. ");
         }
 
-        int appVersion = context == null ? DEFAULT_APP_VERSION : Utils.getAppVersion(context);
+        int appVersion = context == null ? DEFAULT_APP_VERSION : getAppVersion();
 
         DiskLruCache diskLruCache = DiskLruCache.open(
                 dir,
@@ -91,11 +91,10 @@ public class DiskLruCacheHelper
         return diskLruCache;
     }
 
-    private DiskLruCache generateCache(Context context, String dirName, int maxCount) throws IOException
-    {
+    private DiskLruCache generateCache(Context context, String dirName, int maxCount) throws IOException {
         DiskLruCache diskLruCache = DiskLruCache.open(
                 getDiskCacheDir(context, dirName),
-                Utils.getAppVersion(context),
+                getAppVersion(),
                 DEFAULT_VALUE_COUNT,
                 maxCount);
         return diskLruCache;
@@ -104,37 +103,29 @@ public class DiskLruCacheHelper
     // ============== String 数据 读写 =============
     // =======================================
 
-    public void put(String key, String value)
-    {
+    public void put(String key, String value) {
         DiskLruCache.Editor edit = null;
         BufferedWriter bw = null;
-        try
-        {
+        try {
             edit = editor(key);
             if (edit == null) return;
             OutputStream os = edit.newOutputStream(0);
             bw = new BufferedWriter(new OutputStreamWriter(os));
             bw.write(value);
             edit.commit();//write CLEAN
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-            try
-            {
+            try {
                 //s
                 edit.abort();//write REMOVE
-            } catch (IOException e1)
-            {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        } finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (bw != null)
                     bw.close();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -159,21 +150,16 @@ public class DiskLruCacheHelper
     }
 
 
-
-    public void put(String key, JSONObject jsonObject)
-    {
+    public void put(String key, JSONObject jsonObject) {
         put(key, jsonObject.toString());
     }
 
-    public JSONObject getAsJson(String key)
-    {
+    public JSONObject getAsJson(String key) {
         String val = getAsString(key);
-        try
-        {
+        try {
             if (val != null)
                 return new JSONObject(val);
-        } catch (JSONException e)
-        {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
@@ -183,20 +169,16 @@ public class DiskLruCacheHelper
     // ============ JSONArray 数据 读写 =============
     // =======================================
 
-    public void put(String key, JSONArray jsonArray)
-    {
+    public void put(String key, JSONArray jsonArray) {
         put(key, jsonArray.toString());
     }
 
-    public JSONArray getAsJSONArray(String key)
-    {
+    public JSONArray getAsJSONArray(String key) {
         String JSONString = getAsString(key);
-        try
-        {
+        try {
             JSONArray obj = new JSONArray(JSONString);
             return obj;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -212,41 +194,31 @@ public class DiskLruCacheHelper
      * @param key   保存的key
      * @param value 保存的数据
      */
-    public void put(String key, byte[] value)
-    {
+    public void put(String key, byte[] value) {
         OutputStream out = null;
         DiskLruCache.Editor editor = null;
-        try
-        {
+        try {
             editor = editor(key);
-            if (editor == null)
-            {
+            if (editor == null) {
                 return;
             }
             out = editor.newOutputStream(0);
             out.write(value);
             out.flush();
             editor.commit();//write CLEAN
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            try
-            {
+            try {
                 editor.abort();//write REMOVE
-            } catch (IOException e1)
-            {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
 
-        } finally
-        {
-            if (out != null)
-            {
-                try
-                {
+        } finally {
+            if (out != null) {
+                try {
                     out.close();
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -254,23 +226,22 @@ public class DiskLruCacheHelper
     }
 
 
-    public byte[] getAsBytes(String key)
-    {
+    public byte[] getAsBytes(String key) {
         byte[] res = null;
+        if (TextUtils.isEmpty(key)) {
+            return null;
+        }
         InputStream is = get(key);
         if (is == null) return null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try
-        {
+        try {
             byte[] buf = new byte[256];
             int len = 0;
-            while ((len = is.read(buf)) != -1)
-            {
+            while ((len = is.read(buf)) != -1) {
                 baos.write(buf, 0, len);
             }
             res = baos.toByteArray();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return res;
@@ -280,65 +251,50 @@ public class DiskLruCacheHelper
     // =======================================
     // ============== 序列化 数据 读写 =============
     // =======================================
-    public void put(String key, Serializable value)
-    {
+    public void put(String key, Serializable value) {
         DiskLruCache.Editor editor = editor(key);
         ObjectOutputStream oos = null;
         if (editor == null) return;
-        try
-        {
+        try {
             OutputStream os = editor.newOutputStream(0);
             oos = new ObjectOutputStream(os);
             oos.writeObject(value);
             oos.flush();
             editor.commit();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-            try
-            {
+            try {
                 editor.abort();
-            } catch (IOException e1)
-            {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        } finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (oos != null)
                     oos.close();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public <T> T getAsSerializable(String key)
-    {
+    public <T> T getAsSerializable(String key) {
         T t = null;
         InputStream is = get(key);
         ObjectInputStream ois = null;
         if (is == null) return null;
-        try
-        {
+        try {
             ois = new ObjectInputStream(is);
             t = (T) ois.readObject();
-        } catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (ois != null)
                     ois.close();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -348,89 +304,86 @@ public class DiskLruCacheHelper
     // =======================================
     // ============== bitmap 数据 读写 =============
     // =======================================
-    public void put(String key, Bitmap bitmap)
-    {
-        put(key, Utils.bitmap2Bytes(bitmap));
+    public void put(String key, Bitmap bitmap) {
+        put(key, bitmap2Bytes(bitmap));
     }
 
-    public Bitmap getAsBitmap(String key)
-    {
+    public Bitmap getAsBitmap(String key) {
         byte[] bytes = getAsBytes(key);
         if (bytes == null) return null;
-        return Utils.bytes2Bitmap(bytes);
+        return bytes2Bitmap(bytes);
     }
 
     // =======================================
     // ============= drawable 数据 读写 =============
     // =======================================
-    public void put(String key, Drawable value)
-    {
-        put(key, Utils.drawable2Bitmap(value));
+    public void put(String key, Drawable value) {
+        put(key, drawable2Bitmap(value));
     }
 
-    public Drawable getAsDrawable(String key)
-    {
+    public Drawable getAsDrawable(String key) {
         byte[] bytes = getAsBytes(key);
-        if (bytes == null)
-        {
+        if (bytes == null) {
             return null;
         }
-        return Utils.bitmap2Drawable(Utils.bytes2Bitmap(bytes));
+        return bitmap2Drawable(bytes2Bitmap(bytes));
     }
 
     // =======================================
     // ============= other methods =============
     // =======================================
-    public boolean remove(String key)
-    {
-        try
-        {
-            key = Utils.hashKeyForDisk(key);
+    public boolean remove(String key) {
+        try {
+            key = hashKeyForDisk(key);
             return mDiskLruCache.remove(key);
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public void close() throws IOException
-    {
+    public void close() throws IOException {
         mDiskLruCache.close();
     }
 
-    public void delete() throws IOException
-    {
-        mDiskLruCache.delete();
+    /*
+    * 删除所哟文件
+    * */
+    public void delete()  {
+        try {
+            mDiskLruCache.delete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /*
+    * 移除指定缓存
+    * */
+    public boolean delete(String key) throws IOException {
+        return mDiskLruCache.remove(key);
     }
 
-    public void flush() throws IOException
-    {
+    public void flush() throws IOException {
         mDiskLruCache.flush();
     }
 
-    public boolean isClosed()
-    {
+    public boolean isClosed() {
         return mDiskLruCache.isClosed();
     }
 
-    public long size()
-    {
+    public long size() {
         return mDiskLruCache.size();
     }
 
-    public void setMaxSize(long maxSize)
-    {
+    public void setMaxSize(long maxSize) {
         mDiskLruCache.setMaxSize(maxSize);
     }
 
-    public File getDirectory()
-    {
+    public File getDirectory() {
         return mDiskLruCache.getDirectory();
     }
 
-    public long getMaxSize()
-    {
+    public long getMaxSize() {
         return mDiskLruCache.getMaxSize();
     }
 
@@ -439,21 +392,17 @@ public class DiskLruCacheHelper
     // ===遇到文件比较大的，可以直接通过流读写 =====
     // =======================================
     //basic editor
-    public DiskLruCache.Editor editor(String key)
-    {
-        try
-        {
-            key = Utils.hashKeyForDisk(key);
+    public DiskLruCache.Editor editor(String key) {
+        try {
+            key = hashKeyForDisk(key);
             //wirte DIRTY
             DiskLruCache.Editor edit = mDiskLruCache.edit(key);
             //edit maybe null :the entry is editing
-            if (edit == null)
-            {
+            if (edit == null) {
                 Log.w(TAG, "the entry spcified key:" + key + " is editing by other . ");
             }
             return edit;
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -462,11 +411,9 @@ public class DiskLruCacheHelper
 
 
     //basic get
-    public InputStream get(String key)
-    {
-        try
-        {
-            DiskLruCache.Snapshot snapshot = mDiskLruCache.get(Utils.hashKeyForDisk(key));
+    public InputStream get(String key) {
+        try {
+            DiskLruCache.Snapshot snapshot = mDiskLruCache.get(hashKeyForDisk(key));
             if (snapshot == null) //not find entry , or entry.readable = false
             {
                 Log.e(TAG, "not find entry , or entry.readable = false");
@@ -475,8 +422,7 @@ public class DiskLruCacheHelper
             //write READ
             return snapshot.getInputStream(0);
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -488,15 +434,12 @@ public class DiskLruCacheHelper
     // ============== 序列化 数据 读写 =============
     // =======================================
 
-    private File getDiskCacheDir(Context context, String uniqueName)
-    {
+    private File getDiskCacheDir(Context context, String uniqueName) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable())
-        {
+                || !Environment.isExternalStorageRemovable()) {
             cachePath = context.getExternalCacheDir().getPath();
-        } else
-        {
+        } else {
             cachePath = context.getCacheDir().getPath();
         }
         return new File(cachePath + File.separator + uniqueName);

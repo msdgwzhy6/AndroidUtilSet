@@ -19,8 +19,18 @@
   <item type="id" name="decode"/>
   <item type="id" name="decode_failed"/>
   <item type="id" name="decode_succeeded"/>
-    <item type="id" name="launch_product_query"/>
+  <item type="id" name="launch_product_query"/>
   <item type="id" name="quit"/>
   <item type="id" name="restart_preview"/>
   <item type="id" name="return_scan_result"/>
+
+  <!--banner-->
+  <item name="bannerContainer" type="id"/>
+  <item name="bannerViewPager" type="id"/>
+  <item name="circleIndicator" type="id"/>
+  <item name="numIndicator" type="id"/>
+  <item name="titleView" type="id"/>
+  <item name="bannerTitle" type="id"/>
+  <item name="numIndicatorInside" type="id"/>
+  <item name="indicatorInside" type="id"/>
 </resources>
