@@ -41,7 +41,7 @@
         <activity android:name=".activity.spider.view.SpiderActivity"/>
         <activity android:name=".activity.classactivity.ClassActivity"/>
         <activity android:name=".activity.reflect.ReflectActivity"/>
-        <activity android:name=".activity.file.FileActivity"/>
+        <activity android:name=".activity.StackTrace.StackTraceActivity"/>
         <activity android:name=".BaseActivity"/>
         <activity android:name=".activity.device.DeviceActivity"/>
         <activity android:name=".activity.ad.NoAdActivity"/>

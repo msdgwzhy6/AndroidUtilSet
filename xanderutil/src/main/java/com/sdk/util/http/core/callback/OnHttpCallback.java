@@ -18,5 +18,5 @@ public interface OnHttpCallback<T>{
     /*
     * 处理失败
     * */
-    void onFailure(int errorCode);
+    void onFailure(Exception e, String errorCode);
 }

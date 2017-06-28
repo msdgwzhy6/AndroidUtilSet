@@ -1,8 +1,8 @@
 package com.smart.androidutils.activity.spider.modle;
 
 import android.os.Handler;
-import android.util.Log;
 
+import com.sdk.util.logger.JJLogger;
 import com.smart.androidutils.activity.spider.bean.SpiderBean;
 
 import org.jsoup.Connection;
@@ -45,7 +45,7 @@ public class HtmlModle implements IHtmlModle {
                 Document doc;
                 try {
                     doc = conn.get();
-                    Log.i("xxx", "run" +doc.title());
+                    JJLogger.i("xxx", "run" +doc.title());
                     final Document finalDoc = doc;
                     Elements elements = doc.getElementsByClass("content");
                     Elements eles = elements.first().getElementsByTag("p");
@@ -57,8 +57,7 @@ public class HtmlModle implements IHtmlModle {
                             mSpiderBeanList.add(spiderBean);
                         }
                         assert element != null;
-                        Log.i("xxx", "run" +element.text().trim().length());
-                        Log.i("xxx", "run" +element.text().trim());
+                        JJLogger.e("xxx", "run" +element.text().trim());
                     }
                     mHandler.post(new Runnable() {
                         @Override

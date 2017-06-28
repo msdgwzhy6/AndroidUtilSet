@@ -1,1 +1,1 @@
-include ':app', ':xanderutil', ':banner', ':httplibrary', ':mzbanner'
+include ':app', ':xanderutil'

@@ -39,8 +39,9 @@ public class HttpActivity extends BaseActivity implements StringCallback {
     }
 
 
+
     @Override
-    public void onRequestFailure(int errorCode) {
+    public void onRequestFailure(Exception e, String errorCode) {
 
     }
 }

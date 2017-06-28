@@ -12,7 +12,7 @@ import com.smart.androidutils.activity.canvas.CanvasActivity;
 import com.smart.androidutils.activity.classactivity.ClassActivity;
 import com.smart.androidutils.activity.device.DeviceActivity;
 import com.smart.androidutils.activity.dialog.DialogActivity;
-import com.smart.androidutils.activity.file.FileActivity;
+import com.smart.androidutils.activity.StackTrace.StackTraceActivity;
 import com.smart.androidutils.activity.http.HttpActivity;
 import com.smart.androidutils.activity.permission.PActivity;
 import com.smart.androidutils.activity.reflect.ReflectActivity;
@@ -66,8 +66,8 @@ public class IBaseGridViewHolderHelper extends ComHolderHelperI {
         else if (mItemName.equals(context.getResources().getString(R.string.screen))) {
             context.startActivity(new Intent(context, ScreenActivity.class));
         }
-        else if (mItemName.equals(context.getResources().getString(R.string.control_file))) {
-            context.startActivity(new Intent(context, FileActivity.class));
+        else if (mItemName.equals(context.getResources().getString(R.string.StackTrace))) {
+            context.startActivity(new Intent(context, StackTraceActivity.class));
         }
         else if (mItemName.equals(context.getResources().getString(R.string.canvas))) {
             context.startActivity(new Intent(context, CanvasActivity.class));

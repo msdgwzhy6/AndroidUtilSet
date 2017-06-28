@@ -2,9 +2,9 @@ package com.smart.androidutils.activity.classactivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 
+import com.sdk.util.logger.JJLogger;
 import com.smart.androidutils.R;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,22 +38,22 @@ public class ClassActivity extends AppCompatActivity {
         //通过forName("类名")获取
         Class clazz_for_name;
         try {
-            Log.i("xxx", "-------------------------------------");
+            JJLogger.i("xxx", "-------------------------------------");
             clazz_for_name = Class.forName("com.smart.androidutils.mActivity.classactivity.Person");
-            Log.i("xxx", "通过forName(\"类名\")获取" + clazz_for_name.getName());
-            Log.i("xxx", "-------------------------------------");
+            JJLogger.i("xxx", "通过forName(\"类名\")获取" + clazz_for_name.getName());
+            JJLogger.i("xxx", "-------------------------------------");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         //通过类名.class
         Class clazz_class = Person.class;
-        Log.i("xxx", "通过类名.class" + clazz_class.getName());
-        Log.i("xxx", "-------------------------------------");
+        JJLogger.i("xxx", "通过类名.class" + clazz_class.getName());
+        JJLogger.i("xxx", "-------------------------------------");
         //通过该类的实例对象获取Test的Class对象
         Person person = new Person();
         Class clazz_get_class = person.getClass();
-        Log.i("xxx", "实例对象.getClass()" + clazz_get_class.getName());
-        Log.i("xxx", "-------------------------------------");
+        JJLogger.i("xxx", "实例对象.getClass()" + clazz_get_class.getName());
+        JJLogger.i("xxx", "-------------------------------------");
 
         /*
         * 生成Class对象的过程其实是如此的：
@@ -78,7 +78,7 @@ public class ClassActivity extends AppCompatActivity {
             //通过对象调用成员
             //p.function("heihei");
             p.setAge(10);
-            Log.i("xxx", "onMBtnInstanceClicked" + p.getAge());
+            JJLogger.i("xxx", "onMBtnInstanceClicked" + p.getAge());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -99,7 +99,7 @@ public class ClassActivity extends AppCompatActivity {
             Person p = (Person) clazz.newInstance();
             //通过对象调用成员
             p.setAge(10);
-            Log.i("xxx", "onMBtnInstanceClicked" + p.getAge());
+            JJLogger.i("xxx", "onMBtnInstanceClicked" + p.getAge());
             /*
             * 类可以作为参数进行传递，那么方法也一样可以作为参数进行传递，
             * 因为方法存在于字节码文件内， 所以可以通过Class对象获取字节码文件中的内容
@@ -107,7 +107,7 @@ public class ClassActivity extends AppCompatActivity {
             Method m =  clazz.getMethod("setName",String.class);
             m.invoke(p,"heihei");
 
-            Log.i("xxx", "onMBtnInstanceClicked" + p.getName());
+            JJLogger.i("xxx", "onMBtnInstanceClicked" + p.getName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

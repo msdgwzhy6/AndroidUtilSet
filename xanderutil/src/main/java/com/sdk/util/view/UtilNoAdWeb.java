@@ -42,9 +42,11 @@ public final class UtilNoAdWeb {
                 .setCharset(charset)
                 .setStringCallback(new StringCallback() {
                     @Override
-                    public void onRequestFailure(int errorCode) {
+                    public void onRequestFailure(Exception e, String errorCode) {
 
                     }
+
+
 
                     @Override
                     public void onStringSuccess(String result) {

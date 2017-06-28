@@ -3,7 +3,6 @@ package com.sdk.util.http;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.sdk.util.common.ErrorCode;
 import com.sdk.util.http.core.HttpTask;
 import com.sdk.util.http.core.callback.BitmapCallback;
 import com.sdk.util.http.core.callback.OnHttpCallback;
@@ -36,16 +35,16 @@ public class UtilHttpBitmap extends HttpTask<UtilHttpBitmap,Bitmap> {
                 if (bitmap != null) {
                     bitmapCallback.onBitmapSuccess(bitmap);
                 }else {
-                    bitmapCallback.onBitmapFailure(ErrorCode.CODE_REQUEST_IMAGE);
+                    bitmapCallback.onBitmapFailure(new NullPointerException("bitmap 为空"), "");
                 }
             }
 
             @Override
-            public void onFailure(int errorCode) {
+            public void onFailure(Exception e, String errorCode) {
                 /*
                 * 如果获取失败
                 * */
-                bitmapCallback.onBitmapFailure(errorCode);
+                bitmapCallback.onBitmapFailure(e, errorCode);
             }
         }).execute(mUrl);
         return this;

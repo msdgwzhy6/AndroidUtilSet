@@ -6,5 +6,5 @@ package com.sdk.util.http.core.callback;
  */
 
 public interface FailureCallback {
-    void onRequestFailure(int errorCode);
+    void onRequestFailure(Exception e, String errorCode);
 }

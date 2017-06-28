@@ -9,5 +9,5 @@ import android.graphics.Bitmap;
 
 public interface BitmapCallback {
     void onBitmapSuccess(Bitmap bitmap);
-    void onBitmapFailure(int errorCode);
+    void onBitmapFailure(Exception e, String errorCode);
 }

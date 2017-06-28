@@ -4,9 +4,9 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.sdk.core.InitSDK;
 import com.sdk.util.http.core.callback.OnHttpCallback;
 import com.sdk.util.logger.JJLogger;
-import com.sdk.util.phone.UtilNet;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sdk.util.common.ErrorCode.CODE_REQUEST_NET;
 import static com.sdk.util.http.core.ConfigHttp.HTTP_TYPE_GET;
 import static com.sdk.util.http.core.ConfigHttp.HTTP_TYPE_POST;
 import static com.sdk.util.http.core.ConfigHttp.httpType;
@@ -33,12 +32,17 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
     private Map<String ,String > mParams;//接受请求参数
     private Map<String ,String > mHeads;//接受请求参数
     private  String mCharset = "utf-8";
-    private Handler mHandler = new Handler();
+    private Handler mHandler;
     protected String mUrl;
     private TYPE instance;
     protected boolean interceptFlag = false;//取消标志,默认不取消
 
+    public boolean isInterceptFlag() {
+        return interceptFlag;
+    }
+
     public HttpTask() {
+        mHandler = new Handler(InitSDK.getContext().getMainLooper());
         instance = (TYPE) this;
     }
     public TYPE get(String url){
@@ -93,19 +97,20 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
         mParams = params;
         return this;
     }
-    public HttpTask<TYPE,RETURN> setOnHttpCallback(OnHttpCallback httpCallback){
+    public TYPE setOnHttpCallback(OnHttpCallback httpCallback){
         mHttpCallback = httpCallback;
-        return this;
+        return instance;
     }
-    public HttpTask<TYPE,RETURN> setHeads(Map<String ,String > heads){
+    public TYPE setHeads(Map<String ,String > heads){
         mHeads = heads;
-        return this;
+        return instance;
     }
-    public HttpTask<TYPE,RETURN> setCharset(String charset){
+    public TYPE setCharset(String charset) {
         mCharset = charset;
-        return this;
+        return instance;
     }
-    public void cancle(){
+
+    public void cancel(){
         interceptFlag = true;
     }
     @Override
@@ -129,17 +134,17 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
             if(sbuf.length()>0){
                 sbuf.deleteCharAt(sbuf.length()-1);
             }
-            JJLogger.i("请求参数 ："+sbuf.toString());
+            JJLogger.i("param","请求参数 ："+sbuf.toString());
             if (httpType==HTTP_TYPE_GET) {
                 urlStr[0] = urlStr[0] + "?" + sbuf.toString();
             }
-            JJLogger.i(urlStr[0]);
+            JJLogger.i("param",""+urlStr[0]);
         }
         HttpURLConnection httpUrlCon = null;
 
         try {
             URL httpUrl = new URL(urlStr[0]);
-            JJLogger.i(urlStr[0]);
+            JJLogger.i("param",""+urlStr[0]);
             httpUrlCon = (HttpURLConnection) httpUrl.openConnection();
             httpUrlCon.setConnectTimeout(mHttpTimeout);// 建立连接超时时间
             httpUrlCon.setReadTimeout(mHttpTimeout);//数据传输超时时间，很重要，必须设置。
@@ -170,7 +175,7 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
                     if (postData != null) {
                         httpUrlCon.setRequestProperty("Content-length", String.valueOf(postData.length));
                     }
-                    DataOutputStream out = null;
+                    DataOutputStream out;
                     if (!interceptFlag) {
                         out = new DataOutputStream(httpUrlCon.getOutputStream()); // 获取输出流
                     }else {
@@ -186,15 +191,17 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
                     break;
 
             }
-            if (!UtilNet.isActiveConnected(true)) {
+            /*if (!UtilNet.isActiveConnected(true)) {
+                logThreadId("IOException httptask");
+                mHttpCallback.onFailure(null, CODE_REQUEST_NET);
                 return null;
-            }
+            }*/
             if (!interceptFlag) {//用户没有取消
                 httpUrlCon.connect();
             }else {
                 return null;
             }
-            //check the result of connection
+            //checkAdId the result of connection
             if (httpUrlCon.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = null;
                 if (!interceptFlag){
@@ -202,26 +209,27 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
 
                 }else {
                     interceptFlag = false;
-                    JJLogger.i("HttpTask"+"取消连接");
+                    JJLogger.i("HttpTask","取消连接");
                 }
                 return (RETURN) mHttpCallback.onChildThread(inputStream);
             }else {
-                mHttpCallback.onFailure(httpUrlCon.getResponseCode());
+                mHttpCallback.onFailure(null, String.valueOf(httpUrlCon.getResponseCode()));
             }
         } catch (final IOException e) {
 //            e.printStackTrace();
             //如果需要处理超时，可以在这里写
+            JJLogger.e("disconnect","断开连接"+e.getMessage());
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mHttpCallback.onFailure(CODE_REQUEST_NET);
+//                    mHttpCallback.onFailure(e, 0);
                 }
             });
 
         } finally {
             if (httpUrlCon != null) {
                 httpUrlCon.disconnect(); // 断开连接
-                JJLogger.i("断开连接");
+                JJLogger.e("disconnect","断开连接");
                interceptFlag = false;
             }
         }
@@ -232,7 +240,7 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
      protected void onPostExecute(RETURN  s) {
         super.onPostExecute(s);
         if (s == null) {
-            JJLogger.i("没有得到数据");
+            JJLogger.i("onPostExecute","HttpTask:onPostExecute :没有得到数据");
         }
         mHttpCallback.onUISuccess(s);
     }

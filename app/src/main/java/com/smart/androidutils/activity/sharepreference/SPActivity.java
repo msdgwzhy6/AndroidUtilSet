@@ -75,9 +75,10 @@ public class SPActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onBitmapFailure(int errorCode) {
+                    public void onBitmapFailure(Exception e, String errorCode) {
 
                     }
+
                 });
 
 

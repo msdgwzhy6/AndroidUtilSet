@@ -2,7 +2,6 @@ package com.sdk.util.http;
 
 import android.text.TextUtils;
 
-import com.sdk.util.common.ErrorCode;
 import com.sdk.util.http.core.HttpTask;
 import com.sdk.util.http.core.callback.OnHttpCallback;
 import com.sdk.util.http.core.callback.StringCallback;
@@ -12,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 
 
 /**
@@ -35,6 +35,7 @@ public class UtilHttpString extends HttpTask<UtilHttpString,String> {
                 if (inputStream == null) {
                     return null;
                 }
+
                 try {
                     isr = new InputStreamReader(inputStream, mCharset);
                     BufferedReader br = new BufferedReader(isr);
@@ -42,18 +43,17 @@ public class UtilHttpString extends HttpTask<UtilHttpString,String> {
                     StringBuilder stringBuilder = new StringBuilder();
                     while ((line = br.readLine()) != null) {
                         if(interceptFlag ){
-                            //用户取消
-                            interceptFlag = true;
-                            JJLogger.i("-------用户取消请求");
+                            //TODO need to test
+                            JJLogger.i("interceptFlag","requestURL:" +mUrl +"canceled");
                             //跳出任务
-                            return "用户取消请求";
+                            return null;
                         }
                         stringBuilder.append(line).append("\n");
                     }
                     return stringBuilder.toString();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    return e.getMessage();
+                    return null;
                 }
 
             }
@@ -62,16 +62,17 @@ public class UtilHttpString extends HttpTask<UtilHttpString,String> {
                 if (!TextUtils.isEmpty(s)) {
                     stringCallback.onStringSuccess(s);
                 }else {
-                    JJLogger.i("没有得到数据");
-                    stringCallback.onRequestFailure(ErrorCode.CODE_REQUEST_DATA);
+
+                    stringCallback.onRequestFailure(new NullPointerException(""), "");
+                    JJLogger.i("onUISuccess","UtilHttpString:onUISuccess :"+"没有得到数据 :" +"");
                 }
             }
             @Override
-            public void onFailure(int errorCode) {
-                stringCallback.onRequestFailure(errorCode);
+            public void onFailure(Exception e, String errorCode) {
+                stringCallback.onRequestFailure(e, errorCode);
+                JJLogger.i("onFailure","UtilHttpString:onFailure :请求的url 为："+mUrl);
             }
         }).execute(mUrl);
         return this;
     }
-
 }

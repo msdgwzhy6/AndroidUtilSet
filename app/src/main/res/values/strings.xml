@@ -10,7 +10,7 @@
     <string name="control_reflect">反射</string>
     <string name="control_no_ad_off">原页面</string>
     <string name="control_no_ad_on">去广告</string>
-    <string name="control_file">文件类</string>
+    <string name="StackTrace">堆栈信息</string>
 
     <!--手机卡信息-->
     <string name="phone">手机信息</string>
