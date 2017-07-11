@@ -109,8 +109,10 @@ public final class UtilBitmapCompress {
     //**************************************************** * 按质量压缩 *************************************************
     /*
     * 图片的大小是没有变的，因为质量压缩不会减少图片的像素，它是在保持像素的前提下改变图片的位深及透明度等;
-    * 来达到压缩图片的目的，这也是为什么该方法叫质量压缩方法。那么，图片的长，宽，像素都不变，那么bitmap所占内存大小是不会变的;
-    * 但是bytes.length是随着quality变小而变小的。这样适合去传递二进制的图片数据，比如微信分享图片，要传入二进制数据过去，限制32kb之内'
+    * 来达到压缩图片的目的，这也是为什么该方法叫质量压缩方法。
+    * 那么，图片的长，宽，像素都不变，那么bitmap所占内存大小是不会变的;
+    * 但是bytes.length是随着quality变小而变小的。
+    * 这样适合去传递二进制的图片数据，比如微信分享图片，要传入二进制数据过去，限制32kb之内'
     * 这里要说，如果是bit.compress(CompressFormat.PNG, qualityLong, baos);
     * 这样的png格式，quality就没有作用了，bytes.length不会变化，因为png图片是无损的，不能进行压缩;
     */
@@ -120,7 +122,7 @@ public final class UtilBitmapCompress {
      *  qualityLong 质量
      *  质量压缩后的图片
      */
-    public static Bitmap compressByQualityInt(Bitmap src, int quality) {
+    public static Bitmap compressByIntQuality(Bitmap src, int quality) {
         return qualityInt(src, quality, false);
     }
     /**

@@ -4,7 +4,7 @@ import android.util.Log;
 import android.webkit.WebView;
 
 import com.sdk.util.http.UtilHttpString;
-import com.sdk.util.http.core.callback.StringCallback;
+import com.sdk.util.http.core.callback.OnStringCallback;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,7 +40,7 @@ public final class UtilNoAdWeb {
         }
         new UtilHttpString().get(url)
                 .setCharset(charset)
-                .setStringCallback(new StringCallback() {
+                .setStringCallback(new OnStringCallback() {
                     @Override
                     public void onRequestFailure(Exception e, String errorCode) {
 

@@ -5,6 +5,6 @@ package com.sdk.util.http.core.callback;
  * function
  */
 
-public interface FailureCallback {
+public interface OnFailureCallback {
     void onRequestFailure(Exception e, String errorCode);
 }

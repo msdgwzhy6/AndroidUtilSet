@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.sdk.util.http.core.HttpTask;
-import com.sdk.util.http.core.callback.BitmapCallback;
+import com.sdk.util.http.core.callback.OnBitmapCallback;
 import com.sdk.util.http.core.callback.OnHttpCallback;
 
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 public class UtilHttpBitmap extends HttpTask<UtilHttpBitmap,Bitmap> {
     @SuppressWarnings("unchecked")
-    public UtilHttpBitmap setBitmapCallback(final BitmapCallback bitmapCallback){
+    public UtilHttpBitmap setBitmapCallback(final OnBitmapCallback bitmapCallback){
         setOnHttpCallback(new OnHttpCallback<Bitmap>() {
             @Override
             public Bitmap onChildThread(InputStream inputStream) {
@@ -46,7 +46,7 @@ public class UtilHttpBitmap extends HttpTask<UtilHttpBitmap,Bitmap> {
                 * */
                 bitmapCallback.onBitmapFailure(e, errorCode);
             }
-        }).execute(mUrl);
+        }).startConcurrence();
         return this;
     }
 }

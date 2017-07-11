@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.sdk.util.http.core.HttpTask;
 import com.sdk.util.http.core.callback.OnHttpCallback;
-import com.sdk.util.http.core.callback.StringCallback;
+import com.sdk.util.http.core.callback.OnStringCallback;
 import com.sdk.util.logger.JJLogger;
 
 import java.io.BufferedReader;
@@ -27,7 +27,7 @@ public class UtilHttpString extends HttpTask<UtilHttpString,String> {
         return   this;
     }
 
-    public UtilHttpString setStringCallback(final StringCallback stringCallback){
+    public UtilHttpString setStringCallback(final OnStringCallback stringCallback){
         setOnHttpCallback(new OnHttpCallback<String>() {
             @Override
             public String onChildThread(InputStream inputStream) {
@@ -72,7 +72,7 @@ public class UtilHttpString extends HttpTask<UtilHttpString,String> {
                 stringCallback.onRequestFailure(e, errorCode);
                 JJLogger.i("onFailure","UtilHttpString:onFailure :请求的url 为："+mUrl);
             }
-        }).execute(mUrl);
+        }).startConcurrence();
         return this;
     }
 }

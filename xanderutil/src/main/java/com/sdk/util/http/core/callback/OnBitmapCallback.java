@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
  * function
  */
 
-public interface BitmapCallback {
+public interface OnBitmapCallback {
     void onBitmapSuccess(Bitmap bitmap);
     void onBitmapFailure(Exception e, String errorCode);
 }

@@ -16,6 +16,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static com.sdk.util.http.core.ConfigHttp.HTTP_TYPE_GET;
 import static com.sdk.util.http.core.ConfigHttp.HTTP_TYPE_POST;
@@ -36,7 +41,13 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
     protected String mUrl;
     private TYPE instance;
     protected boolean interceptFlag = false;//取消标志,默认不取消
+    //缓冲队列队列长度：100
+    private BlockingQueue<Runnable> sPoolWorkQueue =
+            new LinkedBlockingQueue<Runnable>(100);
 
+    //线程池 核心线程：10个   最大线程：25个   线程空闲存活时间：1秒
+    protected Executor executor = new ThreadPoolExecutor( 10 , 25  , 1  , TimeUnit.SECONDS ,
+            sPoolWorkQueue ) ;
     public boolean isInterceptFlag() {
         return interceptFlag;
     }
@@ -110,6 +121,10 @@ public class HttpTask<TYPE,RETURN> extends AsyncTask<String, Void, RETURN> {
         return instance;
     }
 
+    public TYPE startConcurrence(){
+        executeOnExecutor(executor,mUrl);
+        return instance;
+    }
     public void cancel(){
         interceptFlag = true;
     }

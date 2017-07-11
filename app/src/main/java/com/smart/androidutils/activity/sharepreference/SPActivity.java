@@ -9,7 +9,7 @@ import com.sdk.util.cache.DiskLruCacheHelper;
 import com.sdk.util.convert.BitmapConvert;
 import com.sdk.util.encript.UtilEncript;
 import com.sdk.util.http.UtilHttpBitmap;
-import com.sdk.util.http.core.callback.BitmapCallback;
+import com.sdk.util.http.core.callback.OnBitmapCallback;
 import com.smart.androidutils.BaseActivity;
 import com.smart.androidutils.R;
 
@@ -65,7 +65,7 @@ public class SPActivity extends BaseActivity {
     @OnClick(R.id.id_btn_img_net)
     public void onMBtnImgNetClicked() {
         new UtilHttpBitmap().get(urlImg)
-                .setBitmapCallback(new BitmapCallback() {
+                .setBitmapCallback(new OnBitmapCallback() {
                     @Override
                     public void onBitmapSuccess(Bitmap bitmap) {
                         mImgViewNet.setImageBitmap(bitmap);
