@@ -3,8 +3,12 @@ package com.smart.androidutils;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.widget.RelativeLayout;
+
+import static com.sdk.util.view.UtilWidget.getView;
 
 public class SplashActivity extends BaseActivity {
+    private RelativeLayout mRelativeLayout;
     @Override
     protected void initSystemUI() {
         super.initSystemUI();
@@ -18,7 +22,7 @@ public class SplashActivity extends BaseActivity {
     }
     @Override
     protected void initView() {
-
+        mRelativeLayout = getView(this,R.id.ad_pos);
     }
     @Override
     protected void initData() {

@@ -6,6 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidUtilSet.iml" filepath="$PROJECT_DIR$/AndroidUtilSet.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-core/library-core.iml" filepath="$PROJECT_DIR$/library-core/library-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-file/library-file.iml" filepath="$PROJECT_DIR$/library-file/library-file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-gladapter/library-gladapter.iml" filepath="$PROJECT_DIR$/library-gladapter/library-gladapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-http/library-http.iml" filepath="$PROJECT_DIR$/library-http/library-http.iml" />
       <module fileurl="file://$PROJECT_DIR$/xanderutil/xanderutil.iml" filepath="$PROJECT_DIR$/xanderutil/xanderutil.iml" />
       <module fileurl="file://$PROJECT_DIR$/xanderutil/xanderutil.iml" filepath="$PROJECT_DIR$/xanderutil/xanderutil.iml" />
     </modules>

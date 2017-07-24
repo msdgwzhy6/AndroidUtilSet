@@ -1,1 +1,1 @@
-include ':app', ':xanderutil'
+include ':app', ':xanderutil', ':library-file', ':library-gladapter', ':library-http', ':library-core'
